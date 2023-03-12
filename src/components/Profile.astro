@@ -1,0 +1,39 @@
+---
+import { Image } from '@astrojs/image/components';
+const mohammedimran = '/assets/mohammedimran.webp';
+---
+
+<div class='sticky top-[97px] z-10'>
+    <div
+        class='flex w-full flex-col items-center justify-center rounded-md bg-zinc-50 px-6 py-4 shadow-md ring-1 ring-zinc-200 transition-colors dark:bg-zinc-900 dark:ring-zinc-700'
+    >
+        <div class='h-32 w-32'>
+            <Image
+                src={mohammedimran}
+                format={'webp'}
+                class='shrink-0 rounded-full'
+                height={128}
+                width={128}
+                title='Mohammed Imran'
+                loading='eager'
+                alt='Mohammed Imran'
+            />
+        </div>
+
+        <div class='text-center'>
+            <h3 class='mt-2'>Mohammed Imran</h3>
+            <p>
+                Application Developer
+                <a
+                    class="text-indigo-600 before:content-['_@'] hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-600"
+                    target={'_blank'}
+                    rel='noreferrer'
+                    aria-label='Ather Energy'
+                    href='https://www.atherenergy.com'
+                >
+                    Ather Energy
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
