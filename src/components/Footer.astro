@@ -1,0 +1,63 @@
+---
+import Github from './icons/Github.astro';
+import Instagram from './icons/Instagram.astro';
+import Linkedin from './icons/Linkedin.astro';
+import Twitter from './icons/Twitter.astro';
+---
+
+<footer
+    class='grid h-24 place-content-center gap-8 bg-zinc-700 text-white dark:bg-zinc-900'
+>
+    <ol aria-label='Social Link' class='flex gap-4 px-6'>
+        <li>
+            <a
+                target={'_blank'}
+                referrer-policy='no-referrer'
+                href='https://www.twitter.com/m0hammed_imran'
+                rel='noreferrer'
+            >
+                <Twitter
+                    title='Twitter'
+                    class='h-6 w-6 hover:text-indigo-300'
+                />
+            </a>
+        </li>
+        <li>
+            <a
+                target={'_blank'}
+                referrer-policy='no-referrer'
+                href='https://www.instagram.com/m0hammedimran'
+                rel='noreferrer'
+            >
+                <Instagram
+                    title='Instagram'
+                    class='h-6 w-6 hover:text-indigo-300'
+                />
+            </a>
+        </li>
+        <li>
+            <a
+                target={'_blank'}
+                referrer-policy='no-referrer'
+                href='https://www.github.com/m0hammedimran'
+                rel='noreferrer'
+            >
+                <Github title='GitHub' class='h-6 w-6 hover:text-indigo-300' />
+            </a>
+        </li>
+
+        <li>
+            <a
+                target={'_blank'}
+                referrer-policy='no-referrer'
+                href='https://www.linkedin.com/in/m0hammedimran/'
+                rel='noreferrer'
+            >
+                <Linkedin
+                    title='Linkedin'
+                    class='h-6 w-6 hover:text-indigo-300'
+                />
+            </a>
+        </li>
+    </ol>
+</footer>
