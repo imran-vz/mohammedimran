@@ -1,35 +1,123 @@
 ---
+import Navbar from '../components/Navbar.astro';
 export interface Props {
-	title: string;
+    title: string;
+}
+
+declare global {
+    interface Window {
+        setThemeClass: (theme: string | null | undefined) => void;
+    }
 }
 
 const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8' />
+        <meta
+            name='viewport'
+            content='width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5'
+        />
+        <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+        <meta name='generator' content={Astro.generator} />
+        <link rel='manifest' href='/manifest.json' />
+        <meta
+            name='keywords'
+            content='astro, imran, mohammedimran, mohammed imran'
+        />
+        <meta name='color-scheme' content='dark' />
+        <meta
+            name='theme-color'
+            media='(prefers-color-scheme: dark)'
+            content='#242424'
+        />
+        <meta
+            name='theme-color'
+            media='(prefers-color-scheme: light)'
+            content='#f0f0f0'
+        />
+        <meta name='author' content='Mohammed Imran' />
+        <link rel='author' href='https://www.linkedin.com/in/m0hammedimran' />
+        <meta name='description' content="Mohammed Imran's Portfolio website" />
+
+        <meta
+            name='twitter:card'
+            content='https://mohammedimran.com/icons/android-chrome-512x512.png'
+        />
+        <meta name='twitter:site' content='https://mohammedimran.com' />
+        <meta name='twitter:creator' content='@m0hammed_imran' />
+        <meta name='twitter:title' content='Mohammed Imran' />
+        <meta name='twitter:description' content='My Portfolio website' />
+        <meta
+            name='twitter:image'
+            content='https://mohammedimran.com/icons/android-chrome-512x512.png'
+        />
+
+        <meta property='og:type' content='website' />
+        <meta property='og:url' content='https://mohammedimran.com' />
+        <meta property='og:site_name' content='Mohammed Imran' />
+        <meta property='og:title' content='Mohammed Imran' />
+        <meta property='og:description' content='My Portfolio website' />
+        <meta
+            property='og:image'
+            content='https://mohammedimran.com/icons/android-chrome-512x512.png'
+        />
+        <link rel='sitemap' href='/sitemap-index.xml' />
+
+        <script async type='text/javascript'>
+            const theme = JSON.parse(localStorage.theme || 'null');
+
+            try {
+                if (
+                    theme === 'dark' ||
+                    (!theme &&
+                        window.matchMedia('(prefers-color-scheme: dark)')
+                            .matches)
+                ) {
+                    document.documentElement.classList.add('dark');
+                    document
+                        .querySelector('meta[name="theme-color"]')
+                        ?.setAttribute('content', '#242424');
+                } else {
+                    document
+                        .querySelector('meta[name="theme-color"]')
+                        ?.setAttribute('content', '#f0f0f0');
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch (_) {}
+
+            function setThemeClass(theme) {
+                try {
+                    if (
+                        theme === 'dark' ||
+                        (!theme &&
+                            window.matchMedia('(prefers-color-scheme: dark)')
+                                .matches)
+                    ) {
+                        document.documentElement.classList.add('dark');
+                        document
+                            .querySelector('meta[name="theme-color"]')
+                            ?.setAttribute('content', '${COLORS.DARK}');
+                    } else {
+                        document
+                            .querySelector('meta[name="theme-color"]')
+                            ?.setAttribute('content', '${COLORS.LIGHT}');
+                        document.documentElement.classList.remove('dark');
+                    }
+                } catch (_) {}
+            }
+
+            window.setThemeClass = window.setThemeClass || setThemeClass;
+        </script>
+        <title>{title}</title>
+    </head>
+    <body
+        class='bg-white text-zinc-900 transition-colors dark:bg-zinc-800 dark:text-white'
+    >
+        <Navbar />
+        <slot />
+    </body>
 </html>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-</style>
