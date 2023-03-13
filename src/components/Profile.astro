@@ -1,6 +1,6 @@
 ---
-import { Image } from '@astrojs/image/components';
-const mohammedimran = '/assets/mohammedimran.webp';
+import { Image } from 'astro:assets';
+const mohammedimran = '../assets/mohammedimran.webp';
 ---
 
 <div class='sticky top-[97px] z-10'>
@@ -12,8 +12,8 @@ const mohammedimran = '/assets/mohammedimran.webp';
                 src={mohammedimran}
                 format={'webp'}
                 class='shrink-0 rounded-full'
-                height={128}
-                width={128}
+                height={256}
+                width={256}
                 title='Mohammed Imran'
                 loading='eager'
                 alt='Mohammed Imran'
