@@ -1,7 +1,6 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@astrojs/image': ^0.16.0
   '@astrojs/sitemap': ^1.2.0
   '@astrojs/tailwind': ^3.1.0
   '@tailwindcss/typography': ^0.5.9
@@ -11,7 +10,6 @@ specifiers:
   tailwindcss: ^3.2.7
 
 dependencies:
-  '@astrojs/image': 0.16.0_astro@2.1.2
   '@astrojs/sitemap': 1.2.0
   '@astrojs/tailwind': 3.1.0_astro@2.1.2+tailwindcss@3.2.7
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
@@ -21,10 +19,6 @@ dependencies:
   tailwindcss: 3.2.7
 
 packages:
-
-  /@altano/tiny-async-pool/1.0.2:
-    resolution: {integrity: sha512-qQzaI0TBUPdpjZ3qo5b2ziQY9MSNpbziH2ZrE5lvtUZL+kn9GwVuVJwoOubaoNkeDB+rqEefnpu1k+oMpOCYiw==}
-    dev: false
 
   /@ampproject/remapping/2.2.0:
     resolution: {integrity: sha512-qRmjj8nj9qmLTQXXmaR1cck3UXSRMPrbsLJAasZpF+t3riI71BXed5ebIOYwQntykeZuhjsdweEc9BxH5Jc26w==}
@@ -40,24 +34,6 @@ packages:
 
   /@astrojs/compiler/1.2.0:
     resolution: {integrity: sha512-O8yPCyuq+PU9Fjht2tIW6WzSWiq8qDF1e8uAX2x+SOGFzKqOznp52UlDG2mSf+ekf0Z3R34sb64O7SgX+asTxg==}
-    dev: false
-
-  /@astrojs/image/0.16.0_astro@2.1.2:
-    resolution: {integrity: sha512-9nZSA6/3ucdj5/M774CX0qtPtNZVGJeH6uTL4/4rYJgOZTFfr5CEGNmY9MIyayIYvatvG3VXyRGInLKEo4bXsg==}
-    peerDependencies:
-      astro: ^2.1.0
-      sharp: '>=0.31.0'
-    peerDependenciesMeta:
-      sharp:
-        optional: true
-    dependencies:
-      '@altano/tiny-async-pool': 1.0.2
-      astro: 2.1.2
-      http-cache-semantics: 4.1.1
-      image-size: 1.0.2
-      kleur: 4.1.5
-      magic-string: 0.27.0
-      mime: 3.0.0
     dev: false
 
   /@astrojs/language-server/0.28.3:
@@ -1605,10 +1581,6 @@ packages:
 
   /html-void-elements/2.0.1:
     resolution: {integrity: sha512-0quDb7s97CfemeJAnW9wC0hw78MtW7NU3hqtCD75g2vFlDLt36llsYD7uB7SUzojLMP24N5IatXf7ylGXiGG9A==}
-    dev: false
-
-  /http-cache-semantics/4.1.1:
-    resolution: {integrity: sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==}
     dev: false
 
   /human-signals/3.0.1:
