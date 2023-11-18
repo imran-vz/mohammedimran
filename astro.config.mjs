@@ -9,12 +9,7 @@ export default defineConfig({
     assets: true,
     integrations: [
         tailwind(),
-        sitemap({
-            changefreq: 'always',
-            lastmod: new Date(),
-        }),
-        mdx({
-            syntaxHighlight: 'shiki',
-        }),
+        sitemap({ changefreq: 'always', lastmod: new Date() }),
+        mdx({ syntaxHighlight: 'shiki' }),
     ],
 });
