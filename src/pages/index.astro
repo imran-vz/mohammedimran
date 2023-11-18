@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import mohammedimran from "../assets/mohammedimran.webp";
+import mohammedimranavif from "../assets/mohammedimran.avif";
 import Technologies from "../components/Technologies.astro";
 import Layout from "../layouts/Layout.astro";
 ---
@@ -22,8 +23,9 @@ import Layout from "../layouts/Layout.astro";
 				<div class='text-center'>
 					<div class='flex justify-center pb-6'>
 						<Image
-							src={mohammedimran}
-							format={"webp"}
+							src={mohammedimranavif}
+							srcset={`${mohammedimran} 312w, ${mohammedimranavif} 312w`}
+							format={"avif"}
 							class='shrink-0 rounded-full'
 							height={312}
 							width={312}
