@@ -8,15 +8,16 @@
         "url": "https://github.com/M0hammedImran"
     },
     "engines": {
-        "node": "18.14.0",
-        "vscode": "^1.22.0"
+        "node": ">=20.6.1",
+        "vscode": "^1.22.0",
+        "pnpm": ">=8.7.5"
     },
     "repository": {
         "url": "https://github.com/M0hammedImran/mohammedimran"
     },
     "private": true,
     "homepage": "https://mohammedimran.com",
-    "packageManager": "pnpm",
+    "packageManager": "pnpm@8.7.5",
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
@@ -25,13 +26,13 @@
         "astro": "astro"
     },
     "dependencies": {
-        "@astrojs/mdx": "^0.18.0",
-        "@astrojs/sitemap": "^1.2.0",
-        "@astrojs/tailwind": "^3.1.0",
-        "@tailwindcss/typography": "^0.5.9",
-        "astro": "^2.1.2",
-        "prettier": "^2.8.4",
-        "prettier-plugin-tailwindcss": "^0.2.4",
-        "tailwindcss": "^3.2.7"
+        "@astrojs/mdx": "^1.1.5",
+        "@astrojs/sitemap": "^3.0.3",
+        "@astrojs/tailwind": "^5.0.2",
+        "@tailwindcss/typography": "^0.5.10",
+        "astro": "^3.5.5",
+        "prettier": "^3.1.0",
+        "prettier-plugin-tailwindcss": "^0.5.7",
+        "tailwindcss": "^3.3.5"
     }
 }

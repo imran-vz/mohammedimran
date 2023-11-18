@@ -6,9 +6,7 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://mohammedimran.com',
-    experimental: {
-        assets: true,
-    },
+    assets: true,
     integrations: [
         tailwind(),
         sitemap({
