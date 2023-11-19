@@ -23,7 +23,6 @@ function trimEnd(str: string) {
  * @returns {string} Lowercased and trimmed string.
  */
 const lowercaseTrim = (name: string): string => {
-    console.log(`⚓️ | name:`, name);
     if (!name) return "";
     return name.toLowerCase().trim();
 };
