@@ -3,12 +3,23 @@ import LandingPageHero from "../components/LandingPageHero.astro";
 import MostUsedLanguage from "../components/MostUsedLanguage.svelte";
 import Technologies from "../components/Technologies.astro";
 import Layout from "../layouts/Layout.astro";
+import type { TopLangData } from "../utils/fetch-top-languages";
+import { trimTopLanguages } from "../utils/utils";
+const response = await fetch(new URL("/api/github-projects", Astro.url).toString());
+const data: TopLangData = await response.json();
+const { langs, totalLanguageSize } = trimTopLanguages(data, 10, [
+	"Vim Script",
+	"AutoHotkey",
+	"Makefile",
+	"Shell",
+	"MDX",
+]);
 ---
 
 <Layout title='<MohammedImran />'>
 	<main class='mx-auto w-full max-w-6xl px-3 sm:px-6 md:px-6 lg:px-8 grid gap-4 mb-4'>
 		<LandingPageHero />
-		<MostUsedLanguage client:load />
+		<MostUsedLanguage {totalLanguageSize} {langs} />
 		<Technologies />
 
 		<div
