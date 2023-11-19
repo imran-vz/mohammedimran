@@ -1,35 +1,11 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import type { Lang, TopLangData } from "../utils/fetch-top-languages";
-    import { trimTopLanguages } from "../utils/utils";
-
-    let data: TopLangData | null = null;
-    let totalLanguageSize: number = 0;
-    let langs: Lang[] = [];
-    onMount(async () => {
-        try {
-            const response = await fetch(
-                new URL("/api/github-projects", window.location.href).toString()
-            );
-            data = await response.json();
-            if (!data) return;
-            const topLangs = trimTopLanguages(data, 10, [
-                "Vim Script",
-                "AutoHotkey",
-                "Makefile",
-                "Shell",
-                "MDX",
-            ]);
-            totalLanguageSize = topLangs.totalLanguageSize;
-            langs = topLangs.langs;
-        } catch (error) {
-            console.error("Error fetching user:", error);
-        }
-    });
+    import type { Lang } from "../utils/fetch-top-languages";
+    export let totalLanguageSize: number = 0;
+    export let langs: Lang[] = [];
 </script>
 
 <div class="px-6 py-4 bg-zinc-900 bg-opacity-80 rounded-sm">
-    <h4 class="text-xl font-bold mb-4">Most Used Languauge</h4>
+    <h4 class="text-xl font-bold mb-4">Most Used Language</h4>
 
     <div class="flex flex-wrap gap-4 max-w-6xl">
         <noscript>
@@ -42,7 +18,7 @@
                 <li
                     class="rounded-sm border border-pink-600/50 bg-zinc-900 bg-opacity-20 backdrop-blur-sm px-4 py-2 hover:bg-opacity-50 whitespace-nowrap"
                 >
-                    Rust (Intermidiate)
+                    Rust (Intermediate)
                 </li>
                 <li
                     class="rounded-sm border border-pink-600/50 bg-zinc-900 bg-opacity-20 backdrop-blur-sm px-4 py-2 hover:bg-opacity-50 whitespace-nowrap"
@@ -68,5 +44,14 @@
                 </p>
             </div>
         {/each}
+        {#if langs.length}
+            <p class="text-xs">
+                🛈 These stats are pulled from <a
+                    href="https://github.com/m0hammedimran"
+                >
+                    Github,
+                </a> and are based on the languages used in my public repositories.
+            </p>
+        {/if}
     </div>
 </div>
