@@ -1,8 +1,9 @@
 ---
+export const prerender = false;
+
 import type { TopLangData } from "../utils/fetch-top-languages";
 import { trimTopLanguages } from "../utils/utils";
 
-export const prerender = false;
 const response = await fetch(new URL("/api/github-projects", Astro.request.url).toString(), {
 	headers: { Accept: "application/json" },
 });
