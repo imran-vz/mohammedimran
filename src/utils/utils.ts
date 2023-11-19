@@ -22,7 +22,11 @@ function trimEnd(str: string) {
  * @param {string} name String to lowercase and trim.
  * @returns {string} Lowercased and trimmed string.
  */
-const lowercaseTrim = (name: string): string => name.toLowerCase().trim();
+const lowercaseTrim = (name: string): string => {
+    console.log(`⚓️ | name:`, name);
+    if (!name) return "";
+    return name.toLowerCase().trim();
+};
 
 const MAXIMUM_LANGS_COUNT = 20;
 /**
@@ -61,168 +65,6 @@ export const trimTopLanguages = (
     const totalLanguageSize = langs.reduce((acc, curr) => acc + curr.size, 0);
 
     return { langs, totalLanguageSize };
-};
-
-interface FlexLayoutProps {
-    items: string[];
-    gap: number;
-    direction?: ("column" | "row") | undefined;
-    sizes?: number[] | undefined;
-}
-const DEFAULT_LANG_COLOR = "#858585";
-/**
- * Renders the default language card layout.
- *
- * @param {Lang[]} langs Array of programming languages.
- * @param {number} width Card width.
- * @param {number} totalLanguageSize Total size of all languages.
- * @returns {string} Normal layout card SVG object.
- */
-export const renderNormalLayout = (
-    langs: Lang[],
-    width: number,
-    totalLanguageSize: number,
-): string => {
-    return flexLayout({
-        items: langs.map((lang, index) => {
-            return createProgressTextNode({
-                width,
-                name: lang.name,
-                color: lang.color || DEFAULT_LANG_COLOR,
-                progress: parseFloat(
-                    ((lang.size / totalLanguageSize) * 100).toFixed(2),
-                ),
-
-                index,
-            });
-        }),
-        gap: 40,
-        direction: "column",
-    }).join("");
-};
-
-/**
- * Create progress bar text item for a programming language.
- *
- * @param {object} props Function properties.
- * @param {number} props.width The card width
- * @param {string} props.color Color of the programming language.
- * @param {string} props.name Name of the programming language.
- * @param {number} props.progress Usage of the programming language in percentage.
- * @param {number} props.index Index of the programming language.
- * @returns {string} Programming language SVG node.
- */
-const createProgressTextNode = ({
-    width,
-    color,
-    name,
-    progress,
-    index,
-}: {
-    width: number;
-    color: string;
-    name: string;
-    progress: number;
-    index: number;
-}): string => {
-    const staggerDelay = (index + 3) * 150;
-    const paddingRight = 95;
-    const progressTextX = width - paddingRight + 10;
-    const progressWidth = width - paddingRight;
-
-    return `
-      <g class="stagger" style="animation-delay: ${staggerDelay}ms">
-        <text data-testid="lang-name" x="2" y="15" class="lang-name">${name}</text>
-        <text x="${progressTextX}" y="34" class="lang-name">${progress}%</text>
-        ${createProgressNode({
-            x: 0,
-            y: 25,
-            color,
-            width: progressWidth,
-            progress,
-            progressBarBackgroundColor: "#ddd",
-            delay: staggerDelay + 300,
-        })}
-      </g>
-    `;
-};
-
-/**
- * Create a node to indicate progress in percentage along a horizontal line.
- *
- * @param {Object} createProgressNodeParams Object that contains the createProgressNode parameters.
- * @param {number} createProgressNodeParams.x X-axis position.
- * @param {number} createProgressNodeParams.y Y-axis position.
- * @param {number} createProgressNodeParams.width Width of progress bar.
- * @param {string} createProgressNodeParams.color Progress color.
- * @param {number} createProgressNodeParams.progress Progress value.
- * @param {string} createProgressNodeParams.progressBarBackgroundColor Progress bar bg color.
- * @param {number} createProgressNodeParams.delay Delay before animation starts.
- * @returns {string} Progress node.
- */
-const createProgressNode = ({
-    x,
-    y,
-    width,
-    color,
-    progress,
-    progressBarBackgroundColor,
-    delay,
-}: {
-    x: number;
-    y: number;
-    width: number;
-    color: string;
-    progress: number;
-    progressBarBackgroundColor: string;
-    delay: number;
-}): string => {
-    const progressPercentage = clampValue(progress, 2, 100);
-
-    return `
-      <svg width="${width}" x="${x}" y="${y}">
-        <rect rx="5" ry="5" x="0" y="0" width="${width}" height="8" fill="${progressBarBackgroundColor}"></rect>
-        <svg data-testid="lang-progress" width="${progressPercentage}%">
-          <rect
-              height="8"
-              fill="${color}"
-              rx="5" ry="5" x="0" y="0"
-              class="lang-progress"
-              style="animation-delay: ${delay}ms;"
-          />
-        </svg>
-      </svg>
-    `;
-};
-
-/**
- * Auto layout utility, allows us to layout things vertically or horizontally with
- * proper gaping.
- *
- * @param {object} props Function properties.
- * @param {string[]} props.items Array of items to layout.
- * @param {number} props.gap Gap between items.
- * @param {"column" | "row"=} props.direction Direction to layout items.
- * @param {number[]=} props.sizes Array of sizes for each item.
- * @returns {string[]} Array of items with proper layout.
- */
-export const flexLayout = ({
-    items,
-    gap,
-    direction,
-    sizes = [],
-}: FlexLayoutProps): string[] => {
-    let lastSize = 0;
-    // filter() for filtering out empty strings
-    return items.filter(Boolean).map((item, i) => {
-        const size = sizes[i] || 0;
-        let transform = `translate(${lastSize}, 0)`;
-        if (direction === "column") {
-            transform = `translate(0, ${lastSize})`;
-        }
-        lastSize += size + gap;
-        return `<g transform="${transform}">${item}</g>`;
-    });
 };
 
 function trimTabAndSpaces(str: string) {
