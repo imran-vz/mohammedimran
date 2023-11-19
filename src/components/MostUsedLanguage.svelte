@@ -5,7 +5,7 @@
 </script>
 
 <div class="px-6 py-4 bg-zinc-900 bg-opacity-80 rounded-sm">
-    <h4 class="text-xl font-bold mb-4">Most Used Language</h4>
+    <h2 class="text-xl font-bold mb-4">Most Used Language</h2>
 
     <div class="flex flex-wrap gap-4 max-w-6xl">
         <noscript>
