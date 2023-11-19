@@ -4,7 +4,8 @@
     import { trimTopLanguages } from "../utils/utils";
 
     let data: TopLangData | null = null;
-    let totalLanguageSize: number, langs: Lang[];
+    let totalLanguageSize: number = 0;
+    let langs: Lang[] = [];
     onMount(async () => {
         try {
             const response = await fetch(
