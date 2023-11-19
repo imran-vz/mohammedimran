@@ -29,6 +29,7 @@
         "@astrojs/mdx": "^1.1.5",
         "@astrojs/node": "^6.0.4",
         "@astrojs/sitemap": "^3.0.3",
+        "@astrojs/svelte": "^4.0.4",
         "@astrojs/tailwind": "^5.0.2",
         "@tailwindcss/typography": "^0.5.10",
         "astro": "^3.5.5",
@@ -36,6 +37,7 @@
         "prettier": "^3.1.0",
         "prettier-plugin-tailwindcss": "^0.5.7",
         "sharp": "^0.32.6",
+        "svelte": "^5.0.0-next.1",
         "tailwindcss": "^3.3.5"
     }
 }
