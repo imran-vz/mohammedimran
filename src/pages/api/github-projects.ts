@@ -4,13 +4,13 @@ import fetchTopLanguages, {
     type TopLangData,
 } from "../../utils/fetch-top-languages";
 
+const kv = createClient({
+    url: import.meta.env.KV_REST_API_URL,
+    token: import.meta.env.KV_REST_API_TOKEN,
+});
+
 export const GET: APIRoute = async () => {
     try {
-        const kv = createClient({
-            url: import.meta.env.KV_REST_API_URL,
-            token: import.meta.env.KV_REST_API_TOKEN,
-        });
-
         let response: TopLangData | null = null;
         const cacheResponse = await kv.hget<TopLangData>(
             "github-projects",
