@@ -12,6 +12,7 @@ export default defineConfig({
         webAnalytics: { enabled: true },
         speedInsights: { enabled: true },
     }),
+    build: { inlineStylesheets: "always" },
     site: "https://mohammedimran.com",
     integrations: [
         tailwind(),
