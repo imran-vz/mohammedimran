@@ -26,19 +26,19 @@
         "astro": "astro"
     },
     "dependencies": {
-        "@astrojs/mdx": "^1.1.5",
+        "@astrojs/mdx": "^2.0.0",
         "@astrojs/sitemap": "^3.0.3",
-        "@astrojs/svelte": "^4.0.4",
-        "@astrojs/tailwind": "^5.0.2",
-        "@astrojs/vercel": "^5.2.0",
+        "@astrojs/svelte": "^5.0.0",
+        "@astrojs/tailwind": "^5.0.3",
+        "@astrojs/vercel": "^6.0.1",
         "@tailwindcss/typography": "^0.5.10",
-        "@vercel/kv": "^1.0.0",
-        "astro": "^3.5.5",
+        "@vercel/kv": "^1.0.1",
+        "astro": "^4.0.3",
         "axios": "^1.6.2",
         "prettier": "^3.1.0",
-        "prettier-plugin-tailwindcss": "^0.5.7",
-        "sharp": "^0.32.6",
-        "svelte": "^4.2.5",
-        "tailwindcss": "^3.3.5"
+        "prettier-plugin-tailwindcss": "^0.5.9",
+        "sharp": "^0.33.0",
+        "svelte": "^4.2.8",
+        "tailwindcss": "^3.3.6"
     }
 }
