@@ -3,6 +3,7 @@ import type { APIRoute } from "astro";
 import fetchTopLanguages, {
     type TopLangData,
 } from "../../utils/fetch-top-languages";
+import { trimTopLanguages } from "../../utils/utils";
 
 const kv = createClient({
     url: import.meta.env.KV_REST_API_URL,
@@ -33,7 +34,15 @@ export const GET: APIRoute = async () => {
         }
 
         response = response || cacheResponse;
-        return new Response(JSON.stringify(response), {
+        const result = trimTopLanguages(response, 10, [
+            "Vim Script",
+            "AutoHotkey",
+            "Makefile",
+            "Shell",
+            "MDX",
+        ]);
+
+        return new Response(JSON.stringify(result), {
             status: 200,
             headers: { "Content-Type": "application/json" },
         });
