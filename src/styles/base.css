@@ -12,10 +12,10 @@
         --color-border: 236, 233, 233;
     }
     html[data-theme="dark"] {
-        --color-fill: 33, 39, 55;
+        --color-fill: 16, 13, 23;
         --color-text-base: 234, 237, 243;
         --color-accent: 255, 107, 1;
-        --color-card: 52, 63, 96;
+        --color-card: 15, 29, 62;
         --color-card-muted: 138, 51, 2;
         --color-border: 171, 75, 8;
     }
@@ -26,6 +26,45 @@
     #moon-svg,
     html[data-theme="dark"] #sun-svg {
         display: block;
+    }
+
+    div,
+    span,
+    svg,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    a,
+    button {
+        transition-property: color, background-color, border-color,
+            text-decoration-color, fill, stroke;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+    }
+
+    body {
+        background-size: 20px 20px;
+        background-image: linear-gradient(
+                to right,
+                rgba(var(--color-accent), 0.07) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                to bottom,
+                rgba(var(--color-accent), 0.07) 1px,
+                transparent 1px
+            );
+
+        /* background-image: radial-gradient(
+            rgba(var(--color-accent), 0.2) 1px,
+            transparent 0
+        );
+        background-size: 20px 20px;
+        background-position: -19px -19px; */
     }
 }
 
