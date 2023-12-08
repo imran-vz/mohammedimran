@@ -58,7 +58,15 @@
                 rgba(var(--color-accent), 0.07) 1px,
                 transparent 1px
             );
-
+        background-position-y: -9px;
+        mask-image: linear-gradient(
+            to bottom,
+            transparent,
+            0.05%,
+            white,
+            99.95%,
+            transparent
+        );
         /* background-image: radial-gradient(
             rgba(var(--color-accent), 0.2) 1px,
             transparent 0
