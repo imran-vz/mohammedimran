@@ -28,19 +28,25 @@ const lowercaseTrim = (name: string): string => {
 };
 
 const MAXIMUM_LANGS_COUNT = 20;
+export interface TrimTopLanguagesResult {
+    langs: Lang[];
+    totalLanguageSize: number;
+}
+
 /**
  * Trim top languages to lang_count while also hiding certain languages.
  *
  * @param {Record<string, Lang>} topLangs Top languages.
  * @param {number} langs_count Number of languages to show.
  * @param {string[]=} hide Languages to hide.
- * @returns {{ langs: Lang[], totalLanguageSize: number }} Trimmed top languages and total size.
+ * @returns Trimmed top languages and total size.
  */
 export const trimTopLanguages = (
-    topLangs: Record<string, Lang>,
+    topLangs: Record<string, Lang> | null,
     langs_count: number,
     hide?: string[],
-): { langs: Lang[]; totalLanguageSize: number } => {
+): TrimTopLanguagesResult => {
+    if (!topLangs) return { langs: [], totalLanguageSize: 0 };
     let langs = Object.values(topLangs);
     let langsToHide = new Map<string, boolean>();
     let langsCount = clampValue(langs_count, 1, MAXIMUM_LANGS_COUNT);
