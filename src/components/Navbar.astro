@@ -1,15 +1,19 @@
-<header class='sticky top-0 z-20 h-20 items-center backdrop-blur bg-zinc-900/10 transition-colors'>
+<header class='sticky top-0 z-20 h-20 items-center backdrop-blur bg-skin-fill bg-opacity-10 transition-colors'>
+	<a
+		id='skip-to-content'
+		class='absolute -top-full left-16 z-50 bg-skin-accent px-3 py-2 text-skin-inverted transition-all focus:top-4'
+		href='#main-content'>Skip to content</a
+	>
+
 	<div
 		class='mx-auto w-full max-w-6xl px-3 py-4 sm:px-6 md:px-6 lg:px-8 flex items-center justify-between text-center text-xl font-bold md:text-left'>
 		<div class='flex flex-row items-center gap-2'>
-			<a
-				href='/'
-				class='rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-indigo-600'>
+			<a href='/' class='focus-outline'>
 				<h1 class='sr-only'>Mohammed Imran</h1>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					aria-label='Mohammed Imran'
-					class='h-10 w-40 text-zinc-900 transition-colors dark:text-zinc-50'
+					class='h-10 w-40 transition-colors text-skin-fill'
 					viewBox='0 0 85 10'>
 					<path
 						fill='currentColor'
@@ -19,20 +23,32 @@
 			</a>
 		</div>
 
-		
 		<div>
 			<button
-				id="theme-btn"
-				class="outline-2 outline-offset-1 outline-indigo-600 focus-visible:no-underline focus-visible:outline p-3 sm:p-1"
-				title="Toggles light & dark"
-				aria-label="auto"
-				aria-live="polite"
-			>
-				<svg class='scale-125 hover:rotate-12 sm:scale-100' xmlns="http://www.w3.org/2000/svg" id="moon-svg">
-					<path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" />
+				id='theme-btn'
+				class='focus-outline p-1'
+				title='Toggles light & dark'
+				aria-label='auto'
+				aria-live='polite'>
+				<svg
+					class='scale-125 hover:rotate-12 sm:scale-100 inline-block h-6 w-6 fill-skin-base group-hover:fill-skin-accent'
+					width='21'
+					height='21'
+					xmlns='http://www.w3.org/2000/svg'
+					id='moon-svg'>
+					<path
+						d='M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z'
+					></path>
 				</svg>
-				<svg class="scale-125 hover:rotate-12 sm:scale-100" xmlns="http://www.w3.org/2000/svg" id="sun-svg">
-					<path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" />
+				<svg
+					class='scale-125 hover:rotate-12 sm:scale-100 inline-block h-6 w-6 fill-skin-base group-hover:fill-skin-accent'
+					width='21'
+					height='21'
+					xmlns='http://www.w3.org/2000/svg'
+					id='sun-svg'>
+					<path
+						d='M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z'
+					></path>
 				</svg>
 			</button>
 		</div>
