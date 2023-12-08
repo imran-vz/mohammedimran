@@ -29,6 +29,7 @@ export const GET: APIRoute = async () => {
                 "libsol",
             ]);
 
+            console.log(`⚓️ | github response:`, response);
             await kv.hset("github-projects", { m0hammedimran: response });
             await kv.expire("github-projects", 60 * 60 * 24 * 7);
         }
@@ -41,6 +42,8 @@ export const GET: APIRoute = async () => {
             "Shell",
             "MDX",
         ]);
+
+        console.log(`⚓️ | result:`, result);
 
         return new Response(JSON.stringify(result), {
             status: 200,
