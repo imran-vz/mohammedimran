@@ -16,10 +16,7 @@ export default defineConfig({
     site: "https://mohammedimran.com",
     integrations: [
         tailwind(),
-        sitemap({
-            changefreq: "always",
-            lastmod: new Date(),
-        }),
+        sitemap({ changefreq: "always", lastmod: new Date() }),
         mdx({ syntaxHighlight: "shiki" }),
         svelte(),
     ],
