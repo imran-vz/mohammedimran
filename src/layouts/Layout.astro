@@ -1,6 +1,7 @@
 ---
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
+import "../styles/base.css"
 export interface Props {
 	title: string;
 }
@@ -47,7 +48,7 @@ const { title } = Astro.props;
 		<script is:inline src="/toggle-theme.js"></script>
 	</head>
 
-	<body class='bg-white text-zinc-900 transition-colors dark:bg-zinc-800 dark:text-white'>
+	<body class='bg-white text-zinc-900 transition-colors dark:bg-zinc-800 dark:text-white flex min-h-[100svh] flex-col'>
 		<Navbar />
 		<slot />
 		<Footer />

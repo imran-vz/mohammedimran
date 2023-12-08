@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    #sun-svg,
+    html[data-theme="dark"] #moon-svg {
+        display: none;
+    }
+    #moon-svg,
+    html[data-theme="dark"] #sun-svg {
+        display: block;
+    }
+}
