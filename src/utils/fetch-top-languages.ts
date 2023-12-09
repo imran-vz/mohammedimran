@@ -1,31 +1,24 @@
+import type { Edge, TopLanguages } from "../types";
 import CustomError from "./CustomError";
 import fetcher from "./fetcher";
 import { isErrorResponse } from "./retryer";
 import { wrapTextMultiline } from "./utils";
-
-export type Lang = {
-    name: string;
-    color: string;
-    size: number;
-};
-
-export type TopLangData = Record<string, Lang>;
 
 /**
  * Fetch top languages for a given username.
  *
  * @param {string} username GitHub username.
  * @param {string[]} exclude_repo List of repositories to exclude.
- * @param {number} size_weight Weightage to be given to size.
- * @param {number} count_weight Weightage to be given to count.
- * @returns {Promise<TopLangData>} Top languages data.
+ * @param {number} size_weight weightage to be given to size.
+ * @param {number} count_weight weightage to be given to count.
+ * @returns {Promise<TopLanguages>} Top languages data.
  */
 export default async function fetchTopLanguages(
     username: string,
     exclude_repo: string[] = [],
     size_weight: number = 1,
     count_weight: number = 0,
-): Promise<TopLangData> {
+): Promise<TopLanguages> {
     if (!username) {
         throw new Error("missing username");
     }
@@ -59,62 +52,47 @@ export default async function fetchTopLanguages(
         );
     } else {
         let repoNodes = res?.data.data.user.repositories.nodes;
-
         if (!repoNodes) return {};
-
-        let repoToHide = new Map<string, boolean>();
-
-        // populate repoToHide map for quick lookup
-        // while filtering out
-        if (exclude_repo) {
-            exclude_repo.forEach((repoName) => {
-                repoToHide.set(repoName, true);
-            });
-        }
+        let repoToHide = new Set(exclude_repo);
 
         // filter out repositories to be hidden
         repoNodes = repoNodes.filter((name) => !repoToHide.has(name.name));
 
         let repoCount = 0;
 
-        const nodes: Record<
-            string,
-            { name: string; color: string; size: number; count: number }
-        > = repoNodes
+        const nodes = repoNodes
             ?.filter((node) => node.languages.edges.length > 0)
             // flatten the list of language nodes
             .reduce(
                 (acc, curr) => curr.languages.edges.concat(acc),
-                [] as any[],
+                [] as Edge[],
             )
             .reduce((acc, prev) => {
                 // get the size of the language (bytes)
                 let langSize = prev.size;
-
+                const prevNodeName = prev.node.name;
+                const node = acc[prevNodeName];
                 // if we already have the language in the accumulator
                 // & the current language name is same as previous name
                 // add the size to the language size and increase repoCount.
-                if (
-                    acc[prev.node.name] &&
-                    prev.node.name === acc[prev.node.name].name
-                ) {
-                    langSize = prev.size + acc[prev.node.name].size;
+                if (node && prevNodeName === node.name) {
+                    langSize = prev.size + node.size;
                     repoCount += 1;
                 } else {
-                    // reset noderepoCount to 1
+                    // reset repoCount to 1
                     // language must exist in at least one repo to be detected
                     repoCount = 1;
                 }
                 return {
                     ...acc,
-                    [prev.node.name]: {
-                        name: prev.node.name,
+                    [prevNodeName]: {
+                        name: prevNodeName,
                         color: prev.node.color,
                         size: langSize,
                         count: repoCount,
                     },
                 };
-            }, {});
+            }, {} as TopLanguages);
 
         Object.keys(nodes).forEach((name) => {
             // comparison index calculation
@@ -128,24 +106,8 @@ export default async function fetchTopLanguages(
             .reduce((result, key) => {
                 result[key] = nodes[key];
                 return result;
-            }, {} as TopLangData);
+            }, {} as TopLanguages);
 
         return topLangs;
     }
 }
-
-export type languages =
-    | "TypeScript"
-    | "Shell"
-    | "JavaScript"
-    | "HTML"
-    | "CSS"
-    | "Svelte"
-    | "Astro"
-    | "Rust"
-    | "Go"
-    | "Vim Script"
-    | "Dockerfile"
-    | "MDX"
-    | "AutoHotkey"
-    | "Makefile";
