@@ -1,49 +1,41 @@
 import axios from "axios";
+import type { Response } from "../types";
 
-export default function fetcher(variables: { login: string }, token: string) {
-    return axios.post<{ data: Data } | { errors: Errors }>(
-        "https://api.github.com/graphql",
-        {
-            query: `
-            query userInfo($login: String!) {
-                user(login: $login) {
-                    # fetch only owner repos & not forks
-                    repositories(ownerAffiliations: OWNER, isFork: false, first: 100) {
-                        nodes {
+const query = `query userInfo($login: String!) {
+    user(login: $login) {
+        repositories(
+            ownerAffiliations: OWNER
+            isFork: false
+            first: 100
+            privacy: PUBLIC
+            orderBy: {
+            direction: DESC
+            field: UPDATED_AT
+            }
+        ) {
+            nodes {
+                name
+                description
+                languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+                    edges {
+                        size
+                        node {
+                            color
                             name
-                            languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
-                                edges {
-                                    size
-                                    node {
-                                        color
-                                        name
-                                    }
-                                }
-                            }
                         }
                     }
                 }
             }
-        `,
-            variables,
-        },
-        {
-            headers: { Authorization: `token ${token}` },
-        },
-    );
-}
+        }
+    }
+}`;
 
-export type EdgeNode = {
-    color: string;
-    name: string;
-};
-export type Edge = {
-    size: number;
-    node: EdgeNode;
-};
-export type Language = { edges: Edge[] };
-export type Node = { name: string; languages: Language };
-export type Repositories = { nodes: Node[] };
-export type User = { repositories: Repositories };
-export type Data = { user: User };
-export type Errors = { type: string; message: string }[];
+export default function fetcher(variables: { login: string }, token: string) {
+    const payload = { query, variables };
+    return axios<Response>({
+        url: "https://api.github.com/graphql",
+        method: "POST",
+        data: payload,
+        headers: { Authorization: `token ${token}` },
+    });
+}

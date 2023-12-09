@@ -5,7 +5,7 @@
  * Released under the MIT License.
  */
 
-import type { Lang } from "./fetch-top-languages";
+import type { Language } from "./fetch-top-languages";
 
 function trimEnd(str: string) {
     let lastCharPos = str.length - 1;
@@ -29,20 +29,20 @@ const lowercaseTrim = (name: string): string => {
 
 const MAXIMUM_LANGS_COUNT = 20;
 export interface TrimTopLanguagesResult {
-    langs: Lang[];
+    langs: Language[];
     totalLanguageSize: number;
 }
 
 /**
  * Trim top languages to lang_count while also hiding certain languages.
  *
- * @param {Record<string, Lang>} topLangs Top languages.
+ * @param {Record<string, Language>} topLangs Top languages.
  * @param {number} langs_count Number of languages to show.
  * @param {string[]=} hide Languages to hide.
  * @returns Trimmed top languages and total size.
  */
 export const trimTopLanguages = (
-    topLangs: Record<string, Lang> | null,
+    topLangs: Record<string, Language> | null,
     langs_count: number,
     hide?: string[],
 ): TrimTopLanguagesResult => {
