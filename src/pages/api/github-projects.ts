@@ -1,9 +1,8 @@
 import { createClient } from "@vercel/kv";
 import type { APIRoute } from "astro";
-import fetchTopLanguages, {
-    type TopLangData,
-} from "../../utils/fetch-top-languages";
+import fetchTopLanguages from "../../utils/fetch-top-languages";
 import { trimTopLanguages } from "../../utils/utils";
+import type { TopLanguages } from "../../types";
 
 const kv = createClient({
     url: import.meta.env.KV_REST_API_URL,
@@ -12,8 +11,8 @@ const kv = createClient({
 
 export const GET: APIRoute = async () => {
     try {
-        let response: TopLangData | null = null;
-        const cacheResponse = await kv.hget<TopLangData>(
+        let response: TopLanguages | null = null;
+        const cacheResponse = await kv.hget<TopLanguages>(
             "github-projects",
             "m0hammedimran",
         );
