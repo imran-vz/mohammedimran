@@ -1,8 +1,8 @@
 <script lang="ts">
-    import type { Lang } from "../utils/fetch-top-languages";
+    import type { Language } from "../utils/fetch-top-languages";
     import OfflineLanguages from "./OfflineLanguages.svelte";
     export let totalLanguageSize: number = 0;
-    export let langs: Lang[] = [];
+    export let langs: Language[] = [];
 </script>
 
 <div class="px-6 py-4 bg-skin-card bg-opacity-80 rounded-sm">
