@@ -10,7 +10,9 @@ let data: TrimTopLanguagesResult | null = null;
 try {
 	const response = await fetch(new URL("/api/github-projects", Astro.url).toString());
 	data = await response.json();
-} catch (error) {}
+} catch (error) {
+	console.log(`⚓️ | error:`, error);
+}
 ---
 
 <Layout title='Mohammed Imran'>
@@ -20,8 +22,8 @@ try {
 			class='scroll-mt-20 mx-auto w-full max-w-6xl px-3 sm:px-6 md:px-6 lg:px-8 grid gap-4 mb-4'>
 			<LandingPageHero />
 
-			<div id='technologies' class='space-y-4'>
-				<MostUsedLanguage totalLanguageSize={data?.totalLanguageSize || 0} langs={data?.languages || []} />
+			<div id='technologies' class='space-y-8'>
+				<MostUsedLanguage totalLanguageSize={data?.totalLanguageSize || 0} languages={data?.languages || []} />
 				<Technologies />
 			</div>
 		</main>
