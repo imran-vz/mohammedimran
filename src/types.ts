@@ -33,3 +33,17 @@ export type Data = { user: User };
 export type Errors = { type: string; message: string }[];
 
 export type Response = { data: Data } | { errors: Errors };
+
+export interface TrimTopLanguagesResult {
+    languages: Language[];
+    totalLanguageSize: number;
+}
+
+export interface TrimTopLanguagesArgs {
+    /** Top languages */
+    topLanguages: Record<string, Language> | null;
+    /** Number of languages to show */
+    languagesCount: number;
+    /** Languages to hide */
+    hideLanguages?: string[] | Set<string>;
+}

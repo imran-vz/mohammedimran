@@ -5,7 +5,7 @@
  * Released under the MIT License.
  */
 
-import type { Language } from "../types";
+import type { TrimTopLanguagesArgs, TrimTopLanguagesResult } from "../types";
 
 function trimEnd(str: string) {
     let lastCharPos = str.length - 1;
@@ -28,19 +28,6 @@ const lowercaseTrim = (name: string): string => {
 };
 
 const MAXIMUM_LANGS_COUNT = 20;
-export interface TrimTopLanguagesResult {
-    langs: Language[];
-    totalLanguageSize: number;
-}
-
-interface TrimTopLanguagesArgs {
-    /** Top languages */
-    topLanguages: Record<string, Language> | null;
-    /** Number of languages to show */
-    languagesCount: number;
-    /** Languages to hide */
-    hideLanguages?: string[] | Set<string>;
-}
 
 /**
  * Trim top languages to lang_count while also hiding certain languages.
@@ -52,7 +39,11 @@ export function trimTopLanguages({
     languagesCount,
     hideLanguages,
 }: TrimTopLanguagesArgs) {
-    if (!topLanguages) return { langs: [], totalLanguageSize: 0 };
+    if (!topLanguages)
+        return {
+            languages: [],
+            totalLanguageSize: 0,
+        } satisfies TrimTopLanguagesResult;
     let languages = Object.values(topLanguages);
     let langsToHide = new Set<string>();
     let langsCount = clampValue(languagesCount, 1, MAXIMUM_LANGS_COUNT);
@@ -80,12 +71,7 @@ export function trimTopLanguages({
         0,
     );
 
-    const result: TrimTopLanguagesResult = {
-        langs: languages,
-        totalLanguageSize,
-    };
-
-    return result;
+    return { languages, totalLanguageSize } satisfies TrimTopLanguagesResult;
 }
 
 function trimTabAndSpaces(str: string) {
