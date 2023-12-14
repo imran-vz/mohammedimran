@@ -8,10 +8,7 @@ import { defineConfig } from "astro/config";
 // https://astro.build/config
 export default defineConfig({
     output: "hybrid",
-    adapter: vercel({
-        webAnalytics: { enabled: true },
-        speedInsights: { enabled: true },
-    }),
+    adapter: vercel({ webAnalytics: { enabled: true } }),
     build: { inlineStylesheets: "always" },
     site: "https://mohammedimran.com",
     integrations: [
