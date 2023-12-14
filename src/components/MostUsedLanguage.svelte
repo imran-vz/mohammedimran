@@ -14,7 +14,7 @@
 <div class="px-6 py-4 bg-skin-card bg-opacity-80 rounded-sm">
     <h2 class="text-xl font-bold mb-4">Most Used Language</h2>
 
-    <div class="flex flex-wrap gap-4 max-w-6xl">
+    <div class="flex flex-wrap flex-col gap-4 max-w-6xl">
         <noscript>
             <OfflineLanguages />
         </noscript>
