@@ -5,7 +5,7 @@
  * Released under the MIT License.
  */
 
-import type { Language } from "./fetch-top-languages";
+import type { Language } from "../types";
 
 function trimEnd(str: string) {
     let lastCharPos = str.length - 1;
@@ -33,44 +33,60 @@ export interface TrimTopLanguagesResult {
     totalLanguageSize: number;
 }
 
+interface TrimTopLanguagesArgs {
+    /** Top languages */
+    topLanguages: Record<string, Language> | null;
+    /** Number of languages to show */
+    languagesCount: number;
+    /** Languages to hide */
+    hideLanguages?: string[] | Set<string>;
+}
+
 /**
  * Trim top languages to lang_count while also hiding certain languages.
  *
- * @param {Record<string, Language>} topLangs Top languages.
- * @param {number} langs_count Number of languages to show.
- * @param {string[]=} hide Languages to hide.
  * @returns Trimmed top languages and total size.
  */
-export const trimTopLanguages = (
-    topLangs: Record<string, Language> | null,
-    langs_count: number,
-    hide?: string[],
-): TrimTopLanguagesResult => {
-    if (!topLangs) return { langs: [], totalLanguageSize: 0 };
-    let langs = Object.values(topLangs);
-    let langsToHide = new Map<string, boolean>();
-    let langsCount = clampValue(langs_count, 1, MAXIMUM_LANGS_COUNT);
+export function trimTopLanguages({
+    topLanguages,
+    languagesCount,
+    hideLanguages,
+}: TrimTopLanguagesArgs) {
+    if (!topLanguages) return { langs: [], totalLanguageSize: 0 };
+    let languages = Object.values(topLanguages);
+    let langsToHide = new Set<string>();
+    let langsCount = clampValue(languagesCount, 1, MAXIMUM_LANGS_COUNT);
 
     // populate langsToHide map for quick lookup
     // while filtering out
-    if (hide) {
-        hide.forEach((langName) => {
-            langsToHide.set(lowercaseTrim(langName), true);
-        });
+    if (hideLanguages && Array.isArray(hideLanguages)) {
+        for (const langName of hideLanguages) {
+            langsToHide.add(lowercaseTrim(langName));
+        }
+    }
+
+    if (hideLanguages && hideLanguages.toString() === "[object Set]") {
+        langsToHide = hideLanguages as Set<string>;
     }
 
     // filter out languages to be hidden
-    langs = langs
+    languages = languages
         .sort((a, b) => b.size - a.size)
-        .filter((lang) => {
-            return !langsToHide.has(lowercaseTrim(lang.name));
-        })
+        .filter((lang) => !langsToHide.has(lowercaseTrim(lang.name)))
         .slice(0, langsCount);
 
-    const totalLanguageSize = langs.reduce((acc, curr) => acc + curr.size, 0);
+    const totalLanguageSize = languages.reduce(
+        (acc, curr) => acc + curr.size,
+        0,
+    );
 
-    return { langs, totalLanguageSize };
-};
+    const result: TrimTopLanguagesResult = {
+        langs: languages,
+        totalLanguageSize,
+    };
+
+    return result;
+}
 
 function trimTabAndSpaces(str: string) {
     const lines = str.split("\n");
