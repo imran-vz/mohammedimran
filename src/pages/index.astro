@@ -3,7 +3,8 @@ import LandingPageHero from "../components/LandingPageHero.astro";
 import MostUsedLanguage from "../components/MostUsedLanguage.svelte";
 import Technologies from "../components/Technologies.astro";
 import Layout from "../layouts/Layout.astro";
-import { type TrimTopLanguagesResult } from "../utils/utils";
+import type { TrimTopLanguagesResult } from "../types";
+
 let data: TrimTopLanguagesResult | null = null;
 
 try {
@@ -20,7 +21,7 @@ try {
 			<LandingPageHero />
 
 			<div id='technologies' class='space-y-4'>
-				<MostUsedLanguage totalLanguageSize={data?.totalLanguageSize || 0} langs={data?.langs || []} />
+				<MostUsedLanguage totalLanguageSize={data?.totalLanguageSize || 0} langs={data?.languages || []} />
 				<Technologies />
 			</div>
 		</main>
