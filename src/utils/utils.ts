@@ -5,12 +5,12 @@
  * Released under the MIT License.
  */
 
-import type { TrimTopLanguagesArgs, TrimTopLanguagesResult } from "../types";
+import type { TrimTopLanguagesArgs, TrimTopLanguagesResult } from '../types';
 
 function trimEnd(str: string) {
     let lastCharPos = str.length - 1;
     let lastChar = str[lastCharPos];
-    while (lastChar === " " || lastChar === "\t") {
+    while (lastChar === ' ' || lastChar === '\t') {
         lastChar = str[--lastCharPos];
     }
     return str.substring(0, lastCharPos + 1);
@@ -23,7 +23,7 @@ function trimEnd(str: string) {
  * @returns {string} Lowercased and trimmed string.
  */
 const lowercaseTrim = (name: string): string => {
-    if (!name) return "";
+    if (!name) return '';
     return name.toLowerCase().trim();
 };
 
@@ -34,11 +34,7 @@ const MAXIMUM_LANGS_COUNT = 20;
  *
  * @returns Trimmed top languages and total size.
  */
-export function trimTopLanguages({
-    topLanguages,
-    languagesCount,
-    hideLanguages,
-}: TrimTopLanguagesArgs) {
+export function trimTopLanguages({ topLanguages, languagesCount, hideLanguages }: TrimTopLanguagesArgs) {
     if (!topLanguages)
         return {
             languages: [],
@@ -56,7 +52,7 @@ export function trimTopLanguages({
         }
     }
 
-    if (hideLanguages && hideLanguages.toString() === "[object Set]") {
+    if (hideLanguages && hideLanguages.toString() === '[object Set]') {
         langsToHide = hideLanguages as Set<string>;
     }
 
@@ -66,18 +62,15 @@ export function trimTopLanguages({
         .filter((lang) => !langsToHide.has(lowercaseTrim(lang.name)))
         .slice(0, langsCount);
 
-    const totalLanguageSize = languages.reduce(
-        (acc, curr) => acc + curr.size,
-        0,
-    );
+    const totalLanguageSize = languages.reduce((acc, curr) => acc + curr.size, 0);
 
     return { languages, totalLanguageSize } satisfies TrimTopLanguagesResult;
 }
 
 function trimTabAndSpaces(str: string) {
-    const lines = str.split("\n");
+    const lines = str.split('\n');
     const trimmedLines = lines.map((line) => trimEnd(line));
-    return trimmedLines.join("\n");
+    return trimmedLines.join('\n');
 }
 
 export interface IOptions {
@@ -127,24 +120,23 @@ export function wrap(str: string, options: IOptions) {
     }
 
     let width = options.width || 50;
-    let indent = typeof options.indent === "string" ? options.indent : "  ";
+    let indent = typeof options.indent === 'string' ? options.indent : '  ';
 
-    let newline = options.newline || "\n" + indent;
-    let escape =
-        typeof options.escape === "function" ? options.escape : identity;
+    let newline = options.newline || '\n' + indent;
+    let escape = typeof options.escape === 'function' ? options.escape : identity;
 
-    let regexString = ".{1," + width + "}";
+    let regexString = '.{1,' + width + '}';
     if (options.cut !== true) {
-        regexString += "([\\s\u200B]+|$)|[^\\s\u200B]+?([\\s\u200B]+|$)";
+        regexString += '([\\s\u200B]+|$)|[^\\s\u200B]+?([\\s\u200B]+|$)';
     }
 
-    let re = new RegExp(regexString, "g");
+    let re = new RegExp(regexString, 'g');
     let lines = str.match(re) || [];
     let result =
         indent +
         lines
             .map((line) => {
-                if (line.slice(-1) === "\n") {
+                if (line.slice(-1) === '\n') {
                     line = line.slice(0, line.length - 1);
                 }
 
@@ -170,12 +162,8 @@ function identity(str: string) {
  * @param {number} maxLines Maximum number of lines.
  * @returns {string[]} Array of lines.
  */
-export const wrapTextMultiline = (
-    text: string,
-    width: number = 59,
-    maxLines: number = 3,
-): string[] => {
-    const fullWidthComma = "，";
+export const wrapTextMultiline = (text: string, width: number = 59, maxLines: number = 3): string[] => {
+    const fullWidthComma = '，';
     const encoded = encodeHTML(text);
     const isChinese = encoded.includes(fullWidthComma);
 
@@ -186,14 +174,14 @@ export const wrapTextMultiline = (
     } else {
         wrapped = wrap(encoded, {
             width,
-        }).split("\n"); // Split wrapped lines to get an array of lines
+        }).split('\n'); // Split wrapped lines to get an array of lines
     }
 
     const lines = wrapped.map((line) => line.trim()).slice(0, maxLines); // Only consider maxLines lines
 
     // Add "..." to the last line if the text exceeds maxLines
     if (wrapped.length > maxLines) {
-        lines[maxLines - 1] += "...";
+        lines[maxLines - 1] += '...';
     }
 
     // Remove empty lines if text fits in less than maxLines lines
@@ -212,9 +200,9 @@ export const wrapTextMultiline = (
 const encodeHTML = (str: string): string => {
     return str
         .replace(/[\u00A0-\u9999<>&](?!#)/gim, (i) => {
-            return "&#" + i.charCodeAt(0) + ";";
+            return '&#' + i.charCodeAt(0) + ';';
         })
-        .replace(/\u0008/gim, "");
+        .replace(/\u0008/gim, '');
 };
 
 /**
@@ -225,11 +213,7 @@ const encodeHTML = (str: string): string => {
  * @param {number} max The maximum value.
  * @returns {number} The clamped number.
  */
-export const clampValue = (
-    number: number,
-    min: number,
-    max: number,
-): number => {
+export const clampValue = (number: number, min: number, max: number): number => {
     if (Number.isNaN(parseInt(String(number), 10))) {
         return min;
     }
