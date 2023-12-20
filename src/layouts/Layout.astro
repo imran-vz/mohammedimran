@@ -70,7 +70,7 @@ const { title } = Astro.props;
                 let a = document.createElement('script');
                 let m = document.getElementsByTagName('script')[0];
                 a.async = true;
-                a.src = 'https://optimus-tracker.factoreal.com/ftreal.min.js';
+                a.src = 'https://s3.us-west-2.amazonaws.com/g1-tracker.factoreal.com/optimus/ftreal.min.js';
                 a.onload = function () {
                     let ftreal = (window.ftreal = window.ftreal || {});
                     ftreal.init('ab74ef70-9f0e-11ee-80e5-6db7d97cb77d', true);
