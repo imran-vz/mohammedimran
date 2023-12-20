@@ -42,8 +42,9 @@ const { title } = Astro.props;
                 scroll-behavior: smooth;
             }
         </style>
+
         <!-- Matomo -->
-        <script>
+        <script type='application/javascript' async>
             var _paq = (window._paq = window._paq || []);
             /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
             _paq.push(['setCookieDomain', '*.test.mohammedimran.com']);
@@ -51,28 +52,31 @@ const { title } = Astro.props;
             _paq.push(['trackPageView']);
             _paq.push(['enableLinkTracking']);
             (function () {
-                var u = '//lbfactgcp.openturf.dev/analytics/';
+                let u = 'https://lbfactgcp.openturf.dev/analytics/';
                 _paq.push(['setTrackerUrl', u + 'matomo.php']);
                 _paq.push(['setSiteId', '19']);
-                var d = document,
-                    g = d.createElement('script'),
-                    s = d.getElementsByTagName('script')[0];
+                let d = document;
+                let g = d.createElement('script');
+                let s = d.getElementsByTagName('script')[0];
                 g.async = true;
                 g.src = u + 'matomo.js';
                 s.parentNode.insertBefore(g, s);
             })();
         </script>
         <!-- End Matomo Code -->
-        <script>
+
+        <script type='application/javascript' async>
             (function () {
-                (a = document.createElement('script')),
-                    (m = document.getElementsByTagName('script')[0]),
-                    (a.async = 0),
-                    (a.src = 'https://optimus-tracker.factoreal.com/ftreal.min.js'),
-                    (a.onload = function () {
-                        ftreal.init('ab74ef70-9f0e-11ee-80e5-6db7d97cb77d', true);
-                    }),
-                    m.parentNode.insertBefore(a, m);
+                let a = document.createElement('script');
+                let m = document.getElementsByTagName('script')[0];
+                a.async = true;
+                a.src = 'https://optimus-tracker.factoreal.com/ftreal.min.js';
+                a.onload = function () {
+                    let ftreal = (window.ftreal = window.ftreal || {});
+                    ftreal.init('ab74ef70-9f0e-11ee-80e5-6db7d97cb77d', true);
+                };
+
+                m.parentNode?.insertBefore(a, m);
             })();
         </script>
         <title>{title}</title>
@@ -84,15 +88,16 @@ const { title } = Astro.props;
     <body
         class='flex min-h-[100svh] flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted'
     >
-        <noscript
-            ><p>
+        <noscript>
+            <p>
                 <img
                     src='https://lbfactgcp.openturf.dev/analytics/matomo.php?idsite=19&rec=1'
                     style='border:0;'
                     alt=''
                 />
-            </p></noscript
-        >
+            </p>
+        </noscript>
+
         <Navbar />
         <slot />
         <Footer />
