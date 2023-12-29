@@ -1,9 +1,9 @@
 ---
-import Footer from '../components/Footer.astro';
-import Navbar from '../components/Navbar.astro';
-import '../styles/base.css';
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import "../styles/base.css";
 export interface Props {
-    title: string;
+	title: string;
 }
 
 const { title } = Astro.props;
@@ -11,120 +11,113 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang='en' class='dark'>
-    <head>
-        <meta charset='UTF-8' />
-        <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5' />
-        <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-        <meta name='generator' content={Astro.generator} />
-        <link rel='manifest' href='/manifest.json' />
-        <meta name='keywords' content='astro, imran, mohammedimran, mohammed imran' />
-        <meta name='color-scheme' content='dark' />
-        <meta name='author' content='Mohammed Imran' />
-        <link rel='author' href='https://www.linkedin.com/in/m0hammedimran' />
-        <meta name='description' content="Mohammed Imran's Portfolio website" />
+	<head>
+		<meta charset='UTF-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5' />
+		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+		<meta name='generator' content={Astro.generator} />
+		<link rel='manifest' href='/manifest.json' />
+		<meta name='keywords' content='astro, imran, mohammedimran, mohammed imran' />
+		<meta name='color-scheme' content='dark' />
+		<meta name='author' content='Mohammed Imran' />
+		<link rel='author' href='https://www.linkedin.com/in/m0hammedimran' />
+		<meta name='description' content="Mohammed Imran's Portfolio website" />
 
-        <meta name='twitter:card' content='https://mohammedimran.com/icons/android-chrome-512x512.png' />
-        <meta name='twitter:site' content='https://mohammedimran.com' />
-        <meta name='twitter:creator' content='@m0hammed_imran' />
-        <meta name='twitter:title' content='Mohammed Imran' />
-        <meta name='twitter:description' content="Mohammed Imran's Portfolio website" />
-        <meta name='twitter:image' content='https://mohammedimran.com/icons/android-chrome-512x512.png' />
+		<meta name='twitter:card' content='https://mohammedimran.com/icons/android-chrome-512x512.png' />
+		<meta name='twitter:site' content='https://mohammedimran.com' />
+		<meta name='twitter:creator' content='@m0hammed_imran' />
+		<meta name='twitter:title' content='Mohammed Imran' />
+		<meta name='twitter:description' content="Mohammed Imran's Portfolio website" />
+		<meta name='twitter:image' content='https://mohammedimran.com/icons/android-chrome-512x512.png' />
 
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content='https://mohammedimran.com' />
-        <meta property='og:site_name' content='Mohammed Imran' />
-        <meta property='og:title' content='Mohammed Imran' />
-        <meta property='og:description' content="Mohammed Imran's Portfolio website" />
-        <meta property='og:image' content='https://mohammedimran.com/icons/android-chrome-512x512.png' />
-        <link rel='sitemap' href='/sitemap-index.xml' />
-        <style>
-            html {
-                scroll-behavior: smooth;
-            }
-        </style>
+		<meta property='og:type' content='website' />
+		<meta property='og:url' content='https://mohammedimran.com' />
+		<meta property='og:site_name' content='Mohammed Imran' />
+		<meta property='og:title' content='Mohammed Imran' />
+		<meta property='og:description' content="Mohammed Imran's Portfolio website" />
+		<meta property='og:image' content='https://mohammedimran.com/icons/android-chrome-512x512.png' />
+		<link rel='sitemap' href='/sitemap-index.xml' />
+		<style>
+			html {
+				scroll-behavior: smooth;
+			}
+		</style>
 
-        <!-- Matomo -->
-        <script type='application/javascript' async>
-            var _paq = (window._paq = window._paq || []);
-            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-            _paq.push(['setCookieDomain', '*.test.mohammedimran.com']);
-            _paq.push(['setDoNotTrack', true]);
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function () {
-                let u = 'https://lbfactgcp.openturf.dev/analytics/';
-                _paq.push(['setTrackerUrl', u + 'matomo.php']);
-                _paq.push(['setSiteId', '19']);
-                let d = document;
-                let g = d.createElement('script');
-                let s = d.getElementsByTagName('script')[0];
-                g.async = true;
-                g.src = u + 'matomo.js';
-                s.parentNode.insertBefore(g, s);
-            })();
-        </script>
-        <!-- End Matomo Code -->
+		<!-- Matomo -->
+		<script type='application/javascript' async>
+			var _paq = (window._paq = window._paq || []);
+			/* tracker methods like "setCustomDimension" should be called before "trackPageView" */ _paq.push([
+				"setCookieDomain",
+				"*.test.mohammedimran.com",
+			]);
+			_paq.push(["setDoNotTrack", true]);
+			_paq.push(["trackPageView"]);
+			_paq.push(["enableLinkTracking"]);
+			(function () {
+				var u = "//lbfactgcp.openturf.dev/analytics/";
+				_paq.push(["setTrackerUrl", u + "matomo.php"]);
+				_paq.push(["setSiteId", "21"]);
+				var d = document,
+					g = d.createElement("script"),
+					s = d.getElementsByTagName("script")[0];
+				g.async = true;
+				g.src = u + "matomo.js";
+				s.parentNode.insertBefore(g, s);
+			})();
+		</script>
 
-        <!-- Start FTreal -->
-        <script type='application/javascript' async>
-            (function () {
-                let a = document.createElement('script');
-                let m = document.getElementsByTagName('script')[0];
-                a.async = true;
-                a.src = 'https://s3.us-west-2.amazonaws.com/g1-tracker.factoreal.com/optimus/ftreal.min.js';
-                a.onload = function () {
-                    let ftreal = (window.ftreal = window.ftreal || {});
-                    ftreal.init('ab74ef70-9f0e-11ee-80e5-6db7d97cb77d', true);
-                };
+		<!-- End Matomo Code -->
 
-                m.parentNode?.insertBefore(a, m);
-            })();
-        </script>
-        <!-- End FTreal -->
+		<!-- Start FTreal -->
+		<script type='application/javascript' async>
+			(function () {
+				let a = document.createElement("script");
+				let m = document.getElementsByTagName("script")[0];
+				a.async = true;
+				a.src = "https://s3.us-west-2.amazonaws.com/g1-tracker.factoreal.com/prime/ftreal.min.js";
+				a.onload = function () {
+					let ftreal = (window.ftreal = window.ftreal || {});
+					ftreal.init("02a11320-a64c-11ee-8784-7111c5acfb5c", true);
+				};
 
-        <!-- Start WebPush -->
-        <script type='text/javascript' async>
-            var _at = {};
-            var u = 'https://webpush-fat-globalcdn.s3.us-west-2.amazonaws.com/';
-            _at.domain = 'test.mohammedimran.com';
-            _at.idSite = 'ab74ef70-9f0e-11ee-80e5-6db7d97cb77d';
-            (function () {
-                var d = document,
-                    g = d.createElement('script'),
-                    s = d.getElementsByTagName('script')[0];
-                g.type = 'text/javascript';
-                g.async = true;
-                g.src = u + 'optimus/fsw.js';
-                s.parentNode.insertBefore(g, s);
-            })();
-        </script>
-        <!-- End WebPush -->
-        <script defer type='application/javascript'>
-            document.querySelector('#theme-btn')?.addEventListener('click', () => {
-                ftreal.setUserId('mohammedimran@factoreal.com');
-            });
-        </script>
+				m.parentNode?.insertBefore(a, m);
+			})();
+		</script>
+		<!-- End FTreal -->
 
-        <title>{title}</title>
-        <meta name='theme-color' content='' />
-        <script is:inline src='/toggle-theme.js'></script>
-    </head>
+		<!-- Start WebPush -->
+		<script type='text/javascript' async>
+			var _at = {};
+			var u = "https://webpush-fat-globalcdn.s3.us-west-2.amazonaws.com/";
+			_at.domain = "test.mohammedimran.com";
+			_at.idSite = "02a11320-a64c-11ee-8784-7111c5acfb5c";
+			(function () {
+				var d = document,
+					g = d.createElement("script"),
+					s = d.getElementsByTagName("script")[0];
+				g.type = "text/javascript";
+				g.async = true;
+				g.src = u + "prime/fsw.js";
+				s.parentNode.insertBefore(g, s);
+			})();
+		</script>
+		<!-- End WebPush -->
 
-    <body
-        class='flex min-h-svh flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted'
-    >
-        <noscript>
-            <p>
-                <img
-                    src='https://lbfactgcp.openturf.dev/analytics/matomo.php?idsite=19&rec=1'
-                    style='border:0;'
-                    alt=''
-                />
-            </p>
-        </noscript>
+		<title>{title}</title>
+		<meta name='theme-color' content='' />
+		<script is:inline src='/toggle-theme.js'></script>
+	</head>
 
-        <Navbar />
-        <slot />
-        <Footer />
-    </body>
+	<body
+		class='flex min-h-svh flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted'>
+		<noscript>
+			<p>
+				<img src='//lbfactgcp.openturf.dev/analytics/matomo.php?idsite=21&rec=1' style='border:0;' alt='' />
+			</p>
+		</noscript>
+
+		<Navbar />
+		<slot />
+		<Footer />
+	</body>
 </html>
