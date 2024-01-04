@@ -48,18 +48,17 @@ const { title } = Astro.props;
 			var _paq = (window._paq = window._paq || []);
 			/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
 			_paq.push(["setCookieDomain", "*.test.mohammedimran.com"]);
-			_paq.push(["setDoNotTrack", true]);
 			_paq.push(["trackPageView"]);
 			_paq.push(["enableLinkTracking"]);
 			(function () {
-				var u = "https://lbfactgcp.openturf.dev/analytics/";
-				_paq.push(["setTrackerUrl", u + "matomo.php"]);
+				const baseUrl = "https://lbfactgcp.openturf.dev/analytics";
+				_paq.push(["setTrackerUrl", baseUrl + "/matomo.php"]);
 				_paq.push(["setSiteId", "23"]);
-				var d = document,
-					g = d.createElement("script"),
-					s = d.getElementsByTagName("script")[0];
+				const d = document;
+				const g = d.createElement("script");
+				const s = d.getElementsByTagName("script")[0];
 				g.async = true;
-				g.src = u + "matomo.js";
+				g.src = baseUrl + "/matomo.js";
 				s.parentNode.insertBefore(g, s);
 			})();
 		</script>
@@ -110,7 +109,11 @@ const { title } = Astro.props;
 		class='flex min-h-svh flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted'>
 		<noscript>
 			<p>
-				<img src='//lbfactgcp.openturf.dev/analytics/matomo.php?idsite=23&rec=1' style='border:0;' alt='' />
+				<img
+					src='https://lbfactgcp.openturf.dev/analytics/matomo.php?idsite=23&rec=1'
+					style='border:0;'
+					alt=''
+				/>
 			</p>
 		</noscript>
 
