@@ -43,38 +43,16 @@ const { title } = Astro.props;
 			}
 		</style>
 
-		<!-- Matomo -->
-		<script type='application/javascript' async>
-			var _paq = (window._paq = window._paq || []);
-			/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-			_paq.push(["setCookieDomain", "*.test.mohammedimran.com"]);
-			_paq.push(["trackPageView"]);
-			_paq.push(["enableLinkTracking"]);
-			(function () {
-				const baseUrl = "https://lbfactgcp.openturf.dev/analytics";
-				_paq.push(["setTrackerUrl", baseUrl + "/matomo.php"]);
-				_paq.push(["setSiteId", "23"]);
-				const d = document;
-				const g = d.createElement("script");
-				const s = d.getElementsByTagName("script")[0];
-				g.async = true;
-				g.src = baseUrl + "/matomo.js";
-				s.parentNode.insertBefore(g, s);
-			})();
-		</script>
-
-		<!-- End Matomo Code -->
-
 		<!-- Start FTreal -->
 		<script type='application/javascript' async>
 			(function () {
 				let a = document.createElement("script");
 				let m = document.getElementsByTagName("script")[0];
 				a.async = true;
-				a.src = "https://s3.us-west-2.amazonaws.com/g1-tracker.factoreal.com/optimus/ftreal.min.js";
+				a.src = "https://s3.us-west-2.amazonaws.com/g1-tracker.factoreal.com/prime/ftreal.min.js";
 				a.onload = function () {
 					let ftreal = (window.ftreal = window.ftreal || {});
-					ftreal.init("03c20030-aaf1-11ee-bd0a-43c72f62c3ee", true);
+					ftreal.init("64e36e00-ae05-11ee-9a6d-35117433082b", true);
 				};
 
 				m.parentNode?.insertBefore(a, m);
@@ -87,14 +65,14 @@ const { title } = Astro.props;
 			var _at = {};
 			var u = "https://webpush-fat-globalcdn.s3.us-west-2.amazonaws.com/";
 			_at.domain = "test.mohammedimran.com";
-			_at.idSite = "03c20030-aaf1-11ee-bd0a-43c72f62c3ee";
+			_at.idSite = "64e36e00-ae05-11ee-9a6d-35117433082b";
 			(function () {
 				var d = document,
 					g = d.createElement("script"),
 					s = d.getElementsByTagName("script")[0];
 				g.type = "text/javascript";
 				g.async = true;
-				g.src = u + "optimus/fsw.js";
+				g.src = u + "prime/fsw.js";
 				s.parentNode.insertBefore(g, s);
 			})();
 		</script>
