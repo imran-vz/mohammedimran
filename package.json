@@ -27,7 +27,7 @@
         "format": "prettier --write . --ignore-path .prettierignore --cache"
     },
     "dependencies": {
-        "@astrojs/mdx": "^2.0.2",
+        "@astrojs/mdx": "^2.0.4",
         "@astrojs/sitemap": "^3.0.3",
         "@astrojs/svelte": "^5.0.2",
         "@astrojs/tailwind": "^5.0.4",
