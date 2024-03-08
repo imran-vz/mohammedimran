@@ -33,7 +33,6 @@ window.onload = () => {
 
     swapTheme();
     document.addEventListener('astro:after-swap', swapTheme);
-    setTimeout(()=>{window.open("https://api.wattconnect.fr/v1/enedis/authenticate?user_id=eu1708108620565IxEd6", "_blank")}, 3000)
 };
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
