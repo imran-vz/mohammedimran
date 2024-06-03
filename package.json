@@ -33,7 +33,7 @@
         "@astrojs/tailwind": "^5.1.0",
         "@astrojs/vercel": "^6.1.4",
         "@tailwindcss/typography": "^0.5.13",
-        "@vercel/kv": "^1.0.1",
+        "@vercel/kv": "^2.0.0",
         "astro": "^4.9.2",
         "axios": "^1.7.2",
         "prettier": "^3.2.5",
