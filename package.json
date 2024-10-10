@@ -1,23 +1,22 @@
 {
     "name": "mohammedimran",
     "type": "module",
-    "version": "0.0.1",
     "author": {
         "name": "Mohammed Imran",
         "email": "mohammedimran86992@gmail.com",
         "url": "https://github.com/M0hammedImran"
     },
     "engines": {
-        "node": ">=18.x || >=20.6.1",
+        "node": ">=20.6.1",
         "vscode": "^1.22.0",
-        "pnpm": ">=8.7.5"
+        "pnpm": ">=9.6.0"
     },
     "repository": {
         "url": "https://github.com/M0hammedImran/mohammedimran"
     },
     "private": true,
-    "homepage": "https://mohammedimran.com",
-    "packageManager": "pnpm@8.7.5",
+    "homepage": "https://test.mohammedimran.com",
+    "packageManager": "pnpm@9.6.0",
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
@@ -38,6 +37,6 @@
         "axios": "^1.6.2",
         "svelte": "^4.2.8",
         "tailwindcss": "^3.4.0",
-        "@biomejs/biome": "^1.4.1"
+        "@biomejs/biome": "^1.9.3"
     }
 }
