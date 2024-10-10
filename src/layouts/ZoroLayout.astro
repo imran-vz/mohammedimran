@@ -46,10 +46,48 @@ const { title } = Astro.props;
         <title>{title}</title>
         <meta name='theme-color' content='' />
         <script is:inline src='/toggle-theme.js'></script>
+        <!-- Matomo -->
+        <script>
+            var _paq = (window._paq = window._paq || []);
+            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+            _paq.push(["setCookieDomain", "*.test.mohammedimran.com"]);
+            _paq.push(["setDoNotTrack", true]);
+            _paq.push(["trackPageView"]);
+            _paq.push(["enableLinkTracking"]);
+            (function () {
+                var u = "//lbfactgcp.openturf.dev/analytics/";
+                _paq.push(["setTrackerUrl", u + "matomo.php"]);
+                _paq.push(["setSiteId", "55"]);
+                var d = document,
+                    g = d.createElement("script"),
+                    s = d.getElementsByTagName("script")[0];
+                g.async = true;
+                g.src = u + "matomo.js";
+                s.parentNode.insertBefore(g, s);
+            })();
+        </script>
+        <!-- End Matomo Code -->
+        <script>
+            (function () {
+                (a = document.createElement("script")),
+                    (m = document.getElementsByTagName("script")[0]),
+                    (a.async = 0),
+                    (a.src = "https://g1-tracker.factoreal.com/prime/ftreal.min.js"),
+                    (a.onload = function () {
+                        ftreal.init("03f2a4d2-b6de-42e6-84bb-9303ef261edd", true);
+                    }),
+                    m.parentNode.insertBefore(a, m);
+            })();
+        </script>
     </head>
 
     <body
         class='flex min-h-svh flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted'>
+        <noscript>
+            <p>
+                <img src='//lbfactgcp.openturf.dev/analytics/matomo.php?idsite=55&rec=1' style='border:0;' alt='' />
+            </p>
+        </noscript>
         <Navbar />
         <slot />
         <Footer />
