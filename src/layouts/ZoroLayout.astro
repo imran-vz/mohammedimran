@@ -7,6 +7,16 @@ export interface Props {
 }
 
 const { title } = Astro.props;
+
+// Declare _paq on the window object
+declare global {
+    interface Window {
+        _paq?: unknown[];
+        ftreal?: {
+            init: (arg0: string, arg1: boolean) => void;
+        };
+    }
+}
 ---
 
 <!doctype html>
@@ -58,25 +68,26 @@ const { title } = Astro.props;
                 var u = "//lbfactgcp.openturf.dev/analytics/";
                 _paq.push(["setTrackerUrl", u + "matomo.php"]);
                 _paq.push(["setSiteId", "55"]);
-                var d = document,
-                    g = d.createElement("script"),
-                    s = d.getElementsByTagName("script")[0];
+                var d = document;
+                var g = d.createElement("script");
+                var s = d.getElementsByTagName("script")[0];
                 g.async = true;
                 g.src = u + "matomo.js";
-                s.parentNode.insertBefore(g, s);
+                s.parentNode?.insertBefore(g, s);
             })();
         </script>
         <!-- End Matomo Code -->
         <script>
             (function () {
-                (a = document.createElement("script")),
-                    (m = document.getElementsByTagName("script")[0]),
-                    (a.async = 0),
-                    (a.src = "https://g1-tracker.factoreal.com/prime/ftreal.min.js"),
-                    (a.onload = function () {
-                        ftreal.init("03f2a4d2-b6de-42e6-84bb-9303ef261edd", true);
-                    }),
-                    m.parentNode.insertBefore(a, m);
+                var a = document.createElement("script");
+                var m = document.getElementsByTagName("script")[0];
+                a.async = true;
+                a.src = "https://g1-tracker.factoreal.com/prime/ftreal.min.js";
+                a.onload = function () {
+                    window.ftreal?.init("03f2a4d2-b6de-42e6-84bb-9303ef261edd", true);
+                };
+
+                m.parentNode?.insertBefore(a, m);
             })();
         </script>
     </head>
