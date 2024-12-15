@@ -26,7 +26,7 @@
             <div class="flex flex-wrap gap-4">
                 {#each languages as language}
                     <div class="flex gap-2 items-center px-4 py-2 border border-skin-accent rounded snap-center">
-                        <div class="w-3 h-3 rounded-full" style="background-color: {language.color}" />
+                        <div class="w-3 h-3 rounded-full" style="background-color: {language.color}"></div>
                         <p class="whitespace-nowrap text-skin-base">
                             {language.name} - {formatter.format(language.size / totalLanguageSize)}
                         </p>
