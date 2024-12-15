@@ -8,16 +8,15 @@
         "url": "https://github.com/M0hammedImran"
     },
     "engines": {
-        "node": ">=18.x || >=20.6.1",
-        "vscode": "^1.22.0",
-        "pnpm": ">=8.7.5"
+        "node": "22.x",
+        "vscode": "^1.22.0"
     },
     "repository": {
         "url": "https://github.com/M0hammedImran/mohammedimran"
     },
     "private": true,
     "homepage": "https://mohammedimran.com",
-    "packageManager": "pnpm@9.1.0",
+    "packageManager": "pnpm@9.15.0",
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
