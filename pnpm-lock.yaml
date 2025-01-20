@@ -21,8 +21,8 @@ importers:
         specifier: ^5.1.4
         version: 5.1.4(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       '@astrojs/vercel':
-        specifier: ^8.0.1
-        version: 8.0.1(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(rollup@4.30.1)(svelte@5.17.3)
+        specifier: ^8.0.2
+        version: 8.0.2(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(rollup@4.30.1)(svelte@5.17.3)
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
@@ -101,8 +101,8 @@ packages:
     resolution: {integrity: sha512-wxhSKRfKugLwLlr4OFfcqovk+LIFtKwLyGPqMsv+9/ibqqnW3Gv7tBhtKEb0gAyUAC4G9BTVQeQahqnQAhd6IQ==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0}
 
-  '@astrojs/vercel@8.0.1':
-    resolution: {integrity: sha512-0TgXOlT8HpZNyLpbFuw2tAvo5Azdz/PlRg8/Oak7Skj3uivhSePR9ftt0uq93ofgzHtF7Gzs9BKcH+BsAwff9Q==}
+  '@astrojs/vercel@8.0.2':
+    resolution: {integrity: sha512-JiH9A/uSBqV/XHsfp/wghXs6yBpCNh4iQs8kNIcjKRZXLaO54+PWKar/6d69sUl+ugGXjSWhZjnB5hY4CC3tDg==}
     peerDependencies:
       astro: ^5.0.0
 
@@ -798,9 +798,9 @@ packages:
     resolution: {integrity: sha512-pKT8fRnfyYk2MgvyB6fn6ipJPCdfZwiKDdw7vB+HL50rjboEBHDVBEcnwfkEpVSp2AjNtoaOUH7zG+bVC/rvSg==}
     engines: {node: '>=14.6'}
 
-  '@vercel/nft@0.27.10':
-    resolution: {integrity: sha512-zbaF9Wp/NsZtKLE4uVmL3FyfFwlpDyuymQM1kPbeT0mVOHKDQQNjnnfslB3REg3oZprmNFJuh3pkHBk2qAaizg==}
-    engines: {node: '>=16'}
+  '@vercel/nft@0.29.0':
+    resolution: {integrity: sha512-LAkWyznNySxZ57ibqEGKnWFPqiRxyLvewFyB9iCHFfMsZlVyiu8MNFbjrGk3eV0vuyim5HzBloqlvSrG4BpZ7g==}
+    engines: {node: '>=18'}
     hasBin: true
 
   abbrev@2.0.0:
@@ -1021,8 +1021,8 @@ packages:
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
-  consola@3.3.3:
-    resolution: {integrity: sha512-Qil5KwghMzlqd51UXM0b6fyaGHtOC22scxrwrz4A2882LyUMwQjnvaedN1HAeXzphspQ6CpHkzMAWxBTUruDLg==}
+  consola@3.4.0:
+    resolution: {integrity: sha512-EiPU8G6dQG0GFHNR8ljnZFki/8a+cQwEQ+7wpxdChl02Q8HXlwEZWD5lqAF8vC2sEC3Tehr8hy7vErz88LHyUA==}
     engines: {node: ^14.18.0 || >=16.10.0}
 
   cookie-es@1.2.2:
@@ -2611,12 +2611,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/vercel@8.0.1(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(rollup@4.30.1)(svelte@5.17.3)':
+  '@astrojs/vercel@8.0.2(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(rollup@4.30.1)(svelte@5.17.3)':
     dependencies:
       '@astrojs/internal-helpers': 0.4.2
       '@vercel/analytics': 1.4.1(svelte@5.17.3)
       '@vercel/edge': 1.2.1
-      '@vercel/nft': 0.27.10(rollup@4.30.1)
+      '@vercel/nft': 0.29.0(rollup@4.30.1)
       astro: 5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0)
       esbuild: 0.24.2
       fast-glob: 3.3.3
@@ -2901,7 +2901,7 @@ snapshots:
 
   '@mapbox/node-pre-gyp@2.0.0-rc.0':
     dependencies:
-      consola: 3.3.3
+      consola: 3.4.0
       detect-libc: 2.0.3
       https-proxy-agent: 7.0.6
       node-fetch: 2.7.0
@@ -3147,7 +3147,7 @@ snapshots:
     dependencies:
       '@upstash/redis': 1.34.3
 
-  '@vercel/nft@0.27.10(rollup@4.30.1)':
+  '@vercel/nft@0.29.0(rollup@4.30.1)':
     dependencies:
       '@mapbox/node-pre-gyp': 2.0.0-rc.0
       '@rollup/pluginutils': 5.1.4(rollup@4.30.1)
@@ -3451,7 +3451,7 @@ snapshots:
 
   concat-map@0.0.1: {}
 
-  consola@3.3.3: {}
+  consola@3.4.0: {}
 
   cookie-es@1.2.2: {}
 
@@ -5118,7 +5118,7 @@ snapshots:
 
   unenv@1.10.0:
     dependencies:
-      consola: 3.3.3
+      consola: 3.4.0
       defu: 6.1.4
       mime: 3.0.0
       node-fetch-native: 1.6.4
