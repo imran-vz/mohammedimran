@@ -16,13 +16,13 @@ importers:
         version: 3.2.1
       '@astrojs/svelte':
         specifier: ^7.0.3
-        version: 7.0.3(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(jiti@1.21.7)(svelte@5.17.3)(typescript@5.4.2)(yaml@2.7.0)
+        version: 7.0.3(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(jiti@1.21.7)(svelte@5.19.3)(typescript@5.4.2)(yaml@2.7.0)
       '@astrojs/tailwind':
         specifier: ^5.1.4
         version: 5.1.4(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       '@astrojs/vercel':
         specifier: ^8.0.1
-        version: 8.0.1(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(rollup@4.30.1)(svelte@5.17.3)
+        version: 8.0.1(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(rollup@4.30.1)(svelte@5.19.3)
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
@@ -45,8 +45,8 @@ importers:
         specifier: ^0.33.5
         version: 0.33.5
       svelte:
-        specifier: ^5.17.3
-        version: 5.17.3
+        specifier: ^5.19.3
+        version: 5.19.3
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -1165,8 +1165,8 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
-  esrap@1.4.2:
-    resolution: {integrity: sha512-FhVlJzvTw7ZLxYZ7RyHwQCFE64dkkpzGNNnphaGCLwjqGk1SQcqzbgdx9FowPCktx6NOSHkzvcZ3vsvdH54YXA==}
+  esrap@1.4.3:
+    resolution: {integrity: sha512-Xddc1RsoFJ4z9nR7W7BFaEPIp4UXoeQ0+077UdWLxbafMQFyU79sQJMk7kxNgRwQ9/aVgaKacCHC2pUACGwmYw==}
 
   estree-util-attach-comments@3.0.0:
     resolution: {integrity: sha512-cKUwm/HUcTDsYh/9FgnuFqpfquUbwIqwKM26BVCGDPVgvaCl/nDCCjUfiLlx6lsEZ3Z4RFxNbOQ60pkaEwFxGw==}
@@ -2181,8 +2181,8 @@ packages:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
 
-  svelte@5.17.3:
-    resolution: {integrity: sha512-eLgtpR2JiTgeuNQRCDcLx35Z7Lu9Qe09GPOz+gvtR9nmIZu5xgFd6oFiLGQlxLD0/u7xVyF5AUkjDVyFHe6Bvw==}
+  svelte@5.19.3:
+    resolution: {integrity: sha512-rb/bkYG9jq67OCWikMvaPnfOobyGn0JizVDwHpdeBtLiNXPMcoA9GTFC3BhptP7xGNquUU8J5GiS7PlGlfDAFA==}
     engines: {node: '>=18'}
 
   tailwindcss@3.4.17:
@@ -2567,12 +2567,12 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.24.1
 
-  '@astrojs/svelte@7.0.3(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(jiti@1.21.7)(svelte@5.17.3)(typescript@5.4.2)(yaml@2.7.0)':
+  '@astrojs/svelte@7.0.3(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(jiti@1.21.7)(svelte@5.19.3)(typescript@5.4.2)(yaml@2.7.0)':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.17.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.19.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0))
       astro: 5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0)
-      svelte: 5.17.3
-      svelte2tsx: 0.7.33(svelte@5.17.3)(typescript@5.4.2)
+      svelte: 5.19.3
+      svelte2tsx: 0.7.33(svelte@5.19.3)(typescript@5.4.2)
       typescript: 5.4.2
       vite: 6.0.7(jiti@1.21.7)(yaml@2.7.0)
     transitivePeerDependencies:
@@ -2611,10 +2611,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/vercel@8.0.1(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(rollup@4.30.1)(svelte@5.17.3)':
+  '@astrojs/vercel@8.0.1(astro@5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0))(rollup@4.30.1)(svelte@5.19.3)':
     dependencies:
       '@astrojs/internal-helpers': 0.4.2
-      '@vercel/analytics': 1.4.1(svelte@5.17.3)
+      '@vercel/analytics': 1.4.1(svelte@5.19.3)
       '@vercel/edge': 1.2.1
       '@vercel/nft': 0.27.10(rollup@4.30.1)
       astro: 5.1.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.4.2)(yaml@2.7.0)
@@ -3059,23 +3059,23 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.1': {}
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.17.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.17.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.19.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0))
       debug: 4.4.0
-      svelte: 5.17.3
+      svelte: 5.19.3
       vite: 6.0.7(jiti@1.21.7)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0))':
+  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.17.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0))
       debug: 4.4.0
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.17
-      svelte: 5.17.3
+      svelte: 5.19.3
       vite: 6.0.7(jiti@1.21.7)(yaml@2.7.0)
       vitefu: 1.0.5(vite@6.0.7(jiti@1.21.7)(yaml@2.7.0))
     transitivePeerDependencies:
@@ -3137,9 +3137,9 @@ snapshots:
     dependencies:
       crypto-js: 4.2.0
 
-  '@vercel/analytics@1.4.1(svelte@5.17.3)':
+  '@vercel/analytics@1.4.1(svelte@5.19.3)':
     optionalDependencies:
-      svelte: 5.17.3
+      svelte: 5.19.3
 
   '@vercel/edge@1.2.1': {}
 
@@ -3603,7 +3603,7 @@ snapshots:
 
   esprima@4.0.1: {}
 
-  esrap@1.4.2:
+  esrap@1.4.3:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
@@ -5018,14 +5018,14 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte2tsx@0.7.33(svelte@5.17.3)(typescript@5.4.2):
+  svelte2tsx@0.7.33(svelte@5.19.3)(typescript@5.4.2):
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
-      svelte: 5.17.3
+      svelte: 5.19.3
       typescript: 5.4.2
 
-  svelte@5.17.3:
+  svelte@5.19.3:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -5036,7 +5036,7 @@ snapshots:
       axobject-query: 4.1.0
       clsx: 2.1.1
       esm-env: 1.2.2
-      esrap: 1.4.2
+      esrap: 1.4.3
       is-reference: 3.0.3
       locate-character: 3.0.0
       magic-string: 0.30.17
