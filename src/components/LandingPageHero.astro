@@ -1,48 +1,58 @@
 ---
-import { Image } from 'astro:assets';
-import mohammedimran from '../assets/mohammedimran.webp';
+import { Image } from "astro:assets";
+import mohammedimran from "../assets/mohammedimran.webp";
 ---
 
-<div class='relative isolate lg:px-8'>
+<div class="relative isolate lg:px-8">
     <div
-        class='absolute pointer-events-none inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'
-        aria-hidden='true'
+        class="absolute pointer-events-none inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+        aria-hidden="true"
     >
         <div
-            class='relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]'
-            style='clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+            class="relative left-[calc(50%-11rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
         >
         </div>
     </div>
 
-    <div class='mx-auto max-w-2xl pt-28 pb-16 sm:pt-40 sm:pb-24 lg:pt-52 lg:pb-28'>
-        <div class='text-center'>
-            <div class='flex justify-center pb-6'>
+    <div
+        class="mx-auto max-w-2xl pt-28 pb-16 sm:pt-40 sm:pb-24 lg:pt-52 lg:pb-28"
+    >
+        <div class="text-center">
+            <div class="flex justify-center pb-6">
                 <Image
                     src={mohammedimran}
-                    format={'webp'}
+                    format={"webp"}
                     width={320}
                     height={320}
                     densities={[1, 1.5, 2]}
-                    class='shrink-0 w-80 h-80 rounded-full'
-                    title='Mohammed Imran Standing with his bike near a beach'
-                    loading='eager'
-                    fetchpriority={'high'}
-                    alt='Mohammed Imran'
+                    class="shrink-0 w-80 h-80 rounded-full"
+                    title="Mohammed Imran Standing with his bike near a beach"
+                    loading="eager"
+                    fetchpriority={"high"}
+                    alt="Mohammed Imran"
                 />
             </div>
-            <h1 class='text-4xl font-bold tracking-tight text-skin-base sm:text-6xl'>Mohammed Imran</h1>
+            <h1
+                class="text-4xl font-bold tracking-tight text-skin-base sm:text-6xl"
+            >
+                Mohammed Imran
+            </h1>
 
-            <p class='mt-6 text-lg leading-8 text-skin-base'>
-                Hi, I'm a Full Stack Developer from India. I love to build things for the web. I'm currently working at
-                <a href='https://www.factoreal.com/' class='text-skin-accent hover:text-skin-base focus-outline'>
+            <p class="mt-6 text-lg leading-8 text-skin-base">
+                Hi, I'm a Full Stack Developer from India. I love to build
+                things for the web. I'm currently working at
+                <a
+                    href="https://www.factoreal.com/"
+                    class="text-skin-accent hover:text-skin-base focus-outline"
+                >
                     Factoreal Systems
                 </a> as a Senior Fullstack Developer.
             </p>
-            <div class='mt-10 flex items-center justify-center gap-x-6'>
+            <div class="mt-10 flex items-center justify-center gap-x-6">
                 <a
-                    href='/#technologies'
-                    class='bg-skin-accent px-3.5 py-2.5 text-sm font-semibold text-skin-inverted shadow-sm hover:bg-opacity-80 focus-outline'
+                    href="/#technologies"
+                    class="bg-skin-accent px-3.5 py-2.5 text-sm font-semibold text-skin-inverted shadow-xs hover:bg-opacity-80 focus-outline"
                 >
                     Know More
                 </a>
@@ -51,12 +61,12 @@ import mohammedimran from '../assets/mohammedimran.webp';
     </div>
 
     <div
-        class='absolute inset-x-0 top-[calc(100%-13rem)] pointer-events-none -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]'
-        aria-hidden='true'
+        class="absolute inset-x-0 top-[calc(100%-13rem)] pointer-events-none -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+        aria-hidden="true"
     >
         <div
-            class='relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80df] to-[#89cefc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]'
-            style='clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+            class="relative left-[calc(50%-11rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-linear-to-tr from-[#ff80df] to-[#89cefc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
         >
         </div>
     </div>

@@ -12,7 +12,7 @@ const formatter = Intl.NumberFormat('en-IN', {
 });
 </script>
 
-<div class="px-6 py-4 bg-skin-card bg-opacity-80 rounded-sm">
+<div class="px-6 py-4 bg-skin-card bg-opacity-80 rounded-xs">
     <h2 class="text-xl font-bold mb-4">Most Used Language</h2>
 
     <div class="flex flex-wrap flex-col gap-4 max-w-6xl">
@@ -26,7 +26,7 @@ const formatter = Intl.NumberFormat('en-IN', {
             <div class="flex flex-wrap gap-4">
                 {#each languages as language}
                     <div
-                        class="flex gap-2 items-center px-4 py-2 border border-skin-accent rounded snap-center"
+                        class="flex gap-2 items-center px-4 py-2 border border-skin-accent rounded-sm snap-center"
                     >
                         <div
                             class="w-3 h-3 rounded-full"
