@@ -1,15 +1,15 @@
 <script lang="ts">
-    import type { Language } from "../types";
-    import OfflineLanguages from "./OfflineLanguages.svelte";
+import type { Language } from '../types';
+import OfflineLanguages from './OfflineLanguages.svelte';
 
-    export const totalLanguageSize = 0;
-    export const languages: Language[] = [];
+export const totalLanguageSize = 0;
+export const languages: Language[] = [];
 
-    const formatter = Intl.NumberFormat("en-IN", {
-        maximumFractionDigits: 2,
-        minimumFractionDigits: 2,
-        style: "percent",
-    });
+const formatter = Intl.NumberFormat('en-IN', {
+	maximumFractionDigits: 2,
+	minimumFractionDigits: 2,
+	style: 'percent',
+});
 </script>
 
 <div class="px-6 py-4 bg-skin-card bg-opacity-80 rounded-sm">
