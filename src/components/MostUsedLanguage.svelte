@@ -2,8 +2,8 @@
 import type { Language } from '../types';
 import OfflineLanguages from './OfflineLanguages.svelte';
 
-export const totalLanguageSize = 0;
-export const languages: Language[] = [];
+export let totalLanguageSize = 0;
+export let languages: Language[] = [];
 
 const formatter = Intl.NumberFormat('en-IN', {
 	maximumFractionDigits: 2,
