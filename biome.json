@@ -18,6 +18,21 @@
             "recommended": true,
             "a11y": {
                 "noSvgWithoutTitle": "off"
+            },
+            "nursery": {
+                "useSortedClasses": {
+                    "level": "error",
+                    "fix": "safe",
+                    "options": {
+                        "attributes": [
+                            "className",
+                            "class"
+                        ],
+                        "functions": [
+                            "cn"
+                        ]
+                    }
+                }
             }
         }
     },
