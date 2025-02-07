@@ -67,10 +67,7 @@ async function getTopLanguages() {
 async function getTrimTopLanguages() {
 	let trimmedTopLanguages: TrimTopLanguagesResult | null = null;
 
-	const cacheResponse = await kv.hget<TrimTopLanguagesResult>(
-		'github-projects-parsed',
-		'm0hammedimran',
-	);
+	const cacheResponse = await kv.hget<TrimTopLanguagesResult>('github-projects-parsed', 'm0hammedimran');
 
 	if (!cacheResponse) {
 		const topLanguages = await getTopLanguages();

@@ -20,8 +20,7 @@ export default class CustomError extends Error {
 	constructor(message: string, type: keyof typeof SECONDARY_ERROR_MESSAGES | (string & {})) {
 		super(message);
 		this.type = type;
-		this.secondaryMessage =
-			SECONDARY_ERROR_MESSAGES[type as unknown as keyof typeof SECONDARY_ERROR_MESSAGES] || type;
+		this.secondaryMessage = SECONDARY_ERROR_MESSAGES[type as unknown as keyof typeof SECONDARY_ERROR_MESSAGES] || type;
 	}
 
 	static MAX_RETRY = 'MAX_RETRY' as const;

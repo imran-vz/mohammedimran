@@ -4,11 +4,7 @@ import CustomError from './CustomError';
 import type TypeFetcher from './fetcher';
 
 const RETRIES = 7;
-export async function retryer(
-	fetcher: typeof TypeFetcher,
-	variables: { login: string },
-	retries = 0,
-) {
+export async function retryer(fetcher: typeof TypeFetcher, variables: { login: string }, retries = 0) {
 	if (!RETRIES) {
 		throw new CustomError('No GitHub API tokens found', CustomError.NO_TOKENS);
 	}
@@ -20,9 +16,7 @@ export async function retryer(
 		const response = await fetcher(variables, import.meta.env.GITHUB_API_TOKEN as string);
 
 		const isRateExceeded =
-			isErrorResponse(response?.data) &&
-			response.data.errors &&
-			response.data.errors[0].type === 'RATE_LIMITED';
+			isErrorResponse(response?.data) && response.data.errors && response.data.errors[0].type === 'RATE_LIMITED';
 
 		// if rate limit is hit increase the RETRIES and recursively call the retryer
 		// with username, and current RETRIES
@@ -37,8 +31,7 @@ export async function retryer(
 	} catch (err) {
 		if (err instanceof AxiosError) {
 			// also checking for bad credentials if any tokens gets invalidated
-			const isBadCredential =
-				err.response?.data && err.response?.data.message === 'Bad credentials';
+			const isBadCredential = err.response?.data && err.response?.data.message === 'Bad credentials';
 			const isAccountSuspended =
 				err.response?.data && err.response?.data.message === 'Sorry. Your account was suspended.';
 
@@ -47,9 +40,7 @@ export async function retryer(
 				// directly return from the function
 				return retryer(fetcher, variables, retries + 1);
 			}
-			return err.response as
-				| AxiosResponse<{ data: Data } | { errors: Errors }, unknown>
-				| undefined;
+			return err.response as AxiosResponse<{ data: Data } | { errors: Errors }, unknown> | undefined;
 		}
 
 		throw err;

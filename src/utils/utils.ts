@@ -34,11 +34,7 @@ const MAXIMUM_LANGS_COUNT = 20;
  *
  * @returns Trimmed top languages and total size.
  */
-export function trimTopLanguages({
-	topLanguages,
-	languagesCount,
-	hideLanguages,
-}: TrimTopLanguagesArgs) {
+export function trimTopLanguages({ topLanguages, languagesCount, hideLanguages }: TrimTopLanguagesArgs) {
 	if (!topLanguages)
 		return {
 			languages: [],
