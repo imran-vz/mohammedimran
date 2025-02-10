@@ -1,23 +1,21 @@
-import mdx from "@astrojs/mdx";
-import sitemap from "@astrojs/sitemap";
-import svelte from "@astrojs/svelte";
-import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/serverless";
-import { defineConfig, squooshImageService } from "astro/config";
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
+import svelte from '@astrojs/svelte';
+import vercel from '@astrojs/vercel';
+import tailwindcss from '@tailwindcss/vite';
+import { defineConfig, sharpImageService } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	output: "server",
+	output: 'server',
 	image: {
-		service: squooshImageService(),
+		service: sharpImageService(),
 	},
-	adapter: vercel(),
-	build: { inlineStylesheets: "always" },
-	site: "https://mohammedimran.com",
-	integrations: [
-		tailwind(),
-		sitemap({ changefreq: "always", lastmod: new Date() }),
-		mdx({ syntaxHighlight: "shiki" }),
-		svelte(),
-	],
+	adapter: vercel({ webAnalytics: { enabled: true } }),
+	build: { inlineStylesheets: 'always' },
+	site: 'https://mohammedimran.com',
+	vite: {
+		plugins: [(() => tailwindcss() as any)()],
+	},
+	integrations: [sitemap({ changefreq: 'always', lastmod: new Date() }), mdx({ syntaxHighlight: 'shiki' }), svelte()],
 });

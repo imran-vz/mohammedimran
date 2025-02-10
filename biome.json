@@ -1,17 +1,72 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
-	"organizeImports": {
-		"enabled": true
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true
-		},
-		"ignore": ["node_modules/**/*", "dist/**/*", "coverage/**/*", "docs/**/*", "test/**/*", ".vercel/**/*"]
-	},
-	"formatter": {
-		"lineWidth": 120,
-		"ignore": ["node_modules/**/*", "dist/**/*", "coverage/**/*", "docs/**/*", "test/**/*", ".vercel/**/*"]
-	}
+    "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+    "formatter": {
+        "indentStyle": "tab",
+        "indentWidth": 2,
+        "lineWidth": 120,
+        "formatWithErrors": true,
+        "ignore": [
+            "*.astro"
+        ]
+    },
+    "organizeImports": {
+        "enabled": true
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "a11y": {
+                "noSvgWithoutTitle": "off"
+            },
+            "nursery": {
+                "useSortedClasses": {
+                    "level": "error",
+                    "fix": "safe",
+                    "options": {
+                        "attributes": [
+                            "className",
+                            "class"
+                        ],
+                        "functions": [
+                            "cn"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "trailingCommas": "all",
+            "quoteStyle": "single",
+            "semicolons": "always"
+        }
+    },
+    "json": {
+        "parser": {
+            "allowComments": true,
+            "allowTrailingCommas": true
+        },
+        "formatter": {
+            "trailingCommas": "none"
+        }
+    },
+    "vcs": {
+        "clientKind": "git",
+        "enabled": true,
+        "useIgnoreFile": true
+    },
+    "overrides": [
+        {
+            "include": [
+                "package.json"
+            ],
+            "json": {
+                "formatter": {
+                    "lineWidth": 1
+                }
+            }
+        }
+    ]
 }

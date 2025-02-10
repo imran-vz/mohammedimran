@@ -5,12 +5,12 @@
  * Released under the MIT License.
  */
 
-import type { TrimTopLanguagesArgs, TrimTopLanguagesResult } from "../types";
+import type { TrimTopLanguagesArgs, TrimTopLanguagesResult } from '../types';
 
 function trimEnd(str: string) {
 	let lastCharPos = str.length - 1;
 	let lastChar = str[lastCharPos];
-	while (lastChar === " " || lastChar === "\t") {
+	while (lastChar === ' ' || lastChar === '\t') {
 		lastChar = str[--lastCharPos];
 	}
 	return str.substring(0, lastCharPos + 1);
@@ -23,7 +23,7 @@ function trimEnd(str: string) {
  * @returns {string} Lowercased and trimmed string.
  */
 const lowercaseTrim = (name: string): string => {
-	if (!name) return "";
+	if (!name) return '';
 	return name.toLowerCase().trim();
 };
 
@@ -52,7 +52,7 @@ export function trimTopLanguages({ topLanguages, languagesCount, hideLanguages }
 		}
 	}
 
-	if (hideLanguages && hideLanguages.toString() === "[object Set]") {
+	if (hideLanguages && hideLanguages.toString() === '[object Set]') {
 		langsToHide = hideLanguages as Set<string>;
 	}
 
@@ -68,9 +68,9 @@ export function trimTopLanguages({ topLanguages, languagesCount, hideLanguages }
 }
 
 function trimTabAndSpaces(str: string) {
-	const lines = str.split("\n");
+	const lines = str.split('\n');
 	const trimmedLines = lines.map((line) => trimEnd(line));
-	return trimmedLines.join("\n");
+	return trimmedLines.join('\n');
 }
 
 export interface IOptions {
@@ -113,35 +113,34 @@ export interface IOptions {
 	 */
 	cut?: boolean;
 }
-export function wrap(str: string, _options: IOptions) {
-	const options = _options || {};
+export function wrap(str: string, options: IOptions = {}) {
 	if (str == null) {
 		return str;
 	}
 
 	const width = options.width || 50;
-	const indent = typeof options.indent === "string" ? options.indent : "  ";
+	const indent = typeof options.indent === 'string' ? options.indent : '  ';
 
 	const newline = options.newline || `\n${indent}`;
-	const escapeFunc = typeof options.escape === "function" ? options.escape : identity;
+	const escapeFn = typeof options.escape === 'function' ? options.escape : identity;
 
 	let regexString = `.{1,${width}}`;
 	if (options.cut !== true) {
-		regexString += "([\\s\u200B]+|$)|[^\\s\u200B]+?([\\s\u200B]+|$)";
+		regexString += '([\\s\u200B]+|$)|[^\\s\u200B]+?([\\s\u200B]+|$)';
 	}
 
-	const re = new RegExp(regexString, "g");
+	const re = new RegExp(regexString, 'g');
 	const lines = str.match(re) || [];
 	let result =
 		indent +
 		lines
-			.map((l) => {
-				let line = l.trim();
-				if (l.slice(-1) === "\n") {
-					line = l.slice(0, l.length - 1);
+			.map((line) => {
+				if (line.slice(-1) === '\n') {
+					const l = line.slice(0, line.length - 1);
+					return escapeFn(l);
 				}
 
-				return escapeFunc(line);
+				return escapeFn(line);
 			})
 			.join(newline);
 
@@ -164,7 +163,7 @@ function identity(str: string) {
  * @returns {string[]} Array of lines.
  */
 export const wrapTextMultiline = (text: string, width = 59, maxLines = 3): string[] => {
-	const fullWidthComma = "，";
+	const fullWidthComma = '，';
 	const encoded = encodeHTML(text);
 	const isChinese = encoded.includes(fullWidthComma);
 
@@ -175,14 +174,14 @@ export const wrapTextMultiline = (text: string, width = 59, maxLines = 3): strin
 	} else {
 		wrapped = wrap(encoded, {
 			width,
-		}).split("\n"); // Split wrapped lines to get an array of lines
+		}).split('\n'); // Split wrapped lines to get an array of lines
 	}
 
 	const lines = wrapped.map((line) => line.trim()).slice(0, maxLines); // Only consider maxLines lines
 
 	// Add "..." to the last line if the text exceeds maxLines
 	if (wrapped.length > maxLines) {
-		lines[maxLines - 1] += "...";
+		lines[maxLines - 1] += '...';
 	}
 
 	// Remove empty lines if text fits in less than maxLines lines
@@ -199,14 +198,11 @@ export const wrapTextMultiline = (text: string, width = 59, maxLines = 3): strin
  * @returns {string} Encoded string.
  */
 const encodeHTML = (str: string): string => {
-	return (
-		str
-			.replace(/[\u00A0-\u9999<>&](?!#)/gim, (i) => {
-				return `&#${i.charCodeAt(0)};`;
-			})
-			// biome-ignore lint/suspicious/noControlCharactersInRegex: <explanation>
-			.replace(/\u0008/gim, "")
-	);
+	return str
+		.replace(/[\u00A0-\u9999<>&](?!#)/gim, (i) => {
+			return `&#${i.charCodeAt(0)};`;
+		})
+		.replace(/[\b]/gim, '');
 };
 
 /**
@@ -218,7 +214,7 @@ const encodeHTML = (str: string): string => {
  * @returns {number} The clamped number.
  */
 export const clampValue = (number: number, min: number, max: number): number => {
-	if (Number.isNaN(parseInt(String(number), 10))) {
+	if (Number.isNaN(Number.parseInt(String(number), 10))) {
 		return min;
 	}
 

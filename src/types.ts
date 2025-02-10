@@ -8,20 +8,20 @@ export type Language = {
 export type TopLanguages = Record<string, Language>;
 
 export type languages =
-	| "TypeScript"
-	| "Shell"
-	| "JavaScript"
-	| "HTML"
-	| "CSS"
-	| "Svelte"
-	| "Astro"
-	| "Rust"
-	| "Go"
-	| "Vim Script"
-	| "Dockerfile"
-	| "MDX"
-	| "AutoHotkey"
-	| "Makefile";
+	| 'TypeScript'
+	| 'Shell'
+	| 'JavaScript'
+	| 'HTML'
+	| 'CSS'
+	| 'Svelte'
+	| 'Astro'
+	| 'Rust'
+	| 'Go'
+	| 'Vim Script'
+	| 'Dockerfile'
+	| 'MDX'
+	| 'AutoHotkey'
+	| 'Makefile';
 
 export type EdgeNode = { color: string; name: string };
 export type Edge = { size: number; node: EdgeNode };

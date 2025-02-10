@@ -1,32 +1,70 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --fill-transparent: transparent;
+    --max-height-fit-screen: calc(100vh - 80px);
+    --min-height-fit-screen: clamp(calc(100vh - 80px), 90vh, 100vh);
+
+    --color-skin-fill: rgba(var(--color-fill));
+    --color-skin-accent: rgba(var(--color-accent));
+    --color-skin-card: rgba(var(--color-card));
+    --color-skin-card-muted: rgba(var(--color-card-muted));
+    --color-skin-border: rgba(var(--color-border));
+    --color-skin-base: rgba(var(--color-text-base));
+    --color-skin-accent: rgba(var(--color-accent));
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+#sun-svg,
+html[data-theme="dark"] #moon-svg {
+    display: none;
+}
+
+#moon-svg,
+html[data-theme="dark"] #sun-svg {
+    display: block;
+}
+
 
 @layer base {
-    html[data-theme='light'] {
-        --color-fill: 251, 254, 251;
-        --color-text-base: 40, 39, 40;
-        --color-accent: 0, 108, 172;
-        --color-card: 230, 230, 230;
-        --color-card-muted: 205, 205, 205;
-        --color-border: 236, 233, 233;
+    html[data-theme="light"] {
+        --color-fill: 251, 254, 251, 1;
+        --color-text-base: 40, 39, 40, 1;
+        --color-accent: 0, 108, 172, 1;
+        --color-card: 230, 230, 230, 1;
+        --color-card-muted: 205, 205, 205, 1;
+        --color-border: 236, 233, 233, 1;
     }
-    html[data-theme='dark'] {
-        --color-fill: 26, 26, 63;
-        --color-text-base: 234, 237, 243;
-        --color-accent: 255, 107, 1;
-        --color-card: 6, 16, 40;
-        --color-card-muted: 138, 51, 2;
-        --color-border: 171, 75, 8;
+
+    html[data-theme="dark"] {
+        --color-fill: 26, 26, 63, 0;
+        --color-text-base: 234, 237, 243, 1;
+        --color-accent: 255, 107, 1, 1;
+        --color-card: 6, 16, 40, 1;
+        --color-card-muted: 138, 51, 2, 1;
+        --color-border: 171, 75, 8, 1;
     }
-    #sun-svg,
-    html[data-theme='dark'] #moon-svg {
-        display: none;
-    }
-    #moon-svg,
-    html[data-theme='dark'] #sun-svg {
-        display: block;
-    }
+
 
     div,
     span,
@@ -50,14 +88,9 @@
 
     body {
         background-size: 20px 20px;
-        background-image: linear-gradient(to right, rgba(var(--color-accent), 0.07) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(var(--color-accent), 0.07) 1px, transparent 1px);
+        background-image: linear-gradient(to right,
+                rgba(var(--color-accent), 0.07) 1px,
+                transparent 1px), linear-gradient(to bottom, rgba(var(--color-accent), 0.07) 1px, transparent 1px);
         background-position-y: -9px;
-    }
-}
-
-@layer components {
-    .focus-outline {
-        @apply focus-visible:no-underline focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-skin-fill;
     }
 }

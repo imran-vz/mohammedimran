@@ -1,5 +1,5 @@
-import axios from "axios";
-import type { Response } from "../types";
+import axios from 'axios';
+import type { Response } from '../types';
 
 const query = `query userInfo($login: String!) {
     user(login: $login) {
@@ -33,8 +33,8 @@ const query = `query userInfo($login: String!) {
 export default function fetcher(variables: { login: string }, token: string) {
 	const payload = { query, variables };
 	return axios<Response>({
-		url: "https://api.github.com/graphql",
-		method: "POST",
+		url: 'https://api.github.com/graphql',
+		method: 'POST',
 		data: payload,
 		headers: { Authorization: `token ${token}` },
 	});

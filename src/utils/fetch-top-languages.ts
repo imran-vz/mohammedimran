@@ -1,8 +1,8 @@
-import type { Edge, TopLanguages } from "../types";
-import CustomError from "./CustomError";
-import fetcher from "./fetcher";
-import { isErrorResponse } from "./retryer";
-import { wrapTextMultiline } from "./utils";
+import type { Edge, TopLanguages } from '../types';
+import CustomError from './CustomError';
+import fetcher from './fetcher';
+import { isErrorResponse } from './retryer';
+import { wrapTextMultiline } from './utils';
 
 /**
  * Fetch top languages for a given username.
@@ -20,7 +20,7 @@ export default async function fetchTopLanguages(
 	count_weight = 0,
 ): Promise<TopLanguages> {
 	if (!username) {
-		throw new Error("missing username");
+		throw new Error('missing username');
 	}
 
 	const res = await fetcher({ login: username }, import.meta.env.GITHUB_API_TOKEN);
@@ -28,25 +28,20 @@ export default async function fetchTopLanguages(
 	if (isErrorResponse(res?.data)) {
 		if (!res)
 			throw new CustomError(
-				"Something went wrong while trying to retrieve the language data using the GraphQL API.",
+				'Something went wrong while trying to retrieve the language data using the GraphQL API.',
 				CustomError.GRAPHQL_ERROR,
 			);
-		if (res.data.errors[0].type === "NOT_FOUND") {
-			throw new CustomError(res.data.errors[0].message || "Could not fetch user.", CustomError.USER_NOT_FOUND);
+		if (res.data.errors[0].type === 'NOT_FOUND') {
+			throw new CustomError(res.data.errors[0].message || 'Could not fetch user.', CustomError.USER_NOT_FOUND);
 		}
 		if (res.data.errors[0].message) {
-			throw new CustomError(
-				wrapTextMultiline(res.data.errors[0].message, 90, 1)[0],
-				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-				res?.statusText as any,
-			);
+			throw new CustomError(wrapTextMultiline(res.data.errors[0].message, 90, 1)[0], res?.statusText);
 		}
 		throw new CustomError(
-			"Something went wrong while trying to retrieve the language data using the GraphQL API.",
+			'Something went wrong while trying to retrieve the language data using the GraphQL API.',
 			CustomError.GRAPHQL_ERROR,
 		);
 	}
-
 	let repoNodes = res?.data.data.user.repositories.nodes;
 	if (!repoNodes) return {};
 	const repoToHide = new Set(exclude_repo);
@@ -87,6 +82,7 @@ export default async function fetchTopLanguages(
 		}, {} as TopLanguages);
 
 	for (const name of Object.keys(nodes)) {
+		// comparison index calculation
 		nodes[name].size = nodes[name].size ** size_weight * nodes[name].count ** count_weight;
 	}
 

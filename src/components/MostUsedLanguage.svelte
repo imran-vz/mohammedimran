@@ -1,17 +1,18 @@
 <script lang="ts">
-    import type { Language } from "../types";
-    import OfflineLanguages from "./OfflineLanguages.svelte";
-    export let totalLanguageSize: number = 0;
+import type { Language } from '../types';
+import OfflineLanguages from './OfflineLanguages.svelte';
 
-    export let languages: Language[] = [];
-    const formatter = Intl.NumberFormat("en-IN", {
-        maximumFractionDigits: 2,
-        minimumFractionDigits: 2,
-        style: "percent",
-    });
+export let totalLanguageSize = 0;
+export let languages: Language[] = [];
+
+const formatter = Intl.NumberFormat('en-IN', {
+	maximumFractionDigits: 2,
+	minimumFractionDigits: 2,
+	style: 'percent',
+});
 </script>
 
-<div class="px-6 py-4 bg-skin-card bg-opacity-80 rounded-sm">
+<div class="px-6 py-4 bg-skin-card bg-opacity-80 rounded-xs">
     <h2 class="text-xl font-bold mb-4">Most Used Language</h2>
 
     <div class="flex flex-wrap flex-col gap-4 max-w-6xl">
@@ -25,12 +26,12 @@
             <div class="flex flex-wrap gap-4">
                 {#each languages as language}
                     <div
-                        class="flex gap-2 items-center px-4 py-2 border border-skin-accent rounded snap-center"
+                        class="flex gap-2 items-center px-4 py-2 border border-skin-accent rounded-sm snap-center"
                     >
                         <div
                             class="w-3 h-3 rounded-full"
                             style="background-color: {language.color}"
-                        />
+                        ></div>
                         <p class="whitespace-nowrap text-skin-base">
                             {language.name} - {formatter.format(
                                 language.size / totalLanguageSize,

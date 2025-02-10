@@ -1,4 +1,15 @@
 {
-	"cSpell.words": ["astro", "astrojs", "retryer", "Shiki", "tsconfigs"],
-	"typescript.tsdk": "node_modules/typescript/lib"
+    "cSpell.words": [
+        "astro",
+        "astrojs",
+        "retryer",
+        "Shiki",
+        "tsconfigs"
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+    }
 }
