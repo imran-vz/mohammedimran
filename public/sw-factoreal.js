@@ -1,3 +1,1 @@
-importScripts(
-    "https://webpush-fat-globalcdn.s3.us-west-2.amazonaws.com/prime/sw-factoreal.js"
-);
+importScripts("https://storage.googleapis.com/factoreal-webpush-global/prime/sw-factoreal.min.js");
