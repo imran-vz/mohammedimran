@@ -27,17 +27,17 @@
         "lint": "biome lint --write ./src"
     },
     "dependencies": {
-        "@astrojs/mdx": "^4.0.8",
+        "@astrojs/mdx": "^4.1.0",
         "@astrojs/sitemap": "^3.2.1",
-        "@astrojs/svelte": "^7.0.4",
-        "@astrojs/vercel": "^8.0.6",
-        "@tailwindcss/vite": "^4.0.4",
+        "@astrojs/svelte": "^7.0.5",
+        "@astrojs/vercel": "^8.1.1",
+        "@tailwindcss/vite": "^4.0.12",
         "@vercel/kv": "^3.0.0",
-        "astro": "^5.2.5",
-        "axios": "^1.7.9",
+        "astro": "^5.4.2",
+        "axios": "^1.8.2",
         "sharp": "^0.33.5",
-        "svelte": "^5.19.9",
-        "tailwindcss": "^4.0.4"
+        "svelte": "^5.22.6",
+        "tailwindcss": "^4.0.12"
     },
     "devDependencies": {
         "@biomejs/biome": "1.9.4",
