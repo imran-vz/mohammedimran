@@ -1,3 +1,3 @@
 # Mohammed Imran
 
-Homepage: <https://mohammedimran.com/>
+Homepage: <https://imran.codes/>
