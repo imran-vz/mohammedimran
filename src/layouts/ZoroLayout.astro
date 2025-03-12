@@ -20,33 +20,54 @@ declare global {
 ---
 
 <!doctype html>
-<html lang='en' class='dark'>
+<html lang="en" class="dark">
     <head>
-        <meta charset='UTF-8' />
-        <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5' />
-        <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-        <meta name='generator' content={Astro.generator} />
-        <link rel='manifest' href='/manifest.json' />
-        <meta name='keywords' content='astro, imran, mohammedimran, mohammed imran' />
-        <meta name='color-scheme' content='dark' />
-        <meta name='author' content='Mohammed Imran' />
-        <link rel='author' href='https://www.linkedin.com/in/m0hammedimran' />
-        <meta name='description' content="Mohammed Imran's Portfolio website" />
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5"
+        />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="manifest" href="/manifest.json" />
+        <meta
+            name="keywords"
+            content="astro, imran, mohammedimran, mohammed imran"
+        />
+        <meta name="color-scheme" content="dark" />
+        <meta name="author" content="Mohammed Imran" />
+        <link rel="author" href="https://www.linkedin.com/in/m0hammedimran" />
+        <meta name="description" content="Mohammed Imran's Portfolio website" />
 
-        <meta name='twitter:card' content='https://mohammedimran.com/icons/android-chrome-512x512.png' />
-        <meta name='twitter:site' content='https://mohammedimran.com' />
-        <meta name='twitter:creator' content='@m0hammed_imran' />
-        <meta name='twitter:title' content='Mohammed Imran' />
-        <meta name='twitter:description' content="Mohammed Imran's Portfolio website" />
-        <meta name='twitter:image' content='https://mohammedimran.com/icons/android-chrome-512x512.png' />
+        <meta
+            name="twitter:card"
+            content="https://mohammedimran.com/icons/android-chrome-512x512.png"
+        />
+        <meta name="twitter:site" content="https://mohammedimran.com" />
+        <meta name="twitter:creator" content="@m0hammed_imran" />
+        <meta name="twitter:title" content="Mohammed Imran" />
+        <meta
+            name="twitter:description"
+            content="Mohammed Imran's Portfolio website"
+        />
+        <meta
+            name="twitter:image"
+            content="https://mohammedimran.com/icons/android-chrome-512x512.png"
+        />
 
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content='https://mohammedimran.com' />
-        <meta property='og:site_name' content='Mohammed Imran' />
-        <meta property='og:title' content='Mohammed Imran' />
-        <meta property='og:description' content="Mohammed Imran's Portfolio website" />
-        <meta property='og:image' content='https://mohammedimran.com/icons/android-chrome-512x512.png' />
-        <link rel='sitemap' href='/sitemap-index.xml' />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mohammedimran.com" />
+        <meta property="og:site_name" content="Mohammed Imran" />
+        <meta property="og:title" content="Mohammed Imran" />
+        <meta
+            property="og:description"
+            content="Mohammed Imran's Portfolio website"
+        />
+        <meta
+            property="og:image"
+            content="https://mohammedimran.com/icons/android-chrome-512x512.png"
+        />
+        <link rel="sitemap" href="/sitemap-index.xml" />
         <style>
             html {
                 scroll-behavior: smooth;
@@ -54,49 +75,42 @@ declare global {
         </style>
 
         <title>{title}</title>
-        <meta name='theme-color' content='' />
-        <script is:inline src='/toggle-theme.js'></script>
+        <meta name="theme-color" content="" />
+        <script is:inline src="/toggle-theme.js"></script>
         <!-- Matomo -->
-        <script>
+        <script is:inline type="text/javascript" async>
             var _paq = (window._paq = window._paq || []);
             /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-            _paq.push(["setCookieDomain", "*.test.mohammedimran.com"]);
-            _paq.push(["setDoNotTrack", true]);
             _paq.push(["trackPageView"]);
             _paq.push(["enableLinkTracking"]);
             (function () {
-                var u = "//lbfactgcp.openturf.dev/analytics/";
+                var u = "//me.satisfi4.com/analytics/";
                 _paq.push(["setTrackerUrl", u + "matomo.php"]);
-                _paq.push(["setSiteId", "59"]);
-                var d = document;
-                var g = d.createElement("script");
-                var s = d.getElementsByTagName("script")[0];
+                _paq.push(["setSiteId", "64"]);
+                var d = document,
+                    g = d.createElement("script"),
+                    s = d.getElementsByTagName("script")[0];
                 g.async = true;
                 g.src = u + "matomo.js";
                 s.parentNode?.insertBefore(g, s);
             })();
         </script>
         <!-- End Matomo Code -->
-        <script>
-            (function () {
-                var a = document.createElement("script");
-                var m = document.getElementsByTagName("script")[0];
-                a.async = true;
-                a.src = "https://g1-tracker.factoreal.com/prime/ftreal.min.js";
-                a.onload = function () {
-                    window.ftreal?.init("265e3110-0560-4449-acf4-d445863d5b2d", true);
-                };
-
-                m.parentNode?.insertBefore(a, m);
-            })();
-        </script>
     </head>
 
     <body
-        class='flex min-h-svh flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted'>
+        class="flex min-h-svh flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted"
+    >
         <noscript>
             <p>
-                <img src='//lbfactgcp.openturf.dev/analytics/matomo.php?idsite=55&rec=1' style='border:0;' alt='' />
+                <!-- Matomo Image Tracker-->
+                <img
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://me.satisfi4.com/analytics/matomo.php?idsite=64&rec=1"
+                    style="border:0"
+                    alt=""
+                />
+                <!-- End Matomo -->
             </p>
         </noscript>
         <Navbar />

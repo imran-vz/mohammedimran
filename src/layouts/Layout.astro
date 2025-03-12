@@ -64,41 +64,10 @@ const { title } = Astro.props;
             }
         </style>
 
-        <!-- Start FTreal -->
-        <script is:inline type="application/javascript" async>
-            (function () {
-                let a = document.createElement("script");
-                let m = document.getElementsByTagName("script")[0];
-                a.async = true;
-                a.src =
-                    "https://storage.googleapis.com/factoreal-g1-tracker/prime/ftreal.min.js";
-                a.onload = function () {
-                    let ftreal = (window.ftreal = window.ftreal || {});
-                    ftreal.init("265e3110-0560-4449-acf4-d445863d5b2d", true); // Sample: 514cc670-a384-11ed-87ce-41eeaf703333
-                };
-                m.parentNode?.insertBefore(a, m);
-            })();
-        </script><!-- End FTreal -->
-        <!-- Start WebPush -->
-        <script is:inline type="text/javascript" async>
-            var _at = {};
-            var u =
-                "https://storage.googleapis.com/factoreal-webpush-global/prime/";
-            _at.domain = "test.mohammedimran.com";
-            _at.idSite = "265e3110-0560-4449-acf4-d445863d5b2d";
-            (function () {
-                var d = document,
-                    g = d.createElement("script"),
-                    s = d.getElementsByTagName("script")[0];
-                g.type = "text/javascript";
-                g.async = true;
-                g.src = u + "fsw.min.js";
-                s.parentNode.insertBefore(g, s);
-            })();
-        </script><!-- End WebPush -->
-
         <title>{title}</title>
         <meta name="theme-color" content="" />
+        <script is:inline src="/toggle-theme.js"></script>
+
         <!-- Matomo -->
         <script is:inline type="text/javascript" async>
             var _paq = (window._paq = window._paq || []);
@@ -118,20 +87,23 @@ const { title } = Astro.props;
             })();
         </script>
         <!-- End Matomo Code -->
-        <script is:inline src="/toggle-theme.js"></script>
     </head>
 
     <body
         class="flex min-h-svh flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted"
     >
-        <!-- Matomo Image Tracker-->
-        <img
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://me.satisfi4.com/analytics/matomo.php?idsite=64&rec=1"
-            style="border:0"
-            alt=""
-        />
-        <!-- End Matomo -->
+        <noscript>
+            <p>
+                <!-- Matomo Image Tracker-->
+                <img
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://me.satisfi4.com/analytics/matomo.php?idsite=64&rec=1"
+                    style="border:0"
+                    alt=""
+                />
+                <!-- End Matomo -->
+            </p>
+        </noscript>
         <Navbar />
         <slot />
         <Footer />
