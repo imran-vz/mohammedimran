@@ -99,12 +99,39 @@ const { title } = Astro.props;
 
         <title>{title}</title>
         <meta name="theme-color" content="" />
+        <!-- Matomo -->
+        <script is:inline type="text/javascript" async>
+            var _paq = (window._paq = window._paq || []);
+            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+            _paq.push(["trackPageView"]);
+            _paq.push(["enableLinkTracking"]);
+            (function () {
+                var u = "//me.satisfi4.com/analytics/";
+                _paq.push(["setTrackerUrl", u + "matomo.php"]);
+                _paq.push(["setSiteId", "64"]);
+                var d = document,
+                    g = d.createElement("script"),
+                    s = d.getElementsByTagName("script")[0];
+                g.async = true;
+                g.src = u + "matomo.js";
+                s.parentNode?.insertBefore(g, s);
+            })();
+        </script>
+        <!-- End Matomo Code -->
         <script is:inline src="/toggle-theme.js"></script>
     </head>
 
     <body
         class="flex min-h-svh flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted"
     >
+        <!-- Matomo Image Tracker-->
+        <img
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://me.satisfi4.com/analytics/matomo.php?idsite=64&rec=1"
+            style="border:0"
+            alt=""
+        />
+        <!-- End Matomo -->
         <Navbar />
         <slot />
         <Footer />
