@@ -12,7 +12,11 @@
     >
         <div class="flex items-center gap-10">
             <div class="flex flex-row items-center gap-2">
-                <a href="/" class="focus-outline">
+                <a
+                    href="/"
+                    class="focus-outline"
+                    onclick="_paq.push(['trackEvent', 'Navbar', 'Home']);"
+                >
                     <h1 class="sr-only">Mohammed Imran</h1>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -29,8 +33,18 @@
             </div>
 
             <nav class="hidden sm:flex gap-4">
-                <a href="/zoro" class="focus-outline underline">Zoro</a>
-                <a href="/sanji" class="focus-outline underline">Sanji</a>
+                <a
+                    onclick="_paq.push(['trackEvent', 'Navbar', 'Zoro']);"
+                    href="/zoro"
+                    class="focus-outline underline"
+                >
+                    Zoro
+                </a>
+                <a
+                    onclick="_paq.push(['trackEvent', 'Navbar', 'Sanji']);"
+                    href="/sanji"
+                    class="focus-outline underline">Sanji</a
+                >
             </nav>
         </div>
 
