@@ -5,14 +5,14 @@
     "author": {
         "name": "Mohammed Imran",
         "email": "mohammedimran86992@gmail.com",
-        "url": "https://github.com/M0hammedImran"
+        "url": "https://github.com/imran-vz"
     },
     "engines": {
         "node": "22.x",
         "vscode": "^1.22.0"
     },
     "repository": {
-        "url": "https://github.com/M0hammedImran/mohammedimran"
+        "url": "https://github.com/imran-vz/mohammedimran"
     },
     "private": true,
     "homepage": "https://mohammedimran.com",

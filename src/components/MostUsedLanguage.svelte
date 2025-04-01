@@ -57,7 +57,7 @@ const formatter = Intl.NumberFormat('en-IN', {
                 <span>
                     These stats are pulled from
                     <a
-                        href="https://github.com/m0hammedimran"
+                        href="https://github.com/imran-vz"
                         class="focus-outline focus-visible:outline-1"
                     >
                         Github</a

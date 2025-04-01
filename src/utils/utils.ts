@@ -162,7 +162,7 @@ function identity(str: string) {
  * @param {number} maxLines Maximum number of lines.
  * @returns {string[]} Array of lines.
  */
-export const wrapTextMultiline = (text: string, width = 59, maxLines = 3): string[] => {
+export function wrapTextMultiline(text: string, width = 59, maxLines = 3): string[] {
 	const fullWidthComma = '，';
 	const encoded = encodeHTML(text);
 	const isChinese = encoded.includes(fullWidthComma);
@@ -187,7 +187,7 @@ export const wrapTextMultiline = (text: string, width = 59, maxLines = 3): strin
 	// Remove empty lines if text fits in less than maxLines lines
 	const multiLineText = lines.filter(Boolean);
 	return multiLineText;
-};
+}
 
 /**
  * Encode string as HTML.
@@ -197,13 +197,13 @@ export const wrapTextMultiline = (text: string, width = 59, maxLines = 3): strin
  * @param {string} str String to encode.
  * @returns {string} Encoded string.
  */
-const encodeHTML = (str: string): string => {
+function encodeHTML(str: string): string {
 	return str
 		.replace(/[\u00A0-\u9999<>&](?!#)/gim, (i) => {
 			return `&#${i.charCodeAt(0)};`;
 		})
 		.replace(/[\b]/gim, '');
-};
+}
 
 /**
  * Clamp the given number between the given range.
@@ -213,10 +213,10 @@ const encodeHTML = (str: string): string => {
  * @param {number} max The maximum value.
  * @returns {number} The clamped number.
  */
-export const clampValue = (number: number, min: number, max: number): number => {
+export function clampValue(number: number, min: number, max: number): number {
 	if (Number.isNaN(Number.parseInt(String(number), 10))) {
 		return min;
 	}
 
 	return Math.max(min, Math.min(number, max));
-};
+}
