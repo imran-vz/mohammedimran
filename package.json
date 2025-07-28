@@ -36,7 +36,7 @@
         "astro": "^5.11.1",
         "axios": "^1.10.0",
         "sharp": "^0.34.3",
-        "svelte": "^5.36.0",
+        "svelte": "^5.37.0",
         "tailwindcss": "^4.1.11"
     },
     "devDependencies": {
