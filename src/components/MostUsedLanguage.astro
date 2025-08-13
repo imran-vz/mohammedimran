@@ -1,0 +1,45 @@
+---
+export interface Props {
+    totalLanguageSize: number;
+    languages: Array<{ name: string; color: string; size: number }>;
+}
+
+const { totalLanguageSize = 0, languages = [] } = Astro.props as Props;
+
+const formatter = new Intl.NumberFormat("en-IN", {
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 2,
+    style: "percent",
+});
+---
+
+{
+    (languages?.length ?? 0) === 0 || totalLanguageSize === 0 ? (
+        <ol class="flex flex-wrap gap-4 max-w-6xl overflow-x-auto">
+            <li class="rounded-sm border border-skin-accent backdrop-blur-xs px-4 py-2 hover:bg-opacity-50 whitespace-nowrap">
+                Javascript / TypeScript
+            </li>
+            <li class="rounded-sm border border-skin-accent backdrop-blur-xs px-4 py-2 hover:bg-opacity-50 whitespace-nowrap">
+                Rust (Intermediate)
+            </li>
+            <li class="rounded-sm border border-skin-accent backdrop-blur-xs px-4 py-2 hover:bg-opacity-50 whitespace-nowrap">
+                Go lang
+            </li>
+        </ol>
+    ) : (
+        <div class="flex flex-wrap gap-4">
+            {languages.map((language) => (
+                <div class="flex gap-2 items-center px-4 py-2 border border-skin-accent rounded-sm">
+                    <div
+                        class="w-3 h-3 rounded-full"
+                        style={{ backgroundColor: language.color }}
+                    />
+                    <p class="whitespace-nowrap text-skin-base">
+                        {language.name} -{" "}
+                        {formatter.format(language.size / totalLanguageSize)}
+                    </p>
+                </div>
+            ))}
+        </div>
+    )
+}

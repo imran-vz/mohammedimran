@@ -1,6 +1,8 @@
 ---
+import AboutSection from "../components/AboutSection.astro";
 import LandingPageHero from "../components/LandingPageHero.astro";
-import MostUsedLanguage from "../components/MostUsedLanguage.svelte";
+import MostUsedLanguage from "../components/MostUsedLanguage.astro";
+import StatsSection from "../components/StatsSection.astro";
 import Technologies from "../components/Technologies.astro";
 import Layout from "../layouts/Layout.astro";
 import type { TrimTopLanguagesResult } from "../types";
@@ -18,19 +20,101 @@ try {
 ---
 
 <Layout title="Mohammed Imran">
-    <div class="bg-grid">
+    <div class="bg-grid min-h-screen">
         <main
             id="main-content"
-            class="scroll-mt-20 mx-auto w-full max-w-6xl px-3 sm:px-6 md:px-6 lg:px-8 grid gap-4 mb-4"
+            class="scroll-mt-20 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
         >
+            <!-- Hero Section -->
             <LandingPageHero />
 
-            <div id="technologies" class="space-y-8">
-                <MostUsedLanguage
-                    totalLanguageSize={data?.totalLanguageSize || 0}
-                    languages={data?.languages || []}
-                />
-                <Technologies />
+            <!-- Main Content Grid -->
+            <div class="py-12 sm:py-16 space-y-12 sm:space-y-20">
+                <!-- About & Stats Section -->
+                <section
+                    class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start"
+                >
+                    <AboutSection />
+                    <StatsSection />
+                </section>
+
+                <!-- Languages & Skills Section -->
+                <section id="technologies" class="space-y-10 sm:space-y-12">
+                    <!-- Enhanced Top Languages -->
+                    <div
+                        class="bg-skin-card/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-skin-accent/20 shadow-lg"
+                    >
+                        <div class="text-center mb-6 sm:mb-8">
+                            <h2
+                                class="text-2xl sm:text-3xl font-bold text-skin-base mb-3 sm:mb-4"
+                            >
+                                Development Focus
+                            </h2>
+                            <p
+                                class="text-skin-base/70 max-w-2xl mx-auto text-sm sm:text-base"
+                            >
+                                My programming language distribution based on
+                                public GitHub repositories, updated in real-time
+                                to reflect my current development focus.
+                            </p>
+                        </div>
+                        <MostUsedLanguage
+                            totalLanguageSize={data?.totalLanguageSize || 0}
+                            languages={data?.languages || []}
+                        />
+                    </div>
+
+                    <!-- Enhanced Technologies -->
+                    <div
+                        class="bg-skin-card/30 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-skin-accent/20 shadow-lg"
+                    >
+                        <div class="text-center mb-6 sm:mb-8">
+                            <h2
+                                class="text-2xl sm:text-3xl font-bold text-skin-base mb-3 sm:mb-4"
+                            >
+                                Tech Stack
+                            </h2>
+                            <p
+                                class="text-skin-base/70 max-w-2xl mx-auto text-sm sm:text-base"
+                            >
+                                Technologies and frameworks I work with to build
+                                scalable, performant applications across the
+                                full stack.
+                            </p>
+                        </div>
+                        <Technologies />
+                    </div>
+                </section>
+
+                <!-- Contact CTA Section -->
+                <section class="text-center py-12 sm:py-16">
+                    <div
+                        class="bg-gradient-to-r from-skin-accent/10 to-skin-accent/5 rounded-3xl p-8 sm:p-12 border border-skin-accent/20"
+                    >
+                        <h2
+                            class="text-3xl sm:text-4xl font-bold text-skin-base mb-4 sm:mb-6"
+                        >
+                            Let's Build Something Amazing
+                        </h2>
+                        <p
+                            class="text-base sm:text-xl text-skin-base/80 mb-6 sm:mb-8 max-w-2xl mx-auto"
+                        >
+                            Have a project in mind or want to collaborate? I'm
+                            always excited to work on innovative solutions and
+                            meaningful projects.
+                        </p>
+                        <div
+                            class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
+                        >
+                            <a
+                                href="mailto:hello@mohammedimran.com"
+                                class="bg-skin-accent text-white px-8 py-4 rounded-xl font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 focus-outline w-full sm:w-auto"
+                            >
+                                Get In Touch
+                            </a>
+                        </div>
+                    </div>
+                </section>
             </div>
         </main>
     </div>

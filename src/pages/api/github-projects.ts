@@ -43,10 +43,10 @@ export const GET: APIRoute = async () => {
 
 async function getTopLanguages() {
 	let topLanguages: TopLanguages | null = null;
-	const cacheTopLanguagesResponse = await kv.hget<TopLanguages>('github-projects', 'm0hammedimran');
+	const cacheTopLanguagesResponse = await kv.hget<TopLanguages>('github-projects', import.meta.env.GITHUB_USERNAME);
 
 	if (!cacheTopLanguagesResponse) {
-		topLanguages = await fetchTopLanguages('m0hammedimran', [
+		topLanguages = await fetchTopLanguages(import.meta.env.GITHUB_USERNAME, [
 			'angualar-todo-firebase',
 			'protoezy-graphy-mock',
 			'react-native-todo-app',
@@ -56,7 +56,7 @@ async function getTopLanguages() {
 			'libsol',
 		]);
 
-		await kv.hset('github-projects', { m0hammedimran: topLanguages });
+		await kv.hset('github-projects', { [import.meta.env.GITHUB_USERNAME]: topLanguages });
 		await kv.expire('github-projects', 60 * 60 * 24 * 7);
 	}
 
@@ -67,7 +67,10 @@ async function getTopLanguages() {
 async function getTrimTopLanguages() {
 	let trimmedTopLanguages: TrimTopLanguagesResult | null = null;
 
-	const cacheResponse = await kv.hget<TrimTopLanguagesResult>('github-projects-parsed', 'm0hammedimran');
+	const cacheResponse = await kv.hget<TrimTopLanguagesResult>(
+		'github-projects-parsed',
+		import.meta.env.GITHUB_USERNAME,
+	);
 
 	if (!cacheResponse) {
 		const topLanguages = await getTopLanguages();
@@ -77,7 +80,7 @@ async function getTrimTopLanguages() {
 			hideLanguages: new Set(['Vim Script', 'AutoHotkey', 'Makefile', 'Shell']),
 		});
 		await kv.hset('github-projects-parsed', {
-			m0hammedimran: trimmedTopLanguages,
+			[import.meta.env.GITHUB_USERNAME]: trimmedTopLanguages,
 		});
 		await kv.expire('github-projects-parsed', 60 * 60 * 24 * 7);
 	}
