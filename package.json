@@ -15,7 +15,7 @@
         "url": "https://github.com/imran-vz/mohammedimran"
     },
     "private": true,
-    "homepage": "https://mohammedimran.com",
+    "homepage": "https://imran.codes",
     "packageManager": "pnpm@10.7.0",
     "scripts": {
         "dev": "astro dev",

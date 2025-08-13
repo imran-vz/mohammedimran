@@ -11,7 +11,7 @@ export default defineConfig({
 	image: { service: sharpImageService() },
 	adapter: vercel(),
 	build: { inlineStylesheets: 'always' },
-	site: 'https://mohammedimran.com',
+	site: 'https://imran.codes',
 	vite: { plugins: [tailwindcss()] },
 	integrations: [sitemap({ changefreq: 'always', lastmod: new Date() }), mdx({ syntaxHighlight: 'shiki' }), svelte()],
 });
