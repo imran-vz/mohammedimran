@@ -31,7 +31,7 @@
         "@astrojs/sitemap": "^3.4.2",
         "@astrojs/svelte": "^7.1.0",
         "@astrojs/vercel": "^8.2.5",
-        "@tailwindcss/vite": "^4.1.11",
+        "@tailwindcss/vite": "^4.1.12",
         "@vercel/kv": "^3.0.0",
         "astro": "^5.12.9",
         "axios": "^1.11.0",
