@@ -27,7 +27,7 @@
         "lint": "biome lint --write ./src"
     },
     "dependencies": {
-        "@astrojs/mdx": "^4.3.3",
+        "@astrojs/mdx": "^4.3.8",
         "@astrojs/sitemap": "^3.4.2",
         "@astrojs/svelte": "^7.1.0",
         "@astrojs/vercel": "^8.2.5",
