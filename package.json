@@ -41,7 +41,7 @@
     },
     "devDependencies": {
         "@biomejs/biome": "2.1.4",
-        "supports-color": "^10.1.0"
+        "supports-color": "^10.2.2"
     },
     "pnpm": {
         "onlyBuiltDependencies": [
