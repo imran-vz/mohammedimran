@@ -1,12 +1,72 @@
 ---
+import { inject } from "@vercel/analytics";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import "../styles/base.css";
+
+// Initialize Vercel Analytics
+inject();
 export interface Props {
-    title: string;
+    title?: string;
+    description?: string;
+    image?: string;
+    canonical?: string;
 }
 
-const { title } = Astro.props;
+const {
+    title = "Mohammed Imran | Senior Full Stack Developer | React, TypeScript, GoLang | Bengaluru",
+    description = "Mohammed Imran - 5+ years experience in React, TypeScript, and GoLang. Senior Full Stack Developer based in Bengaluru, available remotely. Open source contributor and tech enthusiast.",
+    image = "https://imran.codes/icons/android-chrome-512x512.png",
+    canonical = "https://imran.codes",
+} = Astro.props;
+
+// Structured Data - JSON-LD
+const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Mohammed Imran",
+    alternateName: ["Imran", "Mohammed Imran Developer"],
+    jobTitle: "Senior Full Stack Developer",
+    description:
+        "Senior Full Stack Developer with 5+ years of experience specializing in React, TypeScript, and GoLang",
+    url: "https://imran.codes",
+    image: "https://imran.codes/icons/android-chrome-512x512.png",
+    sameAs: [
+        "https://github.com/imran-vz",
+        "https://www.linkedin.com/in/m0hammedimran/",
+    ],
+    knowsAbout: [
+        "React",
+        "TypeScript",
+        "GoLang",
+        "JavaScript",
+        "Web Development",
+        "Full Stack Development",
+    ],
+    address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bengaluru",
+        addressRegion: "Karnataka",
+        addressCountry: "India",
+    },
+    worksFor: {
+        "@type": "Organization",
+        name: "Remote",
+    },
+    email: "mohammedimran86992@gmail.com",
+};
+
+const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Mohammed Imran - Portfolio",
+    url: "https://imran.codes",
+    description: "Personal portfolio and technical showcase of Mohammed Imran",
+    author: {
+        "@type": "Person",
+        name: "Mohammed Imran",
+    },
+};
 ---
 
 <!doctype html>
@@ -17,55 +77,66 @@ const { title } = Astro.props;
             name="viewport"
             content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5"
         />
+
+        <!-- Performance: Preconnect to external domains -->
+        <link rel="preconnect" href="https://api.github.com" />
+        <link rel="dns-prefetch" href="https://api.github.com" />
+
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="canonical" href={canonical} />
         <meta name="generator" content={Astro.generator} />
         <link rel="manifest" href="/manifest.json" />
+
+        <!-- SEO Meta Tags -->
+        <title>{title}</title>
+        <meta name="description" content={description} />
         <meta
             name="keywords"
-            content="astro, imran, mohammedimran, mohammed imran"
+            content="Mohammed Imran, Imran, Mohammed Imran developer, React developer, TypeScript expert, GoLang developer, Full Stack Developer Bengaluru, imran-vz, Senior Developer India, React Bengaluru, Remote Developer"
         />
-        <meta name="color-scheme" content="dark" />
         <meta name="author" content="Mohammed Imran" />
         <link rel="author" href="https://www.linkedin.com/in/m0hammedimran" />
-        <meta name="description" content="Mohammed Imran's Portfolio website" />
+        <meta name="color-scheme" content="dark light" />
 
-        <meta
-            name="twitter:card"
-            content="https://imran.codes/icons/android-chrome-512x512.png"
-        />
-        <meta name="twitter:site" content="https://imran.codes" />
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@m0hammed_imran" />
         <meta name="twitter:creator" content="@m0hammed_imran" />
-        <meta name="twitter:title" content="Mohammed Imran" />
-        <meta
-            name="twitter:description"
-            content="Mohammed Imran's Portfolio website"
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={image} />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:site_name" content="Mohammed Imran - Portfolio" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={image} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="en_IN" />
+
+        <!-- Structured Data -->
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(structuredData)}
         />
-        <meta
-            name="twitter:image"
-            content="https://imran.codes/icons/android-chrome-512x512.png"
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(websiteSchema)}
         />
 
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://imran.codes" />
-        <meta property="og:site_name" content="Mohammed Imran" />
-        <meta property="og:title" content="Mohammed Imran" />
-        <meta
-            property="og:description"
-            content="Mohammed Imran's Portfolio website"
-        />
-        <meta
-            property="og:image"
-            content="https://imran.codes/icons/android-chrome-512x512.png"
-        />
         <link rel="sitemap" href="/sitemap-index.xml" />
+
         <style>
             html {
                 scroll-behavior: smooth;
+                font-display: swap;
             }
         </style>
-        <title>{title}</title>
 
-        <meta name="theme-color" content="" />
+        <meta name="theme-color" content="#FAF8F5" />
         <script is:inline src="/toggle-theme.js"></script>
     </head>
 

@@ -1,40 +1,72 @@
-const primaryColorScheme = '';
-const currentTheme = localStorage.getItem('theme');
+const primaryColorScheme = ""; // "light" | "dark"
+
+// Get theme data from local storage
+const currentTheme = localStorage.getItem("theme");
+
 function getPreferTheme() {
-	return (
-		currentTheme || primaryColorScheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-	);
+	// return theme value in local storage if it is set
+	if (currentTheme) return currentTheme;
+
+	// return primary color scheme if it is set
+	if (primaryColorScheme) return primaryColorScheme;
+
+	// return user device's prefer color scheme
+	return window.matchMedia("(prefers-color-scheme: dark)").matches
+		? "dark"
+		: "light";
 }
+
 let themeValue = getPreferTheme();
-function setPreference(themeValue) {
-	localStorage.setItem('theme', themeValue);
+
+function setPreference() {
+	localStorage.setItem("theme", themeValue);
 	reflectPreference();
 }
+
 function reflectPreference() {
-	document.firstElementChild.setAttribute('data-theme', themeValue);
-	document.querySelector('#theme-btn')?.setAttribute('aria-label', themeValue);
-	const body = document.body;
-	if (body) {
-		const backgroundColor = window.getComputedStyle(body).backgroundColor;
-		document.querySelector("meta[name='theme-color']")?.setAttribute('content', backgroundColor);
+	document.documentElement.setAttribute("data-theme", themeValue);
+
+	document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue);
+
+	// Update theme-color meta tag
+	const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+	if (metaThemeColor) {
+		// Light cream background for both themes
+		const themeColor = "#FAF8F5";
+		metaThemeColor.setAttribute("content", themeColor);
 	}
 }
+
+// set early so no page flashes / CSS is made aware
 reflectPreference();
 
 window.onload = () => {
-	function swapTheme() {
+	function setThemeFeature() {
+		// set on load so screen readers can get the latest value on the button
 		reflectPreference();
-		document.querySelector('#theme-btn')?.addEventListener('click', () => {
-			themeValue = themeValue === 'light' ? 'dark' : 'light';
-			setPreference(themeValue);
+
+		// now this script can find and listen for clicks on the control
+		document.querySelector("#theme-btn")?.addEventListener("click", () => {
+			themeValue = themeValue === "light" ? "dark" : "light";
+			setPreference();
 		});
 	}
 
-	swapTheme();
-	document.addEventListener('astro:after-swap', swapTheme);
+	setThemeFeature();
+
+	// Sync with system changes
+	window
+		.matchMedia("(prefers-color-scheme: dark)")
+		.addEventListener("change", ({ matches: isDark }) => {
+			themeValue = isDark ? "dark" : "light";
+			setPreference();
+		});
 };
 
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
-	themeValue = matches ? 'dark' : 'light';
-	setPreference(themeValue);
-});
+// sync with system changes
+window
+	.matchMedia("(prefers-color-scheme: dark)")
+	.addEventListener("change", ({ matches: isDark }) => {
+		themeValue = isDark ? "dark" : "light";
+		setPreference();
+	});

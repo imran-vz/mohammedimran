@@ -1,5 +1,6 @@
 ---
 import AboutSection from "../components/AboutSection.astro";
+import ContactSection from "../components/ContactSection.astro";
 import LandingPageHero from "../components/LandingPageHero.astro";
 import MostUsedLanguage from "../components/MostUsedLanguage.astro";
 import StatsSection from "../components/StatsSection.astro";
@@ -86,35 +87,8 @@ try {
                     </div>
                 </section>
 
-                <!-- Contact CTA Section -->
-                <section class="text-center py-12 sm:py-16">
-                    <div
-                        class="bg-gradient-to-r from-skin-accent/10 to-skin-accent/5 rounded-3xl p-8 sm:p-12 border border-skin-accent/20"
-                    >
-                        <h2
-                            class="text-3xl sm:text-4xl font-bold text-skin-base mb-4 sm:mb-6"
-                        >
-                            Let's Build Something Amazing
-                        </h2>
-                        <p
-                            class="text-base sm:text-xl text-skin-base/80 mb-6 sm:mb-8 max-w-2xl mx-auto"
-                        >
-                            Have a project in mind or want to collaborate? I'm
-                            always excited to work on innovative solutions and
-                            meaningful projects.
-                        </p>
-                        <div
-                            class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
-                        >
-                            <a
-                                href="mailto:hello@imran.codes"
-                                class="bg-skin-accent text-white px-8 py-4 rounded-xl font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 focus-outline w-full sm:w-auto"
-                            >
-                                Get In Touch
-                            </a>
-                        </div>
-                    </div>
-                </section>
+                <!-- Contact Section -->
+                <ContactSection />
             </div>
         </main>
     </div>

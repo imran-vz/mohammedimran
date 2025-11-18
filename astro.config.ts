@@ -1,4 +1,3 @@
-import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
 import vercel from '@astrojs/vercel';
@@ -13,5 +12,5 @@ export default defineConfig({
 	build: { inlineStylesheets: 'always' },
 	site: 'https://imran.codes',
 	vite: { plugins: [tailwindcss()] },
-	integrations: [sitemap({ changefreq: 'always', lastmod: new Date() }), mdx({ syntaxHighlight: 'shiki' }), svelte()],
+	integrations: [sitemap({ changefreq: 'always', lastmod: new Date() }), svelte()],
 });

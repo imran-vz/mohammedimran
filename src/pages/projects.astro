@@ -1,0 +1,135 @@
+---
+import ProjectCard from "../components/ProjectCard.astro";
+import Layout from "../layouts/Layout.astro";
+import { getTopProjects } from "../utils/fetch-github-repos";
+
+const projects = await getTopProjects();
+---
+
+<Layout
+    title="Projects | Mohammed Imran | Full Stack Developer Portfolio"
+    description="Explore Mohammed Imran's portfolio of React, TypeScript, and GoLang projects. Open source contributions and full-stack development work."
+    canonical="https://imran.codes/projects"
+>
+    <main class="flex-1 px-4 py-12 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl">
+            <!-- Header -->
+            <header class="mb-12 text-center">
+                <h1
+                    class="mb-4 bg-gradient-to-r from-skin-accent via-skin-accent-secondary to-skin-accent-tertiary bg-clip-text text-4xl font-bold text-transparent sm:text-5xl lg:text-6xl"
+                >
+                    Projects
+                </h1>
+                <p class="mx-auto max-w-2xl text-lg text-skin-base/80">
+                    A showcase of my open source work and personal projects.
+                    Built with React, TypeScript, GoLang, and more.
+                </p>
+                <a
+                    href="https://github.com/imran-vz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-6 inline-flex items-center gap-2 rounded-lg bg-skin-accent px-6 py-3 font-semibold text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-skin-accent/30"
+                >
+                    <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    View All on GitHub
+                </a>
+            </header>
+
+            <!-- Projects Grid -->
+            {
+                projects.length > 0 ? (
+                    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {projects.map((project) => (
+                            <ProjectCard project={project} />
+                        ))}
+                    </div>
+                ) : (
+                    <div class="rounded-xl border border-skin-border bg-skin-card p-12 text-center">
+                        <svg
+                            class="mx-auto mb-4 h-16 w-16 text-skin-base/40"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+                            />
+                        </svg>
+                        <h2 class="mb-2 text-xl font-bold text-skin-base">
+                            No projects found
+                        </h2>
+                        <p class="text-skin-base/70">
+                            Check back soon or visit my{" "}
+                            <a
+                                href="https://github.com/imran-vz"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-skin-accent hover:underline"
+                            >
+                                GitHub profile
+                            </a>
+                            .
+                        </p>
+                    </div>
+                )
+            }
+
+            <!-- Call to Action -->
+            <section class="mt-16 text-center">
+                <div
+                    class="mx-auto max-w-3xl rounded-2xl border border-skin-accent/30 bg-gradient-to-br from-skin-accent/5 via-skin-card to-skin-accent-secondary/5 p-8 sm:p-12"
+                >
+                    <h2
+                        class="mb-4 text-2xl font-bold text-skin-base sm:text-3xl"
+                    >
+                        Let's Collaborate
+                    </h2>
+                    <p class="mb-6 text-skin-base/80">
+                        Interested in working together? Check out my skills or
+                        get in touch.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a
+                            href="/skills"
+                            class="inline-flex items-center gap-2 rounded-lg border border-skin-accent/50 px-6 py-3 font-semibold text-skin-accent transition-all hover:bg-skin-accent hover:text-white"
+                        >
+                            View Skills
+                        </a>
+                        <a
+                            href="mailto:mohammedimran86992@gmail.com"
+                            class="inline-flex items-center gap-2 rounded-lg bg-skin-accent-secondary px-6 py-3 font-semibold text-white transition-all hover:scale-105"
+                        >
+                            <svg
+                                class="h-5 w-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                ></path>
+                            </svg>
+                            Contact Me
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</Layout>
