@@ -27,21 +27,21 @@
         "lint": "biome lint --write ./src"
     },
     "dependencies": {
-        "@astrojs/sitemap": "^3.4.2",
-        "@astrojs/svelte": "^7.1.0",
-        "@astrojs/vercel": "^8.2.5",
-        "@tailwindcss/vite": "^4.1.11",
+        "@astrojs/sitemap": "^3.6.0",
+        "@astrojs/svelte": "^7.2.2",
+        "@astrojs/vercel": "^8.2.11",
+        "@tailwindcss/vite": "^4.1.17",
         "@vercel/analytics": "^1.5.0",
         "@vercel/kv": "^3.0.0",
-        "astro": "^5.12.9",
-        "axios": "^1.11.0",
-        "sharp": "^0.34.3",
-        "svelte": "^5.38.1",
-        "tailwindcss": "^4.1.11"
+        "astro": "^5.15.9",
+        "axios": "^1.13.2",
+        "sharp": "^0.34.5",
+        "svelte": "^5.43.12",
+        "tailwindcss": "^4.1.17"
     },
     "devDependencies": {
         "@biomejs/biome": "2.1.4",
-        "supports-color": "^10.1.0"
+        "supports-color": "^10.2.2"
     },
     "pnpm": {
         "onlyBuiltDependencies": [
