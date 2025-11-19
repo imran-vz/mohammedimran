@@ -40,7 +40,7 @@
         "tailwindcss": "^4.1.17"
     },
     "devDependencies": {
-        "@biomejs/biome": "2.1.4",
+        "@biomejs/biome": "2.3.6",
         "supports-color": "^10.2.2"
     },
     "pnpm": {
