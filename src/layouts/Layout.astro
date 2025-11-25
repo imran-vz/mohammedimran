@@ -1,5 +1,6 @@
 ---
 import { inject } from "@vercel/analytics";
+import { siteMeta } from "../config/siteMeta";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import "../styles/base.css";
@@ -14,23 +15,22 @@ export interface Props {
 }
 
 const {
-    title = "Mohammed Imran | Senior Full Stack Developer | React, TypeScript, GoLang | Bengaluru",
-    description = "Mohammed Imran - 5+ years experience in React, TypeScript, and GoLang. Senior Full Stack Developer based in Bengaluru, available remotely. Open source contributor and tech enthusiast.",
-    image = "https://imran.codes/icons/android-chrome-512x512.png",
-    canonical = "https://imran.codes",
+    title = siteMeta.defaultTitle,
+    description = siteMeta.defaultDescription,
+    image = siteMeta.logoUrl,
+    canonical = siteMeta.siteUrl,
 } = Astro.props;
 
 // Structured Data - JSON-LD
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Mohammed Imran",
-    alternateName: ["Imran", "Mohammed Imran Developer"],
+    name: siteMeta.brandShort,
+    alternateName: siteMeta.alternateNames,
     jobTitle: "Senior Full Stack Developer",
-    description:
-        "Senior Full Stack Developer with 5+ years of experience specializing in React, TypeScript, and GoLang",
-    url: "https://imran.codes",
-    image: "https://imran.codes/icons/android-chrome-512x512.png",
+    description: siteMeta.defaultDescription,
+    url: siteMeta.siteUrl,
+    image: siteMeta.logoUrl,
     sameAs: [
         "https://github.com/imran-vz",
         "https://www.linkedin.com/in/m0hammedimran/",
@@ -45,13 +45,13 @@ const structuredData = {
     ],
     address: {
         "@type": "PostalAddress",
-        addressLocality: "Bengaluru",
-        addressRegion: "Karnataka",
-        addressCountry: "India",
+        addressLocality: siteMeta.location.locality,
+        addressRegion: siteMeta.location.region,
+        addressCountry: siteMeta.location.country,
     },
     worksFor: {
         "@type": "Organization",
-        name: "Remote",
+        name: siteMeta.employer,
     },
     email: "mohammedimran86992@gmail.com",
 };
@@ -59,12 +59,12 @@ const structuredData = {
 const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Mohammed Imran - Portfolio",
-    url: "https://imran.codes",
-    description: "Personal portfolio and technical showcase of Mohammed Imran",
+    name: siteMeta.brandShort,
+    url: siteMeta.siteUrl,
+    description: siteMeta.defaultDescription,
     author: {
         "@type": "Person",
-        name: "Mohammed Imran",
+        name: siteMeta.brandLong,
     },
 };
 ---
@@ -94,7 +94,9 @@ const websiteSchema = {
             name="keywords"
             content="Mohammed Imran, Imran, Mohammed Imran developer, React developer, TypeScript expert, GoLang developer, Full Stack Developer Bengaluru, imran-vz, Senior Developer India, React Bengaluru, Remote Developer"
         />
-        <meta name="author" content="Mohammed Imran" />
+        <meta name="author" content={siteMeta.brandLong} />
+        <meta name="application-name" content={siteMeta.brandShort} />
+        <meta name="apple-mobile-web-app-title" content={siteMeta.brandShort} />
         <link rel="author" href="https://www.linkedin.com/in/m0hammedimran" />
         <meta name="color-scheme" content="dark light" />
 
@@ -109,7 +111,7 @@ const websiteSchema = {
         <!-- Open Graph -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
-        <meta property="og:site_name" content="Mohammed Imran - Portfolio" />
+        <meta property="og:site_name" content={siteMeta.brandShort} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={image} />
