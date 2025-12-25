@@ -18,11 +18,11 @@
 	"private": true,
 	"homepage": "https://imran.codes",
 	"scripts": {
-		"dev": "bun --bun astro dev",
-		"start": "bun --bun astro dev",
-		"build": "bun --bun astro build",
-		"preview": "bun --bun astro preview",
-		"astro": "bun --bun astro",
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
 		"format": "biome format --write ./src",
 		"lint": "biome lint --write ./src",
 		"lint:fix": "biome check --write ."
