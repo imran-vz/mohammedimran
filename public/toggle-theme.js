@@ -1,7 +1,7 @@
-const primaryColorScheme = ""; // "light" | "dark"
+const primaryColorScheme = ''; // "light" | "dark"
 
 // Get theme data from local storage
-const currentTheme = localStorage.getItem("theme");
+const currentTheme = localStorage.getItem('theme');
 
 function getPreferTheme() {
 	// return theme value in local storage if it is set
@@ -11,35 +11,33 @@ function getPreferTheme() {
 	if (primaryColorScheme) return primaryColorScheme;
 
 	// return user device's prefer color scheme
-	return window.matchMedia("(prefers-color-scheme: dark)").matches
-		? "dark"
-		: "light";
+	return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
 let themeValue = getPreferTheme();
 
 function setPreference() {
-	localStorage.setItem("theme", themeValue);
+	localStorage.setItem('theme', themeValue);
 	reflectPreference();
 }
 
 function reflectPreference() {
-	document.documentElement.setAttribute("data-theme", themeValue);
-	
-	if (themeValue === "dark") {
-		document.documentElement.classList.add("dark");
+	document.documentElement.setAttribute('data-theme', themeValue);
+
+	if (themeValue === 'dark') {
+		document.documentElement.classList.add('dark');
 	} else {
-		document.documentElement.classList.remove("dark");
+		document.documentElement.classList.remove('dark');
 	}
 
-	document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue);
+	document.querySelector('#theme-btn')?.setAttribute('aria-label', themeValue);
 
 	// Update theme-color meta tag
 	const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 	if (metaThemeColor) {
 		// Light cream background for both themes
-		const themeColor = "#FAF8F5";
-		metaThemeColor.setAttribute("content", themeColor);
+		const themeColor = '#FAF8F5';
+		metaThemeColor.setAttribute('content', themeColor);
 	}
 }
 
@@ -52,8 +50,8 @@ window.onload = () => {
 		reflectPreference();
 
 		// now this script can find and listen for clicks on the control
-		document.querySelector("#theme-btn")?.addEventListener("click", () => {
-			themeValue = themeValue === "light" ? "dark" : "light";
+		document.querySelector('#theme-btn')?.addEventListener('click', () => {
+			themeValue = themeValue === 'light' ? 'dark' : 'light';
 			setPreference();
 		});
 	}
@@ -61,18 +59,14 @@ window.onload = () => {
 	setThemeFeature();
 
 	// Sync with system changes
-	window
-		.matchMedia("(prefers-color-scheme: dark)")
-		.addEventListener("change", ({ matches: isDark }) => {
-			themeValue = isDark ? "dark" : "light";
-			setPreference();
-		});
+	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches: isDark }) => {
+		themeValue = isDark ? 'dark' : 'light';
+		setPreference();
+	});
 };
 
 // sync with system changes
-window
-	.matchMedia("(prefers-color-scheme: dark)")
-	.addEventListener("change", ({ matches: isDark }) => {
-		themeValue = isDark ? "dark" : "light";
-		setPreference();
-	});
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches: isDark }) => {
+	themeValue = isDark ? 'dark' : 'light';
+	setPreference();
+});

@@ -1,28 +1,27 @@
 ---
-import type { ProcessedRepo } from "../utils/fetch-github-repos";
+import type { ProcessedRepo } from '../utils/fetch-github-repos';
 
 export interface Props {
-    project: ProcessedRepo;
+	project: ProcessedRepo;
 }
 
 const { project } = Astro.props;
 
 // Language color mapping
 const languageColors: Record<string, string> = {
-    TypeScript: "bg-[#3178C6]",
-    JavaScript: "bg-[#F7DF1E] text-black",
-    React: "bg-[#61DAFB] text-black",
-    Go: "bg-[#00ADD8]",
-    Python: "bg-[#3776AB]",
-    Rust: "bg-[#CE412B]",
-    Java: "bg-[#007396]",
-    HTML: "bg-[#E34F26]",
-    CSS: "bg-[#1572B6]",
-    Unknown: "bg-gray-500",
+	TypeScript: 'bg-[#3178C6]',
+	JavaScript: 'bg-[#F7DF1E] text-black',
+	React: 'bg-[#61DAFB] text-black',
+	Go: 'bg-[#00ADD8]',
+	Python: 'bg-[#3776AB]',
+	Rust: 'bg-[#CE412B]',
+	Java: 'bg-[#007396]',
+	HTML: 'bg-[#E34F26]',
+	CSS: 'bg-[#1572B6]',
+	Unknown: 'bg-gray-500',
 };
 
-const languageColor =
-    languageColors[project.language] || "bg-skin-accent-secondary";
+const languageColor = languageColors[project.language] || 'bg-skin-accent-secondary';
 ---
 
 <article
