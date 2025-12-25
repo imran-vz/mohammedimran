@@ -1,6 +1,7 @@
 ---
 import AboutSection from '../components/AboutSection.astro';
 import ContactSection from '../components/ContactSection.astro';
+import ExperienceSection from '../components/ExperienceSection.astro';
 import LandingPageHero from '../components/LandingPageHero.astro';
 import MostUsedLanguage from '../components/MostUsedLanguage.astro';
 import StatsSection from '../components/StatsSection.astro';
@@ -37,50 +38,29 @@ try {
                     <StatsSection />
                 </section>
 
+                <!-- Experience Section -->
+                <ExperienceSection />
+
                 <!-- Languages & Skills Section -->
-                <section id="technologies" class="space-y-10 sm:space-y-12">
-                    <!-- Enhanced Top Languages -->
+                <section id="technologies" class="space-y-8">
                     <div
-                        class="bg-skin-card/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-skin-accent/20 shadow-lg"
+                        class="spotlight-card bg-skin-card/30 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-skin-accent/10"
                     >
-                        <div class="text-center mb-6 sm:mb-8">
-                            <h2
-                                class="text-2xl sm:text-3xl font-bold text-skin-base mb-3 sm:mb-4"
-                            >
-                                Development Focus
-                            </h2>
-                            <p
-                                class="text-skin-base/70 max-w-2xl mx-auto text-sm sm:text-base"
-                            >
-                                My programming language distribution based on
-                                public GitHub repositories, updated in real-time
-                                to reflect my current development focus.
-                            </p>
-                        </div>
+                        <h2 class="text-lg font-semibold text-skin-base mb-6">
+                            Languages
+                        </h2>
                         <MostUsedLanguage
                             totalLanguageSize={data?.totalLanguageSize || 0}
                             languages={data?.languages || []}
                         />
                     </div>
 
-                    <!-- Enhanced Technologies -->
                     <div
-                        class="bg-skin-card/30 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-skin-accent/20 shadow-lg"
+                        class="spotlight-card bg-skin-card/30 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-skin-accent/10"
                     >
-                        <div class="text-center mb-6 sm:mb-8">
-                            <h2
-                                class="text-2xl sm:text-3xl font-bold text-skin-base mb-3 sm:mb-4"
-                            >
-                                Tech Stack
-                            </h2>
-                            <p
-                                class="text-skin-base/70 max-w-2xl mx-auto text-sm sm:text-base"
-                            >
-                                Technologies and frameworks I work with to build
-                                scalable, performant applications across the
-                                full stack.
-                            </p>
-                        </div>
+                        <h2 class="text-lg font-semibold text-skin-base mb-6">
+                            Technologies
+                        </h2>
                         <Technologies />
                     </div>
                 </section>

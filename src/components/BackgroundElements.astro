@@ -1,0 +1,20 @@
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl animate-float-slow" style="background-color: rgba(var(--color-accent), 0.08)"></div>
+    <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl animate-float-slower" style="background-color: rgba(var(--color-accent-secondary), 0.05)"></div>
+</div>
+
+<style>
+    @keyframes float {
+        0% { transform: translate(0, 0); }
+        50% { transform: translate(0, 20px); }
+        100% { transform: translate(0, 0); }
+    }
+    
+    .animate-float-slow {
+        animation: float 8s ease-in-out infinite;
+    }
+
+    .animate-float-slower {
+        animation: float 12s ease-in-out infinite reverse;
+    }
+</style>

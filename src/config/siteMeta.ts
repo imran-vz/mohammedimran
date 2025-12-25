@@ -17,7 +17,7 @@ export const siteMeta = {
 		country: 'India',
 	},
 	alternateNames: ['Mohammed Imran', 'Mohammed Imran Developer', 'Imran Developer', 'Imran Go Developer'],
-	employer: 'Remote',
+	employer: 'Thoughtseed',
 };
 
 export type SiteMeta = typeof siteMeta;

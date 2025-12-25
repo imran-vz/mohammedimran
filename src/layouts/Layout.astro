@@ -1,76 +1,68 @@
 ---
-import { inject } from "@vercel/analytics";
-import { siteMeta } from "../config/siteMeta";
-import Footer from "../components/Footer.astro";
-import Navbar from "../components/Navbar.astro";
-import "../styles/base.css";
+import { inject } from '@vercel/analytics';
+import BackgroundElements from '../components/BackgroundElements.astro';
+import Footer from '../components/Footer.astro';
+import Navbar from '../components/Navbar.astro';
+import { siteMeta } from '../config/siteMeta';
+
+import '../styles/base.css';
 
 // Initialize Vercel Analytics
 inject();
 export interface Props {
-    title?: string;
-    description?: string;
-    image?: string;
-    canonical?: string;
+	title?: string;
+	description?: string;
+	image?: string;
+	canonical?: string;
 }
 
 const {
-    title = siteMeta.defaultTitle,
-    description = siteMeta.defaultDescription,
-    image = siteMeta.logoUrl,
-    canonical = siteMeta.siteUrl,
+	title = siteMeta.defaultTitle,
+	description = siteMeta.defaultDescription,
+	image = siteMeta.logoUrl,
+	canonical = siteMeta.siteUrl,
 } = Astro.props;
 
 // Structured Data - JSON-LD
 const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: siteMeta.brandShort,
-    alternateName: siteMeta.alternateNames,
-    jobTitle: "Senior Full Stack Developer",
-    description: siteMeta.defaultDescription,
-    url: siteMeta.siteUrl,
-    image: siteMeta.logoUrl,
-    sameAs: [
-        "https://github.com/imran-vz",
-        "https://www.linkedin.com/in/m0hammedimran/",
-    ],
-    knowsAbout: [
-        "React",
-        "TypeScript",
-        "GoLang",
-        "JavaScript",
-        "Web Development",
-        "Full Stack Development",
-    ],
-    address: {
-        "@type": "PostalAddress",
-        addressLocality: siteMeta.location.locality,
-        addressRegion: siteMeta.location.region,
-        addressCountry: siteMeta.location.country,
-    },
-    worksFor: {
-        "@type": "Organization",
-        name: siteMeta.employer,
-    },
-    email: "mohammedimran86992@gmail.com",
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: siteMeta.brandShort,
+	alternateName: siteMeta.alternateNames,
+	jobTitle: 'Senior Full Stack Developer',
+	description: siteMeta.defaultDescription,
+	url: siteMeta.siteUrl,
+	image: siteMeta.logoUrl,
+	sameAs: ['https://github.com/imran-vz', 'https://www.linkedin.com/in/m0hammedimran/'],
+	knowsAbout: ['React', 'TypeScript', 'GoLang', 'JavaScript', 'Web Development', 'Full Stack Development'],
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: siteMeta.location.locality,
+		addressRegion: siteMeta.location.region,
+		addressCountry: siteMeta.location.country,
+	},
+	worksFor: {
+		'@type': 'Organization',
+		name: siteMeta.employer,
+	},
+	email: 'mohammedimran86992@gmail.com',
 };
 
 const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: siteMeta.brandShort,
-    url: siteMeta.siteUrl,
-    description: siteMeta.defaultDescription,
-    author: {
-        "@type": "Person",
-        name: siteMeta.brandLong,
-    },
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: siteMeta.brandShort,
+	url: siteMeta.siteUrl,
+	description: siteMeta.defaultDescription,
+	author: {
+		'@type': 'Person',
+		name: siteMeta.brandLong,
+	},
 };
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta
@@ -140,11 +132,71 @@ const websiteSchema = {
 
         <meta name="theme-color" content="#FAF8F5" />
         <script is:inline src="/toggle-theme.js"></script>
+        <script>
+            // Spotlight Effect for Cards
+            const cards = document.querySelectorAll('.spotlight-card');
+        
+            document.addEventListener('mousemove', (e) => {
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+        
+                    (card as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
+                    (card as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+        </script>
+        <style is:global>
+            .spotlight-card {
+                position: relative;
+                overflow: hidden;
+            }
+        
+            /* The glowing border effect */
+            .spotlight-card::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(
+                    600px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(var(--color-accent), 0.06),
+                    transparent 40%
+                );
+                opacity: 0;
+                transition: opacity 0.5s;
+                z-index: 0;
+                pointer-events: none;
+            }
+        
+            /* The border highlight */
+            .spotlight-card::after {
+                content: "";
+                position: absolute;
+                inset: -1px;
+                background: radial-gradient(
+                    300px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(var(--color-accent), 0.25),
+                    transparent 40%
+                );
+                opacity: 0;
+                z-index: -1;
+                transition: opacity 0.5s;
+                border-radius: inherit;
+            }
+        
+            .spotlight-card:hover::before,
+            .spotlight-card:hover::after {
+                opacity: 1;
+            }
+        </style>
+
     </head>
 
     <body
         class="flex min-h-svh flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-white"
     >
+        <BackgroundElements />
         <Navbar />
         <slot />
         <Footer />

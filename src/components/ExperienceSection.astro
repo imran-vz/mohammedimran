@@ -1,0 +1,64 @@
+---
+const EXPERIENCE = [
+	{
+		company: 'Thoughtseed',
+		role: 'Full Stack Developer',
+		period: 'Present',
+		description:
+			'Building scalable applications with React, Svelte, Node.js, and Rust. Focused on performance optimization and implementing clean architecture patterns for long-term maintainability.',
+		technologies: ['React', 'Node.js', 'Go', 'TypeScript', 'Cloud Architecture'],
+	},
+	{
+		company: 'Freelance / Open Source',
+		role: 'Senior Developer',
+		period: '2019 - Present',
+		description:
+			'Architecting custom web solutions for diverse clients and contributing to the open source ecosystem. Specializing in high-performance web applications and distributed systems.',
+		technologies: ['Go', 'React', 'Svelte', 'Cloud Architecture', 'System Design'],
+	},
+];
+---
+
+<section id="experience" class="spotlight-card bg-skin-card/30 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-skin-accent/10">
+    <h2 class="text-xl font-semibold text-skin-base mb-8 flex items-center gap-2">
+        <svg class="w-5 h-5 text-skin-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+        Experience
+    </h2>
+
+    <div class="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-linear-to-b before:from-transparent before:via-skin-accent/20 before:to-transparent">
+        {EXPERIENCE.map((job) => (
+            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                <!-- Icon -->
+                <div class="flex items-center justify-center w-10 h-10 rounded-full border border-skin-accent/20 bg-skin-card shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 relative z-10">
+                    <div class="w-2.5 h-2.5 rounded-full bg-skin-accent/60"></div>
+                </div>
+                
+                <!-- Content Card -->
+                <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 sm:p-6 bg-skin-card/50 rounded-xl border border-skin-accent/10 hover:border-skin-accent/30 transition-colors duration-300">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                        <h3 class="font-bold text-skin-base">{job.company}</h3>
+                        <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-skin-accent/5 text-skin-accent w-fit">{job.period}</span>
+                    </div>
+                    <div class="text-sm font-medium text-skin-base/80 mb-2">{job.role}</div>
+                    <p class="text-sm text-skin-base/60 leading-relaxed mb-4">{job.description}</p>
+                    <div class="flex flex-wrap gap-2">
+                        {job.technologies.map((tech) => (
+                            <span class="text-xs px-2 py-1 rounded bg-skin-fill/50 border border-skin-accent/10 text-skin-base/70">
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        ))}
+    </div>
+    
+    <div class="mt-8 text-center">
+        <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" class="inline-flex items-center gap-2 text-sm text-skin-accent hover:underline decoration-skin-accent/30 underline-offset-4">
+            View Full History on LinkedIn
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+        </a>
+    </div>
+</section>

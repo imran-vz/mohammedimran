@@ -13,7 +13,7 @@
 	--color-skin-accent-tertiary: rgba(var(--color-accent-tertiary));
 	--color-skin-card: rgba(var(--color-card));
 	--color-skin-card-muted: rgba(var(--color-card-muted));
-	--color-skin-border: rgba(var(--color-border));
+	--color-skin-border: rgba(var(--color-border), var(--alpha-border));
 	--color-skin-base: rgba(var(--color-text-base));
 }
 
@@ -47,25 +47,27 @@ html[data-theme="dark"] #sun-svg {
 
 @layer base {
 	html[data-theme="light"] {
-		--color-fill: 255, 253, 250, 1; /* Warm off-white */
-		--color-text-base: 89, 0, 4, 1; /* Deep Burgundy #590004 */
-		--color-accent: 165, 1, 4, 1; /* Crimson Red #A50104 */
-		--color-accent-secondary: 252, 186, 4, 1; /* Golden Yellow #FCBA04 */
-		--color-accent-tertiary: 89, 0, 4, 1; /* Deep Burgundy #590004 */
-		--color-card: 255, 250, 245, 1;
-		--color-card-muted: 254, 245, 235, 1;
-		--color-border: 252, 186, 4, 0.3;
+		--color-fill: 255, 253, 250; /* Warm off-white */
+		--color-text-base: 89, 0, 4; /* Deep Burgundy #590004 */
+		--color-accent: 165, 1, 4; /* Crimson Red #A50104 */
+		--color-accent-secondary: 252, 186, 4; /* Golden Yellow #FCBA04 */
+		--color-accent-tertiary: 89, 0, 4; /* Deep Burgundy #590004 */
+		--color-card: 255, 250, 245;
+		--color-card-muted: 254, 245, 235;
+		--color-border: 252, 186, 4;
+		--alpha-border: 0.3;
 	}
 
 	html[data-theme="dark"] {
-		--color-fill: 250, 248, 245, 1; /* Light cream background */
-		--color-text-base: 89, 0, 4, 1; /* Deep Burgundy #590004 */
-		--color-accent: 165, 1, 4, 1; /* Crimson Red #A50104 */
-		--color-accent-secondary: 252, 186, 4, 1; /* Golden Yellow #FCBA04 */
-		--color-accent-tertiary: 89, 0, 4, 1; /* Deep Burgundy #590004 */
-		--color-card: 255, 253, 250, 1;
-		--color-card-muted: 254, 248, 240, 1;
-		--color-border: 165, 1, 4, 0.2;
+		--color-fill: 10, 10, 12; /* Very dark background */
+		--color-text-base: 226, 232, 240; /* Light gray text */
+		--color-accent: 248, 113, 113; /* Soft Red (Red-400) for better contrast */
+		--color-accent-secondary: 250, 204, 21; /* Yellow-400 */
+		--color-accent-tertiary: 226, 232, 240; /* Match text */
+		--color-card: 23, 23, 23; /* Dark card */
+		--color-card-muted: 38, 38, 38; /* Muted dark card */
+		--color-border: 248, 113, 113;
+		--alpha-border: 0.15;
 	}
 
 	div,
@@ -89,9 +91,11 @@ html[data-theme="dark"] #sun-svg {
 	}
 
 	body {
-		background-size: 20px 20px;
-		background-image: linear-gradient(to right, rgba(var(--color-accent), 0.07) 1px, transparent 1px),
-			linear-gradient(to bottom, rgba(var(--color-accent), 0.07) 1px, transparent 1px);
+		background-size: 40px 40px;
+		background-image:
+			radial-gradient(circle at 50% 0%, transparent 20%, rgba(var(--color-fill)) 90%),
+			linear-gradient(to right, rgba(var(--color-accent), 0.08) 1px, transparent 1px),
+			linear-gradient(to bottom, rgba(var(--color-accent), 0.08) 1px, transparent 1px);
 		background-position-y: -9px;
 	}
 }
