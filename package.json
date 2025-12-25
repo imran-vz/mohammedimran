@@ -8,15 +8,15 @@
 		"url": "https://github.com/imran-vz"
 	},
 	"engines": {
-		"node": "22.x",
-		"vscode": "^1.22.0"
+		"node": "24.x",
+		"bun": "1.3.4"
 	},
 	"repository": {
 		"url": "https://github.com/imran-vz/mohammedimran"
 	},
 	"private": true,
 	"homepage": "https://imran.codes",
-	"packageManager": "pnpm@10.22.0",
+	"packageManager": "bun@1.3.4",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
@@ -43,13 +43,5 @@
 	"devDependencies": {
 		"@biomejs/biome": "2.1.4",
 		"supports-color": "^10.2.2"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@biomejs/biome",
-			"@tailwindcss/oxide",
-			"esbuild",
-			"sharp"
-		]
 	}
 }
