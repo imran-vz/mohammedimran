@@ -7,7 +7,6 @@ export interface Props {
 }
 
 const { project, index = 0 } = Astro.props;
-console.log(project);
 const animationDelay = `${(index % 3) * 0.1 + 0.1}s`;
 ---
 
