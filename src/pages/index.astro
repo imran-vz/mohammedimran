@@ -2,20 +2,30 @@
 import AboutSection from '../components/AboutSection.astro';
 import ContactSection from '../components/ContactSection.astro';
 import ExperienceSection from '../components/ExperienceSection.astro';
+import FeaturedProjectCard from '../components/FeaturedProjectCard.astro';
 import LandingPageHero from '../components/LandingPageHero.astro';
 import MostUsedLanguage from '../components/MostUsedLanguage.astro';
 import StatsSection from '../components/StatsSection.astro';
 import Technologies from '../components/Technologies.astro';
 import Layout from '../layouts/Layout.astro';
 import type { TrimTopLanguagesResult } from '../types';
+import type { FeaturedProject } from '../utils/fetch-featured-projects';
 
 let data: TrimTopLanguagesResult | null = null;
+let featuredProjects: FeaturedProject[] = [];
 
 try {
 	const response = await fetch(new URL('/api/github-projects', Astro.url));
 	data = await response.json();
 } catch (error) {
 	console.log('⚓️ | error:', error);
+}
+
+try {
+	const response = await fetch(new URL('/api/featured-projects', Astro.url));
+	featuredProjects = await response.json();
+} catch (error) {
+	console.log('Error fetching featured projects:', error);
 }
 ---
 
@@ -40,6 +50,44 @@ try {
 
                 <!-- Experience Section -->
                 <ExperienceSection />
+
+                <!-- Featured Projects Section -->
+                {
+                    featuredProjects.length > 0 && (
+                        <section class="space-y-6">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-2xl font-bold text-skin-base">
+                                    Featured Projects
+                                </h2>
+                                <a
+                                    href="/projects"
+                                    class="text-sm font-medium text-skin-accent hover:text-skin-accent/80 transition-colors flex items-center gap-1"
+                                >
+                                    View all
+                                    <svg
+                                        class="h-4 w-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
+
+                            <div class="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
+                                {featuredProjects.map((project, index) => (
+                                    <FeaturedProjectCard project={project} index={index} />
+                                ))}
+                            </div>
+                        </section>
+                    )
+                }
 
                 <!-- Languages & Skills Section -->
                 <section id="technologies" class="space-y-8">

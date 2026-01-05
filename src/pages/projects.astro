@@ -1,9 +1,16 @@
 ---
-import ProjectCard from '../components/ProjectCard.astro';
+import FeaturedProjectCard from '../components/FeaturedProjectCard.astro';
 import Layout from '../layouts/Layout.astro';
-import { getTopProjects } from '../utils/fetch-github-repos';
+import type { FeaturedProject } from '../utils/fetch-featured-projects';
 
-const projects = await getTopProjects();
+let projects: FeaturedProject[] = [];
+
+try {
+	const response = await fetch(new URL('/api/featured-projects', Astro.url));
+	projects = await response.json();
+} catch (error) {
+	console.log('Error fetching featured projects:', error);
+}
 ---
 
 <Layout
@@ -18,11 +25,11 @@ const projects = await getTopProjects();
                 <h1
                     class="mb-4 bg-linear-to-r from-skin-accent via-skin-accent-secondary to-skin-accent-tertiary bg-clip-text text-4xl font-bold text-transparent sm:text-5xl lg:text-6xl"
                 >
-                    Projects
+                    Featured Projects
                 </h1>
                 <p class="mx-auto max-w-2xl text-lg text-skin-base/80">
-                    A showcase of my open source work and personal projects.
-                    Built with React, TypeScript, GoLang, and more.
+                    Hand-picked showcase of my best open-source work.
+                    Built with Go, TypeScript, and modern web technologies.
                 </p>
                 <a
                     href="https://github.com/imran-vz"
@@ -48,9 +55,9 @@ const projects = await getTopProjects();
             <!-- Projects Grid -->
             {
                 projects.length > 0 ? (
-                    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        {projects.map((project) => (
-                            <ProjectCard project={project} />
+                    <div class="grid gap-8 sm:grid-cols-1 lg:grid-cols-3">
+                        {projects.map((project, index) => (
+                            <FeaturedProjectCard project={project} index={index} />
                         ))}
                     </div>
                 ) : (

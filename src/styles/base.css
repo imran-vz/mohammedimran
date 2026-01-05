@@ -40,6 +40,7 @@ html[data-theme="dark"] #moon-svg {
 	display: none;
 }
 
+/* biome-ignore lint/style/noDescendingSpecificity: required for lib */
 #moon-svg,
 html[data-theme="dark"] #sun-svg {
 	display: block;
