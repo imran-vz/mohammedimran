@@ -1,121 +1,839 @@
 ---
-import AboutSection from '../components/AboutSection.astro';
-import ContactSection from '../components/ContactSection.astro';
-import ExperienceSection from '../components/ExperienceSection.astro';
-import FeaturedProjectCard from '../components/FeaturedProjectCard.astro';
-import LandingPageHero from '../components/LandingPageHero.astro';
-import MostUsedLanguage from '../components/MostUsedLanguage.astro';
-import StatsSection from '../components/StatsSection.astro';
-import Technologies from '../components/Technologies.astro';
-import Layout from '../layouts/Layout.astro';
-import type { TrimTopLanguagesResult } from '../types';
-import type { FeaturedProject } from '../utils/fetch-featured-projects';
+import { siteMeta } from '../config/siteMeta';
 
-let data: TrimTopLanguagesResult | null = null;
-let featuredProjects: FeaturedProject[] = [];
+// SEO Configuration
+const seo = {
+	title: 'Imran | Senior Full Stack Developer | React, TypeScript, Go',
+	description:
+		'Imran - Senior Full Stack Developer with 5+ years experience in React, TypeScript, Go, and Rust. Building data-intensive applications at Thoughtseed. Based in Bengaluru, available remotely.',
+	image: siteMeta.ogImage,
+	url: siteMeta.siteUrl,
+	keywords:
+		'Imran, Mohammed Imran, Mohammed Imran developer, Full Stack Developer, React Developer, TypeScript Expert, Go Developer, Rust Developer, Bengaluru Developer, Senior Developer India, imran-vz, Web Developer, Software Engineer',
+};
 
-try {
-	const response = await fetch(new URL('/api/github-projects', Astro.url));
-	data = await response.json();
-} catch (error) {
-	console.log('⚓️ | error:', error);
-}
+// Structured Data - Person Schema
+const personSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Imran',
+	alternateName: [
+		'Imran Developer',
+		'imran-vz',
+		'Mohammed Imran',
+		'Mohammed Imran Developer',
+		'developer Imran',
+		'developer Mohammed imran',
+		'Mohammed Imran Developer Bengaluru',
+		'bengaluru developer',
+		'bengaluru developer Mohammed Imran',
+		'bengaluru developer Mohammed',
+		'bengaluru developer Imran',
+	],
+	jobTitle: 'Senior Full Stack Developer',
+	description: seo.description,
+	url: siteMeta.siteUrl,
+	image: siteMeta.logoUrl,
+	email: 'mohammedimran86992@gmail.com',
+	sameAs: ['https://github.com/imran-vz', 'https://www.linkedin.com/in/m0hammedimran/'],
+	knowsAbout: [
+		'React',
+		'TypeScript',
+		'Go',
+		'Rust',
+		'Node.js',
+		'PostgreSQL',
+		'Next.js',
+		'Tauri',
+		'Full Stack Development',
+		'Web Development',
+	],
+	worksFor: {
+		'@type': 'Organization',
+		name: 'Thoughtseed',
+		url: 'https://www.thoughtseed.space/',
+	},
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Bengaluru',
+		addressRegion: 'Karnataka',
+		addressCountry: 'India',
+	},
+};
 
-try {
-	const response = await fetch(new URL('/api/featured-projects', Astro.url));
-	featuredProjects = await response.json();
-} catch (error) {
-	console.log('Error fetching featured projects:', error);
-}
+// Structured Data - Website Schema
+const websiteSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'Imran - Developer Portfolio',
+	url: siteMeta.siteUrl,
+	description: seo.description,
+	author: {
+		'@type': 'Person',
+		name: 'Imran',
+	},
+};
+
+// Structured Data - Professional Service Schema
+const professionalServiceSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'ProfessionalService',
+	name: 'Imran - Full Stack Development',
+	description: 'Full Stack Development services specializing in React, TypeScript, Go, and Rust',
+	url: siteMeta.siteUrl,
+	areaServed: 'Worldwide',
+	serviceType: ['Web Development', 'Full Stack Development', 'Software Engineering'],
+};
+
+const projects = [
+	{
+		name: 'SEER',
+		description: 'Tauri desktop app for media file management, metadata editing & re-encoding',
+		tech: ['Rust', 'TypeScript', 'React', 'FFmpeg'],
+		url: 'https://github.com/imran-vz/seer',
+		number: '01',
+	},
+	{
+		name: 'COCOACOMAA',
+		description: 'E-commerce platform for custom dessert ordering with payments & admin dashboard',
+		tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle'],
+		url: 'https://github.com/imran-vz/cocoacomaa',
+		number: '02',
+	},
+	{
+		name: 'GOSQLIT',
+		description: 'Terminal UI SQL client with encrypted credentials & multi-database support',
+		tech: ['Go', 'Bubble Tea', 'PostgreSQL'],
+		url: 'https://github.com/imran-vz/gosqlit',
+		number: '03',
+	},
+];
+
+const skills = ['REACT', 'TYPESCRIPT', 'GO', 'RUST', 'NODE.JS', 'POSTGRESQL', 'NEXT.JS', 'TAURI'];
 ---
 
-<Layout title="Mohammed Imran">
-    <div class="bg-grid min-h-screen">
-        <main
-            id="main-content"
-            class="scroll-mt-20 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
-        >
-            <!-- Hero Section -->
-            <LandingPageHero />
-
-            <!-- Main Content Grid -->
-            <div class="py-12 sm:py-16 space-y-12 sm:space-y-20">
-                <!-- About & Stats Section -->
-                <section
-                    class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start"
-                >
-                    <AboutSection />
-                    <StatsSection />
-                </section>
-
-                <!-- Experience Section -->
-                <ExperienceSection />
-
-                <!-- Featured Projects Section -->
-                {
-                    featuredProjects.length > 0 && (
-                        <section class="space-y-6">
-                            <div class="flex items-center justify-between">
-                                <h2 class="text-2xl font-bold text-skin-base">
-                                    Featured Projects
-                                </h2>
-                                <a
-                                    href="/projects"
-                                    class="text-sm font-medium text-skin-accent hover:text-skin-accent/80 transition-colors flex items-center gap-1"
-                                >
-                                    View all
-                                    <svg
-                                        class="h-4 w-4"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                        />
-                                    </svg>
-                                </a>
-                            </div>
-
-                            <div class="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
-                                {featuredProjects.map((project, index) => (
-                                    <FeaturedProjectCard project={project} index={index} />
-                                ))}
-                            </div>
-                        </section>
-                    )
-                }
-
-                <!-- Languages & Skills Section -->
-                <section id="technologies" class="space-y-8">
-                    <div
-                        class="spotlight-card bg-skin-card/30 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-skin-accent/10"
-                    >
-                        <h2 class="text-lg font-semibold text-skin-base mb-6">
-                            Languages
-                        </h2>
-                        <MostUsedLanguage
-                            totalLanguageSize={data?.totalLanguageSize || 0}
-                            languages={data?.languages || []}
-                        />
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5" />
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>{seo.title}</title>
+    <meta name="title" content={seo.title} />
+    <meta name="description" content={seo.description} />
+    <meta name="keywords" content={seo.keywords} />
+    <meta name="author" content="Imran" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href={seo.url} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={seo.url} />
+    <meta property="og:site_name" content="Imran" />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:image" content={seo.image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Imran - Full Stack Developer" />
+    <meta property="og:locale" content="en_IN" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@m0hammed_imran" />
+    <meta name="twitter:creator" content="@m0hammed_imran" />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.description} />
+    <meta name="twitter:image" content={seo.image} />
+    <meta name="twitter:image:alt" content="Imran - Full Stack Developer" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="application-name" content="Imran" />
+    <meta name="apple-mobile-web-app-title" content="Imran" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#ffff00" />
+    <meta name="color-scheme" content="light" />
+    
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="IN-KA" />
+    <meta name="geo.placename" content="Bengaluru" />
+    <meta name="geo.position" content="12.9716;77.5946" />
+    <meta name="ICBM" content="12.9716, 77.5946" />
+    
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(professionalServiceSchema)} />
+    
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    
+    <!-- Performance: Preconnect & DNS Prefetch -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://api.github.com" />
+    
+    <!-- Fonts with display swap for performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --yellow: #ffff00;
+            --red: #ff0000;
+            --blue: #0000ff;
+            --gray: #888888;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--white);
+            color: var(--black);
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        ::selection {
+            background: var(--yellow);
+            color: var(--black);
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        /* Brutal border style */
+        .border-brutal {
+            border: 4px solid var(--black);
+        }
+        
+        /* Header */
+        .header {
+            border-bottom: 4px solid var(--black);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logo {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--black);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 80vh;
+        }
+        
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .hero-left {
+            border-right: 4px solid var(--black);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--yellow);
+        }
+        
+        @media (max-width: 900px) {
+            .hero-left {
+                border-right: none;
+                border-bottom: 4px solid var(--black);
+            }
+        }
+        
+        .hero-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+        
+        .hero-title span {
+            display: block;
+        }
+        
+        .hero-right {
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .hero-description {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            max-width: 500px;
+        }
+        
+        .hero-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .meta-item {
+            border-top: 2px solid var(--black);
+            padding-top: 15px;
+        }
+        
+        .meta-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+        
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        
+        /* Marquee */
+        .marquee-container {
+            background: var(--black);
+            color: var(--white);
+            padding: 20px 0;
+            overflow: hidden;
+            border-bottom: 4px solid var(--black);
+        }
+        
+        .marquee {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+        
+        .marquee-content {
+            display: flex;
+            gap: 60px;
+            padding-right: 60px;
+            white-space: nowrap;
+        }
+        
+        .marquee-item {
+            font-family: 'Anton', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* Section */
+        .section {
+            border-bottom: 4px solid var(--black);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px;
+            border-bottom: 4px solid var(--black);
+            background: var(--white);
+        }
+        
+        .section-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .section-count {
+            font-family: 'Anton', sans-serif;
+            font-size: 5rem;
+            line-height: 1;
+            color: var(--gray);
+        }
+        
+        /* Projects */
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-item {
+            display: grid;
+            grid-template-columns: 100px 1fr 2fr auto;
+            gap: 40px;
+            padding: 40px;
+            border-bottom: 2px solid var(--black);
+            transition: all 0.3s;
+            align-items: center;
+        }
+        
+        @media (max-width: 900px) {
+            .project-item {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        .project-item:last-child {
+            border-bottom: none;
+        }
+        
+        .project-item:hover {
+            background: var(--yellow);
+        }
+        
+        .project-number {
+            font-family: 'Anton', sans-serif;
+            font-size: 4rem;
+            color: var(--gray);
+            transition: color 0.3s;
+        }
+        
+        .project-item:hover .project-number {
+            color: var(--black);
+        }
+        
+        .project-name {
+            font-family: 'Anton', sans-serif;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .project-description {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--gray);
+        }
+        
+        .project-item:hover .project-description {
+            color: var(--black);
+        }
+        
+        .project-arrow {
+            font-size: 2rem;
+            transition: transform 0.3s;
+        }
+        
+        .project-item:hover .project-arrow {
+            transform: translate(10px, -10px);
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-tag {
+            padding: 5px 12px;
+            border: 2px solid var(--black);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Skills */
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        @media (max-width: 900px) {
+            .skills-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .skills-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .skill-item {
+            padding: 40px;
+            border-right: 2px solid var(--black);
+            border-bottom: 2px solid var(--black);
+            text-align: center;
+            transition: all 0.3s;
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .skill-item:nth-child(4n) {
+            border-right: none;
+        }
+        
+        @media (max-width: 900px) {
+            .skill-item:nth-child(4n) {
+                border-right: 2px solid var(--black);
+            }
+            .skill-item:nth-child(2n) {
+                border-right: none;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .skill-item {
+                border-right: none;
+            }
+        }
+        
+        .skill-item:hover {
+            background: var(--black);
+            color: var(--yellow);
+        }
+        
+        /* Work Experience */
+        .work-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        @media (max-width: 700px) {
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .work-item {
+            padding: 60px 40px;
+            border-right: 2px solid var(--black);
+            transition: all 0.3s;
+        }
+        
+        @media (max-width: 700px) {
+            .work-item {
+                border-right: none;
+                border-bottom: 2px solid var(--black);
+            }
+            
+            .work-item:last-child {
+                border-bottom: none;
+            }
+        }
+        
+        .work-item:last-child {
+            border-right: none;
+        }
+        
+        .work-item:hover {
+            background: var(--red);
+            color: var(--white);
+        }
+        
+        .work-item:hover a {
+            color: var(--yellow);
+        }
+        
+        .work-company {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .work-role {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+        
+        .work-description {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .work-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 80px 40px;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+        }
+        
+        @media (max-width: 900px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        .footer-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+        
+        .footer-title span {
+            color: var(--yellow);
+        }
+        
+        .footer-section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .footer-link {
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: var(--yellow);
+        }
+        
+        /* Noise overlay */
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">IMRAN.CODES</div>
+        <nav class="nav-links">
+            <a href="https://github.com/imran-vz" target="_blank" class="nav-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" class="nav-link">LinkedIn</a>
+            <a href="mailto:mohammedimran86992@gmail.com" class="nav-link">Contact</a>
+        </nav>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-left">
+            <h1 class="hero-title">
+                <span>IMRAN</span>
+            </h1>
+        </div>
+        <div class="hero-right">
+            <div>
+                <p class="hero-description">
+                    Senior Full Stack Developer specializing in building data-intensive applications. I craft robust systems using modern technologies with a focus on performance and user experience.
+                </p>
+                <div class="hero-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Location</div>
+                        <div class="meta-value">Bengaluru, India</div>
                     </div>
-
-                    <div
-                        class="spotlight-card bg-skin-card/30 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-skin-accent/10"
-                    >
-                        <h2 class="text-lg font-semibold text-skin-base mb-6">
-                            Technologies
-                        </h2>
-                        <Technologies />
+                    <div class="meta-item">
+                        <div class="meta-label">Current Role</div>
+                        <div class="meta-value">@ Thoughtseed</div>
                     </div>
-                </section>
-
-                <!-- Contact Section -->
-                <ContactSection />
+                    <div class="meta-item">
+                        <div class="meta-label">Specialization</div>
+                        <div class="meta-value">Full Stack</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Status</div>
+                        <div class="meta-value">Available</div>
+                    </div>
+                </div>
             </div>
-        </main>
+        </div>
+    </section>
+    
+    <!-- Skills Marquee -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-content">
+                {[...skills, ...skills].map((skill) => (
+                    <span class="marquee-item">{skill}</span>
+                ))}
+            </div>
+            <div class="marquee-content">
+                {[...skills, ...skills].map((skill) => (
+                    <span class="marquee-item">{skill}</span>
+                ))}
+            </div>
+        </div>
     </div>
-</Layout>
+    
+    <!-- Projects -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Selected Work</h2>
+            <span class="section-count">03</span>
+        </div>
+        <div class="projects-list">
+            {projects.map((project) => (
+                <a href={project.url} target="_blank" class="project-item">
+                    <span class="project-number">{project.number}</span>
+                    <h3 class="project-name">{project.name}</h3>
+                    <div>
+                        <p class="project-description">{project.description}</p>
+                        <div class="project-tech">
+                            {project.tech.map((t) => (
+                                <span class="tech-tag">{t}</span>
+                            ))}
+                        </div>
+                    </div>
+                    <span class="project-arrow">↗</span>
+                </a>
+            ))}
+        </div>
+    </section>
+    
+    <!-- Skills Grid -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Technologies</h2>
+        </div>
+        <div class="skills-section">
+            {skills.map((skill) => (
+                <div class="skill-item">{skill}</div>
+            ))}
+        </div>
+    </section>
+    
+    <!-- Work Experience -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Experience</h2>
+        </div>
+        <div class="work-grid">
+            <div class="work-item">
+                <h3 class="work-company">Thoughtseed</h3>
+                <p class="work-role">Senior Full Stack Developer</p>
+                <p class="work-description">
+                    Building innovative web applications and data-intensive systems with cutting-edge technologies.
+                </p>
+                <a href="https://www.thoughtseed.space/" target="_blank" class="work-link">
+                    Visit Website →
+                </a>
+            </div>
+            <div class="work-item">
+                <h3 class="work-company">Freelance</h3>
+                <p class="work-role">Independent Contractor</p>
+                <p class="work-description">
+                    Developing custom software solutions for clients. Full-stack web applications and system architecture.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h2 class="footer-title">
+                    LET'S BUILD<br/>
+                    <span>SOMETHING</span><br/>
+                    TOGETHER
+                </h2>
+            </div>
+            <div>
+                <h3 class="footer-section-title">Connect</h3>
+                <div class="footer-links">
+                    <a href="https://github.com/imran-vz" target="_blank" class="footer-link">GitHub</a>
+                    <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" class="footer-link">LinkedIn</a>
+                    <a href="mailto:mohammedimran86992@gmail.com" class="footer-link">Email</a>
+                </div>
+            </div>
+            <div>
+                <h3 class="footer-section-title">Location</h3>
+                <div class="footer-links">
+                    <span class="footer-link">Bengaluru</span>
+                    <span class="footer-link">India</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

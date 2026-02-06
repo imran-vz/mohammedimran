@@ -3,9 +3,10 @@ export const siteMeta = {
 	brandLong: 'Imran',
 	siteUrl: 'https://imran.codes',
 	logoUrl: 'https://imran.codes/icons/android-chrome-512x512.png',
-	defaultTitle: 'Imran | Senior Full Stack Developer | React, TypeScript, GoLang | Bengaluru',
+	ogImage: 'https://imran.codes/og-image.svg',
+	defaultTitle: 'Imran | Senior Full Stack Developer | React, TypeScript, Go',
 	defaultDescription:
-		'Imran (Mohammed Imran) - 5+ years experience in React, TypeScript, and GoLang. Senior Full Stack Developer based in Bengaluru, available remotely. Open source contributor and tech enthusiast.',
+		'Imran - Senior Full Stack Developer with 5+ years experience in React, TypeScript, Go, and Rust. Building data-intensive applications at Thoughtseed. Based in Bengaluru, available remotely.',
 	social: {
 		twitter: '@m0hammed_imran',
 		github: 'https://github.com/imran-vz',
@@ -16,7 +17,7 @@ export const siteMeta = {
 		region: 'Karnataka',
 		country: 'India',
 	},
-	alternateNames: ['Mohammed Imran', 'Mohammed Imran Developer', 'Imran Developer', 'Imran Go Developer'],
+	alternateNames: ['Imran', 'Imran Developer', 'Imran Go Developer', 'imran-vz'],
 	employer: 'Thoughtseed',
 };
 

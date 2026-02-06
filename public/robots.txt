@@ -1,3 +1,40 @@
+# Robots.txt for imran.codes
+# https://imran.codes
+
+# Allow all search engine crawlers
 User-agent: *
 Allow: /
+
+# Disallow internal/build directories
 Disallow: /_astro/
+Disallow: /api/
+
+# Crawl-delay for politeness (optional, most major crawlers ignore this)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://imran.codes/sitemap-index.xml
+
+# Google-specific directives
+User-agent: Googlebot
+Allow: /
+Disallow: /_astro/
+Disallow: /api/
+
+# Bing-specific directives
+User-agent: Bingbot
+Allow: /
+Disallow: /_astro/
+Disallow: /api/
+
+# Block AI training crawlers (optional - uncomment if desired)
+# User-agent: GPTBot
+# Disallow: /
+# User-agent: ChatGPT-User
+# Disallow: /
+# User-agent: CCBot
+# Disallow: /
+# User-agent: anthropic-ai
+# Disallow: /
+# User-agent: Google-Extended
+# Disallow: /

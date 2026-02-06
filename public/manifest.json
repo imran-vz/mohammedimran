@@ -1,7 +1,8 @@
 {
 	"$schema": "https://json.schemastore.org/web-manifest-combined.json",
-	"name": "Imran",
+	"name": "Imran - Full Stack Developer",
 	"short_name": "Imran",
+	"description": "Senior Full Stack Developer specializing in React, TypeScript, Go, and Rust. Building data-intensive applications with modern technologies.",
 	"icons": [
 		{
 			"src": "/icons/android-chrome-192x192.png",
@@ -20,9 +21,14 @@
 			"type": "image/png"
 		}
 	],
-	"theme_color": "#242424",
-	"background_color": "#242424",
+	"theme_color": "#ffff00",
+	"background_color": "#ffffff",
 	"start_url": "/",
+	"scope": "/",
 	"display": "standalone",
-	"orientation": "portrait"
+	"orientation": "portrait-primary",
+	"lang": "en",
+	"dir": "ltr",
+	"categories": ["portfolio", "developer", "technology", "software"],
+	"prefer_related_applications": false
 }

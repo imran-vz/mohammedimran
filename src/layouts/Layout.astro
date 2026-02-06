@@ -19,7 +19,7 @@ export interface Props {
 const {
 	title = siteMeta.defaultTitle,
 	description = siteMeta.defaultDescription,
-	image = siteMeta.logoUrl,
+	image = siteMeta.ogImage || siteMeta.logoUrl,
 	canonical = siteMeta.siteUrl,
 } = Astro.props;
 
@@ -84,7 +84,7 @@ const websiteSchema = {
         <meta name="description" content={description} />
         <meta
             name="keywords"
-            content="Mohammed Imran, Imran, Mohammed Imran developer, React developer, TypeScript expert, GoLang developer, Full Stack Developer Bengaluru, imran-vz, Senior Developer India, React Bengaluru, Remote Developer"
+            content="Imran, Imran developer, React developer, TypeScript expert, GoLang developer, Full Stack Developer Bengaluru, imran-vz, Senior Developer India, React Bengaluru, Remote Developer"
         />
         <meta name="author" content={siteMeta.brandLong} />
         <meta name="application-name" content={siteMeta.brandShort} />
@@ -109,6 +109,7 @@ const websiteSchema = {
         <meta property="og:image" content={image} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Imran - Full Stack Developer" />
         <meta property="og:locale" content="en_IN" />
 
         <!-- Structured Data -->
