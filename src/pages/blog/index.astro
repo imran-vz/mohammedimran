@@ -445,6 +445,49 @@ const blogListingSchema = {
             opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
+
+        /* ── Mobile ─────────────────────────────────────────── */
+        @media (max-width: 600px) {
+            .header { padding: 16px; }
+            .nav-links { gap: 16px; }
+
+            .hero-left { padding: 32px 20px; }
+            .hero-right { padding: 28px 20px; }
+            .hero-description { font-size: 1rem; }
+
+            .section-header { padding: 16px 20px; }
+            .section-title { font-size: 1.75rem; }
+            .section-count { font-size: 2.5rem; }
+
+            /* Re-layout post items as number + title on one row, body below */
+            .post-item {
+                grid-template-columns: auto 1fr;
+                grid-template-areas:
+                    "num  title"
+                    "body body";
+                gap: 10px 12px;
+                padding: 20px;
+            }
+            .post-number {
+                grid-area: num;
+                font-size: 1.75rem;
+                align-self: center;
+            }
+            .post-title {
+                grid-area: title;
+                font-size: 1.1rem;
+                padding-top: 0;
+                align-self: center;
+            }
+            .post-body {
+                grid-area: body;
+                padding-top: 0;
+            }
+            .post-arrow { display: none; }
+
+            .footer { padding: 40px 20px; }
+            .footer-title { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
