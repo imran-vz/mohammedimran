@@ -1,4 +1,5 @@
 ---
+import imranWebp from '../assets/imran.webp';
 import { siteMeta } from '../config/siteMeta';
 
 // SEO Configuration
@@ -78,6 +79,7 @@ const websiteSchema = {
 const professionalServiceSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'ProfessionalService',
+	image: imranWebp.src,
 	name: 'Imran - Full Stack Development',
 	description: 'Full Stack Development services specializing in React, TypeScript, Go, and Rust',
 	url: siteMeta.siteUrl,
