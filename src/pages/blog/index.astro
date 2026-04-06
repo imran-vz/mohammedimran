@@ -1,0 +1,553 @@
+---
+import { getCollection } from 'astro:content';
+import { siteMeta } from '../../config/siteMeta';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const seo = {
+	title: 'Blog | Imran | Guides on React, TypeScript, Go & Full Stack Development',
+	description:
+		'Technical guides and tutorials on React, TypeScript, Go, Rust, and full-stack development by Imran — a Senior Full Stack Developer based in Bengaluru.',
+	url: `${siteMeta.siteUrl}/blog`,
+	image: siteMeta.ogImage,
+};
+
+const blogListingSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Blog',
+	name: 'Imran – Blog',
+	description: seo.description,
+	url: seo.url,
+	author: {
+		'@type': 'Person',
+		name: siteMeta.brandShort,
+		url: siteMeta.siteUrl,
+	},
+	blogPost: posts.map((post) => ({
+		'@type': 'BlogPosting',
+		headline: post.data.title,
+		description: post.data.description,
+		datePublished: post.data.pubDate.toISOString(),
+		url: `${siteMeta.siteUrl}/blog/${post.id}`,
+	})),
+};
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5" />
+
+    <title>{seo.title}</title>
+    <meta name="title" content={seo.title} />
+    <meta name="description" content={seo.description} />
+    <meta name="author" content="Imran" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href={seo.url} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={seo.url} />
+    <meta property="og:site_name" content="Imran" />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:image" content={seo.image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_IN" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@m0hammed_imran" />
+    <meta name="twitter:creator" content="@m0hammed_imran" />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.description} />
+    <meta name="twitter:image" content={seo.image} />
+
+    <meta name="theme-color" content="#ffff00" />
+    <meta name="color-scheme" content="light" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(blogListingSchema)} />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --yellow: #ffff00;
+            --red: #ff0000;
+            --gray: #888888;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--white);
+            color: var(--black);
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        ::selection {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 4px solid var(--black);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--black);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 4px solid var(--black);
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hero-left {
+            border-right: 4px solid var(--black);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--yellow);
+        }
+
+        @media (max-width: 900px) {
+            .hero-left {
+                border-right: none;
+                border-bottom: 4px solid var(--black);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(5rem, 18vw, 14rem);
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .hero-right {
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            max-width: 500px;
+        }
+
+        .hero-breadcrumb {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray);
+        }
+
+        .hero-breadcrumb a:hover {
+            color: var(--black);
+        }
+
+        /* Section */
+        .section {
+            border-bottom: 4px solid var(--black);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px;
+            border-bottom: 4px solid var(--black);
+        }
+
+        .section-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-count {
+            font-family: 'Anton', sans-serif;
+            font-size: 5rem;
+            line-height: 1;
+            color: var(--gray);
+        }
+
+        /* Post List */
+        .posts-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-item {
+            display: grid;
+            grid-template-columns: 100px 2fr 3fr auto;
+            gap: 40px;
+            padding: 40px;
+            border-bottom: 2px solid var(--black);
+            transition: background 0.3s;
+            align-items: start;
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+            .post-item {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+
+        .post-item:hover {
+            background: var(--yellow);
+        }
+
+        .post-number {
+            font-family: 'Anton', sans-serif;
+            font-size: 4rem;
+            color: var(--gray);
+            transition: color 0.3s;
+            line-height: 1;
+        }
+
+        .post-item:hover .post-number {
+            color: var(--black);
+        }
+
+        .post-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            line-height: 1.1;
+            padding-top: 8px;
+        }
+
+        .post-body {
+            padding-top: 8px;
+        }
+
+        .post-description {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--gray);
+            margin-bottom: 16px;
+        }
+
+        .post-item:hover .post-description {
+            color: var(--black);
+        }
+
+        .post-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .post-date {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--gray);
+        }
+
+        .post-item:hover .post-date {
+            color: var(--black);
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            padding: 4px 10px;
+            border: 2px solid var(--black);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .post-arrow {
+            font-size: 2rem;
+            transition: transform 0.3s;
+            padding-top: 8px;
+        }
+
+        .post-item:hover .post-arrow {
+            transform: translate(8px, -8px);
+        }
+
+        /* Empty state */
+        .empty-state {
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .empty-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .empty-text {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 80px 40px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        @media (max-width: 900px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        .footer-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .footer-title span {
+            color: var(--yellow);
+        }
+
+        .footer-section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-link {
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--yellow);
+        }
+
+        /* Noise overlay */
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="logo">IMRAN.CODES</a>
+        <nav class="nav-links">
+            <a href="https://github.com/imran-vz" target="_blank" class="nav-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" class="nav-link">LinkedIn</a>
+            <a href="mailto:mohammedimran86992@gmail.com" class="nav-link">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-left">
+            <h1 class="hero-title">BLOG</h1>
+        </div>
+        <div class="hero-right">
+            <p class="hero-breadcrumb">
+                <a href="/">Home</a> / Blog
+            </p>
+            <p class="hero-description">
+                Practical guides on building software with React, TypeScript, Go, and modern web technologies.
+            </p>
+        </div>
+    </section>
+
+    <!-- Posts -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Articles</h2>
+            <span class="section-count">{String(posts.length).padStart(2, '0')}</span>
+        </div>
+
+        {posts.length > 0 ? (
+            <div class="posts-list">
+                {posts.map((post, i) => (
+                    <a href={`/blog/${post.id}`} class="post-item">
+                        <span class="post-number">{String(i + 1).padStart(2, '0')}</span>
+                        <h2 class="post-title">{post.data.title}</h2>
+                        <div class="post-body">
+                            <p class="post-description">{post.data.description}</p>
+                            <div class="post-meta">
+                                <time
+                                    class="post-date"
+                                    datetime={post.data.pubDate.toISOString()}
+                                >
+                                    {post.data.pubDate.toLocaleDateString('en-US', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                    })}
+                                </time>
+                                {post.data.tags.length > 0 && (
+                                    <div class="post-tags">
+                                        {post.data.tags.slice(0, 3).map((tag) => (
+                                            <span class="tech-tag">{tag}</span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        <span class="post-arrow">↗</span>
+                    </a>
+                ))}
+            </div>
+        ) : (
+            <div class="empty-state">
+                <p class="empty-title">Coming Soon</p>
+                <p class="empty-text">No posts yet. Check back soon.</p>
+            </div>
+        )}
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h2 class="footer-title">
+                    LET'S BUILD<br/>
+                    <span>SOMETHING</span><br/>
+                    TOGETHER
+                </h2>
+            </div>
+            <div>
+                <h3 class="footer-section-title">Connect</h3>
+                <div class="footer-links">
+                    <a href="https://github.com/imran-vz" target="_blank" class="footer-link">GitHub</a>
+                    <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" class="footer-link">LinkedIn</a>
+                    <a href="mailto:mohammedimran86992@gmail.com" class="footer-link">Email</a>
+                </div>
+            </div>
+            <div>
+                <h3 class="footer-section-title">Location</h3>
+                <div class="footer-links">
+                    <span class="footer-link">Bengaluru</span>
+                    <span class="footer-link">India</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

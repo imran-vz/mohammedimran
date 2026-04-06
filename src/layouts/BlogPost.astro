@@ -1,0 +1,880 @@
+---
+import { siteMeta } from '../config/siteMeta';
+
+interface FAQ {
+	question: string;
+	answer: string;
+}
+
+export interface Props {
+	title: string;
+	description: string;
+	pubDate: Date;
+	updatedDate?: Date;
+	tags?: string[];
+	faq?: FAQ[];
+}
+
+const { title, description, pubDate, updatedDate, tags = [], faq = [] } = Astro.props;
+
+const canonicalUrl = `${siteMeta.siteUrl}${Astro.url.pathname}`;
+const formattedPubDate = pubDate.toISOString();
+const formattedUpdateDate = updatedDate?.toISOString();
+
+const articleSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'TechArticle',
+	headline: title,
+	description,
+	datePublished: formattedPubDate,
+	...(formattedUpdateDate && { dateModified: formattedUpdateDate }),
+	author: {
+		'@type': 'Person',
+		name: siteMeta.brandShort,
+		url: siteMeta.siteUrl,
+		jobTitle: 'Senior Full Stack Developer',
+	},
+	publisher: {
+		'@type': 'Person',
+		name: siteMeta.brandShort,
+		url: siteMeta.siteUrl,
+	},
+	mainEntityOfPage: {
+		'@type': 'WebPage',
+		'@id': canonicalUrl,
+	},
+	keywords: tags.join(', '),
+	url: canonicalUrl,
+};
+
+const isHowTo = title.toLowerCase().includes('how to');
+const howToSchema = isHowTo
+	? {
+			'@context': 'https://schema.org',
+			'@type': 'HowTo',
+			name: title,
+			description,
+			author: {
+				'@type': 'Person',
+				name: siteMeta.brandShort,
+			},
+		}
+	: null;
+
+const faqSchema =
+	faq.length > 0
+		? {
+				'@context': 'https://schema.org',
+				'@type': 'FAQPage',
+				mainEntity: faq.map((item) => ({
+					'@type': 'Question',
+					name: item.question,
+					acceptedAnswer: {
+						'@type': 'Answer',
+						text: item.answer,
+					},
+				})),
+			}
+		: null;
+
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{ '@type': 'ListItem', position: 1, name: 'Home', item: siteMeta.siteUrl },
+		{ '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteMeta.siteUrl}/blog` },
+		{ '@type': 'ListItem', position: 3, name: title, item: canonicalUrl },
+	],
+};
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5" />
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Imran" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Imran" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={siteMeta.ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="article:published_time" content={formattedPubDate} />
+    {formattedUpdateDate && <meta property="article:modified_time" content={formattedUpdateDate} />}
+    {tags.map((tag) => <meta property="article:tag" content={tag} />)}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@m0hammed_imran" />
+    <meta name="twitter:creator" content="@m0hammed_imran" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={siteMeta.ogImage} />
+
+    <meta name="theme-color" content="#ffff00" />
+    <meta name="color-scheme" content="light" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    {howToSchema && <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />}
+    {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+    <style is:global>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --yellow: #ffff00;
+            --red: #ff0000;
+            --gray: #888888;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--white);
+            color: var(--black);
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        ::selection {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 4px solid var(--black);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--black);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Article header banner */
+        .article-banner {
+            background: var(--yellow);
+            border-bottom: 4px solid var(--black);
+            padding: 60px 40px;
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--black);
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .tech-tag {
+            padding: 5px 12px;
+            border: 2px solid var(--black);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--white);
+        }
+
+        .article-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            max-width: 1000px;
+        }
+
+        .article-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin-bottom: 32px;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            border-top: 2px solid var(--black);
+            padding-top: 24px;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .meta-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray);
+        }
+
+        .meta-value {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* Article body */
+        .article-wrapper {
+            display: grid;
+            grid-template-columns: 1fr min(720px, 100%) 1fr;
+            border-bottom: 4px solid var(--black);
+        }
+
+        .article-content {
+            grid-column: 2;
+            padding: 60px 40px;
+            border-left: 4px solid var(--black);
+            border-right: 4px solid var(--black);
+        }
+
+        @media (max-width: 900px) {
+            .article-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .article-content {
+                border-left: none;
+                border-right: none;
+                padding: 40px 20px;
+            }
+        }
+
+        /* Prose styles */
+        .prose h2 {
+            font-family: 'Anton', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-top: 60px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 4px solid var(--black);
+        }
+
+        .prose h3 {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        .prose h4 {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+
+        .prose p {
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            color: #111;
+        }
+
+        .prose a {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 700;
+        }
+
+        .prose a:hover {
+            background: var(--yellow);
+        }
+
+        .prose strong {
+            font-weight: 700;
+        }
+
+        .prose em {
+            font-style: italic;
+        }
+
+        .prose code {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            background: var(--black);
+            color: var(--yellow);
+            padding: 2px 6px;
+        }
+
+        .prose pre {
+            background: var(--black);
+            color: var(--white);
+            padding: 20px 24px;
+            margin: 30px 0;
+            overflow-x: auto;
+            border-left: 6px solid var(--yellow);
+            font-size: 13px;
+            line-height: 1;
+            position: relative;
+        }
+
+        .prose pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+            counter-reset: line;
+        }
+
+        /* Line numbers for non-bash blocks */
+        .prose pre.show-line-numbers {
+            padding-left: 0;
+            border-left: none;
+            border-top: 6px solid var(--yellow);
+        }
+
+        .prose pre.show-line-numbers code .line {
+            counter-increment: line;
+            display: block;
+            padding: 0 24px 0 0;
+            min-height: 1em;
+        }
+
+        .prose pre.show-line-numbers code .line::before {
+            content: counter(line);
+            display: inline-block;
+            width: 3rem;
+            padding-right: 1rem;
+            margin-right: 1rem;
+            text-align: right;
+            color: #555;
+            border-right: 1px solid #333;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .prose blockquote {
+            border-left: 6px solid var(--black);
+            padding: 20px 30px;
+            margin: 30px 0;
+            background: #f5f5f5;
+            font-style: italic;
+        }
+
+        .prose blockquote p {
+            margin-bottom: 0;
+        }
+
+        .prose ul {
+            list-style: none;
+            margin: 20px 0;
+            padding: 0;
+        }
+
+        .prose ul li {
+            font-size: 15px;
+            line-height: 1.9;
+            padding-left: 24px;
+            position: relative;
+            margin-bottom: 8px;
+            color: #111;
+        }
+
+        .prose ul li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        .prose ol {
+            list-style: none;
+            counter-reset: prose-counter;
+            margin: 20px 0;
+            padding: 0;
+        }
+
+        .prose ol li {
+            counter-increment: prose-counter;
+            font-size: 15px;
+            line-height: 1.9;
+            padding-left: 36px;
+            position: relative;
+            margin-bottom: 8px;
+            color: #111;
+        }
+
+        .prose ol li::before {
+            content: counter(prose-counter, decimal-leading-zero);
+            position: absolute;
+            left: 0;
+            font-family: 'Anton', sans-serif;
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .prose hr {
+            border: none;
+            border-top: 4px solid var(--black);
+            margin: 50px 0;
+        }
+
+        .prose img {
+            max-width: 100%;
+            border: 4px solid var(--black);
+            display: block;
+            margin: 30px 0;
+        }
+
+        .prose table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 14px;
+        }
+
+        .prose th {
+            background: var(--black);
+            color: var(--white);
+            padding: 12px 16px;
+            text-align: left;
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .prose td {
+            padding: 12px 16px;
+            border-bottom: 2px solid var(--black);
+        }
+
+        .prose tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            border-top: 4px solid var(--black);
+            padding: 60px 40px;
+        }
+
+        .faq-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .faq-item {
+            border: 2px solid var(--black);
+            margin-bottom: 8px;
+        }
+
+        .faq-item summary {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 15px;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .faq-item summary:hover {
+            background: var(--yellow);
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-toggle {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+
+        .faq-item[open] .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 20px;
+            border-top: 2px solid var(--black);
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* Author box */
+        .author-section {
+            border-top: 4px solid var(--black);
+        }
+
+        .author-box {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 40px;
+            padding: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .author-box {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .author-box:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .author-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .author-box:hover .author-label {
+            color: var(--gray);
+        }
+
+        .author-name {
+            font-family: 'Anton', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .author-role {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+            margin-bottom: 12px;
+        }
+
+        .author-bio {
+            font-size: 14px;
+            line-height: 1.8;
+            opacity: 0.7;
+            max-width: 600px;
+        }
+
+        .author-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .author-link {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .author-box:hover .author-link {
+            color: var(--yellow);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 80px 40px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        @media (max-width: 900px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        .footer-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .footer-title span {
+            color: var(--yellow);
+        }
+
+        .footer-section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-link {
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--yellow);
+        }
+
+        /* Noise overlay */
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="logo">IMRAN.CODES</a>
+        <nav class="nav-links">
+            <a href="https://github.com/imran-vz" target="_blank" class="nav-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" class="nav-link">LinkedIn</a>
+            <a href="mailto:mohammedimran86992@gmail.com" class="nav-link">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Article Banner -->
+    <div class="article-banner">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="/blog">Blog</a>
+            <span>/</span>
+            <span>{title}</span>
+        </nav>
+
+        {tags.length > 0 && (
+            <div class="article-tags">
+                {tags.map((tag) => (
+                    <span class="tech-tag">{tag}</span>
+                ))}
+            </div>
+        )}
+
+        <h1 class="article-title">{title}</h1>
+        <p class="article-description">{description}</p>
+
+        <div class="article-meta">
+            <div class="meta-item">
+                <span class="meta-label">Author</span>
+                <span class="meta-value">{siteMeta.brandShort}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Published</span>
+                <time class="meta-value" datetime={formattedPubDate}>
+                    {pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+            </div>
+            {updatedDate && (
+                <div class="meta-item">
+                    <span class="meta-label">Updated</span>
+                    <time class="meta-value" datetime={formattedUpdateDate}>
+                        {updatedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </time>
+                </div>
+            )}
+        </div>
+    </div>
+
+    <!-- Article Content -->
+    <div class="article-wrapper">
+        <article class="article-content prose">
+            <slot />
+        </article>
+    </div>
+
+    <!-- FAQ -->
+    {faq.length > 0 && (
+        <section class="faq-section">
+            <h2 class="faq-title">FAQ</h2>
+            <div>
+                {faq.map((item) => (
+                    <details class="faq-item">
+                        <summary>
+                            {item.question}
+                            <span class="faq-toggle">+</span>
+                        </summary>
+                        <p class="faq-answer">{item.answer}</p>
+                    </details>
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Author -->
+    <section class="author-section">
+        <div class="author-box">
+            <div>
+                <p class="author-label">Written by</p>
+                <h3 class="author-name">{siteMeta.brandShort}</h3>
+                <p class="author-role">Senior Full Stack Developer</p>
+                <p class="author-bio">
+                    Building data-intensive applications with React, TypeScript, Go, and Rust.
+                    Based in Bengaluru, available worldwide.
+                </p>
+                <div class="author-links" style="margin-top: 16px;">
+                    <a href="https://github.com/imran-vz" target="_blank" rel="noopener noreferrer" class="author-link">
+                        GitHub ↗
+                    </a>
+                    <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" rel="noopener noreferrer" class="author-link">
+                        LinkedIn ↗
+                    </a>
+                </div>
+            </div>
+            <a href="/blog" class="nav-link" style="font-family: 'Anton', sans-serif; font-size: 1.25rem; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap;">
+                ← All Posts
+            </a>
+        </div>
+    </section>
+
+    <script>
+        const BASH_LANGS = new Set(['bash', 'sh', 'shell', 'zsh', 'fish', 'console', 'terminal', 'text', 'plaintext', '']);
+        document.querySelectorAll<HTMLElement>('.prose pre').forEach((pre) => {
+            const lang = (pre.getAttribute('data-language') ?? '').toLowerCase();
+            if (!BASH_LANGS.has(lang)) {
+                pre.classList.add('show-line-numbers');
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h2 class="footer-title">
+                    LET'S BUILD<br/>
+                    <span>SOMETHING</span><br/>
+                    TOGETHER
+                </h2>
+            </div>
+            <div>
+                <h3 class="footer-section-title">Connect</h3>
+                <div class="footer-links">
+                    <a href="https://github.com/imran-vz" target="_blank" class="footer-link">GitHub</a>
+                    <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" class="footer-link">LinkedIn</a>
+                    <a href="mailto:mohammedimran86992@gmail.com" class="footer-link">Email</a>
+                </div>
+            </div>
+            <div>
+                <h3 class="footer-section-title">Location</h3>
+                <div class="footer-links">
+                    <span class="footer-link">Bengaluru</span>
+                    <span class="footer-link">India</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
