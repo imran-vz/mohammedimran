@@ -223,6 +223,7 @@ const breadcrumbSchema = {
             background: var(--yellow);
             border-bottom: 4px solid var(--black);
             padding: 60px 40px;
+            overflow: hidden;
         }
 
         .breadcrumb {
@@ -232,8 +233,11 @@ const breadcrumbSchema = {
             color: var(--gray);
             margin-bottom: 40px;
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 8px;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .breadcrumb a:hover {
@@ -311,6 +315,8 @@ const breadcrumbSchema = {
             padding: 60px 40px;
             border-left: 4px solid var(--black);
             border-right: 4px solid var(--black);
+            min-width: 0; /* prevent grid blowout */
+            overflow: hidden;
         }
 
         @media (max-width: 900px) {
@@ -318,6 +324,7 @@ const breadcrumbSchema = {
                 grid-template-columns: 1fr;
             }
             .article-content {
+                grid-column: 1; /* reset — col 2 doesn't exist in a 1-col grid */
                 border-left: none;
                 border-right: none;
                 padding: 40px 20px;
