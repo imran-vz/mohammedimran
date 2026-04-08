@@ -1,5 +1,6 @@
 ---
 import imranWebp from '../assets/imran.webp';
+import { buildPersonSchema, buildWebsiteSchema } from '../config/schema';
 import { siteMeta } from '../config/siteMeta';
 
 // SEO Configuration
@@ -13,69 +14,9 @@ const seo = {
 		'Imran, Mohammed Imran, Mohammed Imran developer, Full Stack Developer, React Developer, TypeScript Expert, Go Developer, Rust Developer, Bengaluru Developer, Senior Developer India, imran-vz, Web Developer, Software Engineer',
 };
 
-// Structured Data - Person Schema
-const personSchema = {
-	'@context': 'https://schema.org',
-	'@type': 'Person',
-	name: 'Imran',
-	alternateName: [
-		'Imran Developer',
-		'imran-vz',
-		'Mohammed Imran',
-		'Mohammed Imran Developer',
-		'developer Imran',
-		'developer Mohammed imran',
-		'Mohammed Imran Developer Bengaluru',
-		'bengaluru developer',
-		'bengaluru developer Mohammed Imran',
-		'bengaluru developer Mohammed',
-		'bengaluru developer Imran',
-	],
-	jobTitle: 'Senior Full Stack Developer',
-	description: seo.description,
-	url: siteMeta.siteUrl,
-	image: siteMeta.logoUrl,
-	email: 'mohammedimran86992@gmail.com',
-	sameAs: ['https://github.com/imran-vz', 'https://www.linkedin.com/in/m0hammedimran/'],
-	knowsAbout: [
-		'React',
-		'TypeScript',
-		'Go',
-		'Rust',
-		'Node.js',
-		'PostgreSQL',
-		'Next.js',
-		'Tauri',
-		'Full Stack Development',
-		'Web Development',
-	],
-	worksFor: {
-		'@type': 'Organization',
-		name: 'Thoughtseed',
-		url: 'https://www.thoughtseed.space/',
-	},
-	address: {
-		'@type': 'PostalAddress',
-		addressLocality: 'Bengaluru',
-		addressRegion: 'Karnataka',
-		addressCountry: 'India',
-	},
-};
+const personSchema = buildPersonSchema({ description: seo.description });
+const websiteSchema = buildWebsiteSchema({ description: seo.description });
 
-// Structured Data - Website Schema
-const websiteSchema = {
-	'@context': 'https://schema.org',
-	'@type': 'WebSite',
-	name: 'Imran - Developer Portfolio',
-	url: siteMeta.siteUrl,
-	description: seo.description,
-	author: {
-		'@type': 'Person',
-		name: 'Imran',
-	},
-};
-
-// Structured Data - Professional Service Schema
 const professionalServiceSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'ProfessionalService',

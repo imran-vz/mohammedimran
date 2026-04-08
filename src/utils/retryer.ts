@@ -1,4 +1,5 @@
 import { AxiosError, type AxiosResponse } from 'axios';
+import { env } from '../config/env';
 import type { Data, Errors } from '../types';
 import CustomError from './CustomError';
 import type TypeFetcher from './fetcher';
@@ -12,8 +13,7 @@ export async function retryer(fetcher: typeof TypeFetcher, variables: { login: s
 		throw new CustomError('Downtime due to GitHub API rate limiting', CustomError.MAX_RETRY);
 	}
 	try {
-		// try to fetch with the first token since RETRIES is 0 index i'm adding +1
-		const response = await fetcher(variables, import.meta.env.GITHUB_API_TOKEN as string);
+		const response = await fetcher(variables, env.githubToken);
 
 		const isRateExceeded =
 			isErrorResponse(response?.data) && response.data.errors && response.data.errors[0].type === 'RATE_LIMITED';

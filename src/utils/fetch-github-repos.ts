@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { env } from '../config/env';
 
 export interface GitHubRepo {
 	fork: boolean;
@@ -30,7 +31,6 @@ export interface ProcessedRepo {
 	category?: 'personal' | 'oss';
 }
 
-const GITHUB_USERNAME = 'imran-vz';
 const GITHUB_API = 'https://api.github.com';
 
 /**
@@ -38,7 +38,7 @@ const GITHUB_API = 'https://api.github.com';
  */
 export async function fetchGitHubRepos(): Promise<GitHubRepo[]> {
 	try {
-		const response = await axios.get(`${GITHUB_API}/users/${GITHUB_USERNAME}/repos`, {
+		const response = await axios.get(`${GITHUB_API}/users/${env.githubUsername}/repos`, {
 			params: {
 				sort: 'updated',
 				per_page: 100,
@@ -62,7 +62,7 @@ export async function fetchGitHubRepos(): Promise<GitHubRepo[]> {
 export async function fetchPinnedRepos(): Promise<string[]> {
 	const query = `
     query {
-      user(login: "${GITHUB_USERNAME}") {
+      user(login: "${env.githubUsername}") {
         pinnedItems(first: 6, types: REPOSITORY) {
           nodes {
             ... on Repository {
@@ -80,7 +80,7 @@ export async function fetchPinnedRepos(): Promise<string[]> {
 			{ query },
 			{
 				headers: {
-					Authorization: `Bearer ${import.meta.env.GITHUB_TOKEN || ''}`,
+					Authorization: `Bearer ${env.githubToken || ''}`,
 					'Content-Type': 'application/json',
 				},
 			},

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { env } from '../config/env';
 import type { Response } from '../types';
 
 const query = `query userInfo($login: String!) {
@@ -30,12 +31,13 @@ const query = `query userInfo($login: String!) {
     }
 }`;
 
-export default function fetcher(variables: { login: string }, token: string) {
+export default function fetcher(variables: { login: string }, token?: string) {
 	const payload = { query, variables };
+	const authToken = token || env.githubToken;
 	return axios<Response>({
 		url: 'https://api.github.com/graphql',
 		method: 'POST',
 		data: payload,
-		headers: { Authorization: `token ${token}` },
+		headers: { Authorization: `token ${authToken}` },
 	});
 }

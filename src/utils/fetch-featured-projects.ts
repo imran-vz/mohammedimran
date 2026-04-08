@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { env } from '../config/env';
 
 export interface FeaturedProject {
 	name: string;
@@ -16,30 +17,10 @@ export interface FeaturedProject {
 	primaryLanguage: string;
 }
 
-const GITHUB_USERNAME = 'imran-vz';
 const GITHUB_API = 'https://api.github.com';
 const FEATURED_REPOS = ['seer', 'cocoacomaa', 'gosqlit'];
 
-// GitHub Linguist color mapping
-const LANGUAGE_COLORS: Record<string, string> = {
-	TypeScript: '#3178C6',
-	JavaScript: '#F7DF1E',
-	Go: '#00ADD8',
-	Python: '#3776AB',
-	Rust: '#DEA584',
-	Java: '#007396',
-	C: '#555555',
-	'C++': '#f34b7d',
-	HTML: '#E34F26',
-	CSS: '#1572B6',
-	Shell: '#89e051',
-	Makefile: '#427819',
-	Dockerfile: '#384d54',
-	Vue: '#41B883',
-	Svelte: '#FF3E00',
-	React: '#61DAFB',
-	Unknown: '#858585',
-};
+import { LANGUAGE_COLORS } from '../config/language-colors';
 
 /**
  * Format relative time (e.g., "2 days ago", "3 weeks ago")
@@ -73,25 +54,17 @@ function getRelativeTime(dateString: string): string {
  */
 export async function fetchFeaturedProject(repoName: string): Promise<FeaturedProject | null> {
 	try {
-		// Fetch main repo data
-		const repoResponse = await axios.get(`${GITHUB_API}/repos/${GITHUB_USERNAME}/${repoName}`, {
-			headers: {
-				Accept: 'application/vnd.github.v3+json',
-				...(import.meta.env.GITHUB_TOKEN && {
-					Authorization: `Bearer ${import.meta.env.GITHUB_TOKEN}`,
-				}),
-			},
-		});
+		const apiHeaders = {
+			Accept: 'application/vnd.github.v3+json',
+			...(env.githubToken && {
+				Authorization: `Bearer ${env.githubToken}`,
+			}),
+		};
 
-		// Fetch languages data
-		const languagesResponse = await axios.get(`${GITHUB_API}/repos/${GITHUB_USERNAME}/${repoName}/languages`, {
-			headers: {
-				Accept: 'application/vnd.github.v3+json',
-				...(import.meta.env.GITHUB_TOKEN && {
-					Authorization: `Bearer ${import.meta.env.GITHUB_TOKEN}`,
-				}),
-			},
-		});
+		const [repoResponse, languagesResponse] = await Promise.all([
+			axios.get(`${GITHUB_API}/repos/${env.githubUsername}/${repoName}`, { headers: apiHeaders }),
+			axios.get(`${GITHUB_API}/repos/${env.githubUsername}/${repoName}/languages`, { headers: apiHeaders }),
+		]);
 
 		const repo = repoResponse.data;
 		const languagesData = languagesResponse.data;

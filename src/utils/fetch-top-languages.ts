@@ -23,7 +23,7 @@ export default async function fetchTopLanguages(
 		throw new Error('missing username');
 	}
 
-	const res = await fetcher({ login: username }, import.meta.env.GITHUB_API_TOKEN);
+	const res = await fetcher({ login: username });
 
 	if (isErrorResponse(res?.data)) {
 		if (!res)

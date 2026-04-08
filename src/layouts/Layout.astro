@@ -3,6 +3,7 @@ import { inject } from '@vercel/analytics';
 import BackgroundElements from '../components/BackgroundElements.astro';
 import Footer from '../components/Footer.astro';
 import Navbar from '../components/Navbar.astro';
+import { buildPersonSchema, buildWebsiteSchema } from '../config/schema';
 import { siteMeta } from '../config/siteMeta';
 
 import '../styles/base.css';
@@ -23,42 +24,8 @@ const {
 	canonical = siteMeta.siteUrl,
 } = Astro.props;
 
-// Structured Data - JSON-LD
-const structuredData = {
-	'@context': 'https://schema.org',
-	'@type': 'Person',
-	name: siteMeta.brandShort,
-	alternateName: siteMeta.alternateNames,
-	jobTitle: 'Senior Full Stack Developer',
-	description: siteMeta.defaultDescription,
-	url: siteMeta.siteUrl,
-	image: siteMeta.logoUrl,
-	sameAs: ['https://github.com/imran-vz', 'https://www.linkedin.com/in/m0hammedimran/'],
-	knowsAbout: ['React', 'TypeScript', 'GoLang', 'JavaScript', 'Web Development', 'Full Stack Development'],
-	address: {
-		'@type': 'PostalAddress',
-		addressLocality: siteMeta.location.locality,
-		addressRegion: siteMeta.location.region,
-		addressCountry: siteMeta.location.country,
-	},
-	worksFor: {
-		'@type': 'Organization',
-		name: siteMeta.employer,
-	},
-	email: 'mohammedimran86992@gmail.com',
-};
-
-const websiteSchema = {
-	'@context': 'https://schema.org',
-	'@type': 'WebSite',
-	name: siteMeta.brandShort,
-	url: siteMeta.siteUrl,
-	description: siteMeta.defaultDescription,
-	author: {
-		'@type': 'Person',
-		name: siteMeta.brandLong,
-	},
-};
+const structuredData = buildPersonSchema();
+const websiteSchema = buildWebsiteSchema();
 ---
 
 <!doctype html>
