@@ -260,7 +260,7 @@ const blogListingSchema = {
 
         .post-item {
             display: grid;
-            grid-template-columns: 100px 2fr 3fr auto;
+            grid-template-columns: 100px minmax(260px, 2.3fr) minmax(0, 2.7fr) auto;
             gap: 40px;
             padding: 40px;
             border-bottom: 2px solid var(--black);
@@ -296,12 +296,15 @@ const blogListingSchema = {
         }
 
         .post-title {
-            font-family: 'Anton', sans-serif;
-            font-size: 1.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            line-height: 1.1;
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: 0.01em;
+            line-height: 1.35;
             padding-top: 8px;
+            text-wrap: balance;
+            text-rendering: optimizeLegibility;
         }
 
         .post-body {
@@ -442,7 +445,7 @@ const blogListingSchema = {
             inset: 0;
             pointer-events: none;
             z-index: 9999;
-            opacity: 0.03;
+            opacity: 0.015;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
@@ -475,7 +478,8 @@ const blogListingSchema = {
             }
             .post-title {
                 grid-area: title;
-                font-size: 1.1rem;
+                font-size: 1rem;
+                line-height: 1.45;
                 padding-top: 0;
                 align-self: center;
             }
