@@ -1,40 +1,52 @@
 import { siteMeta } from './siteMeta';
 
+const personAlternateNames = [
+	...siteMeta.alternateNames,
+	'Mohammed Imran',
+	'Mohammed Imran Developer',
+	'developer Imran',
+	'developer Mohammed imran',
+	'Mohammed Imran Developer Bengaluru',
+	'bengaluru developer',
+	'bengaluru developer Mohammed Imran',
+	'bengaluru developer Mohammed',
+	'bengaluru developer Imran',
+];
+
+const personKnowsAbout = [
+	'React',
+	'TypeScript',
+	'Go',
+	'Rust',
+	'Node.js',
+	'PostgreSQL',
+	'Next.js',
+	'Tauri',
+	'Full Stack Development',
+	'Web Development',
+];
+
+function personDescription(overrides?: { description?: string }) {
+	return overrides?.description ?? siteMeta.defaultDescription;
+}
+
+function personImage(overrides?: { imageUrl?: string }) {
+	return overrides?.imageUrl ?? siteMeta.logoUrl;
+}
+
 export function buildPersonSchema(overrides?: { description?: string; imageUrl?: string }) {
 	return {
 		'@context': 'https://schema.org',
 		'@type': 'Person',
 		name: siteMeta.brandShort,
-		alternateName: [
-			...siteMeta.alternateNames,
-			'Mohammed Imran',
-			'Mohammed Imran Developer',
-			'developer Imran',
-			'developer Mohammed imran',
-			'Mohammed Imran Developer Bengaluru',
-			'bengaluru developer',
-			'bengaluru developer Mohammed Imran',
-			'bengaluru developer Mohammed',
-			'bengaluru developer Imran',
-		],
+		alternateName: personAlternateNames,
 		jobTitle: 'Senior Full Stack Developer',
-		description: overrides?.description ?? siteMeta.defaultDescription,
+		description: personDescription(overrides),
 		url: siteMeta.siteUrl,
-		image: overrides?.imageUrl ?? siteMeta.logoUrl,
+		image: personImage(overrides),
 		email: 'mohammedimran86992@gmail.com',
 		sameAs: [siteMeta.social.github, siteMeta.social.linkedin],
-		knowsAbout: [
-			'React',
-			'TypeScript',
-			'Go',
-			'Rust',
-			'Node.js',
-			'PostgreSQL',
-			'Next.js',
-			'Tauri',
-			'Full Stack Development',
-			'Web Development',
-		],
+		knowsAbout: personKnowsAbout,
 		worksFor: {
 			'@type': 'Organization',
 			name: siteMeta.employer,

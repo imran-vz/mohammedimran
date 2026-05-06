@@ -1,4 +1,4 @@
-import { env } from '../config/env';
+import { githubEnv } from '../config/github-env';
 import { githubAdapter } from '../lib/github';
 
 export interface FeaturedProject {
@@ -51,7 +51,7 @@ function getRelativeTime(dateString: string): string {
  */
 export async function fetchFeaturedProject(repoName: string): Promise<FeaturedProject | null> {
 	try {
-		const [repo] = await githubAdapter.fetchRepositoryDetails(env.githubUsername, [repoName]);
+		const [repo] = await githubAdapter.fetchRepositoryDetails(githubEnv.username, [repoName]);
 		if (!repo) return null;
 
 		return {
@@ -80,7 +80,7 @@ export async function fetchFeaturedProject(repoName: string): Promise<FeaturedPr
  */
 export async function getFeaturedProjects(): Promise<FeaturedProject[]> {
 	try {
-		const projects = await githubAdapter.fetchRepositoryDetails(env.githubUsername, FEATURED_REPOS);
+		const projects = await githubAdapter.fetchRepositoryDetails(githubEnv.username, FEATURED_REPOS);
 
 		return projects.map((project) => ({
 			...project,

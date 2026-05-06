@@ -1,6 +1,6 @@
-export const TRY_AGAIN_LATER = 'Please try again later';
+const TRY_AGAIN_LATER = 'Please try again later';
 
-export const SECONDARY_ERROR_MESSAGES = {
+const SECONDARY_ERROR_MESSAGES = {
 	MAX_RETRY: 'You can deploy own instance or wait until public will be no longer limited',
 	NO_TOKENS: 'Please add an env variable called PAT_1 with your GitHub API token in vercel',
 	USER_NOT_FOUND: 'Make sure the provided username is not an organization',
@@ -23,10 +23,7 @@ export default class CustomError extends Error {
 		this.secondaryMessage = SECONDARY_ERROR_MESSAGES[type as unknown as keyof typeof SECONDARY_ERROR_MESSAGES] || type;
 	}
 
-	static MAX_RETRY = 'MAX_RETRY' as const;
-	static NO_TOKENS = 'NO_TOKENS' as const;
 	static USER_NOT_FOUND = 'USER_NOT_FOUND' as const;
 	static GRAPHQL_ERROR = 'GRAPHQL_ERROR' as const;
 	static GITHUB_REST_API_ERROR = 'GITHUB_REST_API_ERROR' as const;
-	static WAKATIME_ERROR = 'WAKATIME_ERROR' as const;
 }

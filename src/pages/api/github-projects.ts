@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { env } from '../../config/env';
+import { githubEnv } from '../../config/github-env';
 import { CACHE_KEYS, cachedHashFetch, handleApiError } from '../../lib/cache';
 import type { TopLanguages, TrimTopLanguagesResult } from '../../types';
 import fetchTopLanguages from '../../utils/fetch-top-languages';
@@ -22,12 +22,12 @@ export const GET: APIRoute = async () => {
 	try {
 		const result = await cachedHashFetch<TrimTopLanguagesResult>(
 			CACHE_KEYS.githubProjectsParsed.key,
-			env.githubUsername,
+			githubEnv.username,
 			async () => {
 				const topLanguages = await cachedHashFetch<TopLanguages>(
 					CACHE_KEYS.githubProjects.key,
-					env.githubUsername,
-					() => fetchTopLanguages(env.githubUsername, EXCLUDED_REPOS),
+					githubEnv.username,
+					() => fetchTopLanguages(githubEnv.username, EXCLUDED_REPOS),
 					CACHE_KEYS.githubProjects.ttlSeconds,
 				);
 

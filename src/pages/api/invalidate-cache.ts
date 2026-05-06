@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { env } from '../../config/env';
+import { cacheEnv } from '../../config/cache-env';
 import { CACHE_KEYS, type CacheKeyName, getCacheKeyNames, kv } from '../../lib/cache';
 
 const headers = new Headers([['Content-Type', 'application/json']]);
@@ -8,53 +8,81 @@ function isCacheKeyName(keyName: string): keyName is CacheKeyName {
 	return keyName in CACHE_KEYS;
 }
 
+function jsonResponse(body: object, status: number): Response {
+	return new Response(JSON.stringify(body), { status, headers });
+}
+
+async function cacheInvalidationPayload(request: Request): Promise<{ secret: string | null; requestedKey: string | null }> {
+	const contentType = request.headers.get('content-type');
+	if (!contentType?.includes('application/json')) {
+		const url = new URL(request.url);
+		return {
+			secret: url.searchParams.get('secret'),
+			requestedKey: url.searchParams.get('key'),
+		};
+	}
+
+	const body = await request.json();
+	return {
+		secret: body.secret,
+		requestedKey: body.key ?? null,
+	};
+}
+
+function keyNamesFromRequest(requestedKey: string | null): string[] {
+	return requestedKey ? [requestedKey] : getCacheKeyNames();
+}
+
+function errorMessageFrom(error: unknown): string {
+	return error instanceof Error ? error.message : 'Unknown error';
+}
+
+function configurationErrorResponse(expectedSecret: string | undefined): Response | null {
+	return expectedSecret ? null : jsonResponse({ error: 'Cache invalidation not configured' }, 500);
+}
+
+function authorizationErrorResponse(secret: string | null, expectedSecret: string): Response | null {
+	return secret === expectedSecret ? null : jsonResponse({ error: 'Unauthorized' }, 401);
+}
+
+function invalidKeyResponse(keyNames: string[]): Response | null {
+	const invalidKeys = keyNames.filter((keyName) => !isCacheKeyName(keyName));
+	return invalidKeys.length > 0 ? jsonResponse({ error: 'Unknown cache key', keys: invalidKeys }, 400) : null;
+}
+
+async function deleteCacheKeys(keyNames: string[]): Promise<string[]> {
+	const validKeyNames = keyNames.filter(isCacheKeyName);
+	const deletedKeys = validKeyNames.map((keyName) => CACHE_KEYS[keyName].key);
+	await kv.del(...deletedKeys);
+	return deletedKeys;
+}
+
 async function invalidateCache(request: Request): Promise<Response> {
+	const expectedSecret = cacheEnv.invalidationSecret;
+	const configurationError = configurationErrorResponse(expectedSecret);
+	if (configurationError) return configurationError;
+
+	const { secret, requestedKey } = await cacheInvalidationPayload(request);
+	const authorizationError = authorizationErrorResponse(secret, expectedSecret);
+	if (authorizationError) return authorizationError;
+
+	const keyNames = keyNamesFromRequest(requestedKey);
+	const keyError = invalidKeyResponse(keyNames);
+	if (keyError) return keyError;
+
+	const deletedKeys = await deleteCacheKeys(keyNames);
+
+	return jsonResponse({ success: true, message: 'Cache invalidated successfully', keys: deletedKeys }, 200);
+}
+
+async function safeInvalidateCache(request: Request): Promise<Response> {
 	try {
-		const expectedSecret = env.cacheInvalidationSecret;
-		if (!expectedSecret) {
-			return new Response(JSON.stringify({ error: 'Cache invalidation not configured' }), { status: 500, headers });
-		}
-
-		// Extract secret from body or query params
-		let secret: string | null = null;
-		let requestedKey: string | null = null;
-		const contentType = request.headers.get('content-type');
-
-		if (contentType?.includes('application/json')) {
-			const body = await request.json();
-			secret = body.secret;
-			requestedKey = body.key ?? null;
-		} else {
-			const url = new URL(request.url);
-			secret = url.searchParams.get('secret');
-			requestedKey = url.searchParams.get('key');
-		}
-
-		if (!secret || secret !== expectedSecret) {
-			return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers });
-		}
-
-		const keyNames = requestedKey ? [requestedKey] : getCacheKeyNames();
-		const invalidKeys = keyNames.filter((keyName) => !isCacheKeyName(keyName));
-
-		if (invalidKeys.length > 0) {
-			return new Response(JSON.stringify({ error: 'Unknown cache key', keys: invalidKeys }), { status: 400, headers });
-		}
-
-		const validKeyNames = keyNames.filter(isCacheKeyName);
-		const deletedKeys = validKeyNames.map((keyName) => CACHE_KEYS[keyName].key);
-		await kv.del(...deletedKeys);
-
-		return new Response(
-			JSON.stringify({ success: true, message: 'Cache invalidated successfully', keys: deletedKeys }),
-			{ status: 200, headers },
-		);
+		return await invalidateCache(request);
 	} catch (error) {
 		console.error('Error invalidating cache:', error);
-		const message = error instanceof Error ? error.message : 'Unknown error';
-		return new Response(JSON.stringify({ error: 'Failed to invalidate cache', message }), { status: 500, headers });
+		return jsonResponse({ error: 'Failed to invalidate cache', message: errorMessageFrom(error) }, 500);
 	}
 }
 
-export const POST: APIRoute = async ({ request }) => invalidateCache(request);
-export const GET: APIRoute = async ({ request }) => invalidateCache(request);
+export const POST: APIRoute = async ({ request }) => safeInvalidateCache(request);
+export const GET: APIRoute = async ({ request }) => safeInvalidateCache(request);

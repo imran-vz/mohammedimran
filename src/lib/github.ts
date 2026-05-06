@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { env } from '../config/env';
+import { githubEnv } from '../config/github-env';
 import { LANGUAGE_COLORS } from '../config/language-colors';
 import type { Data, Errors, Response } from '../types';
 import CustomError from '../utils/CustomError';
@@ -78,7 +78,7 @@ interface GitHubRestRepositoryResponse {
 
 type GitHubRepositoryLanguagesResponse = Record<string, number>;
 
-function authorizationHeader(token = env.githubToken): Record<string, string> {
+function authorizationHeader(token = githubEnv.token): Record<string, string> {
 	return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
@@ -106,36 +106,66 @@ function truncateErrorMessage(message: string, maxLength = MAX_GRAPHQL_ERROR_MES
 	return `${message.slice(0, maxLength - 3)}...`;
 }
 
+function firstGraphQLError(errors: Errors) {
+	return errors[0];
+}
+
+function customErrorMessage(message: string | undefined, fallbackMessage: string): string {
+	return message || fallbackMessage;
+}
+
+function graphQLErrorType(type: string | undefined, statusText?: string): string {
+	const errorTypes: Record<string, string> = {
+		NOT_FOUND: CustomError.USER_NOT_FOUND,
+	};
+
+	return (type && errorTypes[type]) || statusText || CustomError.GRAPHQL_ERROR;
+}
+
+function graphQLErrorMessage(type: string | undefined, message: string | undefined): string {
+	const fallbackMessage =
+		type === 'NOT_FOUND'
+			? 'Could not fetch user.'
+			: 'Something went wrong while trying to retrieve the language data using the GraphQL API.';
+
+	return message ? truncateErrorMessage(message) : fallbackMessage;
+}
+
 function graphQLErrorFrom(errors: Errors, statusText?: string): CustomError {
-	const [error] = errors;
+	const error = firstGraphQLError(errors);
+	return new CustomError(graphQLErrorMessage(error?.type, error?.message), graphQLErrorType(error?.type, statusText));
+}
 
-	if (error?.type === 'NOT_FOUND') {
-		return new CustomError(error.message || 'Could not fetch user.', CustomError.USER_NOT_FOUND);
-	}
+function isObjectWithMessage(input: unknown): input is { message: unknown } {
+	return typeof input === 'object' && input != null && 'message' in input;
+}
 
-	if (error?.message) {
-		return new CustomError(truncateErrorMessage(error.message), statusText || CustomError.GRAPHQL_ERROR);
-	}
+function axiosErrorMessage(error: unknown): string {
+	if (!axios.isAxiosError(error)) return '';
 
+	const responseData = error.response?.data;
+	return isObjectWithMessage(responseData) ? String(responseData.message) : error.message;
+}
+
+function axiosErrorType(error: unknown): string | undefined {
+	return axios.isAxiosError(error) ? error.response?.statusText : undefined;
+}
+
+function mappedAxiosError(error: unknown, fallbackMessage: string, fallbackType: string): CustomError {
 	return new CustomError(
-		'Something went wrong while trying to retrieve the language data using the GraphQL API.',
-		CustomError.GRAPHQL_ERROR,
+		customErrorMessage(axiosErrorMessage(error), fallbackMessage),
+		customErrorMessage(axiosErrorType(error), fallbackType),
 	);
 }
 
+function mappedNativeError(error: Error, fallbackType: string): CustomError {
+	return new CustomError(error.message, fallbackType);
+}
+
 function mapGitHubError(error: unknown, fallbackMessage: string, fallbackType: string): CustomError {
-	if (axios.isAxiosError(error)) {
-		const responseData = error.response?.data;
-		const message =
-			typeof responseData === 'object' && responseData != null && 'message' in responseData
-				? String(responseData.message)
-				: error.message;
-
-		return new CustomError(message || fallbackMessage, error.response?.statusText || fallbackType);
-	}
-
 	if (error instanceof CustomError) return error;
-	if (error instanceof Error) return new CustomError(error.message, fallbackType);
+	if (axios.isAxiosError(error)) return mappedAxiosError(error, fallbackMessage, fallbackType);
+	if (error instanceof Error) return mappedNativeError(error, fallbackType);
 
 	return new CustomError(fallbackMessage, fallbackType);
 }

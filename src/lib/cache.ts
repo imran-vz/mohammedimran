@@ -1,10 +1,10 @@
 import { createClient } from '@vercel/kv';
-import { env } from '../config/env';
+import { cacheEnv } from '../config/cache-env';
 import CustomError from '../utils/CustomError';
 
 const kv = createClient({
-	url: env.kvRestApiUrl,
-	token: env.kvRestApiToken,
+	url: cacheEnv.kvRestApiUrl,
+	token: cacheEnv.kvRestApiToken,
 });
 
 export { kv };
