@@ -1,23 +1,17 @@
 ---
 import { inject } from '@vercel/analytics';
-import BackgroundElements from '../components/BackgroundElements.astro';
 import Footer from '../components/Footer.astro';
 import Navbar from '../components/Navbar.astro';
 import { buildPersonSchema, buildWebsiteSchema } from '../config/schema';
 import { siteMeta } from '../config/siteMeta';
 
-import '../styles/base.css';
-
-// Initialize Vercel Analytics
 inject();
+
 export interface Props {
 	title?: string;
 	description?: string;
 	image?: string;
 	canonical?: string;
-	variant?: 'default' | 'brutalist';
-	themeColor?: string;
-	colorScheme?: string;
 }
 
 const {
@@ -25,9 +19,6 @@ const {
 	description = siteMeta.defaultDescription,
 	image = siteMeta.ogImage || siteMeta.logoUrl,
 	canonical = siteMeta.siteUrl,
-	variant = 'default',
-	themeColor = '#FAF8F5',
-	colorScheme = 'dark light',
 } = Astro.props;
 
 const structuredData = buildPersonSchema();
@@ -43,7 +34,6 @@ const websiteSchema = buildWebsiteSchema();
             content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5"
         />
 
-        <!-- Performance: Preconnect to external domains -->
         <link rel="preconnect" href="https://api.github.com" />
         <link rel="dns-prefetch" href="https://api.github.com" />
 
@@ -52,7 +42,6 @@ const websiteSchema = buildWebsiteSchema();
         <meta name="generator" content={Astro.generator} />
         <link rel="manifest" href="/manifest.json" />
 
-        <!-- SEO Meta Tags -->
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta
@@ -65,9 +54,8 @@ const websiteSchema = buildWebsiteSchema();
         <link rel="author" href="https://www.linkedin.com/in/m0hammedimran" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
-        <meta name="color-scheme" content={colorScheme} />
+        <meta name="color-scheme" content="light" />
 
-        <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@m0hammed_imran" />
         <meta name="twitter:creator" content="@m0hammed_imran" />
@@ -75,7 +63,6 @@ const websiteSchema = buildWebsiteSchema();
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
 
-        <!-- Open Graph -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <meta property="og:site_name" content={siteMeta.brandShort} />
@@ -87,7 +74,6 @@ const websiteSchema = buildWebsiteSchema();
         <meta property="og:image:alt" content="Imran - Full Stack Developer" />
         <meta property="og:locale" content="en_IN" />
 
-        <!-- Structured Data -->
         <script
             type="application/ld+json"
             set:html={JSON.stringify(structuredData)}
@@ -99,89 +85,223 @@ const websiteSchema = buildWebsiteSchema();
 
         <link rel="sitemap" href="/sitemap-index.xml" />
 
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet" />
+
         <slot name="head" />
 
-        <style>
+        <meta name="theme-color" content="#ffff00" />
+
+        <style is:global>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            :root {
+                --black: #000000;
+                --white: #ffffff;
+                --yellow: #ffff00;
+                --red: #ff0000;
+                --blue: #0000ff;
+                --gray: #888888;
+            }
+
             html {
                 scroll-behavior: smooth;
-                font-display: swap;
             }
-        </style>
 
-        <meta name="theme-color" content={themeColor} />
-        {variant === 'default' && <script is:inline src="/toggle-theme.js"></script>}
-        <script>
-            // Spotlight Effect for Cards
-            const cards = document.querySelectorAll('.spotlight-card');
-        
-            document.addEventListener('mousemove', (e) => {
-                cards.forEach(card => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-        
-                    (card as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
-                    (card as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
-                });
-            });
-        </script>
-        <style is:global>
-            .spotlight-card {
+            body {
+                font-family: 'Space Mono', monospace;
+                background: var(--white);
+                color: var(--black);
+                min-height: 100vh;
+                overflow-x: hidden;
+                cursor: crosshair;
+            }
+
+            ::selection {
+                background: var(--yellow);
+                color: var(--black);
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .border-brutal {
+                border: 4px solid var(--black);
+            }
+
+            .header {
+                border-bottom: 4px solid var(--black);
+                padding: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .skip-link {
+                position: absolute;
+                top: -100%;
+                left: 16px;
+                z-index: 10000;
+                background: var(--yellow);
+                color: var(--black);
+                border: 2px solid var(--black);
+                padding: 8px 12px;
+            }
+
+            .skip-link:focus {
+                top: 16px;
+            }
+
+            .logo {
+                font-family: 'Anton', sans-serif;
+                font-size: 1.5rem;
+                letter-spacing: 0.1em;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 30px;
+            }
+
+            .nav-link {
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
                 position: relative;
-                overflow: hidden;
             }
-        
-            /* The glowing border effect */
-            .spotlight-card::before {
-                content: "";
+
+            .nav-link::after {
+                content: '';
                 position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--black);
+                transition: width 0.3s;
+            }
+
+            .nav-link:hover::after {
+                width: 100%;
+            }
+
+            .section {
+                border-bottom: 4px solid var(--black);
+            }
+
+            .section-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 30px 40px;
+                border-bottom: 4px solid var(--black);
+                background: var(--white);
+            }
+
+            .section-title {
+                font-family: 'Anton', sans-serif;
+                font-size: 3rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            .section-count {
+                font-family: 'Anton', sans-serif;
+                font-size: 5rem;
+                line-height: 1;
+                color: var(--gray);
+            }
+
+            .footer {
+                background: var(--black);
+                color: var(--white);
+                padding: 80px 40px;
+            }
+
+            .footer-content {
+                max-width: 1400px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 2fr 1fr 1fr;
+                gap: 60px;
+            }
+
+            @media (max-width: 900px) {
+                .footer-content {
+                    grid-template-columns: 1fr;
+                    gap: 40px;
+                }
+            }
+
+            .footer-title {
+                font-family: 'Anton', sans-serif;
+                font-size: 4rem;
+                text-transform: uppercase;
+                line-height: 1;
+            }
+
+            .footer-title span {
+                color: var(--yellow);
+            }
+
+            .footer-section-title {
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                color: var(--gray);
+                margin-bottom: 20px;
+            }
+
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .footer-link {
+                font-size: 1rem;
+                transition: color 0.3s;
+            }
+
+            .footer-link:hover {
+                color: var(--yellow);
+            }
+
+            .noise {
+                position: fixed;
                 inset: 0;
-                background: radial-gradient(
-                    600px circle at var(--mouse-x) var(--mouse-y),
-                    rgba(var(--color-accent), 0.06),
-                    transparent 40%
-                );
-                opacity: 0;
-                transition: opacity 0.5s;
-                z-index: 0;
                 pointer-events: none;
+                z-index: 9999;
+                opacity: 0.03;
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
             }
-        
-            /* The border highlight */
-            .spotlight-card::after {
-                content: "";
-                position: absolute;
-                inset: -1px;
-                background: radial-gradient(
-                    300px circle at var(--mouse-x) var(--mouse-y),
-                    rgba(var(--color-accent), 0.25),
-                    transparent 40%
-                );
-                opacity: 0;
-                z-index: -1;
-                transition: opacity 0.5s;
-                border-radius: inherit;
-            }
-        
-            .spotlight-card:hover::before,
-            .spotlight-card:hover::after {
-                opacity: 1;
+
+            @media (max-width: 600px) {
+                .header { padding: 16px; }
+                .nav-links { gap: 16px; }
+                .section-header { padding: 16px 20px; }
+                .section-title { font-size: 1.75rem; }
+                .section-count { font-size: 2.5rem; }
+                .footer { padding: 40px 20px; }
+                .footer-title { font-size: 2.5rem; }
             }
         </style>
-
     </head>
 
-    <body
-        class:list={[
-            'min-h-svh',
-            variant === 'default'
-                ? 'flex flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-white'
-                : 'brutalist-page',
-        ]}
-    >
-        {variant === 'default' && <BackgroundElements />}
-        <Navbar variant={variant} />
+    <body>
+        <div class="noise"></div>
+        <Navbar />
         <slot />
-        <Footer variant={variant} />
+        <Footer />
     </body>
 </html>

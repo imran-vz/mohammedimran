@@ -40,162 +40,534 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 		<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 	</Fragment>
 
-	<main class="flex-1 px-4 py-12 sm:px-6 lg:px-8">
-		<div class="mx-auto max-w-4xl">
-			<!-- Breadcrumbs -->
-			<nav aria-label="Breadcrumb" class="mb-8">
-				<ol class="flex items-center gap-2 text-sm text-skin-base/60">
-					<li><a href="/" class="hover:text-skin-accent transition-colors">Home</a></li>
-					<li class="before:content-['/'] before:mx-2 text-skin-base/40">{page.title}</li>
-				</ol>
-			</nav>
-
-			<!-- Hero -->
-			<header class="mb-16">
-				<h1
-					class="mb-6 text-4xl font-bold text-skin-base sm:text-5xl lg:text-6xl leading-tight"
-				>
-					{page.headline}
-				</h1>
-				<p class="max-w-3xl text-lg text-skin-base/70 leading-relaxed">
-					{page.intro}
-				</p>
-				<div class="mt-8 flex flex-wrap gap-4">
-					<a
-						href="mailto:mohammedimran86992@gmail.com"
-						class="inline-flex items-center gap-2 rounded-lg bg-skin-accent px-6 py-3 font-semibold text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-skin-accent/30"
-					>
-						Get in Touch
-					</a>
-					<a
-						href="/projects"
-						class="inline-flex items-center gap-2 rounded-lg border border-skin-accent/50 px-6 py-3 font-semibold text-skin-accent transition-all hover:bg-skin-accent hover:text-white"
-					>
-						View All Projects
-					</a>
+	<main id="main-content">
+		<!-- Hero -->
+		<section class="page-hero">
+			<div class="page-hero-left">
+				<h1 class="page-hero-title">HIRE ME</h1>
+			</div>
+			<div class="page-hero-right">
+				<nav class="breadcrumb" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span>/</span>
+					<span>{page.title}</span>
+				</nav>
+				<h2 class="page-hero-headline">{page.headline}</h2>
+				<p class="page-hero-description">{page.intro}</p>
+				<div class="hero-actions">
+					<a href="mailto:mohammedimran86992@gmail.com" class="action-link">GET IN TOUCH →</a>
+					<a href="/projects" class="action-link action-link--outline">VIEW PROJECTS →</a>
 				</div>
-			</header>
+			</div>
+		</section>
 
-			<!-- Why Hire Me -->
-			<section class="mb-16">
-				<h2 class="mb-8 text-2xl font-bold text-skin-base sm:text-3xl">
-					{page.whyHireMe.title}
-				</h2>
-				<div class="grid gap-6 sm:grid-cols-2">
-					{
-						page.whyHireMe.points.map((point) => (
-							<div class="rounded-xl border border-skin-border/50 bg-skin-card p-6 transition-all hover:border-skin-accent/30 hover:shadow-lg hover:shadow-skin-accent/5">
-								<h3 class="mb-3 text-lg font-bold text-skin-base">{point.heading}</h3>
-								<p class="text-sm text-skin-base/70 leading-relaxed">{point.text}</p>
+		<!-- Why Hire Me -->
+		<section class="section">
+			<div class="section-header">
+				<h2 class="section-title">{page.whyHireMe.title}</h2>
+				<span class="section-count">{String(page.whyHireMe.points.length).padStart(2, '0')}</span>
+			</div>
+			<div class="points-list">
+				{page.whyHireMe.points.map((point, i) => (
+					<div class="point-item">
+						<span class="point-number">{String(i + 1).padStart(2, '0')}</span>
+						<div>
+							<h3 class="point-heading">{point.heading}</h3>
+							<p class="point-text">{point.text}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<!-- Projects -->
+		<section class="section">
+			<div class="section-header">
+				<h2 class="section-title">Relevant Projects</h2>
+				<span class="section-count">{String(page.projects.length).padStart(2, '0')}</span>
+			</div>
+			<div class="projects-list">
+				{page.projects.map((project, i) => (
+					<a href={project.url} target="_blank" rel="noopener noreferrer" class="project-item">
+						<span class="project-number">{String(i + 1).padStart(2, '0')}</span>
+						<h3 class="project-name">{project.name}</h3>
+						<div>
+							<p class="project-description">{project.description}</p>
+							<div class="project-tech">
+								{project.tech.map((t) => (
+									<span class="tech-tag">{t}</span>
+								))}
 							</div>
-						))
-					}
-				</div>
-			</section>
-
-			<!-- Projects -->
-			<section class="mb-16">
-				<h2 class="mb-8 text-2xl font-bold text-skin-base sm:text-3xl">
-					Relevant Projects
-				</h2>
-				<div class="space-y-6">
-					{
-						page.projects.map((project) => (
-							<a
-								href={project.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="group block rounded-xl border border-skin-border/50 bg-skin-card p-6 sm:p-8 transition-all hover:border-skin-accent/30 hover:shadow-lg hover:shadow-skin-accent/5"
-							>
-								<div class="flex items-start justify-between gap-4">
-									<div>
-										<h3 class="mb-2 text-xl font-bold text-skin-base group-hover:text-skin-accent transition-colors">
-											{project.name}
-										</h3>
-										<p class="mb-4 text-sm text-skin-base/70 leading-relaxed">
-											{project.description}
-										</p>
-										<div class="flex flex-wrap gap-2">
-											{project.tech.map((t) => (
-												<span class="rounded-full bg-skin-accent/10 px-3 py-1 text-xs font-medium text-skin-accent">
-													{t}
-												</span>
-											))}
-										</div>
-									</div>
-									<span class="text-skin-base/30 group-hover:text-skin-accent transition-colors text-xl">
-										↗
-									</span>
-								</div>
-							</a>
-						))
-					}
-				</div>
-			</section>
-
-			<!-- Skills -->
-			<section class="mb-16">
-				<h2 class="mb-8 text-2xl font-bold text-skin-base sm:text-3xl">
-					Technical Skills
-				</h2>
-				<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-					{
-						page.skills.map((skill) => (
-							<div class="rounded-lg border border-skin-border/50 bg-skin-card px-4 py-3 text-center text-sm font-medium text-skin-base">
-								{skill}
-							</div>
-						))
-					}
-				</div>
-			</section>
-
-			<!-- FAQ -->
-			<section class="mb-16">
-				<h2 class="mb-8 text-2xl font-bold text-skin-base sm:text-3xl">
-					Frequently Asked Questions
-				</h2>
-				<div class="space-y-4">
-					{
-						page.faq.map((item) => (
-							<details class="group rounded-xl border border-skin-border/50 bg-skin-card p-6">
-								<summary class="cursor-pointer text-lg font-semibold text-skin-base list-none flex items-center justify-between">
-									{item.question}
-									<span class="ml-4 text-skin-accent transition-transform group-open:rotate-45">
-										+
-									</span>
-								</summary>
-								<p class="mt-4 text-skin-base/70 leading-relaxed">{item.answer}</p>
-							</details>
-						))
-					}
-				</div>
-			</section>
-
-			<!-- CTA -->
-			<section class="rounded-2xl border border-skin-accent/30 bg-skin-card p-8 text-center sm:p-12">
-				<h2 class="mb-4 text-2xl font-bold text-skin-base sm:text-3xl">
-					Ready to Work Together?
-				</h2>
-				<p class="mb-6 text-skin-base/70">
-					Let's discuss your project requirements. I'm available for freelance work and contract engagements.
-				</p>
-				<div class="flex flex-wrap justify-center gap-4">
-					<a
-						href="mailto:mohammedimran86992@gmail.com"
-						class="inline-flex items-center gap-2 rounded-lg bg-skin-accent px-6 py-3 font-semibold text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-skin-accent/30"
-					>
-						Email Me
+						</div>
+						<span class="project-arrow">↗</span>
 					</a>
-					<a
-						href="https://www.linkedin.com/in/m0hammedimran/"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 rounded-lg border border-skin-accent/50 px-6 py-3 font-semibold text-skin-accent transition-all hover:bg-skin-accent hover:text-white"
-					>
-						LinkedIn
-					</a>
+				))}
+			</div>
+		</section>
+
+		<!-- Skills -->
+		<section class="section">
+			<div class="section-header">
+				<h2 class="section-title">Technical Skills</h2>
+			</div>
+			<div class="skills-grid">
+				{page.skills.map((skill) => (
+					<div class="skill-cell">{skill}</div>
+				))}
+			</div>
+		</section>
+
+		<!-- FAQ -->
+		<section class="section">
+			<div class="section-header">
+				<h2 class="section-title">FAQ</h2>
+				<span class="section-count">{String(page.faq.length).padStart(2, '0')}</span>
+			</div>
+			<div class="faq-list">
+				{page.faq.map((item) => (
+					<details class="faq-item">
+						<summary>
+							{item.question}
+							<span class="faq-toggle">+</span>
+						</summary>
+						<p class="faq-answer">{item.answer}</p>
+					</details>
+				))}
+			</div>
+		</section>
+
+		<!-- CTA -->
+		<section class="cta-section">
+			<div class="cta-content">
+				<h2 class="cta-title">READY TO WORK TOGETHER?</h2>
+				<p class="cta-text">Let's discuss your project requirements. I'm available for freelance work and contract engagements.</p>
+				<div class="cta-links">
+					<a href="mailto:mohammedimran86992@gmail.com" class="cta-link">EMAIL ME →</a>
+					<a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" rel="noopener noreferrer" class="cta-link">LINKEDIN ↗</a>
 				</div>
-			</section>
-		</div>
+			</div>
+		</section>
 	</main>
 </Layout>
+
+<style>
+    .page-hero {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        border-bottom: 4px solid var(--black);
+    }
+
+    @media (max-width: 900px) {
+        .page-hero {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .page-hero-left {
+        border-right: 4px solid var(--black);
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: var(--yellow);
+    }
+
+    @media (max-width: 900px) {
+        .page-hero-left {
+            border-right: none;
+            border-bottom: 4px solid var(--black);
+        }
+    }
+
+    .page-hero-title {
+        font-family: 'Anton', sans-serif;
+        font-size: clamp(4rem, 12vw, 10rem);
+        line-height: 0.9;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+    }
+
+    .page-hero-right {
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .breadcrumb {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--gray);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .breadcrumb a:hover {
+        color: var(--black);
+    }
+
+    .page-hero-headline {
+        font-family: 'Anton', sans-serif;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1.1;
+    }
+
+    .page-hero-description {
+        font-size: 15px;
+        line-height: 1.8;
+        max-width: 600px;
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 8px;
+    }
+
+    .action-link {
+        padding: 14px 24px;
+        background: var(--black);
+        color: var(--yellow);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        border: 3px solid var(--black);
+        transition: all 0.3s;
+    }
+
+    .action-link:hover {
+        background: var(--yellow);
+        color: var(--black);
+    }
+
+    .action-link--outline {
+        background: transparent;
+        color: var(--black);
+    }
+
+    .action-link--outline:hover {
+        background: var(--black);
+        color: var(--yellow);
+    }
+
+    /* Points */
+    .points-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .point-item {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        gap: 30px;
+        padding: 40px;
+        border-bottom: 2px solid var(--black);
+        transition: background 0.3s;
+    }
+
+    .point-item:last-child {
+        border-bottom: none;
+    }
+
+    .point-item:hover {
+        background: var(--yellow);
+    }
+
+    .point-number {
+        font-family: 'Anton', sans-serif;
+        font-size: 3rem;
+        color: var(--gray);
+        line-height: 1;
+    }
+
+    .point-item:hover .point-number {
+        color: var(--black);
+    }
+
+    .point-heading {
+        font-family: 'Anton', sans-serif;
+        font-size: 1.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        margin-bottom: 12px;
+    }
+
+    .point-text {
+        font-size: 14px;
+        line-height: 1.8;
+        color: var(--gray);
+    }
+
+    .point-item:hover .point-text {
+        color: var(--black);
+    }
+
+    /* Projects */
+    .projects-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-item {
+        display: grid;
+        grid-template-columns: 80px 1fr 2fr auto;
+        gap: 30px;
+        padding: 40px;
+        border-bottom: 2px solid var(--black);
+        transition: all 0.3s;
+        align-items: center;
+    }
+
+    @media (max-width: 900px) {
+        .project-item {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+    }
+
+    .project-item:last-child {
+        border-bottom: none;
+    }
+
+    .project-item:hover {
+        background: var(--yellow);
+    }
+
+    .project-number {
+        font-family: 'Anton', sans-serif;
+        font-size: 3rem;
+        color: var(--gray);
+        transition: color 0.3s;
+    }
+
+    .project-item:hover .project-number {
+        color: var(--black);
+    }
+
+    .project-name {
+        font-family: 'Anton', sans-serif;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .project-description {
+        font-size: 14px;
+        line-height: 1.8;
+        color: var(--gray);
+    }
+
+    .project-item:hover .project-description {
+        color: var(--black);
+    }
+
+    .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .tech-tag {
+        padding: 5px 12px;
+        border: 2px solid var(--black);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .project-arrow {
+        font-size: 2rem;
+        transition: transform 0.3s;
+    }
+
+    .project-item:hover .project-arrow {
+        transform: translate(8px, -8px);
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 900px) {
+        .skills-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 500px) {
+        .skills-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .skill-cell {
+        padding: 30px 16px;
+        border-right: 2px solid var(--black);
+        border-bottom: 2px solid var(--black);
+        text-align: center;
+        transition: all 0.3s;
+        font-family: 'Anton', sans-serif;
+        font-size: 1.25rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .skill-cell:nth-child(4n) {
+        border-right: none;
+    }
+
+    @media (max-width: 900px) {
+        .skill-cell:nth-child(4n) {
+            border-right: 2px solid var(--black);
+        }
+        .skill-cell:nth-child(3n) {
+            border-right: none;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .skill-cell:nth-child(3n) {
+            border-right: 2px solid var(--black);
+        }
+        .skill-cell:nth-child(2n) {
+            border-right: none;
+        }
+    }
+
+    .skill-cell:hover {
+        background: var(--black);
+        color: var(--yellow);
+    }
+
+    /* FAQ */
+    .faq-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .faq-item {
+        border-bottom: 2px solid var(--black);
+    }
+
+    .faq-item:last-child {
+        border-bottom: none;
+    }
+
+    .faq-item summary {
+        padding: 24px 40px;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 15px;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        transition: background 0.3s;
+    }
+
+    .faq-item summary:hover {
+        background: var(--yellow);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-toggle {
+        font-family: 'Anton', sans-serif;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+        transition: transform 0.2s;
+    }
+
+    .faq-item[open] .faq-toggle {
+        transform: rotate(45deg);
+    }
+
+    .faq-answer {
+        padding: 0 40px 24px;
+        font-size: 14px;
+        line-height: 1.8;
+        color: var(--gray);
+        border-top: 1px solid var(--black);
+        padding-top: 20px;
+        margin: 0 40px;
+    }
+
+    /* CTA */
+    .cta-section {
+        background: var(--black);
+        color: var(--white);
+        border-bottom: 4px solid var(--black);
+    }
+
+    .cta-content {
+        padding: 80px 40px;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .cta-title {
+        font-family: 'Anton', sans-serif;
+        font-size: 4rem;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+    }
+
+    .cta-text {
+        font-size: 14px;
+        line-height: 1.8;
+        color: var(--gray);
+        margin-bottom: 40px;
+    }
+
+    .cta-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .cta-link {
+        padding: 16px 32px;
+        border: 3px solid var(--white);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        transition: all 0.3s;
+    }
+
+    .cta-link:hover {
+        background: var(--yellow);
+        color: var(--black);
+        border-color: var(--yellow);
+    }
+
+    @media (max-width: 600px) {
+        .page-hero-left { padding: 32px 20px; }
+        .page-hero-right { padding: 28px 20px; }
+        .page-hero-description { font-size: 14px; }
+        .point-item { grid-template-columns: 1fr; gap: 12px; padding: 24px 20px; }
+        .point-number { font-size: 2rem; }
+        .project-item { padding: 24px 20px; }
+        .project-number { font-size: 2rem; }
+        .project-name { font-size: 1.5rem; }
+        .faq-item summary { padding: 16px 20px; font-size: 14px; }
+        .faq-answer { padding: 0 20px 16px; margin: 0 20px; }
+        .cta-content { padding: 40px 20px; }
+        .cta-title { font-size: 2.5rem; }
+    }
+</style>

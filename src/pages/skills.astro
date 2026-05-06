@@ -2,42 +2,27 @@
 import Layout from '../layouts/Layout.astro';
 
 const skills = {
-	expert: [
-		{ name: 'React', years: '5+', icon: '⚛️' },
-		{ name: 'TypeScript', years: '5+', icon: '📘' },
-		{ name: 'JavaScript', years: '5+', icon: '⚡' },
-	],
-	proficient: [
-		{ name: 'GoLang', years: '3+', icon: '🐹' },
-		{ name: 'Node.js', years: '4+', icon: '💚' },
-		{ name: 'Next.js', years: '3+', icon: '▲' },
-		{ name: 'Tailwind CSS', years: '3+', icon: '🎨' },
-		{ name: 'Git', years: '5+', icon: '🔧' },
-	],
-	familiar: [
-		{ name: 'Python', icon: '🐍' },
-		{ name: 'Docker', icon: '🐳' },
-		{ name: 'PostgreSQL', icon: '🐘' },
-		{ name: 'MongoDB', icon: '🍃' },
-		{ name: 'Redis', icon: '🔴' },
-		{ name: 'AWS', icon: '☁️' },
-	],
+	expert: ['REACT', 'TYPESCRIPT', 'JAVASCRIPT'],
+	proficient: ['GOLANG', 'NODE.JS', 'NEXT.JS', 'TAILWIND CSS', 'GIT'],
+	familiar: ['PYTHON', 'DOCKER', 'POSTGRESQL', 'MONGODB', 'REDIS', 'AWS'],
 };
+
+const allSkills = [...skills.expert, ...skills.proficient, ...skills.familiar];
 
 const experience = [
 	{
-		year: '2020 - Present',
-		title: '5+ Years Full Stack Development',
+		year: '2020 — PRESENT',
+		title: '5+ YEARS FULL STACK',
 		description: 'Building scalable web applications with modern technologies and best practices',
 	},
 	{
-		year: 'Primary Stack',
-		title: 'React, TypeScript, GoLang',
+		year: 'PRIMARY STACK',
+		title: 'REACT, TS, GO',
 		description: 'Deep expertise in frontend and backend development with these core technologies',
 	},
 	{
-		year: 'Location',
-		title: 'Bengaluru, India',
+		year: 'LOCATION',
+		title: 'BENGALURU, INDIA',
 		description: 'Available for remote collaboration worldwide',
 	},
 ];
@@ -48,260 +33,478 @@ const experience = [
     description="Imran's technical skills and expertise. 5+ years experience in React, TypeScript, GoLang, and modern web development. Based in Bengaluru, India."
     canonical="https://imran.codes/skills"
 >
-    <main class="flex-1 px-4 py-12 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-7xl">
-            <!-- Header -->
-            <header class="mb-12 text-center">
-                <h1
-                    class="mb-4 bg-linear-to-r from-skin-accent via-skin-accent-secondary to-skin-accent-tertiary bg-clip-text text-4xl font-bold text-transparent sm:text-5xl lg:text-6xl"
-                >
-                    Skills & Expertise
-                </h1>
-                <p class="mx-auto max-w-2xl text-lg text-skin-base/80">
-                    5+ years building scalable, performant web applications.
-                    Specialized in React, TypeScript, and GoLang.
+    <main id="main-content">
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="page-hero-left">
+                <h1 class="page-hero-title">SKILLS</h1>
+            </div>
+            <div class="page-hero-right">
+                <p class="page-hero-breadcrumb">
+                    <a href="/">Home</a> / Skills
                 </p>
-            </header>
+                <p class="page-hero-description">
+                    5+ years building scalable, performant web applications. Specialized in React, TypeScript, and GoLang.
+                </p>
+            </div>
+        </section>
 
-            <!-- Experience Timeline -->
-            <section class="mb-16">
-                <h2
-                    class="mb-8 text-center text-2xl font-bold text-skin-base sm:text-3xl"
-                >
-                    Experience Overview
-                </h2>
-                <div class="grid gap-6 sm:grid-cols-3">
-                    {
-                        experience.map((item) => (
-                            <div class="group rounded-xl border border-skin-border bg-skin-card p-6 text-center transition-all hover:-translate-y-1 hover:border-skin-accent/50 hover:shadow-lg hover:shadow-skin-accent/20">
-                                <div class="mb-2 text-sm font-semibold uppercase tracking-wide text-skin-accent">
-                                    {item.year}
-                                </div>
-                                <h3 class="mb-2 text-xl font-bold text-skin-base">
-                                    {item.title}
-                                </h3>
-                                <p class="text-sm text-skin-base/70">
-                                    {item.description}
-                                </p>
-                            </div>
-                        ))
-                    }
-                </div>
-            </section>
+        <!-- Experience Overview -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Experience</h2>
+            </div>
+            <div class="experience-grid">
+                {experience.map((item) => (
+                    <div class="experience-item">
+                        <span class="experience-label">{item.year}</span>
+                        <h3 class="experience-title">{item.title}</h3>
+                        <p class="experience-description">{item.description}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
 
-            <!-- Skills Grid -->
-            <section class="mb-16">
-                <!-- Expert Level -->
-                <div class="mb-12">
-                    <div class="mb-6 flex items-center gap-3">
-                        <h2 class="text-2xl font-bold text-skin-base">
-                            Expert
-                        </h2>
-                        <div class="h-1 flex-1 rounded-full bg-skin-accent">
-                        </div>
-                    </div>
-                    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        {
-                            skills.expert.map((skill) => (
-                                <div class="group relative overflow-hidden rounded-xl border-2 border-skin-accent bg-skin-card p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-skin-accent/30">
-                                    <div class="absolute inset-0 bg-gradient-to-br from-skin-accent/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                                    <div class="relative flex items-center gap-4">
-                                        <div class="text-4xl">{skill.icon}</div>
-                                        <div>
-                                            <h3 class="text-xl font-bold text-skin-base">
-                                                {skill.name}
-                                            </h3>
-                                            <p class="text-sm text-skin-accent">
-                                                {skill.years} years
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4 h-2 overflow-hidden rounded-full bg-skin-border">
-                                        <div class="h-full w-full bg-skin-accent" />
-                                    </div>
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div>
+        <!-- Expert Skills -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Expert</h2>
+                <span class="section-count">{String(skills.expert.length).padStart(2, '0')}</span>
+            </div>
+            <div class="skills-grid skills-grid--3">
+                {skills.expert.map((skill) => (
+                    <div class="skill-cell skill-cell--expert">{skill}</div>
+                ))}
+            </div>
+        </section>
 
-                <!-- Proficient Level -->
-                <div class="mb-12">
-                    <div class="mb-6 flex items-center gap-3">
-                        <h2 class="text-2xl font-bold text-skin-base">
-                            Proficient
-                        </h2>
-                        <div
-                            class="h-1 flex-1 rounded-full bg-skin-accent-secondary"
-                        >
-                        </div>
-                    </div>
-                    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                        {
-                            skills.proficient.map((skill) => (
-                                <div class="group rounded-xl border border-skin-border bg-skin-card p-6 transition-all hover:-translate-y-1 hover:border-skin-accent-secondary/50 hover:shadow-lg hover:shadow-skin-accent-secondary/20">
-                                    <div class="mb-3 text-center text-3xl">
-                                        {skill.icon}
-                                    </div>
-                                    <h3 class="mb-2 text-center text-lg font-bold text-skin-base">
-                                        {skill.name}
-                                    </h3>
-                                    {skill.years && (
-                                        <p class="text-center text-xs text-skin-base/60">
-                                            {skill.years} years
-                                        </p>
-                                    )}
-                                    <div class="mt-3 h-2 overflow-hidden rounded-full bg-skin-border">
-                                        <div class="h-full w-4/5 bg-skin-accent-secondary" />
-                                    </div>
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div>
+        <!-- Proficient Skills -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Proficient</h2>
+                <span class="section-count">{String(skills.proficient.length).padStart(2, '0')}</span>
+            </div>
+            <div class="skills-grid skills-grid--5">
+                {skills.proficient.map((skill) => (
+                    <div class="skill-cell">{skill}</div>
+                ))}
+            </div>
+        </section>
 
-                <!-- Familiar Level -->
-                <div>
-                    <div class="mb-6 flex items-center gap-3">
-                        <h2 class="text-2xl font-bold text-skin-base">
-                            Familiar
-                        </h2>
-                        <div
-                            class="h-1 flex-1 rounded-full bg-skin-accent-tertiary"
-                        >
-                        </div>
-                    </div>
-                    <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
-                        {
-                            skills.familiar.map((skill) => (
-                                <div class="group rounded-xl border border-skin-border bg-skin-card p-4 text-center transition-all hover:-translate-y-1 hover:border-skin-accent-tertiary/50">
-                                    <div class="mb-2 text-2xl">
-                                        {skill.icon}
-                                    </div>
-                                    <h3 class="text-sm font-semibold text-skin-base">
-                                        {skill.name}
-                                    </h3>
-                                    <div class="mx-auto mt-2 h-1.5 w-16 overflow-hidden rounded-full bg-skin-border">
-                                        <div class="h-full w-3/5 bg-skin-accent-tertiary" />
-                                    </div>
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div>
-            </section>
+        <!-- Familiar Skills -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Familiar</h2>
+                <span class="section-count">{String(skills.familiar.length).padStart(2, '0')}</span>
+            </div>
+            <div class="skills-grid skills-grid--6">
+                {skills.familiar.map((skill) => (
+                    <div class="skill-cell">{skill}</div>
+                ))}
+            </div>
+        </section>
 
-            <!-- GitHub Activity -->
-            <section class="mb-16">
-                <h2
-                    class="mb-8 text-center text-2xl font-bold text-skin-base sm:text-3xl"
-                >
-                    Open Source Contributions
-                </h2>
-                <div
-                    class="mx-auto max-w-4xl rounded-2xl border border-skin-accent/30 bg-gradient-to-br from-skin-accent/5 via-skin-card to-skin-accent-secondary/5 p-8 text-center"
-                >
-                    <a
-                        href="https://github.com/imran-vz"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="group inline-block"
-                    >
-                        <svg
-                            class="mx-auto mb-4 h-16 w-16 text-skin-accent transition-transform group-hover:scale-110"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <h3
-                            class="mb-2 text-xl font-bold text-skin-base group-hover:text-skin-accent"
-                        >
-                            github.com/imran-vz
-                        </h3>
-                    </a>
-                    <p class="mb-6 text-skin-base/80">
-                        Active contributor to open source projects. Check out my
-                        repositories and contributions.
-                    </p>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <a
-                            href="https://github.com/imran-vz"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 rounded-lg bg-skin-accent px-6 py-3 font-semibold text-white transition-all hover:scale-105"
-                        >
-                            View Profile
-                        </a>
-                        <a
-                            href="/projects"
-                            class="inline-flex items-center gap-2 rounded-lg border border-skin-accent/50 px-6 py-3 font-semibold text-skin-accent transition-all hover:bg-skin-accent hover:text-white"
-                        >
-                            View Projects
-                        </a>
-                    </div>
+        <!-- All Technologies Marquee -->
+        <div class="marquee-container">
+            <div class="marquee">
+                <div class="marquee-content">
+                    {[...allSkills, ...allSkills].map((skill) => (
+                        <span class="marquee-item">{skill}</span>
+                    ))}
                 </div>
-            </section>
-
-            <!-- Call to Action -->
-            <section class="text-center">
-                <div
-                    class="mx-auto max-w-3xl rounded-2xl border border-skin-accent-secondary/30 bg-gradient-to-br from-skin-accent-secondary/5 via-skin-card to-skin-accent/5 p-8 sm:p-12"
-                >
-                    <h2
-                        class="mb-4 text-2xl font-bold text-skin-base sm:text-3xl"
-                    >
-                        Let's Work Together
-                    </h2>
-                    <p class="mb-6 text-skin-base/80">
-                        Interested in collaboration? Reach out and let's build
-                        something amazing.
-                    </p>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <a
-                            href="mailto:mohammedimran86992@gmail.com"
-                            class="inline-flex items-center gap-2 rounded-lg bg-skin-accent-secondary px-6 py-3 font-semibold text-white transition-all hover:scale-105"
-                        >
-                            <svg
-                                class="h-5 w-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                ></path>
-                            </svg>
-                            Email Me
-                        </a>
-                        <a
-                            href="https://www.linkedin.com/in/m0hammedimran/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 rounded-lg border border-skin-accent-secondary/50 px-6 py-3 font-semibold text-skin-accent-secondary transition-all hover:bg-skin-accent-secondary hover:text-white"
-                        >
-                            <svg
-                                class="h-5 w-5"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                                ></path>
-                            </svg>
-                            LinkedIn
-                        </a>
-                    </div>
+                <div class="marquee-content">
+                    {[...allSkills, ...allSkills].map((skill) => (
+                        <span class="marquee-item">{skill}</span>
+                    ))}
                 </div>
-            </section>
+            </div>
         </div>
+
+        <!-- Open Source -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Open Source</h2>
+            </div>
+            <div class="opensource-grid">
+                <div class="opensource-item">
+                    <h3 class="opensource-title">GITHUB</h3>
+                    <p class="opensource-description">Active contributor to open source projects. Check out my repositories and contributions.</p>
+                    <a href="https://github.com/imran-vz" target="_blank" rel="noopener noreferrer" class="opensource-link">
+                        VIEW PROFILE ↗
+                    </a>
+                </div>
+                <div class="opensource-item">
+                    <h3 class="opensource-title">PROJECTS</h3>
+                    <p class="opensource-description">Hand-picked showcase of my best work built with Go, TypeScript, Rust, and modern web technologies.</p>
+                    <a href="/projects" class="opensource-link">
+                        VIEW PROJECTS →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">LET'S WORK TOGETHER</h2>
+                <p class="cta-text">Interested in collaboration? Reach out and let's build something amazing.</p>
+                <div class="cta-links">
+                    <a href="mailto:mohammedimran86992@gmail.com" class="cta-link">EMAIL ME →</a>
+                    <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" rel="noopener noreferrer" class="cta-link">LINKEDIN ↗</a>
+                </div>
+            </div>
+        </section>
     </main>
 </Layout>
+
+<style>
+    .page-hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-bottom: 4px solid var(--black);
+    }
+
+    @media (max-width: 900px) {
+        .page-hero {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .page-hero-left {
+        border-right: 4px solid var(--black);
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: var(--yellow);
+    }
+
+    @media (max-width: 900px) {
+        .page-hero-left {
+            border-right: none;
+            border-bottom: 4px solid var(--black);
+        }
+    }
+
+    .page-hero-title {
+        font-family: 'Anton', sans-serif;
+        font-size: clamp(5rem, 18vw, 14rem);
+        line-height: 0.9;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+    }
+
+    .page-hero-right {
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .page-hero-breadcrumb {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--gray);
+    }
+
+    .page-hero-breadcrumb a:hover {
+        color: var(--black);
+    }
+
+    .page-hero-description {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        max-width: 500px;
+    }
+
+    /* Experience */
+    .experience-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 700px) {
+        .experience-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .experience-item {
+        padding: 40px;
+        border-right: 2px solid var(--black);
+        transition: all 0.3s;
+    }
+
+    .experience-item:last-child {
+        border-right: none;
+    }
+
+    @media (max-width: 700px) {
+        .experience-item {
+            border-right: none;
+            border-bottom: 2px solid var(--black);
+        }
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .experience-item:hover {
+        background: var(--yellow);
+    }
+
+    .experience-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--gray);
+    }
+
+    .experience-item:hover .experience-label {
+        color: var(--black);
+    }
+
+    .experience-title {
+        font-family: 'Anton', sans-serif;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    .experience-description {
+        font-size: 13px;
+        line-height: 1.8;
+        color: var(--gray);
+    }
+
+    .experience-item:hover .experience-description {
+        color: var(--black);
+    }
+
+    /* Skills Grids */
+    .skills-grid {
+        display: grid;
+    }
+
+    .skills-grid--3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .skills-grid--5 {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .skills-grid--6 {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    @media (max-width: 900px) {
+        .skills-grid--5,
+        .skills-grid--6 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 500px) {
+        .skills-grid--3,
+        .skills-grid--5,
+        .skills-grid--6 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .skill-cell {
+        padding: 40px 20px;
+        border-right: 2px solid var(--black);
+        border-bottom: 2px solid var(--black);
+        text-align: center;
+        transition: all 0.3s;
+        font-family: 'Anton', sans-serif;
+        font-size: 1.5rem;
+        letter-spacing: 0.1em;
+    }
+
+    .skill-cell:last-child {
+        border-right: none;
+    }
+
+    .skill-cell:hover {
+        background: var(--black);
+        color: var(--yellow);
+    }
+
+    .skill-cell--expert {
+        font-size: 2rem;
+        padding: 60px 20px;
+    }
+
+    .skill-cell--expert:hover {
+        background: var(--yellow);
+        color: var(--black);
+    }
+
+    /* Marquee */
+    .marquee-container {
+        background: var(--black);
+        color: var(--white);
+        padding: 20px 0;
+        overflow: hidden;
+        border-bottom: 4px solid var(--black);
+    }
+
+    .marquee {
+        display: flex;
+        animation: marquee 40s linear infinite;
+    }
+
+    .marquee-content {
+        display: flex;
+        gap: 60px;
+        padding-right: 60px;
+        white-space: nowrap;
+    }
+
+    .marquee-item {
+        font-family: 'Anton', sans-serif;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    /* Open Source */
+    .opensource-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 700px) {
+        .opensource-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .opensource-item {
+        padding: 60px 40px;
+        border-right: 2px solid var(--black);
+        transition: all 0.3s;
+    }
+
+    .opensource-item:last-child {
+        border-right: none;
+    }
+
+    @media (max-width: 700px) {
+        .opensource-item {
+            border-right: none;
+            border-bottom: 2px solid var(--black);
+        }
+        .opensource-item:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .opensource-item:hover {
+        background: var(--yellow);
+    }
+
+    .opensource-title {
+        font-family: 'Anton', sans-serif;
+        font-size: 3rem;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+    }
+
+    .opensource-description {
+        font-size: 14px;
+        line-height: 1.8;
+        color: var(--gray);
+        margin-bottom: 20px;
+    }
+
+    .opensource-item:hover .opensource-description {
+        color: var(--black);
+    }
+
+    .opensource-link {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+
+    /* CTA */
+    .cta-section {
+        border-bottom: 4px solid var(--black);
+        background: var(--red);
+        color: var(--white);
+    }
+
+    .cta-content {
+        padding: 80px 40px;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .cta-title {
+        font-family: 'Anton', sans-serif;
+        font-size: 4rem;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+    }
+
+    .cta-text {
+        font-size: 14px;
+        line-height: 1.8;
+        opacity: 0.8;
+        margin-bottom: 40px;
+    }
+
+    .cta-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .cta-link {
+        padding: 16px 32px;
+        border: 3px solid var(--white);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        transition: all 0.3s;
+    }
+
+    .cta-link:hover {
+        background: var(--white);
+        color: var(--black);
+    }
+
+    @media (max-width: 600px) {
+        .page-hero-left { padding: 32px 20px; }
+        .page-hero-right { padding: 28px 20px; }
+        .page-hero-description { font-size: 1rem; }
+        .experience-item { padding: 24px 20px; }
+        .experience-title { font-size: 1.5rem; }
+        .skill-cell { padding: 24px 12px; font-size: 1.1rem; }
+        .skill-cell--expert { padding: 40px 12px; font-size: 1.5rem; }
+        .opensource-item { padding: 32px 20px; }
+        .opensource-title { font-size: 2rem; }
+        .cta-content { padding: 40px 20px; }
+        .cta-title { font-size: 2.5rem; }
+    }
+</style>
