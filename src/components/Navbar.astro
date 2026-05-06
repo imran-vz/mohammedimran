@@ -1,3 +1,36 @@
+---
+import { landingNavLinks, primaryNavLinks } from '../config/navigation';
+
+interface Props {
+	variant?: 'default' | 'brutalist';
+}
+
+const { variant = 'default' } = Astro.props;
+---
+
+{
+	variant === 'brutalist' ? (
+		<header class="header">
+			<a id="skip-to-content" class="skip-link" href="#main-content">
+				Skip to content
+			</a>
+			<a href="/" class="logo" aria-label="Imran home">
+				IMRAN.CODES
+			</a>
+			<nav class="nav-links" aria-label="Primary navigation">
+				{landingNavLinks.map((link) => (
+					<a
+						href={link.href}
+						target={link.external ? '_blank' : undefined}
+						rel={link.external ? 'noopener noreferrer' : undefined}
+						class="nav-link"
+					>
+						{link.label}
+					</a>
+				))}
+			</nav>
+		</header>
+	) : (
 <header
     class="sticky top-0 z-50 items-center bg-skin-card/30 backdrop-blur-lg border-b border-skin-accent/20 shadow-md"
 >
@@ -24,36 +57,14 @@
 
         <!-- Navigation -->
         <nav class="hidden md:flex items-center gap-6">
-            <a
-                href="/"
-                class="text-sm font-medium text-skin-base/80 hover:text-skin-accent transition-colors"
-            >
-                Home
-            </a>
-            <a
-                href="/projects"
-                class="text-sm font-medium text-skin-base/80 hover:text-skin-accent-secondary transition-colors"
-            >
-                Projects
-            </a>
-            <a
-                href="/skills"
-                class="text-sm font-medium text-skin-base/80 hover:text-skin-accent-tertiary transition-colors"
-            >
-                Skills
-            </a>
-            <a
-                href="/blog"
-                class="text-sm font-medium text-skin-base/80 hover:text-skin-accent-secondary transition-colors"
-            >
-                Blog
-            </a>
-            <a
-                href="/#contact"
-                class="text-sm font-medium text-skin-base/80 hover:text-skin-accent transition-colors"
-            >
-                Contact
-            </a>
+            {primaryNavLinks.map((link) => (
+                <a
+                    href={link.href}
+                    class="text-sm font-medium text-skin-base/80 hover:text-skin-accent transition-colors"
+                >
+                    {link.label}
+                </a>
+            ))}
         </nav>
 
         <!-- Theme Toggle -->
@@ -92,3 +103,5 @@
         </div>
     </div>
 </header>
+	)
+}

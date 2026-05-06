@@ -15,6 +15,9 @@ export interface Props {
 	description?: string;
 	image?: string;
 	canonical?: string;
+	variant?: 'default' | 'brutalist';
+	themeColor?: string;
+	colorScheme?: string;
 }
 
 const {
@@ -22,6 +25,9 @@ const {
 	description = siteMeta.defaultDescription,
 	image = siteMeta.ogImage || siteMeta.logoUrl,
 	canonical = siteMeta.siteUrl,
+	variant = 'default',
+	themeColor = '#FAF8F5',
+	colorScheme = 'dark light',
 } = Astro.props;
 
 const structuredData = buildPersonSchema();
@@ -57,7 +63,9 @@ const websiteSchema = buildWebsiteSchema();
         <meta name="application-name" content={siteMeta.brandShort} />
         <meta name="apple-mobile-web-app-title" content={siteMeta.brandShort} />
         <link rel="author" href="https://www.linkedin.com/in/m0hammedimran" />
-        <meta name="color-scheme" content="dark light" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="color-scheme" content={colorScheme} />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
@@ -100,8 +108,8 @@ const websiteSchema = buildWebsiteSchema();
             }
         </style>
 
-        <meta name="theme-color" content="#FAF8F5" />
-        <script is:inline src="/toggle-theme.js"></script>
+        <meta name="theme-color" content={themeColor} />
+        {variant === 'default' && <script is:inline src="/toggle-theme.js"></script>}
         <script>
             // Spotlight Effect for Cards
             const cards = document.querySelectorAll('.spotlight-card');
@@ -164,11 +172,16 @@ const websiteSchema = buildWebsiteSchema();
     </head>
 
     <body
-        class="flex min-h-svh flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-white"
+        class:list={[
+            'min-h-svh',
+            variant === 'default'
+                ? 'flex flex-col bg-skin-fill font-mono text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-white'
+                : 'brutalist-page',
+        ]}
     >
-        <BackgroundElements />
-        <Navbar />
+        {variant === 'default' && <BackgroundElements />}
+        <Navbar variant={variant} />
         <slot />
-        <Footer />
+        <Footer variant={variant} />
     </body>
 </html>

@@ -4,11 +4,13 @@ export const siteMeta = {
 	siteUrl: 'https://imran.codes',
 	logoUrl: 'https://imran.codes/icons/android-chrome-512x512.png',
 	ogImage: 'https://imran.codes/og-image.svg',
+	email: 'mohammedimran86992@gmail.com',
 	defaultTitle: 'Imran | Senior Full Stack Developer | React, TypeScript, Go',
 	defaultDescription:
 		'Imran - Senior Full Stack Developer with 5+ years experience in React, TypeScript, Go, and Rust. Building data-intensive applications at Thoughtseed. Based in Bengaluru, available remotely.',
 	social: {
-		twitter: '@m0hammed_imran',
+		twitter: '@imran_vzz',
+		twitterUrl: 'https://www.twitter.com/imran_vzz',
 		github: 'https://github.com/imran-vz',
 		linkedin: 'https://www.linkedin.com/in/m0hammedimran/',
 	},

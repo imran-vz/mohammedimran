@@ -1,6 +1,63 @@
 ---
 import GitHubIcon from './icons/GitHubIcon.astro';
+import { footerSocialLinks, primaryNavLinks } from '../config/navigation';
+import { siteMeta } from '../config/siteMeta';
+
+interface Props {
+	variant?: 'default' | 'brutalist';
+}
+
+const { variant = 'default' } = Astro.props;
 ---
+{
+	variant === 'brutalist' ? (
+		<footer class="footer">
+			<div class="footer-content">
+				<div>
+					<h2 class="footer-title">
+						LET'S BUILD
+						<br />
+						<span>SOMETHING</span>
+						<br />
+						TOGETHER
+					</h2>
+				</div>
+				<div>
+					<h3 class="footer-section-title">Connect</h3>
+					<div class="footer-links">
+						{footerSocialLinks
+							.filter((link) => link.type !== 'twitter')
+							.map((link) => (
+								<a
+									href={link.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="footer-link"
+								>
+									{link.label}
+								</a>
+							))}
+						<a href={`mailto:${siteMeta.email}`} class="footer-link">
+							Email
+						</a>
+					</div>
+				</div>
+				<div>
+					<h3 class="footer-section-title">Navigate</h3>
+					<div class="footer-links">
+						{primaryNavLinks
+							.filter((link) => link.href !== '/#contact')
+							.map((link) => (
+								<a href={link.href} class="footer-link">
+									{link.label}
+								</a>
+							))}
+						<span class="footer-link">{siteMeta.location.locality}, {siteMeta.location.country}</span>
+					</div>
+				</div>
+			</div>
+		</footer>
+	) : (
 <footer class="border-t border-skin-border/50 bg-skin-card/30">
     <div class="mx-auto max-w-7xl px-6 py-10 lg:px-8">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
@@ -12,16 +69,14 @@ import GitHubIcon from './icons/GitHubIcon.astro';
             </div>
 
             <nav class="flex flex-wrap gap-6 text-sm">
-                <a href="/" class="text-skin-base/60 hover:text-skin-base transition-colors">Home</a>
-                <a href="/projects" class="text-skin-base/60 hover:text-skin-base transition-colors">Projects</a>
-                <a href="/skills" class="text-skin-base/60 hover:text-skin-base transition-colors">Skills</a>
-                <a href="/blog" class="text-skin-base/60 hover:text-skin-base transition-colors">Blog</a>
-                <a href="/#contact" class="text-skin-base/60 hover:text-skin-base transition-colors">Contact</a>
+                {primaryNavLinks.map((link) => (
+                    <a href={link.href} class="text-skin-base/60 hover:text-skin-base transition-colors">{link.label}</a>
+                ))}
             </nav>
 
             <div class="flex gap-4">
                 <a
-                    href="https://github.com/imran-vz"
+                    href={siteMeta.social.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-skin-base/50 hover:text-skin-base transition-colors"
@@ -30,7 +85,7 @@ import GitHubIcon from './icons/GitHubIcon.astro';
                     <GitHubIcon class="h-5 w-5" />
                 </a>
                 <a
-                    href="https://www.linkedin.com/in/m0hammedimran/"
+                    href={siteMeta.social.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-skin-base/50 hover:text-skin-base transition-colors"
@@ -41,7 +96,7 @@ import GitHubIcon from './icons/GitHubIcon.astro';
                     </svg>
                 </a>
                 <a
-                    href="https://www.twitter.com/m0hammed_imran"
+                    href={siteMeta.social.twitterUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-skin-base/50 hover:text-skin-base transition-colors"
@@ -61,3 +116,5 @@ import GitHubIcon from './icons/GitHubIcon.astro';
         </div>
     </div>
 </footer>
+	)
+}

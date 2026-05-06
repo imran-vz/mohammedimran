@@ -1,6 +1,6 @@
 ---
 import imranWebp from '../assets/imran.webp';
-import { buildPersonSchema, buildWebsiteSchema } from '../config/schema';
+import Layout from '../layouts/Layout.astro';
 import { siteMeta } from '../config/siteMeta';
 
 // SEO Configuration
@@ -13,9 +13,6 @@ const seo = {
 	keywords:
 		'Imran, Mohammed Imran, Mohammed Imran developer, Full Stack Developer, React Developer, TypeScript Expert, Go Developer, Rust Developer, Bengaluru Developer, Senior Developer India, imran-vz, Web Developer, Software Engineer',
 };
-
-const personSchema = buildPersonSchema({ description: seo.description });
-const websiteSchema = buildWebsiteSchema({ description: seo.description });
 
 const professionalServiceSchema = {
 	'@context': 'https://schema.org',
@@ -55,81 +52,33 @@ const projects = [
 const skills = ['REACT', 'TYPESCRIPT', 'GO', 'RUST', 'NODE.JS', 'POSTGRESQL', 'NEXT.JS', 'TAURI'];
 ---
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5" />
-    
-    <!-- Primary SEO Meta Tags -->
-    <title>{seo.title}</title>
+<Layout
+    title={seo.title}
+    description={seo.description}
+    image={seo.image}
+    canonical={seo.url}
+    variant="brutalist"
+    themeColor="#ffff00"
+    colorScheme="light"
+>
+    <Fragment slot="head">
     <meta name="title" content={seo.title} />
-    <meta name="description" content={seo.description} />
     <meta name="keywords" content={seo.keywords} />
-    <meta name="author" content="Imran" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow" />
-    <link rel="canonical" href={seo.url} />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={seo.url} />
-    <meta property="og:site_name" content="Imran" />
-    <meta property="og:title" content={seo.title} />
-    <meta property="og:description" content={seo.description} />
-    <meta property="og:image" content={seo.image} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Imran - Full Stack Developer" />
-    <meta property="og:locale" content="en_IN" />
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@m0hammed_imran" />
-    <meta name="twitter:creator" content="@m0hammed_imran" />
-    <meta name="twitter:title" content={seo.title} />
-    <meta name="twitter:description" content={seo.description} />
-    <meta name="twitter:image" content={seo.image} />
     <meta name="twitter:image:alt" content="Imran - Full Stack Developer" />
-    
-    <!-- Additional SEO Meta Tags -->
-    <meta name="application-name" content="Imran" />
-    <meta name="apple-mobile-web-app-title" content="Imran" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="format-detection" content="telephone=no" />
-    <meta name="theme-color" content="#ffff00" />
-    <meta name="color-scheme" content="light" />
-    
-    <!-- Geo Tags -->
     <meta name="geo.region" content="IN-KA" />
     <meta name="geo.placename" content="Bengaluru" />
     <meta name="geo.position" content="12.9716;77.5946" />
     <meta name="ICBM" content="12.9716, 77.5946" />
-    
-    <!-- Structured Data / JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(professionalServiceSchema)} />
-    
-    <!-- Favicon & Icons -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    
-    <!-- Performance: Preconnect & DNS Prefetch -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://api.github.com" />
-    
-    <!-- Fonts with display swap for performance -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet" />
-    <style>
+    <style is:global>
         * {
             margin: 0;
             padding: 0;
@@ -145,7 +94,7 @@ const skills = ['REACT', 'TYPESCRIPT', 'GO', 'RUST', 'NODE.JS', 'POSTGRESQL', 'N
             --gray: #888888;
         }
         
-        body {
+        .brutalist-page {
             font-family: 'Space Mono', monospace;
             background: var(--white);
             color: var(--black);
@@ -178,6 +127,21 @@ const skills = ['REACT', 'TYPESCRIPT', 'GO', 'RUST', 'NODE.JS', 'POSTGRESQL', 'N
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 16px;
+            z-index: 10000;
+            background: var(--yellow);
+            color: var(--black);
+            border: 2px solid var(--black);
+            padding: 8px 12px;
+        }
+
+        .skip-link:focus {
+            top: 16px;
         }
         
         .logo {
@@ -624,22 +588,12 @@ const skills = ['REACT', 'TYPESCRIPT', 'GO', 'RUST', 'NODE.JS', 'POSTGRESQL', 'N
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
     </style>
-</head>
-<body>
+    </Fragment>
+
     <div class="noise"></div>
     
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">IMRAN.CODES</div>
-        <nav class="nav-links">
-            <a href="/blog" class="nav-link">Blog</a>
-            <a href="https://github.com/imran-vz" target="_blank" class="nav-link">GitHub</a>
-            <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" class="nav-link">LinkedIn</a>
-            <a href="mailto:mohammedimran86992@gmail.com" class="nav-link">Contact</a>
-        </nav>
-    </header>
-    
     <!-- Hero -->
+    <main id="main-content">
     <section class="hero">
         <div class="hero-left">
             <h1 class="hero-title">
@@ -752,32 +706,5 @@ const skills = ['REACT', 'TYPESCRIPT', 'GO', 'RUST', 'NODE.JS', 'POSTGRESQL', 'N
         </div>
     </section>
     
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div>
-                <h2 class="footer-title">
-                    LET'S BUILD<br/>
-                    <span>SOMETHING</span><br/>
-                    TOGETHER
-                </h2>
-            </div>
-            <div>
-                <h3 class="footer-section-title">Connect</h3>
-                <div class="footer-links">
-                    <a href="https://github.com/imran-vz" target="_blank" class="footer-link">GitHub</a>
-                    <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" class="footer-link">LinkedIn</a>
-                    <a href="mailto:mohammedimran86992@gmail.com" class="footer-link">Email</a>
-                </div>
-            </div>
-            <div>
-                <h3 class="footer-section-title">Navigate</h3>
-                <div class="footer-links">
-                    <a href="/blog" class="footer-link">Blog</a>
-                    <span class="footer-link">Bengaluru, India</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-</body>
-</html>
+    </main>
+</Layout>
