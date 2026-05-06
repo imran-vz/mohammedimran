@@ -3,11 +3,11 @@ import { env } from '../config/env';
 import { LANGUAGE_COLORS } from '../config/language-colors';
 import type { Data, Errors, Response } from '../types';
 import CustomError from '../utils/CustomError';
-import { wrapTextMultiline } from '../utils/utils';
 
 const GITHUB_API_URL = 'https://api.github.com';
 const GITHUB_GRAPHQL_URL = `${GITHUB_API_URL}/graphql`;
 const GITHUB_API_VERSION = '2022-11-28';
+const MAX_GRAPHQL_ERROR_MESSAGE_LENGTH = 90;
 
 const USER_REPOSITORY_LANGUAGES_QUERY = `query userInfo($login: String!) {
     user(login: $login) {
@@ -101,6 +101,11 @@ function isGitHubGraphQLErrorResponse(input: unknown): input is { errors: Errors
 	return input != null && typeof input === 'object' && 'errors' in input;
 }
 
+function truncateErrorMessage(message: string, maxLength = MAX_GRAPHQL_ERROR_MESSAGE_LENGTH): string {
+	if (message.length <= maxLength) return message;
+	return `${message.slice(0, maxLength - 3)}...`;
+}
+
 function graphQLErrorFrom(errors: Errors, statusText?: string): CustomError {
 	const [error] = errors;
 
@@ -109,7 +114,7 @@ function graphQLErrorFrom(errors: Errors, statusText?: string): CustomError {
 	}
 
 	if (error?.message) {
-		return new CustomError(wrapTextMultiline(error.message, 90, 1)[0], statusText || CustomError.GRAPHQL_ERROR);
+		return new CustomError(truncateErrorMessage(error.message), statusText || CustomError.GRAPHQL_ERROR);
 	}
 
 	return new CustomError(

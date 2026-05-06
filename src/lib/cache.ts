@@ -9,6 +9,31 @@ const kv = createClient({
 
 export { kv };
 
+const SIX_HOURS = 60 * 60 * 6;
+const SEVEN_DAYS = 60 * 60 * 24 * 7;
+
+export const CACHE_KEYS = {
+	githubProjects: {
+		key: 'github-projects',
+		ttlSeconds: SEVEN_DAYS,
+	},
+	githubProjectsParsed: {
+		key: 'github-projects-parsed',
+		ttlSeconds: SEVEN_DAYS,
+		dependsOn: ['githubProjects'],
+	},
+	featuredProjects: {
+		key: 'featured-projects',
+		ttlSeconds: SIX_HOURS,
+	},
+} as const;
+
+export type CacheKeyName = keyof typeof CACHE_KEYS;
+
+export function getCacheKeyNames(): CacheKeyName[] {
+	return Object.keys(CACHE_KEYS) as CacheKeyName[];
+}
+
 /**
  * Check cache first, fetch on miss, store result with TTL.
  */
