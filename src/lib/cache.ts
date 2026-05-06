@@ -1,6 +1,6 @@
 import { createClient } from '@vercel/kv';
-import axios from 'axios';
 import { env } from '../config/env';
+import CustomError from '../utils/CustomError';
 
 const kv = createClient({
 	url: env.kvRestApiUrl,
@@ -46,9 +46,9 @@ export async function cachedHashFetch<T>(
 export function handleApiError(error: unknown): Response {
 	const headers = { 'Content-Type': 'application/json' };
 
-	if (axios.isAxiosError(error)) {
-		console.error(error.response?.data || error);
-		return new Response(JSON.stringify({ message: error.response?.data || error.message }), {
+	if (error instanceof CustomError) {
+		console.error(error);
+		return new Response(JSON.stringify({ message: error.message, type: error.type }), {
 			status: 500,
 			headers,
 		});
