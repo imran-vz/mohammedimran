@@ -1,8 +1,11 @@
-import type { Edge, TopLanguages } from '../types';
+import type { Edge, Errors, TopLanguages } from '../types';
 import CustomError from './CustomError';
 import fetcher from './fetcher';
-import { isErrorResponse } from './retryer';
 import { wrapTextMultiline } from './utils';
+
+function isErrorResponse(input: unknown): input is { errors: Errors } {
+	return input != null && typeof input === 'object' && 'errors' in input;
+}
 
 /**
  * Fetch top languages for a given username.
