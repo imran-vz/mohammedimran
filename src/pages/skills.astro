@@ -507,4 +507,161 @@ const experience = [
         .cta-content { padding: 40px 20px; }
         .cta-title { font-size: 2.5rem; }
     }
+
+    .page-hero,
+    .section,
+    .marquee-container,
+    .cta-section {
+        width: min(100%, 720px);
+        margin: 0 auto;
+    }
+
+    .page-hero {
+        display: block;
+        border-bottom: 0;
+        padding-bottom: 28px;
+    }
+
+    .page-hero-left,
+    .page-hero-right {
+        display: block;
+        border: 0;
+        padding: 0;
+        background: transparent;
+    }
+
+    .page-hero-title {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: clamp(3rem, 9vw, 5.5rem);
+        line-height: 1.06;
+        letter-spacing: -0.055em;
+        margin: 36px 0 20px;
+        text-transform: none;
+    }
+
+    .page-hero-breadcrumb,
+    .page-hero-description,
+    .experience-label,
+    .experience-description,
+    .opensource-description,
+    .cta-text {
+        color: var(--page-muted);
+        font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        letter-spacing: 0;
+        text-transform: none;
+    }
+
+    .page-hero-description {
+        max-width: 680px;
+        font-size: 1.1rem;
+        line-height: 1.72;
+    }
+
+    .experience-grid,
+    .opensource-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .experience-item,
+    .opensource-item {
+        border: 0;
+        border-radius: 6px;
+        padding: 10px 8px;
+        transition: background 0.18s ease;
+    }
+
+    .experience-item:hover,
+    .opensource-item:hover {
+        background: var(--page-hover);
+    }
+
+    .experience-title,
+    .opensource-title,
+    .cta-title {
+        font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 15px;
+        font-weight: 650;
+        letter-spacing: 0;
+        text-transform: none;
+    }
+
+    .skills-grid,
+    .skills-grid--3,
+    .skills-grid--5,
+    .skills-grid--6 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .skill-cell,
+    .skill-cell--expert,
+    .marquee-item {
+        border: 0;
+        border-radius: 5px;
+        padding: 4px 8px;
+        background: var(--page-soft);
+        color: var(--page-muted);
+        font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 13px;
+        letter-spacing: 0;
+        text-transform: none;
+    }
+
+    .skill-cell:hover,
+    .skill-cell--expert:hover {
+        background: #e8e8e5;
+        color: var(--page-ink);
+    }
+
+    .marquee-container {
+        border-bottom: 0;
+        padding: 22px 0 4px;
+        overflow: visible;
+        background: transparent;
+    }
+
+    .marquee,
+    .marquee-content {
+        flex-wrap: wrap;
+        gap: 8px;
+        animation: none;
+        padding-right: 0;
+        white-space: normal;
+    }
+
+    .marquee-content + .marquee-content {
+        display: none;
+    }
+
+    .cta-section {
+        border-bottom: 0;
+        background: transparent;
+        color: var(--page-ink);
+    }
+
+    .cta-content {
+        padding: 22px 0 4px;
+        text-align: left;
+    }
+
+    .cta-links {
+        justify-content: flex-start;
+    }
+
+    .cta-link,
+    .opensource-link {
+        border: 0;
+        border-radius: 6px;
+        padding: 7px 10px;
+        background: var(--page-soft);
+        color: var(--page-ink);
+        font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 13px;
+        letter-spacing: 0;
+        text-decoration: none;
+        text-transform: none;
+    }
 </style>

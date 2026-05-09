@@ -5,6 +5,7 @@ import {
 	buildFaqSchema,
 	buildHowToSchema,
 } from '../config/schema';
+import { primaryNavLinks } from '../config/navigation';
 import { siteMeta } from '../config/siteMeta';
 
 interface FAQ {
@@ -722,16 +723,243 @@ const breadcrumbSchema = buildBreadcrumbSchema([
             .footer-title { font-size: 2.5rem; }
         }
 
-        /* Prevent long words/URLs from breaking prose layout on mobile */
-        @media (max-width: 768px) {
-            .prose p,
-            .prose li,
-            .prose blockquote {
-                overflow-wrap: break-word;
-                word-break: break-word;
-            }
-        }
-    </style>
+		/* Prevent long words/URLs from breaking prose layout on mobile */
+		@media (max-width: 768px) {
+			.prose p,
+			.prose li,
+			.prose blockquote {
+				overflow-wrap: break-word;
+				word-break: break-word;
+			}
+		}
+
+		:root {
+			--page-bg: #fbfbfa;
+			--page-ink: #37352f;
+			--page-muted: #787774;
+			--page-soft: #f1f1ef;
+			--page-line: #e9e9e7;
+			--page-hover: #f7f7f5;
+		}
+
+		body {
+			background: var(--page-bg);
+			color: var(--page-ink);
+			cursor: text;
+		}
+
+		::selection {
+			background: #dbeafe;
+			color: var(--page-ink);
+		}
+
+		.noise {
+			display: none;
+		}
+
+		.header {
+			position: sticky;
+			top: 0;
+			z-index: 20;
+			border-bottom: 1px solid var(--page-line);
+			padding: 10px 18px;
+			background: rgba(251, 251, 250, 0.86);
+			backdrop-filter: blur(16px);
+		}
+
+		.logo {
+			font-family: 'Space Mono', monospace;
+			font-size: 13px;
+			font-weight: 700;
+			letter-spacing: 0;
+			color: var(--page-muted);
+		}
+
+		.nav-links {
+			gap: 6px;
+		}
+
+		.nav-link {
+			border-radius: 6px;
+			padding: 6px 8px;
+			color: var(--page-muted);
+			font-size: 12px;
+			letter-spacing: 0;
+			text-transform: none;
+		}
+
+		.nav-link:hover {
+			background: var(--page-soft);
+			color: var(--page-ink);
+		}
+
+		.nav-link::after {
+			display: none;
+		}
+
+		.article-banner,
+		.article-wrapper,
+		.faq-section,
+		.author-section {
+			width: min(100%, 720px);
+			margin: 0 auto;
+		}
+
+		.article-banner {
+			border-bottom: 0;
+			padding: 72px 36px 28px;
+			background: transparent;
+		}
+
+		.breadcrumb,
+		.article-description,
+		.meta-label,
+		.meta-value,
+		.faq-answer,
+		.author-label,
+		.author-role,
+		.author-bio {
+			color: var(--page-muted);
+			font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			letter-spacing: 0;
+			text-transform: none;
+		}
+
+		.breadcrumb {
+			margin-bottom: 18px;
+		}
+
+		.article-title {
+			font-family: Georgia, 'Times New Roman', serif;
+			font-size: clamp(2.6rem, 7vw, 4.8rem);
+			line-height: 1.08;
+			letter-spacing: -0.055em;
+			text-transform: none;
+		}
+
+		.article-description {
+			font-size: 1.1rem;
+			line-height: 1.72;
+		}
+
+		.article-meta {
+			border-top: 1px solid var(--page-line);
+		}
+
+		.tech-tag,
+		.author-link {
+			border: 0;
+			border-radius: 5px;
+			padding: 4px 8px;
+			background: var(--page-soft);
+			color: var(--page-muted);
+			font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			font-size: 13px;
+			letter-spacing: 0;
+			text-transform: none;
+		}
+
+		.article-wrapper {
+			padding: 22px 36px;
+		}
+
+		.prose {
+			font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			color: var(--page-ink);
+		}
+
+		.faq-section,
+		.author-section {
+			border-top: 1px solid var(--page-line);
+			border-bottom: 0;
+			padding: 28px 36px;
+			background: transparent;
+		}
+
+		.faq-title,
+		.author-name {
+			font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			font-size: 1.28rem;
+			font-weight: 700;
+			letter-spacing: -0.02em;
+			text-transform: none;
+		}
+
+		.faq-item {
+			border-bottom: 1px solid var(--page-line);
+		}
+
+		.faq-item summary {
+			border-radius: 6px;
+			padding: 12px 8px;
+		}
+
+		.faq-item summary:hover {
+			background: var(--page-hover);
+		}
+
+		.faq-answer {
+			border-top: 0;
+			margin: 0;
+			padding: 0 8px 14px;
+		}
+
+		.author-box {
+			border: 0;
+			border-radius: 8px;
+			padding: 0;
+			background: transparent;
+		}
+
+		.footer {
+			border-top: 1px solid var(--page-line);
+			background: var(--page-bg);
+			color: var(--page-muted);
+			padding: 36px 40px;
+		}
+
+		.footer-content {
+			width: min(100%, 720px);
+			max-width: 720px;
+			grid-template-columns: 1fr 1fr;
+			gap: 28px;
+		}
+
+		.footer-content > div:first-child {
+			display: none;
+		}
+
+		.footer-section-title,
+		.footer-link {
+			color: var(--page-muted);
+			font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			font-size: 13px;
+			letter-spacing: 0;
+			text-transform: none;
+		}
+
+		.footer-link:hover {
+			color: var(--page-ink);
+		}
+
+		@media (max-width: 760px) {
+			.article-banner,
+			.article-wrapper,
+			.faq-section,
+			.author-section {
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+
+			.article-banner {
+				padding-top: 44px;
+			}
+
+			.footer-content {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
 </head>
 <body>
     <div class="noise"></div>
@@ -739,10 +967,17 @@ const breadcrumbSchema = buildBreadcrumbSchema([
     <!-- Header -->
     <header class="header">
         <a href="/" class="logo">IMRAN.CODES</a>
-        <nav class="nav-links">
-            <a href="https://github.com/imran-vz" target="_blank" class="nav-link">GitHub</a>
-            <a href="https://www.linkedin.com/in/m0hammedimran/" target="_blank" class="nav-link">LinkedIn</a>
-            <a href="mailto:mohammedimran86992@gmail.com" class="nav-link">Contact</a>
+        <nav class="nav-links" aria-label="Primary navigation">
+            {primaryNavLinks.map((link) => (
+                <a
+                    href={link.href}
+                    target={'external' in link && link.external ? '_blank' : undefined}
+                    rel={'external' in link && link.external ? 'noopener noreferrer' : undefined}
+                    class="nav-link"
+                >
+                    {link.label}
+                </a>
+            ))}
         </nav>
     </header>
 
