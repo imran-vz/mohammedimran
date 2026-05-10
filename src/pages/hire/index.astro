@@ -1,0 +1,485 @@
+---
+import { hirePages } from '../../data/hire-pages';
+import { siteMeta } from '../../config/siteMeta';
+import Layout from '../../layouts/Layout.astro';
+import { buildBreadcrumbSchema } from '../../config/schema';
+
+const title = 'Hire Imran | React, TypeScript, GoLang Developer for Hire';
+const description =
+	'Looking to hire a senior developer? Imran is available for freelance and contract work in React, TypeScript, GoLang, and full-stack development. Based in Bengaluru, available worldwide.';
+const canonicalUrl = `${siteMeta.siteUrl}/hire`;
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+	{ name: 'Home', url: siteMeta.siteUrl },
+	{ name: 'Hire Me', url: canonicalUrl },
+]);
+---
+
+<Layout title={title} description={description} canonical={canonicalUrl}>
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+	</Fragment>
+
+	<main id="main-content">
+		<!-- Hero -->
+		<section class="page-hero">
+			<div class="page-hero-left">
+				<h1 class="page-hero-title">HIRE ME</h1>
+			</div>
+			<div class="page-hero-right">
+				<nav class="breadcrumb" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span>/</span>
+					<span>Hire Me</span>
+				</nav>
+				<h2 class="page-hero-headline">Available for freelance & contract work</h2>
+				<p class="page-hero-description">
+					I specialize in building production-grade web applications with React, TypeScript,
+					GoLang, and Rust. Whether you need a frontend specialist, backend engineer, or
+					full-stack developer — I can help ship your project.
+				</p>
+				<div class="hero-actions">
+					<a href={`mailto:${siteMeta.email}`} class="action-link">GET IN TOUCH →</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Specializations -->
+		<section class="section">
+			<div class="section-header">
+				<h2 class="section-title">Specializations</h2>
+				<span class="section-count">{String(hirePages.length).padStart(2, '0')}</span>
+			</div>
+			<div class="hire-grid">
+				{hirePages.map((page) => (
+					<a href={`/hire/${page.slug}`} class="hire-card">
+						<h3 class="hire-card-title">{page.headline}</h3>
+						<p class="hire-card-description">{page.intro}</p>
+						<div class="hire-card-skills">
+							{page.skills.slice(0, 4).map((skill) => (
+								<span class="hire-skill-tag">{skill}</span>
+							))}
+						</div>
+						<span class="hire-card-link">Learn more →</span>
+					</a>
+				))}
+			</div>
+		</section>
+
+		<!-- CTA -->
+		<section class="cta-section">
+			<div class="cta-content">
+				<h2 class="cta-title">LET'S WORK TOGETHER</h2>
+				<p class="cta-text">
+					Have a project in mind? Reach out and let's discuss how I can help.
+				</p>
+				<div class="cta-links">
+					<a href={`mailto:${siteMeta.email}`} class="cta-link">EMAIL ME →</a>
+					<a
+						href={siteMeta.social.linkedin}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="cta-link"
+					>
+						LINKEDIN ↗
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.page-hero {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		border-bottom: 4px solid var(--black);
+	}
+
+	@media (max-width: 900px) {
+		.page-hero {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.page-hero-left {
+		border-right: 4px solid var(--black);
+		padding: 60px 40px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		background: var(--yellow);
+	}
+
+	@media (max-width: 900px) {
+		.page-hero-left {
+			border-right: none;
+			border-bottom: 4px solid var(--black);
+		}
+	}
+
+	.page-hero-title {
+		font-family: 'Anton', sans-serif;
+		font-size: clamp(4rem, 12vw, 10rem);
+		line-height: 0.9;
+		letter-spacing: -0.02em;
+		text-transform: uppercase;
+	}
+
+	.page-hero-right {
+		padding: 60px 40px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 24px;
+	}
+
+	.breadcrumb {
+		font-size: 12px;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		color: var(--gray);
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.breadcrumb a:hover {
+		color: var(--black);
+	}
+
+	.page-hero-headline {
+		font-family: 'Anton', sans-serif;
+		font-size: clamp(2rem, 4vw, 3.5rem);
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		line-height: 1.1;
+	}
+
+	.page-hero-description {
+		font-size: 15px;
+		line-height: 1.8;
+		max-width: 600px;
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 8px;
+	}
+
+	.action-link {
+		padding: 14px 24px;
+		background: var(--black);
+		color: var(--yellow);
+		font-size: 12px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		border: 3px solid var(--black);
+		transition: all 0.3s;
+	}
+
+	.action-link:hover {
+		background: var(--yellow);
+		color: var(--black);
+	}
+
+	/* Hire Grid */
+	.hire-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2px;
+		background: var(--black);
+	}
+
+	@media (max-width: 900px) {
+		.hire-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.hire-card {
+		background: var(--page-bg);
+		padding: 40px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		transition: background 0.3s;
+	}
+
+	.hire-card:hover {
+		background: var(--yellow);
+	}
+
+	.hire-card-title {
+		font-family: 'Anton', sans-serif;
+		font-size: 1.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+	}
+
+	.hire-card-description {
+		font-size: 14px;
+		line-height: 1.8;
+		color: var(--gray);
+		flex: 1;
+	}
+
+	.hire-card:hover .hire-card-description {
+		color: var(--black);
+	}
+
+	.hire-card-skills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.hire-skill-tag {
+		padding: 4px 10px;
+		border: 2px solid var(--black);
+		font-size: 11px;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.hire-card-link {
+		font-size: 12px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		text-decoration: underline;
+		text-underline-offset: 4px;
+		margin-top: 8px;
+	}
+
+	/* CTA */
+	.cta-section {
+		background: var(--black);
+		color: var(--white);
+		border-bottom: 4px solid var(--black);
+	}
+
+	.cta-content {
+		padding: 80px 40px;
+		text-align: center;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.cta-title {
+		font-family: 'Anton', sans-serif;
+		font-size: 4rem;
+		text-transform: uppercase;
+		margin-bottom: 16px;
+	}
+
+	.cta-text {
+		font-size: 14px;
+		line-height: 1.8;
+		color: var(--gray);
+		margin-bottom: 40px;
+	}
+
+	.cta-links {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 16px;
+	}
+
+	.cta-link {
+		padding: 16px 32px;
+		border: 3px solid var(--white);
+		font-size: 12px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		transition: all 0.3s;
+	}
+
+	.cta-link:hover {
+		background: var(--yellow);
+		color: var(--black);
+		border-color: var(--yellow);
+	}
+
+	@media (max-width: 600px) {
+		.page-hero-left { padding: 32px 20px; }
+		.page-hero-right { padding: 28px 20px; }
+		.page-hero-description { font-size: 14px; }
+		.hire-card { padding: 24px 20px; }
+		.hire-card-title { font-size: 1.5rem; }
+		.cta-content { padding: 40px 20px; }
+		.cta-title { font-size: 2.5rem; }
+	}
+
+	/* Notion-style overrides */
+	.page-hero,
+	.section,
+	.cta-section {
+		width: min(100%, 720px);
+		margin: 0 auto;
+	}
+
+	.page-hero {
+		display: block;
+		border-bottom: 0;
+		padding-bottom: 28px;
+	}
+
+	.page-hero-left,
+	.page-hero-right {
+		display: block;
+		border: 0;
+		padding: 0;
+		background: transparent;
+	}
+
+	.page-hero-title {
+		font-family: Georgia, 'Times New Roman', serif;
+		font-size: clamp(3rem, 9vw, 5.5rem);
+		line-height: 1.06;
+		letter-spacing: -0.055em;
+		margin: 36px 0 20px;
+		text-transform: none;
+	}
+
+	.page-hero-headline,
+	.hire-card-title,
+	.cta-title {
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 15px;
+		font-weight: 650;
+		letter-spacing: 0;
+		text-transform: none;
+	}
+
+	.breadcrumb,
+	.page-hero-description,
+	.hire-card-description,
+	.cta-text {
+		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		letter-spacing: 0;
+		text-transform: none;
+	}
+
+	.page-hero-description {
+		max-width: 680px;
+		font-size: 1.1rem;
+		line-height: 1.72;
+	}
+
+	.action-link {
+		border: 0;
+		border-radius: 6px;
+		padding: 7px 10px;
+		background: var(--page-soft);
+		color: var(--page-ink);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 13px;
+		letter-spacing: 0;
+		text-transform: none;
+		font-weight: 500;
+	}
+
+	.action-link:hover {
+		background: var(--page-hover);
+		color: var(--page-ink);
+	}
+
+	.hire-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		background: transparent;
+	}
+
+	.hire-card {
+		background: transparent;
+		border-radius: 6px;
+		padding: 10px 8px;
+		transition: background 0.18s ease;
+	}
+
+	.hire-card:hover {
+		background: var(--page-hover);
+	}
+
+	.hire-card-title {
+		font-size: 15px;
+		font-weight: 650;
+		margin-bottom: 3px;
+	}
+
+	.hire-card-description {
+		font-size: 14px;
+		line-height: 1.65;
+		margin-bottom: 8px;
+	}
+
+	.hire-skill-tag {
+		border: 0;
+		border-radius: 5px;
+		padding: 2px 6px;
+		background: var(--page-soft);
+		color: var(--page-muted);
+		font-size: 11px;
+		letter-spacing: 0;
+		text-transform: none;
+	}
+
+	.hire-card-link {
+		margin-top: 8px;
+		color: var(--page-muted);
+		font-size: 13px;
+		font-weight: 500;
+		text-decoration: none;
+		letter-spacing: 0;
+		text-transform: none;
+	}
+
+	.hire-card:hover .hire-card-link {
+		color: var(--page-ink);
+	}
+
+	.cta-section {
+		border-bottom: 0;
+		background: transparent;
+		color: var(--page-ink);
+	}
+
+	.cta-content {
+		padding: 22px 0 4px;
+		text-align: left;
+	}
+
+	.cta-links {
+		justify-content: flex-start;
+	}
+
+	.cta-link {
+		border: 0;
+		border-radius: 6px;
+		padding: 7px 10px;
+		background: var(--page-soft);
+		color: var(--page-ink);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 13px;
+		letter-spacing: 0;
+		text-transform: none;
+		font-weight: 500;
+	}
+
+	.cta-link:hover {
+		background: var(--page-hover);
+		color: var(--page-ink);
+	}
+
+	@media (max-width: 760px) {
+		.hire-card { padding: 9px 8px; }
+	}
+</style>

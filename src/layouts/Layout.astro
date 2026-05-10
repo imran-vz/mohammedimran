@@ -2,7 +2,11 @@
 import { inject } from '@vercel/analytics';
 import Footer from '../components/Footer.astro';
 import Navbar from '../components/Navbar.astro';
-import { buildPersonSchema, buildWebsiteSchema } from '../config/schema';
+import {
+	buildPersonSchema,
+	buildSiteNavigationSchema,
+	buildWebsiteSchema,
+} from '../config/schema';
 import { siteMeta } from '../config/siteMeta';
 
 inject();
@@ -23,6 +27,13 @@ const {
 
 const structuredData = buildPersonSchema();
 const websiteSchema = buildWebsiteSchema();
+const navigationSchema = buildSiteNavigationSchema([
+	{ name: 'Home', url: `${siteMeta.siteUrl}/` },
+	{ name: 'Hire Me', url: `${siteMeta.siteUrl}/hire` },
+	{ name: 'Skills', url: `${siteMeta.siteUrl}/skills` },
+	{ name: 'Blog', url: `${siteMeta.siteUrl}/blog` },
+	{ name: 'GitHub', url: siteMeta.social.github },
+]);
 ---
 
 <!doctype html>
@@ -33,9 +44,6 @@ const websiteSchema = buildWebsiteSchema();
             name="viewport"
             content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5"
         />
-
-        <link rel="preconnect" href="https://api.github.com" />
-        <link rel="dns-prefetch" href="https://api.github.com" />
 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="canonical" href={canonical} />
@@ -81,6 +89,10 @@ const websiteSchema = buildWebsiteSchema();
         <script
             type="application/ld+json"
             set:html={JSON.stringify(websiteSchema)}
+        />
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(navigationSchema)}
         />
 
         <link rel="sitemap" href="/sitemap-index.xml" />

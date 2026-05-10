@@ -1,15 +1,11 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import {
-	buildBreadcrumbSchema,
-	buildFaqSchema,
-	buildServiceSchema,
-} from '../../config/schema';
+import { buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '../../config/schema';
 import { siteMeta } from '../../config/siteMeta';
-import { getHirePage, hirePages } from '../../data/hire-pages';
+import { getHirePage } from '../../data/hire-pages';
+import Layout from '../../layouts/Layout.astro';
 
 const { slug } = Astro.params;
-const page = getHirePage(slug!);
+const page = getHirePage(slug || '');
 
 if (!page) {
 	return new Response(null, { status: 404, statusText: 'Not Found' });
@@ -29,6 +25,7 @@ const faqSchema = buildFaqSchema(page.faq);
 
 const breadcrumbSchema = buildBreadcrumbSchema([
 	{ name: 'Home', url: siteMeta.siteUrl },
+	{ name: 'Hire Me', url: `${siteMeta.siteUrl}/hire` },
 	{ name: page.title, url: canonicalUrl },
 ]);
 ---
@@ -47,16 +44,17 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 				<h1 class="page-hero-title">HIRE ME</h1>
 			</div>
 			<div class="page-hero-right">
-				<nav class="breadcrumb" aria-label="Breadcrumb">
-					<a href="/">Home</a>
-					<span>/</span>
-					<span>{page.title}</span>
-				</nav>
+			<nav class="breadcrumb" aria-label="Breadcrumb">
+				<a href="/">Home</a>
+				<span>/</span>
+				<a href="/hire">Hire Me</a>
+				<span>/</span>
+				<span>{page.title}</span>
+			</nav>
 				<h2 class="page-hero-headline">{page.headline}</h2>
 				<p class="page-hero-description">{page.intro}</p>
 				<div class="hero-actions">
 					<a href="mailto:mohammedimran86992@gmail.com" class="action-link">GET IN TOUCH →</a>
-					<a href="/projects" class="action-link action-link--outline">VIEW PROJECTS →</a>
 				</div>
 			</div>
 		</section>

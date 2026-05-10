@@ -2,6 +2,7 @@
 import imranWebp from '../assets/imran.webp';
 import Layout from '../layouts/Layout.astro';
 import { siteMeta } from '../config/siteMeta';
+import { allProjects } from '../data/projects';
 
 // SEO Configuration
 const seo = {
@@ -25,36 +26,10 @@ const professionalServiceSchema = {
 	serviceType: ['Web Development', 'Full Stack Development', 'Software Engineering'],
 };
 
-const projects = [
-	{
-		name: 'SEER',
-		description: 'Tauri desktop app for media file management, metadata editing & re-encoding',
-		tech: ['Rust', 'TypeScript', 'React', 'FFmpeg'],
-		url: 'https://github.com/imran-vz/seer',
-		number: '01',
-	},
-	{
-		name: 'COCOACOMAA STORE',
-		description: 'E-commerce storefront for custom dessert ordering with product catalog, cart & checkout',
-		tech: ['TypeScript', 'React', 'Vercel'],
-		url: 'https://github.com/imran-vz/cocoacomaastore',
-		number: '02',
-	},
-	{
-		name: 'GOSQLIT',
-		description: 'Terminal UI SQL client with encrypted credentials & multi-database support',
-		tech: ['Go', 'Bubble Tea', 'PostgreSQL'],
-		url: 'https://github.com/imran-vz/gosqlit',
-		number: '03',
-	},
-	{
-		name: 'DBUNK',
-		description: 'Desktop database workspace for exploring data, running SQL & editing schemas',
-		tech: ['Tauri', 'React', 'TypeScript', 'Rust'],
-		url: 'https://github.com/imran-vz/dbunk',
-		number: '04',
-	},
-];
+const projects = allProjects.map((p, i) => ({
+	...p,
+	number: String(i + 1).padStart(2, '0'),
+}));
 
 const skills = ['REACT', 'TYPESCRIPT', 'GO', 'RUST', 'NODE.JS', 'POSTGRESQL', 'NEXT.JS', 'TAURI'];
 ---
@@ -537,7 +512,7 @@ const skills = ['REACT', 'TYPESCRIPT', 'GO', 'RUST', 'NODE.JS', 'POSTGRESQL', 'N
     <section class="section">
         <div class="section-header">
             <h2 class="section-title">Selected Work</h2>
-			<span class="section-count">04</span>
+			<span class="section-count">03</span>
         </div>
         <div class="projects-list">
             {projects.map((project) => (
@@ -595,6 +570,23 @@ const skills = ['REACT', 'TYPESCRIPT', 'GO', 'RUST', 'NODE.JS', 'POSTGRESQL', 'N
             </div>
         </div>
     </section>
-    
+
+    <!-- Hire Me -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Hire Me</h2>
+        </div>
+        <div class="work-grid">
+            <a href="/hire" class="work-item">
+                <h3 class="work-company">Available for Work</h3>
+                <p class="work-role">React · TypeScript · GoLang</p>
+                <p class="work-description">
+                    Open for freelance and contract engagements. Full-stack development, consulting, and code reviews.
+                </p>
+                <span class="work-link">View Specializations →</span>
+            </a>
+        </div>
+    </section>
+
     </main>
 </Layout>

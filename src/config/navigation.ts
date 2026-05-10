@@ -1,6 +1,7 @@
 import { siteMeta } from './siteMeta';
 
 export const primaryNavLinks = [
+	{ href: '/hire', label: 'Hire' },
 	{ href: '/skills', label: 'Skills' },
 	{ href: '/blog', label: 'Blog' },
 	{ href: siteMeta.social.github, label: 'GitHub', external: true },

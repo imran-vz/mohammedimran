@@ -3,9 +3,7 @@ import { getCollection } from 'astro:content';
 import { primaryNavLinks } from '../../config/navigation';
 import { siteMeta } from '../../config/siteMeta';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const seo = {
 	title: 'Blog | Imran | Guides on React, TypeScript, Go & Full Stack Development',

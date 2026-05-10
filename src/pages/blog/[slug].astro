@@ -4,7 +4,7 @@ import BlogPost from '../../layouts/BlogPost.astro';
 
 const { slug } = Astro.params;
 
-const post = await getEntry('blog', slug!);
+const post = await getEntry('blog', slug || '');
 
 if (!post) {
 	return new Response(null, { status: 404, statusText: 'Not Found' });

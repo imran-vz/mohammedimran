@@ -1,3 +1,12 @@
+import { allProjects } from './projects';
+import type { Project } from './projects';
+
+function getProject(name: string): Project {
+	const project = allProjects.find((p) => p.name === name);
+	if (!project) throw new Error(`Project "${name}" not found`);
+	return project;
+}
+
 export interface HirePageData {
 	slug: string;
 	title: string;
@@ -9,12 +18,7 @@ export interface HirePageData {
 		title: string;
 		points: { heading: string; text: string }[];
 	};
-	projects: {
-		name: string;
-		description: string;
-		tech: string[];
-		url: string;
-	}[];
+	projects: Project[];
 	skills: string[];
 	faq: { question: string; answer: string }[];
 }
@@ -51,18 +55,9 @@ export const hirePages: HirePageData[] = [
 		},
 		projects: [
 			{
-				name: 'SEER',
+				...getProject('SEER'),
 				description:
 					'A Tauri desktop application for media file management with a React frontend. Features include metadata editing, batch re-encoding with FFmpeg, and a responsive file browser interface built entirely in React and TypeScript.',
-				tech: ['React', 'TypeScript', 'Tauri', 'Rust', 'FFmpeg'],
-				url: 'https://github.com/imran-vz/seer',
-			},
-			{
-				name: 'Cocoacomaa Store',
-				description:
-					'A full-featured e-commerce storefront built with modern web technologies and TypeScript. Includes product catalog, shopping cart, checkout flow, and responsive design optimized for conversion.',
-				tech: ['TypeScript', 'React', 'Vercel'],
-				url: 'https://github.com/imran-vz/cocoacomaastore',
 			},
 		],
 		skills: [
@@ -131,11 +126,9 @@ export const hirePages: HirePageData[] = [
 		},
 		projects: [
 			{
-				name: 'GOSQLIT',
+				...getProject('GOSQLIT'),
 				description:
 					'A terminal UI SQL client built with Go and Bubble Tea. Features encrypted credential storage, multi-database support (PostgreSQL, MySQL, SQLite), query execution with formatted output, and an intuitive keyboard-driven interface.',
-				tech: ['Go', 'Bubble Tea', 'PostgreSQL', 'MySQL', 'SQLite'],
-				url: 'https://github.com/imran-vz/gosqlit',
 			},
 		],
 		skills: [
@@ -204,25 +197,14 @@ export const hirePages: HirePageData[] = [
 		},
 		projects: [
 			{
-				name: 'SEER',
+				...getProject('SEER'),
 				description:
 					'A Tauri desktop application for media file management built with TypeScript and React. The entire frontend is written in strict TypeScript with full type coverage across components, hooks, and Tauri IPC commands.',
-				tech: ['TypeScript', 'React', 'Tauri', 'Rust'],
-				url: 'https://github.com/imran-vz/seer',
 			},
 			{
-				name: 'Cocoacomaa Store',
-				description:
-					'An e-commerce storefront built entirely in TypeScript. Features type-safe API routes, validated form inputs with Zod, and a fully typed product catalog with cart management.',
-				tech: ['TypeScript', 'React', 'Vercel'],
-				url: 'https://github.com/imran-vz/cocoacomaastore',
-			},
-			{
-				name: 'GOSQLIT',
+				...getProject('GOSQLIT'),
 				description:
 					'While the core is written in Go, this project demonstrates my ability to work across language boundaries — choosing the right tool for the job while maintaining quality across the stack.',
-				tech: ['Go', 'Bubble Tea', 'PostgreSQL'],
-				url: 'https://github.com/imran-vz/gosqlit',
 			},
 		],
 		skills: [

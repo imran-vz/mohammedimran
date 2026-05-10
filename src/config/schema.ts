@@ -191,3 +191,21 @@ export function buildServiceSchema(props: ServiceSchemaProps) {
 		serviceType: props.skills.slice(0, 5),
 	};
 }
+
+interface NavigationItem {
+	name: string;
+	url: string;
+}
+
+export function buildSiteNavigationSchema(items: NavigationItem[]) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'SiteNavigationElement',
+		name: `${siteMeta.brandShort} Site Navigation`,
+		hasPart: items.map((item) => ({
+			'@type': 'SiteNavigationElement',
+			name: item.name,
+			url: item.url,
+		})),
+	};
+}
