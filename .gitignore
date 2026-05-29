@@ -1,6 +1,9 @@
 # build output
 dist/
 
+# local scratch space
+tmp/
+
 # generated types
 .astro/
 

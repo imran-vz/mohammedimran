@@ -54,7 +54,13 @@ export const hirePages: HirePageData[] = [
 				},
 			],
 		},
-		projects: [getProject('SEER'), getProject('GOSQLIT'), getProject('DBUNK')],
+		projects: [
+			getProject('DBUNK'),
+			getProject('Cocoa Comaa Store'),
+			getProject('GOSQLIT'),
+			getProject('SEER'),
+			getProject('pi-observability'),
+		],
 		skills: [
 			'Full Stack Development',
 			'React & Next.js',
@@ -127,9 +133,24 @@ export const hirePages: HirePageData[] = [
 		},
 		projects: [
 			{
+				...getProject('DBUNK'),
+				description:
+					'A Tauri desktop database workspace with a React and TypeScript frontend, Monaco-powered SQL editor, schema browser, data grids, and Rust-backed database integrations.',
+			},
+			{
+				...getProject('Cocoa Comaa Store'),
+				description:
+					'A production-style Next.js and React store operations app covering POS ordering, inventory, manager workflows, admin reporting, and precomputed analytics.',
+			},
+			{
 				...getProject('SEER'),
 				description:
-					'A Tauri desktop application for media file management with a React frontend. Features include metadata editing, batch re-encoding with FFmpeg, and a responsive file browser interface built entirely in React and TypeScript.',
+					'A Tauri desktop media toolkit with a React and TypeScript frontend for file browsing, codec and stream inspection, bitrate analysis, and exportable media reports.',
+			},
+			{
+				...getProject('Vegam'),
+				description:
+					'A React and TypeScript Tauri app for direct macOS and Android file transfer using Iroh P2P networking and a Rust backend.',
 			},
 		],
 		skills: [
@@ -206,7 +227,7 @@ export const hirePages: HirePageData[] = [
 			{
 				...getProject('GOSQLIT'),
 				description:
-					'A terminal UI SQL client built with Go and Bubble Tea. Features encrypted credential storage, multi-database support (PostgreSQL, MySQL, SQLite), query execution with formatted output, and an intuitive keyboard-driven interface.',
+					'A terminal UI SQL client built with Go and Bubble Tea. Features encrypted credential storage, PostgreSQL schema browsing, a multi-line query editor, query cancellation, paginated results, and an intuitive keyboard-driven interface.',
 			},
 		],
 		skills: [
@@ -281,14 +302,34 @@ export const hirePages: HirePageData[] = [
 		},
 		projects: [
 			{
-				...getProject('SEER'),
+				...getProject('DBUNK'),
 				description:
-					'A Tauri desktop application for media file management built with TypeScript and React. The entire frontend is written in strict TypeScript with full type coverage across components, hooks, and Tauri IPC commands.',
+					'A type-safe React and TypeScript desktop database workspace with a Monaco SQL editor, TanStack-powered data grids, and typed Tauri IPC boundaries to a Rust backend.',
 			},
 			{
-				...getProject('GOSQLIT'),
+				...getProject('Cocoa Comaa Store'),
 				description:
-					'While the core is written in Go, this project demonstrates my ability to work across language boundaries — choosing the right tool for the job while maintaining quality across the stack.',
+					'A full-stack TypeScript app using Next.js, PostgreSQL, Drizzle ORM, Better Auth, TanStack tooling, and Trigger.dev scheduled jobs for analytics.',
+			},
+			{
+				...getProject('SEER'),
+				description:
+					'A Tauri desktop media toolkit built with React and TypeScript for file browsing, codec and stream inspection, bitrate analysis, and exportable media data.',
+			},
+			{
+				...getProject('pi-observability'),
+				description:
+					'A TypeScript extension for the pi coding agent that renders a live observability footer and /obs TUI dashboard for tokens, cost, runtime, TPS, and git stats.',
+			},
+			{
+				...getProject('pi-context-breakup'),
+				description:
+					'A small TypeScript pi extension that categorizes context-window usage into prompts, rules, tools, MCP, skills, user context, and messages.',
+			},
+			{
+				...getProject('Vegam'),
+				description:
+					'A React and TypeScript Tauri app for direct macOS and Android file transfer, backed by Rust and Iroh P2P networking.',
 			},
 		],
 		skills: [
