@@ -2,11 +2,8 @@
 import { inject } from '@vercel/analytics';
 import Footer from '../components/Footer.astro';
 import Navbar from '../components/Navbar.astro';
-import {
-	buildPersonSchema,
-	buildSiteNavigationSchema,
-	buildWebsiteSchema,
-} from '../config/schema';
+import { agentToolDefinitions, contactLinks, publicProjects, siteSummary } from '../config/agent-discovery';
+import { buildPersonSchema, buildSiteNavigationSchema, buildWebsiteSchema } from '../config/schema';
 import { siteMeta } from '../config/siteMeta';
 
 inject();
@@ -34,6 +31,12 @@ const navigationSchema = buildSiteNavigationSchema([
 	{ name: 'Blog', url: `${siteMeta.siteUrl}/blog` },
 	{ name: 'GitHub', url: siteMeta.social.github },
 ]);
+const webMcpData = {
+	tools: agentToolDefinitions,
+	siteSummary,
+	publicProjects,
+	contactLinks,
+};
 ---
 
 <!doctype html>
@@ -103,6 +106,45 @@ const navigationSchema = buildSiteNavigationSchema([
         <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet" />
 
         <slot name="head" />
+
+        <script define:vars={{ webMcpData }}>
+            (() => {
+                const modelContext = document.modelContext || navigator.modelContext;
+                if (!modelContext) return;
+
+                const controller = new AbortController();
+                const executeTool = async (name) => {
+                    if (name === 'get_site_summary') return webMcpData.siteSummary;
+                    if (name === 'list_projects') return webMcpData.publicProjects;
+                    if (name === 'get_contact_links') return webMcpData.contactLinks;
+                    throw new Error(`Unknown WebMCP tool: ${name}`);
+                };
+                const tools = webMcpData.tools.map((tool) => ({
+                    ...tool,
+                    execute: async () => executeTool(tool.name),
+                }));
+
+                if (typeof modelContext.registerTool === 'function') {
+                    for (const tool of tools) {
+                        try {
+                            modelContext.registerTool(tool, { signal: controller.signal });
+                        } catch (error) {
+                            console.debug('WebMCP tool registration skipped', tool.name, error);
+                        }
+                    }
+                }
+
+                if (typeof modelContext.provideContext === 'function') {
+                    try {
+                        modelContext.provideContext({ tools }, { signal: controller.signal });
+                    } catch (error) {
+                        console.debug('WebMCP context registration skipped', error);
+                    }
+                }
+
+                window.addEventListener('pagehide', () => controller.abort(), { once: true });
+            })();
+        </script>
 
         <meta name="theme-color" content="#ffff00" />
 

@@ -4,6 +4,7 @@
 # Allow all search engine crawlers
 User-agent: *
 Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 # Disallow internal/build directories
 Disallow: /_astro/
@@ -18,12 +19,14 @@ Sitemap: https://imran.codes/sitemap-index.xml
 # Google-specific directives
 User-agent: Googlebot
 Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Disallow: /_astro/
 Disallow: /api/
 
 # Bing-specific directives
 User-agent: Bingbot
 Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Disallow: /_astro/
 Disallow: /api/
 

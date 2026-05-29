@@ -6,13 +6,13 @@ import Layout from '../layouts/Layout.astro';
 
 // SEO Configuration
 const seo = {
-	title: 'Imran | Senior Full Stack Developer | React, TypeScript, Go',
+	title: 'Imran | Full Stack Developer for Hire in Bangalore | React, TypeScript, Go',
 	description:
-		'Imran - Senior Full Stack Developer with 5+ years experience in React, TypeScript, Go, and Rust. Building data-intensive applications at Thoughtseed. Based in Bengaluru, available remotely.',
+		'Imran is a senior full stack developer for hire in Bangalore/Bengaluru with 5+ years of React, TypeScript, Go, and Rust experience. Available for freelance and contract work.',
 	image: siteMeta.ogImage,
 	url: siteMeta.siteUrl,
 	keywords:
-		'Imran, Mohammed Imran, Mohammed Imran developer, Full Stack Developer, React Developer, TypeScript Expert, Go Developer, Rust Developer, Bengaluru Developer, Senior Developer India, imran-vz, Web Developer, Software Engineer',
+		'Imran, Mohammed Imran, developer for hire Bangalore, full stack developer Bangalore, React developer Bangalore, TypeScript developer Bangalore, Go developer Bangalore, Bengaluru Developer, Senior Developer India, imran-vz, Web Developer, Software Engineer',
 };
 
 const professionalServiceSchema = {
@@ -20,7 +20,7 @@ const professionalServiceSchema = {
 	'@type': 'ProfessionalService',
 	image: imranWebp.src,
 	name: 'Imran - Full Stack Development',
-	description: 'Full Stack Development services specializing in React, TypeScript, Go, and Rust',
+	description: 'Full Stack Development services in Bangalore/Bengaluru specializing in React, TypeScript, Go, and Rust',
 	url: siteMeta.siteUrl,
 	areaServed: 'Worldwide',
 	serviceType: ['Web Development', 'Full Stack Development', 'Software Engineering'],
@@ -33,9 +33,11 @@ const projects = allProjects.map((p, i) => ({
 
 const skills = ['REACT', 'TYPESCRIPT', 'GO', 'RUST', 'NODE.JS', 'POSTGRESQL', 'NEXT.JS', 'TAURI'];
 const agentDiscoveryLinks = [
+	'</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
+	'</.well-known/openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json"',
+	'</auth.md>; rel="service-doc"; type="text/markdown"',
+	'</.well-known/agent-skills/index.json>; rel="describedby"; type="application/json"',
 	'</sitemap-index.xml>; rel="describedby"; type="application/xml"',
-	'</manifest.json>; rel="describedby"; type="application/manifest+json"',
-	'</skills>; rel="service-doc"; type="text/html"',
 ];
 
 Astro.response.headers.set('Link', agentDiscoveryLinks.join(', '));
@@ -475,12 +477,12 @@ Astro.response.headers.set('Link', agentDiscoveryLinks.join(', '));
         <div class="hero-right">
             <div>
                 <p class="hero-description">
-                    Senior Full Stack Developer specializing in building data-intensive applications.
+                    Senior Full Stack Developer for hire in Bangalore/Bengaluru, specializing in data-intensive applications.
                 </p>
                 <div class="hero-meta">
                     <div class="meta-item">
                         <div class="meta-label">Location</div>
-                        <div class="meta-value">Bengaluru, India</div>
+                        <div class="meta-value">Bengaluru (Bangalore), India</div>
                     </div>
                     <div class="meta-item">
                         <div class="meta-label">Current Role</div>
@@ -586,9 +588,9 @@ Astro.response.headers.set('Link', agentDiscoveryLinks.join(', '));
         <div class="work-grid">
             <a href="/hire" class="work-item">
                 <h3 class="work-company">Available for Work</h3>
-                <p class="work-role">React · TypeScript · GoLang</p>
+                <p class="work-role">Bangalore · React · TypeScript · GoLang</p>
                 <p class="work-description">
-                    Open for freelance and contract engagements. Full-stack development, consulting, and code reviews.
+                    Open for freelance and contract engagements in Bangalore/Bengaluru and remotely. Full-stack development, consulting, and code reviews.
                 </p>
                 <span class="work-link">View Specializations →</span>
             </a>

@@ -7,6 +7,10 @@ const personAlternateNames = [
 	'developer Imran',
 	'developer Mohammed imran',
 	'Mohammed Imran Developer Bengaluru',
+	'Mohammed Imran Developer Bangalore',
+	'developer for hire Bangalore',
+	'full stack developer Bangalore',
+	'react developer Bangalore',
 	'bengaluru developer',
 	'bengaluru developer Mohammed Imran',
 	'bengaluru developer Mohammed',
@@ -184,6 +188,7 @@ export function buildServiceSchema(props: ServiceSchemaProps) {
 		areaServed: props.isLocal
 			? [
 					{ '@type': 'City', name: 'Bengaluru' },
+					{ '@type': 'City', name: 'Bangalore' },
 					{ '@type': 'Country', name: 'India' },
 					{ '@type': 'Place', name: 'Worldwide (Remote)' },
 				]

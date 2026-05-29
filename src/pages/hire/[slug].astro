@@ -18,7 +18,7 @@ const serviceSchema = buildServiceSchema({
 	description: page.metaDescription,
 	canonicalUrl,
 	skills: page.skills,
-	isLocal: page.slug.includes('bengaluru'),
+	isLocal: page.slug.includes('bengaluru') || page.slug.includes('bangalore'),
 });
 
 const faqSchema = buildFaqSchema(page.faq);

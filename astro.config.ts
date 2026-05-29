@@ -1,8 +1,8 @@
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
 import vercel from '@astrojs/vercel';
-import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, sharpImageService } from 'astro/config';
+import { hirePages } from './src/data/hire-pages';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,6 +11,12 @@ export default defineConfig({
 	adapter: vercel(),
 	build: { inlineStylesheets: 'always' },
 	site: 'https://imran.codes',
-	vite: { plugins: [tailwindcss()] },
-	integrations: [sitemap({ changefreq: 'always', lastmod: new Date() }), svelte()],
+	integrations: [
+		sitemap({
+			changefreq: 'always',
+			customPages: hirePages.map((page) => `https://imran.codes/hire/${page.slug}`),
+			lastmod: new Date(),
+		}),
+		svelte(),
+	],
 });

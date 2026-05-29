@@ -31,13 +31,10 @@
 		"@astrojs/sitemap": "^3.7.2",
 		"@astrojs/svelte": "^7.2.5",
 		"@astrojs/vercel": "^9.0.5",
-		"@tailwindcss/typography": "^0.5.19",
-		"@tailwindcss/vite": "^4.2.2",
 		"@vercel/analytics": "^1.6.1",
 		"astro": "^5.18.1",
 		"sharp": "^0.34.5",
 		"svelte": "^5.55.2",
-		"tailwindcss": "^4.2.2",
 		"turndown": "^7.2.4"
 	},
 	"devDependencies": {

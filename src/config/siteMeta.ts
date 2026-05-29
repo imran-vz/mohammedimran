@@ -5,9 +5,9 @@ export const siteMeta = {
 	logoUrl: 'https://imran.codes/icons/android-chrome-512x512.png',
 	ogImage: 'https://imran.codes/og-image.svg',
 	email: 'mohammedimran86992@gmail.com',
-	defaultTitle: 'Imran | Senior Full Stack Developer | React, TypeScript, Go',
+	defaultTitle: 'Imran | Full Stack Developer for Hire in Bangalore | React, TypeScript, Go',
 	defaultDescription:
-		'Imran - Senior Full Stack Developer with 5+ years experience in React, TypeScript, Go, and Rust. Building data-intensive applications at Thoughtseed. Based in Bengaluru, available remotely.',
+		'Imran is a senior full stack developer for hire in Bangalore/Bengaluru with 5+ years of React, TypeScript, Go, and Rust experience. Available for freelance and contract work.',
 	social: {
 		twitter: '@imran_vzz',
 		twitterUrl: 'https://www.twitter.com/imran_vzz',
@@ -19,7 +19,15 @@ export const siteMeta = {
 		region: 'Karnataka',
 		country: 'India',
 	},
-	alternateNames: ['Imran', 'Imran Developer', 'Imran Go Developer', 'imran-vz'],
+	alternateNames: [
+		'Imran',
+		'Imran Developer',
+		'Imran Go Developer',
+		'imran-vz',
+		'Bangalore Full Stack Developer',
+		'Bengaluru Full Stack Developer',
+		'Developer for Hire in Bangalore',
+	],
 	employer: 'Thoughtseed',
 };
 
