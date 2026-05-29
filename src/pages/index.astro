@@ -1,8 +1,8 @@
 ---
 import imranWebp from '../assets/imran.webp';
-import Layout from '../layouts/Layout.astro';
 import { siteMeta } from '../config/siteMeta';
 import { allProjects } from '../data/projects';
+import Layout from '../layouts/Layout.astro';
 
 // SEO Configuration
 const seo = {
@@ -32,6 +32,13 @@ const projects = allProjects.map((p, i) => ({
 }));
 
 const skills = ['REACT', 'TYPESCRIPT', 'GO', 'RUST', 'NODE.JS', 'POSTGRESQL', 'NEXT.JS', 'TAURI'];
+const agentDiscoveryLinks = [
+	'</sitemap-index.xml>; rel="describedby"; type="application/xml"',
+	'</manifest.json>; rel="describedby"; type="application/manifest+json"',
+	'</skills>; rel="service-doc"; type="text/html"',
+];
+
+Astro.response.headers.set('Link', agentDiscoveryLinks.join(', '));
 ---
 
 <Layout
