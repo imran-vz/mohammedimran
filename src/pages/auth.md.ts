@@ -35,7 +35,7 @@ Supported identity types:
 
 Supported credential types:
 
-- bearer_token
+- access_token (sent as \`Authorization: Bearer <token>\`)
 
 Supported scopes:
 

@@ -18,7 +18,7 @@ export const POST: APIRoute = async () =>
 	jsonResponse({
 		...registrationMetadata,
 		status: 'accepted',
-		credential_type: 'bearer_token',
+		credential_type: 'access_token',
 		access_token: 'public-read-only-discovery-token',
 		token_type: 'Bearer',
 		scope: discoveryApi.scope,

@@ -5,7 +5,7 @@ export const GET: APIRoute = () =>
 	jsonResponse({
 		status: 'ok',
 		identity_type: 'anonymous',
-		credential_types_supported: ['bearer_token'],
+		credential_types_supported: ['access_token'],
 		scopes_supported: [discoveryApi.scope],
 	});
 
