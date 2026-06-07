@@ -14,7 +14,7 @@
 	"repository": {
 		"url": "https://github.com/imran-vz/mohammedimran"
 	},
-	"packageManager": "pnpm@11.5.0",
+	"packageManager": "pnpm@11.5.2",
 	"private": true,
 	"homepage": "https://imran.codes",
 	"scripts": {
@@ -28,18 +28,18 @@
 		"lint:fix": "biome check --write ."
 	},
 	"dependencies": {
-		"@astrojs/sitemap": "^3.7.2",
+		"@astrojs/sitemap": "^3.7.3",
 		"@astrojs/svelte": "^7.2.5",
 		"@astrojs/vercel": "^9.0.5",
 		"@resvg/resvg-js": "^2.6.2",
 		"@vercel/analytics": "^1.6.1",
-		"astro": "^5.18.1",
+		"astro": "^5.18.2",
 		"sharp": "^0.34.5",
-		"svelte": "^5.55.2",
+		"svelte": "^5.56.2",
 		"turndown": "^7.2.4"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.10",
+		"@biomejs/biome": "2.4.16",
 		"@types/turndown": "^5.0.6",
 		"supports-color": "^10.2.2"
 	}
