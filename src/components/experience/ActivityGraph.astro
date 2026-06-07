@@ -112,6 +112,13 @@ const dayLabels = [
 					</div>
 				</div>
 			</div>
+			<script is:inline>
+				(() => {
+					for (const el of document.querySelectorAll('.activity-graph__scroll')) {
+						el.scrollLeft = el.scrollWidth;
+					}
+				})();
+			</script>
 
 			<div class="activity-graph__footer">
 				<a
