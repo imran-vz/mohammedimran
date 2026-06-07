@@ -8,8 +8,7 @@
 		"url": "https://github.com/imran-vz"
 	},
 	"engines": {
-		"node": "24.x",
-		"pnpm": "11.x"
+		"node": "24.x"
 	},
 	"repository": {
 		"url": "https://github.com/imran-vz/mohammedimran"
