@@ -1,0 +1,30 @@
+---
+import { experience } from '../../lib/experience';
+
+const { personalNote } = experience.profile;
+---
+
+{
+	personalNote && (
+		<aside class="exp-note section" aria-label="Personal note">
+			<p class="exp-note__text">{personalNote}</p>
+		</aside>
+	)
+}
+
+<style>
+	.exp-note {
+		margin-top: 16px;
+		padding-top: 24px;
+	}
+
+	.exp-note__text {
+		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 13px;
+		font-style: italic;
+		line-height: 1.65;
+		max-width: 540px;
+		opacity: 0.9;
+	}
+</style>

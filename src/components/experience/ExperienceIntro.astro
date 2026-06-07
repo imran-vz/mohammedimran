@@ -1,0 +1,54 @@
+---
+import { experience } from '../../lib/experience';
+
+const { profile } = experience;
+---
+
+<section class="exp-intro" aria-labelledby="profile-name">
+	<p class="exp-intro__eyebrow">{profile.location}</p>
+	<h1 id="profile-name" class="exp-intro__name">{profile.name}</h1>
+	<p class="exp-intro__headline">{profile.displayHeadline}</p>
+	<p class="exp-intro__subheadline">{profile.supportingHeadline}</p>
+</section>
+
+<style>
+	.exp-intro {
+		padding-bottom: 36px;
+		border-bottom: 1px solid var(--page-line);
+		margin-bottom: 8px;
+	}
+
+	.exp-intro__eyebrow {
+		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 13px;
+		line-height: 1.5;
+		margin-bottom: 10px;
+	}
+
+	.exp-intro__name {
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: clamp(1.75rem, 4vw, 2.25rem);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		line-height: 1.15;
+		margin-bottom: 10px;
+	}
+
+	.exp-intro__headline {
+		color: var(--page-ink);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 1.125rem;
+		font-weight: 600;
+		line-height: 1.45;
+		margin-bottom: 8px;
+	}
+
+	.exp-intro__subheadline {
+		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 15px;
+		line-height: 1.65;
+		max-width: 640px;
+	}
+</style>

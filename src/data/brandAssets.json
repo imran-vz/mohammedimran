@@ -1,0 +1,71 @@
+{
+	"companies": {
+		"thoughtseed": {
+			"name": "ThoughtSeed",
+			"asset": "/assets/brand/companies/thoughtseed.jpg",
+			"source": "linkedin_company"
+		},
+		"factoreal": {
+			"name": "Factoreal",
+			"asset": "/assets/brand/companies/factoreal.svg",
+			"source": "company_website"
+		},
+		"satisfilabs": {
+			"name": "Satisfi Labs",
+			"asset": "/assets/brand/companies/satisfilabs.png",
+			"source": "company_website"
+		},
+		"ather": {
+			"name": "Ather Energy",
+			"asset": "/assets/brand/companies/ather.svg",
+			"source": "company_website"
+		},
+		"protoezy": {
+			"name": "Protoezy",
+			"asset": "/assets/brand/companies/protoezy.ico",
+			"source": "company_website"
+		},
+		"pongo": {
+			"name": "Pongo Trasteros",
+			"asset": "/assets/brand/companies/pongo.svg",
+			"source": "company_website"
+		}
+	},
+	"projects": {
+		"gosqlit": {
+			"name": "GOSQLIT",
+			"asset": "/assets/brand/projects/gosqlit.svg",
+			"source": "generated_fallback"
+		},
+		"seer": {
+			"name": "Seer",
+			"asset": "/assets/brand/projects/seer.svg",
+			"source": "github_repo"
+		},
+		"dbunk": {
+			"name": "DBUNK",
+			"asset": "/assets/brand/projects/dbunk.png",
+			"source": "github_repo"
+		},
+		"thirai": {
+			"name": "Thirai",
+			"asset": "/assets/brand/projects/thirai.svg",
+			"source": "github_repo"
+		},
+		"prompter": {
+			"name": "Prompter",
+			"asset": "/assets/brand/projects/prompter.svg",
+			"source": "github_repo"
+		},
+		"pi-observability": {
+			"name": "pi-observability",
+			"asset": "/assets/brand/projects/pi-observability.svg",
+			"source": "generated_fallback"
+		},
+		"vegam": {
+			"name": "Vegam",
+			"asset": "/assets/brand/projects/vegam.png",
+			"source": "github_repo"
+		}
+	}
+}

@@ -1,0 +1,294 @@
+---
+/**
+ * ActivityGraph — GitHub-style contribution heatmap.
+ *
+ * Astro port of the jalco-ui activity-graph registry item (ui.justinlevine.me),
+ * rewritten to drop React / radix-ui / Tailwind in favour of this project's
+ * scoped CSS + --page-* design tokens. Native `title` tooltips, server-side
+ * fetch, monochrome ink-intensity ramp.
+ */
+import { type ActivityEntry, fetchGitHubContributions } from '../../lib/github';
+
+interface Props {
+	username?: string;
+	weeks?: number;
+}
+
+const { username = 'imran-vz', weeks: weekCount = 53 } = Astro.props;
+
+const data = await fetchGitHubContributions(username);
+
+type Day = { date: Date; count: number; level: 0 | 1 | 2 | 3 | 4 };
+
+function buildWeeks(entries: ActivityEntry[], count: number): Day[][] {
+	const byDate = new Map<string, ActivityEntry>();
+	for (const e of entries) byDate.set(e.date, e);
+
+	const today = new Date();
+	today.setHours(0, 0, 0, 0);
+	const endOfWeek = new Date(today);
+	endOfWeek.setDate(today.getDate() + (6 - today.getDay()));
+
+	const totalDays = count * 7;
+	const start = new Date(endOfWeek);
+	start.setDate(endOfWeek.getDate() - totalDays + 1);
+
+	const weeks: Day[][] = [];
+	let week: Day[] = [];
+	for (let i = 0; i < totalDays; i++) {
+		const d = new Date(start);
+		d.setDate(start.getDate() + i);
+		const hit = byDate.get(d.toISOString().slice(0, 10));
+		week.push({ date: d, count: hit?.count ?? 0, level: hit?.level ?? 0 });
+		if (week.length === 7) {
+			weeks.push(week);
+			week = [];
+		}
+	}
+	if (week.length) weeks.push(week);
+	return weeks;
+}
+
+function monthLabels(weeks: Day[][]): { label: string; col: number }[] {
+	const out: { label: string; col: number }[] = [];
+	let last = '';
+	weeks.forEach((week, w) => {
+		const first = week[0].date;
+		const key = `${first.getFullYear()}-${first.getMonth()}`;
+		// only label once the month has at least a couple weeks of room
+		if (key !== last && first.getDate() <= 14) {
+			out.push({ label: first.toLocaleString('en-US', { month: 'short' }), col: w + 1 });
+			last = key;
+		}
+	});
+	return out;
+}
+
+function fmt(date: Date): string {
+	return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+const weeks = data ? buildWeeks(data.entries, weekCount) : [];
+const months = monthLabels(weeks);
+const dayLabels = [
+	{ label: 'Mon', row: 2 },
+	{ label: 'Wed', row: 4 },
+	{ label: 'Fri', row: 6 },
+];
+---
+
+{
+	data && (
+		<section class="section activity-graph" aria-labelledby="activity-heading">
+			<div class="section-header">
+				<h2 id="activity-heading" class="section-title">
+					Contributions
+				</h2>
+			</div>
+
+			<div class="activity-graph__scroll">
+				<div class="activity-graph__chart" style={`--cols:${weeks.length}`}>
+					<div class="activity-graph__months">
+						{months.map((m) => (
+							<span style={`grid-column-start:${m.col}`}>{m.label}</span>
+						))}
+					</div>
+
+					<div class="activity-graph__days" aria-hidden="true">
+						{dayLabels.map((d) => (
+							<span style={`grid-row:${d.row}`}>{d.label}</span>
+						))}
+					</div>
+
+					<div class="activity-graph__grid" role="img" aria-label={`${data.total.toLocaleString()} GitHub contributions in the last year`}>
+						{weeks.map((week) =>
+							week.map((day) => (
+								<span
+									class:list={['cell', `cell--${day.level}`]}
+									title={`${day.count} contribution${day.count === 1 ? '' : 's'} on ${fmt(day.date)}`}
+								/>
+							)),
+						)}
+					</div>
+				</div>
+			</div>
+
+			<div class="activity-graph__footer">
+				<a
+					class="activity-graph__total"
+					href={`https://github.com/${username}`}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					{data.total.toLocaleString()} contribution{data.total === 1 ? '' : 's'} on <span class="activity-graph__gh">GitHub</span>.
+				</a>
+
+				<div class="activity-graph__legend">
+					<span>Less</span>
+					<span class="cell cell--0" />
+					<span class="cell cell--1" />
+					<span class="cell cell--2" />
+					<span class="cell cell--3" />
+					<span class="cell cell--4" />
+					<span>More</span>
+				</div>
+			</div>
+		</section>
+	)
+}
+
+<style>
+	.activity-graph {
+		--cell: 11px;
+		--gap: 3px;
+		/* monochrome ink-intensity ramp built from --page-* tokens */
+		--lvl-0: var(--page-soft);
+		--lvl-1: color-mix(in srgb, var(--page-ink) 22%, var(--page-bg));
+		--lvl-2: color-mix(in srgb, var(--page-ink) 45%, var(--page-bg));
+		--lvl-3: color-mix(in srgb, var(--page-ink) 70%, var(--page-bg));
+		--lvl-4: var(--page-ink);
+	}
+
+	.activity-graph__scroll {
+		overflow-x: auto;
+		padding-bottom: 4px;
+		scrollbar-width: thin;
+		scrollbar-color: var(--page-line) transparent;
+	}
+
+	.activity-graph__scroll::-webkit-scrollbar {
+		height: 6px;
+	}
+
+	.activity-graph__scroll::-webkit-scrollbar-thumb {
+		background: var(--page-line);
+		border-radius: 3px;
+	}
+
+	.activity-graph__scroll::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.activity-graph__chart {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		grid-template-rows: auto auto;
+		gap: 4px 6px;
+		width: max-content;
+	}
+
+	.activity-graph__months {
+		grid-column: 2;
+		grid-row: 1;
+		display: grid;
+		grid-template-columns: repeat(var(--cols), var(--cell));
+		column-gap: var(--gap);
+		color: var(--page-muted);
+		font-family: 'Space Mono', monospace;
+		font-size: 10px;
+		line-height: 1;
+	}
+
+	.activity-graph__months span {
+		grid-row: 1;
+		white-space: nowrap;
+	}
+
+	.activity-graph__days {
+		grid-column: 1;
+		grid-row: 2;
+		position: sticky;
+		left: 0;
+		z-index: 1;
+		display: grid;
+		grid-template-rows: repeat(7, var(--cell));
+		row-gap: var(--gap);
+		align-content: start;
+		background: var(--page-bg);
+		color: var(--page-muted);
+		font-family: 'Space Mono', monospace;
+		font-size: 10px;
+	}
+
+	.activity-graph__days span {
+		display: flex;
+		align-items: center;
+		line-height: 1;
+		padding-right: 6px;
+		background: var(--page-bg);
+	}
+
+	.activity-graph__grid {
+		grid-column: 2;
+		grid-row: 2;
+		display: grid;
+		grid-auto-flow: column;
+		grid-template-rows: repeat(7, var(--cell));
+		grid-auto-columns: var(--cell);
+		gap: var(--gap);
+	}
+
+	.cell {
+		width: var(--cell);
+		height: var(--cell);
+		border-radius: 2px;
+		background: var(--lvl-0);
+		outline: 1px solid color-mix(in srgb, var(--page-ink) 6%, transparent);
+		outline-offset: -1px;
+	}
+
+	.cell--1 {
+		background: var(--lvl-1);
+	}
+	.cell--2 {
+		background: var(--lvl-2);
+	}
+	.cell--3 {
+		background: var(--lvl-3);
+	}
+	.cell--4 {
+		background: var(--lvl-4);
+	}
+
+	.activity-graph__footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 10px;
+	}
+
+	.activity-graph__total {
+		color: var(--page-muted);
+		font-family: 'Space Mono', monospace;
+		font-size: 11px;
+		transition: color 0.18s ease;
+	}
+
+	.activity-graph__total:hover {
+		color: var(--page-ink);
+	}
+
+	.activity-graph__gh {
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	.activity-graph__legend {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 3px;
+		color: var(--page-muted);
+		font-family: 'Space Mono', monospace;
+		font-size: 11px;
+	}
+
+	.activity-graph__legend span:first-child {
+		margin-right: 3px;
+	}
+	.activity-graph__legend span:last-child {
+		margin-left: 3px;
+	}
+</style>

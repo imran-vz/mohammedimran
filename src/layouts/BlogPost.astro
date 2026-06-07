@@ -15,9 +15,10 @@ export interface Props {
 	updatedDate?: Date;
 	tags?: string[];
 	faq?: FAQ[];
+	image?: string;
 }
 
-const { title, description, pubDate, updatedDate, tags = [], faq = [] } = Astro.props;
+const { title, description, pubDate, updatedDate, tags = [], faq = [], image = siteMeta.ogImage } = Astro.props;
 
 const canonicalUrl = `${siteMeta.siteUrl}${Astro.url.pathname}`;
 const formattedPubDate = pubDate.toISOString();
@@ -61,7 +62,8 @@ const breadcrumbSchema = buildBreadcrumbSchema([
     <meta property="og:site_name" content="Imran" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={siteMeta.ogImage} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_IN" />
@@ -74,7 +76,7 @@ const breadcrumbSchema = buildBreadcrumbSchema([
     <meta name="twitter:creator" content="@m0hammed_imran" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={siteMeta.ogImage} />
+    <meta name="twitter:image" content={image} />
 
     <meta name="theme-color" content="#ffff00" />
     <meta name="color-scheme" content="light" />

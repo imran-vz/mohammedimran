@@ -1,0 +1,85 @@
+---
+import { experience } from '../../lib/experience';
+
+const { resumeSkills } = experience.profile;
+
+const groups = [
+	{ label: 'Languages', items: resumeSkills.languages },
+	{ label: 'Frontend', items: resumeSkills.frontend },
+	{ label: 'Backend & AI', items: resumeSkills.backendAi },
+	{ label: 'Infrastructure & IoT', items: resumeSkills.infrastructureIot },
+	{ label: 'Databases & Tools', items: resumeSkills.databasesTools },
+].filter((group) => group.items.length > 0);
+---
+
+<section class="exp-skills section" aria-labelledby="skills-heading">
+	<div class="section-header">
+		<h2 id="skills-heading" class="section-title">Technologies</h2>
+	</div>
+
+	<dl class="skills-matrix">
+		{groups.map((group) => (
+			<div class="skills-matrix__row">
+				<dt class="skills-matrix__label">{group.label}</dt>
+				<dd class="skills-matrix__items">
+					{group.items.map((item) => (
+						<span class="tech-tag">{item}</span>
+					))}
+				</dd>
+			</div>
+		))}
+	</dl>
+</section>
+
+<style>
+	.skills-matrix {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		margin: 0;
+	}
+
+	.skills-matrix__row {
+		align-items: baseline;
+		border-top: 1px solid var(--page-line);
+		display: grid;
+		gap: 8px 20px;
+		grid-template-columns: 150px 1fr;
+		padding: 12px 0;
+	}
+
+	.skills-matrix__row:last-child {
+		border-bottom: 1px solid var(--page-line);
+	}
+
+	.skills-matrix__label {
+		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 12px;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+	}
+
+	.skills-matrix__items {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		margin: 0;
+	}
+
+	.tech-tag {
+		background: var(--page-soft);
+		border-radius: 5px;
+		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 11px;
+		padding: 2px 7px;
+	}
+
+	@media (max-width: 640px) {
+		.skills-matrix__row {
+			grid-template-columns: 1fr;
+			gap: 6px;
+		}
+	}
+</style>

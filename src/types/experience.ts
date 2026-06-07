@@ -19,6 +19,13 @@ export interface ExperienceProfile {
 	};
 }
 
+export interface ReferenceLink {
+	label: string;
+	url: string;
+	logo?: string;
+	source?: string;
+}
+
 export interface WorkExperience {
 	id: string;
 	company: string;
@@ -34,10 +41,18 @@ export interface WorkExperience {
 	endDate: string | null;
 	current?: boolean;
 	companyUrl?: string | null;
+	logo?: string;
+	parentCompanyLogo?: string;
+	acquisition?: {
+		acquirer: string;
+		announcedDate?: string;
+		url?: string;
+	};
 	showInPrimaryTimeline?: boolean;
 	shortDescription?: string;
 	achievementBullets?: string[];
 	technologies?: string[];
+	referenceLinks?: ReferenceLink[];
 }
 
 export interface ShowcaseProject {
@@ -50,6 +65,7 @@ export interface ShowcaseProject {
 		show: boolean;
 		style: string;
 	};
+	icon?: string;
 	description: string;
 	tech: string[];
 	url: string;

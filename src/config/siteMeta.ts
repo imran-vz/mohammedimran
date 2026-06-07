@@ -3,7 +3,7 @@ export const siteMeta = {
 	brandLong: 'Imran',
 	siteUrl: 'https://imran.codes',
 	logoUrl: 'https://imran.codes/icons/android-chrome-512x512.png',
-	ogImage: 'https://imran.codes/og-image.svg',
+	ogImage: 'https://imran.codes/og/default.png',
 	email: 'mohammedimran86992@gmail.com',
 	defaultTitle: 'Imran | Full Stack Developer for Hire in Bangalore | React, TypeScript, Go',
 	defaultDescription:
@@ -32,3 +32,15 @@ export const siteMeta = {
 };
 
 export type SiteMeta = typeof siteMeta;
+
+/** Build a per-page dot-matrix OG image URL. */
+export function ogImageUrl(
+	opts: { title?: string; subtitle?: string; variant?: 'default' | 'square' | 'story' } = {},
+): string {
+	const { title, subtitle, variant = 'default' } = opts;
+	const params = new URLSearchParams();
+	if (title) params.set('title', title);
+	if (subtitle) params.set('subtitle', subtitle);
+	const query = params.toString();
+	return `${siteMeta.siteUrl}/og/${variant}.png${query ? `?${query}` : ''}`;
+}

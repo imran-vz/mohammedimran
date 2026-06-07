@@ -1,5 +1,6 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
+import { ogImageUrl } from '../../config/siteMeta';
 import BlogPost from '../../layouts/BlogPost.astro';
 
 const { slug } = Astro.params;
@@ -11,6 +12,8 @@ if (!post) {
 }
 
 const { Content } = await render(post);
+
+const ogImage = ogImageUrl({ title: post.data.title, subtitle: 'imran.codes/blog' });
 ---
 
 <BlogPost
@@ -20,6 +23,7 @@ const { Content } = await render(post);
 	updatedDate={post.data.updatedDate}
 	tags={post.data.tags}
 	faq={post.data.faq}
+	image={ogImage}
 >
 	<Content />
 </BlogPost>

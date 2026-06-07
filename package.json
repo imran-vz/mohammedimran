@@ -31,6 +31,7 @@
 		"@astrojs/sitemap": "^3.7.2",
 		"@astrojs/svelte": "^7.2.5",
 		"@astrojs/vercel": "^9.0.5",
+		"@resvg/resvg-js": "^2.6.2",
 		"@vercel/analytics": "^1.6.1",
 		"astro": "^5.18.1",
 		"sharp": "^0.34.5",

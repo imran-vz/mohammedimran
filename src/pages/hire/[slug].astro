@@ -1,6 +1,6 @@
 ---
 import { buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '../../config/schema';
-import { siteMeta } from '../../config/siteMeta';
+import { ogImageUrl, siteMeta } from '../../config/siteMeta';
 import { getHirePage } from '../../data/hire-pages';
 import Layout from '../../layouts/Layout.astro';
 
@@ -30,7 +30,12 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 ]);
 ---
 
-<Layout title={page.metaTitle} description={page.metaDescription} canonical={canonicalUrl}>
+<Layout
+	title={page.metaTitle}
+	description={page.metaDescription}
+	canonical={canonicalUrl}
+	image={ogImageUrl({ title: page.headline, subtitle: page.title })}
+>
 	<Fragment slot="head">
 		<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
 		<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

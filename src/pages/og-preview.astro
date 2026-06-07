@@ -1,0 +1,90 @@
+---
+/**
+ * Local OG preview gallery. Dev-only helper — returns 404 in production.
+ */
+export const prerender = false;
+
+if (import.meta.env.PROD) {
+	return new Response(null, { status: 404 });
+}
+
+const samples = [
+	{ label: 'Default · brand (1200×630)', src: '/og/default.png' },
+	{ label: 'Default · blog post', src: '/og/default.png?title=Build a Type-Safe API with Go and TypeScript&subtitle=imran.codes/blog' },
+	{ label: 'Default · hire page', src: '/og/default.png?title=Hire a Senior Go Developer in Bengaluru&subtitle=Freelance · Contract' },
+	{ label: 'Square · Instagram (1080×1080)', src: '/og/square.png' },
+	{ label: 'Story (1080×1920)', src: '/og/story.png' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>OG preview</title>
+		<style>
+			:root {
+				color-scheme: light;
+			}
+			body {
+				margin: 0;
+				padding: 32px;
+				background: #f1f1ef;
+				font-family: ui-monospace, "Space Mono", monospace;
+				color: #37352f;
+			}
+			h1 {
+				font-size: 16px;
+				margin: 0 0 24px;
+			}
+			.grid {
+				display: flex;
+				flex-direction: column;
+				gap: 32px;
+				max-width: 1240px;
+				margin: 0 auto;
+			}
+			figure {
+				margin: 0;
+				background: #fff;
+				border: 1px solid #e9e9e7;
+				border-radius: 10px;
+				padding: 16px;
+			}
+			figcaption {
+				font-size: 12px;
+				color: #787774;
+				margin-bottom: 10px;
+			}
+			img {
+				display: block;
+				width: 100%;
+				height: auto;
+				border-radius: 6px;
+				background: #fbfbfa;
+			}
+			.story img {
+				width: 360px;
+				margin: 0 auto;
+			}
+			a {
+				color: #37352f;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="grid">
+			<h1>OG preview · <a href="/og/default.png" target="_blank">open raw</a></h1>
+			{
+				samples.map((s) => (
+					<figure class={s.src.includes('story') ? 'story' : ''}>
+						<figcaption>{s.label}</figcaption>
+						<img src={s.src} alt={s.label} loading="lazy" />
+					</figure>
+				))
+			}
+		</div>
+	</body>
+</html>

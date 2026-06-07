@@ -42,6 +42,7 @@
 			"current": true,
 			"companyUrl": "https://www.thoughtseed.space/",
 			"linkedinUrl": "https://www.linkedin.com/company/thought-seed-labs/",
+			"logo": "/assets/brand/companies/thoughtseed.jpg",
 			"showInPrimaryTimeline": true,
 			"companyContext": {
 				"industry": "IT Services and IT Consulting",
@@ -91,6 +92,7 @@
 				{
 					"label": "Pongo Trasteros",
 					"url": "https://pongotrasteros.com",
+					"logo": "/assets/brand/companies/pongo.svg",
 					"source": "resume_latex"
 				}
 			],
@@ -137,6 +139,8 @@
 			"current": false,
 			"companyUrl": "https://www.factoreal.com/",
 			"linkedinUrl": "https://www.linkedin.com/company/factoreal/",
+			"logo": "/assets/brand/companies/factoreal.svg",
+			"parentCompanyLogo": "/assets/brand/companies/satisfilabs.png",
 			"acquisition": {
 				"acquirer": "Satisfi Labs",
 				"announcedDate": "2024-06-18",
@@ -194,6 +198,7 @@
 			"endDate": "2023-08",
 			"current": false,
 			"companyUrl": "https://www.atherenergy.com/",
+			"logo": "/assets/brand/companies/ather.svg",
 			"sourceConfidence": "high",
 			"showInPrimaryTimeline": true,
 			"themes": [
@@ -259,6 +264,7 @@
 			"endDate": "2022-05",
 			"current": false,
 			"companyUrl": null,
+			"logo": "/assets/brand/companies/protoezy.ico",
 			"sourceConfidence": "high",
 			"showInPrimaryTimeline": true,
 			"themes": ["PCB Manufacturing Workflows", "Manufacturing Operations", "E-commerce", "File Processing", "CMS"],
@@ -352,6 +358,7 @@
 			"displaySection": "open-source-projects",
 			"group": "developer-tools",
 			"status": "showcase",
+			"icon": "/assets/brand/projects/gosqlit.svg",
 			"description": "Terminal SQL client for PostgreSQL with encrypted credentials, schema browsing, a multi-line query editor, query cancellation, and paginated results.",
 			"tech": ["Go", "Bubble Tea", "PostgreSQL", "pgx"],
 			"url": "https://github.com/imran-vz/gosqlit",
@@ -364,6 +371,7 @@
 			"displaySection": "open-source-projects",
 			"group": "desktop-tools",
 			"status": "showcase",
+			"icon": "/assets/brand/projects/seer.svg",
 			"description": "Tauri desktop media toolkit for file browsing, codec and stream inspection, bitrate analysis, ffprobe metadata, and SQLite-backed caching.",
 			"tech": ["Tauri", "React", "TypeScript", "Rust", "FFmpeg"],
 			"url": "https://github.com/imran-vz/seer",
@@ -375,6 +383,7 @@
 			"displaySection": "open-source-projects",
 			"group": "developer-tools",
 			"status": "showcase",
+			"icon": "/assets/brand/projects/dbunk.png",
 			"description": "Open-source Tauri desktop database workspace for exploring schemas, running SQL, inspecting relationships, and editing table data.",
 			"tech": ["Tauri", "React", "TypeScript", "Rust", "SQLx"],
 			"url": "https://github.com/imran-vz/dbunk",
@@ -390,6 +399,7 @@
 				"show": true,
 				"style": "subtle-chip"
 			},
+			"icon": "/assets/brand/projects/thirai.svg",
 			"description": "Mac screen recorder that follows the cursor, detects tasteful zoom moments from click/dwell/typing signals, and exports high-fidelity video for editors like DaVinci Resolve, Final Cut, or CapCut.",
 			"tech": ["Tauri", "React", "TypeScript", "Rust", "Swift", "ScreenCaptureKit", "Metal"],
 			"url": "https://github.com/imran-vz/thirai",
@@ -401,6 +411,7 @@
 			"displaySection": "open-source-projects",
 			"group": "desktop-tools",
 			"status": "showcase",
+			"icon": "/assets/brand/projects/prompter.svg",
 			"description": "Native SwiftUI macOS teleprompter with real-time speech-to-text auto-scrolling, transcript alignment, themes, and keyboard shortcuts.",
 			"tech": ["Swift", "SwiftUI", "Apple Speech", "WhisperKit"],
 			"url": "https://github.com/imran-vz/prompter",
@@ -412,6 +423,7 @@
 			"displaySection": "open-source-projects",
 			"group": "developer-tools",
 			"status": "showcase",
+			"icon": "/assets/brand/projects/pi-observability.svg",
 			"description": "Pi coding-agent extension with a live footer and /obs TUI dashboard for context usage, token counts, cost, TPS, runtime, and git stats.",
 			"tech": ["TypeScript", "Pi Extension", "TUI", "Agent Tooling"],
 			"url": "https://github.com/imran-vz/pi-observability",
@@ -424,6 +436,7 @@
 			"group": "desktop-tools",
 			"tags": ["P2P file transfer"],
 			"status": "showcase",
+			"icon": "/assets/brand/projects/vegam.png",
 			"description": "Cross-platform Tauri app for direct macOS and Android file transfer using Iroh P2P networking, with a Rust backend and React frontend.",
 			"tech": ["Tauri", "Rust", "React", "TypeScript", "Iroh"],
 			"url": "https://github.com/imran-vz/vegam",

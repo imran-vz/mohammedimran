@@ -1,0 +1,466 @@
+---
+import { formatDateRange, getDisplayCompanyName, getLegalNameTooltip, getPrimaryTimeline } from '../../lib/experience';
+import BrandLogo from './BrandLogo.astro';
+
+const timeline = getPrimaryTimeline();
+---
+
+<section class="exp-work section" aria-labelledby="work-heading">
+	<div class="section-header">
+		<h2 id="work-heading" class="section-title">Work Experience</h2>
+		<span class="section-count">{String(timeline.length).padStart(2, '0')}</span>
+	</div>
+
+	<ol class="timeline">
+		{timeline.map((entry, index) => {
+			const companyName = getDisplayCompanyName(entry);
+			const legalTooltip = getLegalNameTooltip(entry);
+			const isFirst = index === 0;
+			const isLast = index === timeline.length - 1;
+			const metaParts = [
+				entry.employmentType,
+				entry.locationType,
+				entry.parentCompany,
+			].filter(Boolean);
+
+			return (
+				<li class="timeline__item">
+					{!isLast && (
+						<svg class="timeline__connector" viewBox="0 0 22 100" preserveAspectRatio="none" aria-hidden="true">
+							<path d="M11 0 C 2 34 20 66 11 100" vector-effect="non-scaling-stroke" />
+						</svg>
+					)}
+					<span class:list={['timeline__dot', { 'is-current': isFirst }]} aria-hidden="true" />
+					<div class="timeline__content">
+						<div class="timeline__header">
+							<time class="timeline__dates" datetime={`${entry.startDate}/${entry.endDate ?? ''}`}>
+								{formatDateRange(entry)}
+							</time>
+							{entry.current && <span class="timeline__current">Current</span>}
+						</div>
+
+						<div class="timeline__identity">
+							<span class="timeline__logo-wrap" title={legalTooltip}>
+								<BrandLogo src={entry.logo} name={companyName} variant="company" />
+								{entry.parentCompanyLogo && entry.acquisition && (
+									<img
+										class="timeline__parent-badge"
+										src={entry.parentCompanyLogo}
+										alt={`Acquired by ${entry.acquisition.acquirer}`}
+										title={`Acquired by ${entry.acquisition.acquirer}`}
+										loading="lazy"
+										decoding="async"
+										onerror="this.style.display='none'"
+									/>
+								)}
+							</span>
+
+							<div class="timeline__identity-text">
+								<div class="timeline__title-row">
+									{legalTooltip ? (
+										<h3 class="timeline__company">
+											<span class="tooltip-wrap" tabindex="0" title={legalTooltip}>
+												{companyName}
+												<span class="tooltip" aria-hidden="true">{legalTooltip}</span>
+											</span>
+										</h3>
+									) : (
+										<h3 class="timeline__company">{companyName}</h3>
+									)}
+									<span class="timeline__role">{entry.role}</span>
+								</div>
+
+								{metaParts.length > 0 && (
+									<p class="timeline__meta">{metaParts.join(' · ')}</p>
+								)}
+							</div>
+						</div>
+
+						{entry.shortDescription && (
+							<p class="timeline__summary">{entry.shortDescription}</p>
+						)}
+
+						{entry.achievementBullets && entry.achievementBullets.length > 0 && (
+							<ul class="timeline__bullets">
+								{entry.achievementBullets.map((bullet) => (
+									<li>{bullet}</li>
+								))}
+							</ul>
+						)}
+
+						{entry.technologies && entry.technologies.length > 0 && (
+							<div class="timeline__tech">
+								{entry.technologies.map((tech) => (
+									<span class="tech-tag">{tech}</span>
+								))}
+							</div>
+						)}
+
+						{entry.companyUrl && (
+							<a
+								href={entry.companyUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="timeline__link"
+							>
+								{companyName} ↗
+							</a>
+						)}
+
+						{entry.referenceLinks && entry.referenceLinks.length > 0 && (
+							<div class="timeline__refs">
+								<span class="timeline__refs-label">Reference</span>
+								{entry.referenceLinks.map((ref) => (
+									<a
+										href={ref.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="timeline__ref"
+									>
+										{ref.logo && (
+											<img
+												class="timeline__ref-logo"
+												src={ref.logo}
+												alt={`${ref.label} logo`}
+												loading="lazy"
+												decoding="async"
+												onerror="this.style.display='none'"
+											/>
+										)}
+										<span>{ref.label}</span>
+										<span class="timeline__ref-arrow" aria-hidden="true">↗</span>
+									</a>
+								))}
+							</div>
+						)}
+					</div>
+				</li>
+			);
+		})}
+	</ol>
+</section>
+
+<style>
+	.timeline {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		position: relative;
+	}
+
+	.timeline__item {
+		padding: 16px 0 16px 40px;
+		position: relative;
+	}
+
+	/* continuous curvy spine: each item draws a smooth S-curve down to the next node */
+	.timeline__connector {
+		height: 100%;
+		left: 0;
+		overflow: visible;
+		position: absolute;
+		top: 23px;
+		width: 22px;
+	}
+
+	.timeline__connector path {
+		fill: none;
+		stroke: var(--page-line);
+		stroke-linecap: round;
+		stroke-width: 2;
+	}
+
+	/* node dot sits directly on the spine */
+	.timeline__dot {
+		background: var(--page-muted);
+		border: 2px solid var(--page-bg);
+		border-radius: 50%;
+		box-shadow: 0 0 0 1px var(--page-line);
+		height: 10px;
+		left: 6px;
+		position: absolute;
+		top: 18px;
+		width: 10px;
+		z-index: 2;
+	}
+
+	.timeline__dot.is-current {
+		background: var(--page-ink);
+		box-shadow: 0 0 0 1px var(--page-ink);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.timeline__item {
+			animation: timeline-in 0.5s ease both;
+		}
+
+		.timeline__item:nth-child(2) {
+			animation-delay: 0.07s;
+		}
+
+		.timeline__item:nth-child(3) {
+			animation-delay: 0.14s;
+		}
+
+		.timeline__item:nth-child(4) {
+			animation-delay: 0.21s;
+		}
+	}
+
+	@keyframes timeline-in {
+		from {
+			opacity: 0;
+			transform: translateY(8px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.timeline__header {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-bottom: 6px;
+	}
+
+	.timeline__dates {
+		color: var(--page-muted);
+		font-family: 'Space Mono', monospace;
+		font-size: 12px;
+		letter-spacing: -0.01em;
+	}
+
+	.timeline__current {
+		background: #e8f4ea;
+		border-radius: 4px;
+		color: #2f6b3a;
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 11px;
+		font-weight: 600;
+		line-height: 1;
+		padding: 3px 6px;
+	}
+
+	.timeline__identity {
+		align-items: flex-start;
+		display: flex;
+		gap: 12px;
+		margin-bottom: 8px;
+	}
+
+	.timeline__logo-wrap {
+		flex: none;
+		margin-top: 1px;
+		position: relative;
+	}
+
+	.timeline__parent-badge {
+		background: var(--page-bg);
+		border: 1px solid var(--page-line);
+		border-radius: 50%;
+		bottom: -5px;
+		height: 17px;
+		object-fit: contain;
+		padding: 1px;
+		position: absolute;
+		right: -5px;
+		width: 17px;
+	}
+
+	.timeline__identity-text {
+		min-width: 0;
+	}
+
+	.timeline__title-row {
+		align-items: baseline;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px 10px;
+		margin-bottom: 4px;
+	}
+
+	.timeline__company {
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 16px;
+		font-weight: 650;
+		line-height: 1.4;
+	}
+
+	.timeline__role {
+		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 14px;
+	}
+
+	.timeline__role::before {
+		color: var(--page-line);
+		content: '·';
+		margin-right: 10px;
+	}
+
+	.timeline__meta {
+		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 12px;
+		margin-bottom: 8px;
+	}
+
+	.timeline__summary {
+		color: var(--page-ink);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 14px;
+		line-height: 1.65;
+		margin-bottom: 10px;
+	}
+
+	.timeline__bullets {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		margin: 0 0 12px;
+		padding: 0 0 0 16px;
+	}
+
+	.timeline__bullets li {
+		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 13px;
+		line-height: 1.6;
+	}
+
+	.timeline__bullets li::marker {
+		color: var(--page-muted);
+	}
+
+	.timeline__tech {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		margin-bottom: 8px;
+	}
+
+	.tech-tag {
+		background: var(--page-soft);
+		border-radius: 5px;
+		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 11px;
+		padding: 2px 6px;
+	}
+
+	.timeline__link {
+		color: var(--page-muted);
+		display: inline-block;
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 13px;
+		margin-top: 4px;
+		transition: color 0.18s ease;
+	}
+
+	.timeline__link:hover {
+		color: var(--page-ink);
+	}
+
+	.timeline__refs {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 10px;
+	}
+
+	.timeline__refs-label {
+		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	.timeline__ref {
+		align-items: center;
+		background: var(--page-soft);
+		border: 1px solid var(--page-line);
+		border-radius: 6px;
+		color: var(--page-muted);
+		display: inline-flex;
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 12px;
+		gap: 6px;
+		padding: 3px 8px 3px 5px;
+		transition:
+			border-color 0.18s ease,
+			color 0.18s ease;
+	}
+
+	.timeline__ref:hover {
+		border-color: #d4d4d0;
+		color: var(--page-ink);
+	}
+
+	.timeline__ref-logo {
+		border-radius: 3px;
+		height: 16px;
+		object-fit: contain;
+		width: 16px;
+	}
+
+	.timeline__ref-arrow {
+		color: var(--page-muted);
+		font-size: 11px;
+	}
+
+	.tooltip-wrap {
+		border-bottom: 1px dotted var(--page-muted);
+		cursor: help;
+		position: relative;
+	}
+
+	.tooltip {
+		background: var(--page-ink);
+		border-radius: 6px;
+		bottom: calc(100% + 8px);
+		color: var(--page-bg);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 12px;
+		font-weight: 400;
+		left: 50%;
+		opacity: 0;
+		padding: 6px 10px;
+		pointer-events: none;
+		position: absolute;
+		transform: translateX(-50%) translateY(4px);
+		transition:
+			opacity 0.15s ease,
+			transform 0.15s ease;
+		white-space: nowrap;
+		z-index: 10;
+	}
+
+	.tooltip-wrap:hover .tooltip,
+	.tooltip-wrap:focus .tooltip,
+	.tooltip-wrap:focus-within .tooltip {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+
+	@media (max-width: 760px) {
+		.timeline__item {
+			padding: 16px 0 16px 40px;
+		}
+
+		.timeline__title-row {
+			flex-direction: column;
+			gap: 2px;
+		}
+
+		.timeline__role::before {
+			display: none;
+		}
+	}
+</style>
