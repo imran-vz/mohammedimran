@@ -1,0 +1,462 @@
+{
+	"profile": {
+		"name": "Mohammed Imran",
+		"preferredName": "Imran",
+		"headline": "Lead Software Developer at ThoughtSeed. Working with Go, TypeScript, React and Python.",
+		"displayHeadline": "Lead Software Developer",
+		"supportingHeadline": "5+ years building backend platforms, IoT systems, AI assistants, data pipelines, and customer engagement tools.",
+		"location": "Bengaluru, Karnataka, India",
+		"summary": "Full-stack developer with 5+ years of experience building backend platforms, IoT systems, AI assistants, data pipelines, and customer engagement tools. Strong with TypeScript, Python, Go, React, Kafka, PostgreSQL, and event-driven systems; shipped systems for 100,000+ users and 300,000+ devices.",
+		"personalNote": "Outside engineering, I enjoy collecting coins and learning about the history and culture behind them.",
+		"links": {
+			"website": "https://imran.codes",
+			"github": "https://github.com/imran-vz",
+			"linkedin": "https://www.linkedin.com/in/m0hammedimran/"
+		},
+		"resumeSkills": {
+			"languages": ["TypeScript", "JavaScript", "Python", "Go", "Java", "Rust", "Shell"],
+			"frontend": ["React", "Next.js", "Tailwind CSS", "Material UI"],
+			"backendAi": ["Node.js", "Hono", "REST APIs", "OpenAI SDK", "Kafka", "Kafka Streams", "Pulsar", "MQTT"],
+			"infrastructureIot": ["Tuya IoT Platform", "Debezium", "CDC", "EMQX", "AWS IoT Core", "GCP IoT Core"],
+			"databasesTools": ["PostgreSQL", "MongoDB", "ClickHouse", "Git", "Docker", "Markdown"]
+		},
+		"sourceNotes": [
+			"Resume LaTeX from /Users/imran/.codex/attachments/355f5628-803c-414d-a56f-ccdaee67bcf1/pasted-text.txt",
+			"Resume extract from /Users/imran/Downloads/Mohammed_Imran-2.pdf",
+			"LinkedIn profile pulled through Chrome from https://www.linkedin.com/in/m0hammedimran/ on 2026-06-07",
+			"Satisfi Labs acquisition announcement for Factoreal from https://www.satisfilabs.com/blog/expanding-our-platform-satisfi-labs-acquires-factoreal",
+			"Existing site content from imran.codes"
+		]
+	},
+	"experience": [
+		{
+			"id": "thoughtseed-lead-software-developer",
+			"company": "ThoughtSeed",
+			"role": "Lead Software Developer",
+			"resumeRole": "Senior Full-Stack Developer",
+			"employmentType": "Full-time",
+			"locationType": "Remote",
+			"location": "Bengaluru, Karnataka, India",
+			"startDate": "2025-05",
+			"endDate": null,
+			"current": true,
+			"companyUrl": "https://www.thoughtseed.space/",
+			"linkedinUrl": "https://www.linkedin.com/company/thought-seed-labs/",
+			"showInPrimaryTimeline": true,
+			"companyContext": {
+				"industry": "IT Services and IT Consulting",
+				"companySize": "2-10 employees",
+				"associatedMembers": 7,
+				"headquarters": "Bengaluru, Karnataka",
+				"founded": "2020",
+				"overview": "ThoughtSeed is built on a simple belief: great products live at the intersection of code and creativity. The team crafts modern digital experiences that are fast, scalable, visually compelling, and focused on real-world impact."
+			},
+			"sourceConfidence": "high",
+			"themes": [
+				"Product Studio",
+				"Digital Experience Engineering",
+				"IoT",
+				"Smart Home Automation",
+				"AI Assistants",
+				"Device Control"
+			],
+			"technologies": [
+				"Tuya IoT Platform",
+				"TypeScript",
+				"Go",
+				"React",
+				"PostgreSQL",
+				"AWS",
+				"LLM orchestration",
+				"Regex intent parsing"
+			],
+			"linkedinSkillLabels": [
+				"Internet of Things (IoT)",
+				"Go (Programming Language)",
+				"React.js",
+				"PostgreSQL",
+				"Amazon Web Services (AWS)",
+				"TypeScript"
+			],
+			"shortDescription": "Building digital product experiences and production IoT systems processing 1M+ messages per day across 300,000+ devices, then layering AI automation for reliable real-world device control.",
+			"narrativeDescription": "At ThoughtSeed, a product studio focused on digital experience engineering, I work on IoT systems processing 1M+ messages per day across 300,000+ devices. On top of that scale, my current work centers on AI-driven smart home automation: Tuya-based device flows, hybrid intent parsing with LLM orchestration, and human-in-the-loop dry-run validation before automations affect real devices.",
+			"ownershipSummary": "Owned architecture and implementation across IoT flows, automation logic, validation, and integrations.",
+			"achievementBullets": [
+				"Built IoT systems on the Tuya IoT Platform processing 1M+ messages per day across 300,000+ devices.",
+				"Architected a hybrid AI automation engine that routes high-frequency commands through regex intent parsing and complex multi-device workflows through LLM orchestration.",
+				"Implemented a human-in-the-loop dry-run validation framework, drastically reducing automation failure rates and ensuring reliable state transitions across IoT infrastructure.",
+				"Built a smart lock integration for Pongo Trasteros using Tuya-compliant locks to support secure digital access workflows."
+			],
+			"referenceLinks": [
+				{
+					"label": "Pongo Trasteros",
+					"url": "https://pongotrasteros.com",
+					"source": "resume_latex"
+				}
+			],
+			"openQuestions": []
+		},
+		{
+			"id": "freelance-software-engineer",
+			"company": "Freelance",
+			"role": "Freelance Software Engineer",
+			"employmentType": "Freelance",
+			"locationType": null,
+			"location": "Bengaluru, Karnataka, India",
+			"startDate": "2021-06",
+			"endDate": null,
+			"current": true,
+			"companyUrl": null,
+			"sourceConfidence": "medium",
+			"showInPrimaryTimeline": false,
+			"displaySection": "open-source-projects",
+			"themes": ["Full-Stack Development", "Client Work", "Product Engineering", "System Architecture"],
+			"technologies": ["React", "TypeScript", "Go", "Node.js", "PostgreSQL", "Tauri", "Rust"],
+			"linkedinSkillLabels": [],
+			"shortDescription": "Independent full-stack engineering for client and product work, spanning web applications, internal tools, desktop apps, and backend systems.",
+			"narrativeDescription": "Alongside full-time roles, I have taken on freelance engineering work where I can own practical product outcomes end to end: frontend, backend, database, integrations, and deployment. This work is best positioned as the thread connecting my portfolio projects and contract availability.",
+			"achievementBullets": [
+				"Built custom software across full-stack web applications, internal tools, and system architecture.",
+				"Shipped portfolio-grade projects including desktop and developer tooling with React, TypeScript, Go, Rust, and Tauri."
+			],
+			"openQuestions": []
+		},
+		{
+			"id": "factoreal-systems-senior-full-stack-developer",
+			"company": "Factoreal by Satisfi Labs",
+			"brandName": "Factoreal",
+			"legalName": "Factoreal Systems Private Limited",
+			"legalNameDisplay": "tooltip",
+			"parentCompany": "Satisfi Labs",
+			"role": "Senior Fullstack Developer",
+			"employmentType": "Full-time",
+			"locationType": "Remote",
+			"location": "Bengaluru, Karnataka, India",
+			"startDate": "2023-09",
+			"endDate": "2025-05",
+			"current": false,
+			"companyUrl": "https://www.factoreal.com/",
+			"linkedinUrl": "https://www.linkedin.com/company/factoreal/",
+			"acquisition": {
+				"acquirer": "Satisfi Labs",
+				"announcedDate": "2024-06-18",
+				"url": "https://www.satisfilabs.com/blog/expanding-our-platform-satisfi-labs-acquires-factoreal"
+			},
+			"sourceConfidence": "high",
+			"showInPrimaryTimeline": true,
+			"themes": ["Marketing Automation", "Customer Engagement", "Messaging", "Reporting", "Sports and Entertainment"],
+			"technologies": [
+				"Hono",
+				"TypeScript",
+				"Apache Kafka",
+				"React",
+				"AWS Lambda",
+				"Kubernetes",
+				"Apache NiFi",
+				"Go",
+				"REST APIs",
+				"WhatsApp",
+				"SMS",
+				"Web Push"
+			],
+			"linkedinSkillLabels": [
+				"Apache Kafka",
+				"AWS Lambda",
+				"Kubernetes",
+				"JavaScript",
+				"TypeScript",
+				"Apache NiFi",
+				"Go (Programming Language)",
+				"REST APIs",
+				"React.js"
+			],
+			"shortDescription": "Built marketing automation integrations, asynchronous reporting APIs, dashboards, and Web Push infrastructure for high-volume customer engagement.",
+			"narrativeDescription": "At Factoreal by Satisfi Labs, I worked on marketing automation systems behind customer engagement: messaging integrations, journey workflows, reporting APIs, dashboards, and push infrastructure. The work supported omnichannel campaigns across WhatsApp, SMS, Web Push, and reporting workflows, with sports and entertainment as an important domain context for fan engagement use cases.",
+			"ownershipSummary": "Held senior implementation ownership across integrations, APIs, reporting workflows, and dashboards.",
+			"achievementBullets": [
+				"Integrated Factoreal with Satisfi Labs for WhatsApp and SMS channels, enabling faster channel rollout and broader omnichannel campaign reach.",
+				"Developed REST APIs with Hono, TypeScript, and Apache Kafka to support asynchronous reporting workflows and a React dashboard.",
+				"Built a Web Push service for 100,000+ users.",
+				"Implemented event filtering that reduced database resource utilization by 30%."
+			],
+			"openQuestions": []
+		},
+		{
+			"id": "ather-energy-application-developer",
+			"company": "Ather Energy",
+			"legalName": "Ather Energy Private Limited",
+			"legalNameDisplay": "tooltip",
+			"role": "Application Developer",
+			"employmentType": "Full-time",
+			"locationType": null,
+			"location": "Bengaluru, Karnataka, India",
+			"startDate": "2022-06",
+			"endDate": "2023-08",
+			"current": false,
+			"companyUrl": "https://www.atherenergy.com/",
+			"sourceConfidence": "high",
+			"showInPrimaryTimeline": true,
+			"themes": [
+				"Charger Connectivity",
+				"Data Pipelines",
+				"EV Infrastructure",
+				"IoT Connectivity",
+				"Internal Platforms"
+			],
+			"technologies": [
+				"Java",
+				"Go",
+				"JavaScript",
+				"Rust",
+				"MQTT",
+				"EMQX",
+				"Kafka Streams",
+				"Debezium",
+				"GCP IoT Core",
+				"AWS IoT Core",
+				"GKE",
+				"Docker",
+				"React",
+				"Node.js",
+				"REST APIs"
+			],
+			"linkedinSkillLabels": [
+				"Apache Kafka",
+				"Google Kubernetes Engine (GKE)",
+				"JavaScript",
+				"Go (Programming Language)",
+				"Rust (Programming Language)",
+				"REST APIs",
+				"Cascading Style Sheets (CSS)",
+				"Node.js",
+				"HTML",
+				"Docker",
+				"React.js"
+			],
+			"shortDescription": "Built charger connectivity services and data pipeline applications for EV infrastructure, including IoT migration work and internal platform tooling.",
+			"narrativeDescription": "At Ather Energy, I worked on charger connectivity and data pipeline systems close to the infrastructure layer: MQTT services, Kafka event pipelines, CDC flows, internal platform tools, and notification systems. I contributed to moving charger connectivity away from GCP IoT Core and AWS IoT Core toward Kafka and MQTT infrastructure, improving charger uptime stability across India and building systems used by internal teams and large user cohorts.",
+			"achievementBullets": [
+				"Built data pipeline applications using Java, Go, and JavaScript for internal platform workflows.",
+				"Contributed to Rust and MQTT charger connectivity services while moving from GCP IoT Core and AWS IoT Core to Kafka and MQTT infrastructure.",
+				"Improved charger uptime stability across India by 20% through architectural changes to the charger connectivity platform.",
+				"Developed a notification engine for 100,000+ users.",
+				"Created Kafka Streams and Debezium CDC pipelines for analytics and database change propagation.",
+				"Built internal tools for controlled backend API access."
+			],
+			"openQuestions": []
+		},
+		{
+			"id": "protoezy-product-developer",
+			"company": "Protoezy",
+			"legalName": "Protoezy Design Private Limited",
+			"legalNameDisplay": "tooltip",
+			"role": "Product Developer",
+			"resumeRole": "Application Developer",
+			"employmentType": "Full-time",
+			"locationType": null,
+			"location": "Bangalore Urban, Karnataka, India",
+			"startDate": "2020-10",
+			"endDate": "2022-05",
+			"current": false,
+			"companyUrl": null,
+			"sourceConfidence": "high",
+			"showInPrimaryTimeline": true,
+			"themes": ["PCB Manufacturing Workflows", "Manufacturing Operations", "E-commerce", "File Processing", "CMS"],
+			"technologies": [
+				"React",
+				"TypeScript",
+				"JavaScript",
+				"Tailwind CSS",
+				"Material UI",
+				"Node.js",
+				"MongoDB",
+				"Next.js",
+				"Prisma",
+				"SVGO",
+				"Sharp",
+				"AWS",
+				"Docker",
+				"REST APIs"
+			],
+			"linkedinSkillLabels": [
+				"JavaScript",
+				"TypeScript",
+				"MongoDB",
+				"REST APIs",
+				"Cascading Style Sheets (CSS)",
+				"Amazon Web Services (AWS)",
+				"Node.js",
+				"Front-End Development",
+				"HTML",
+				"Docker",
+				"React.js"
+			],
+			"shortDescription": "Built PCB/manufacturing workflows across web, ordering, Gerber parsing, a Gerber viewer, file validation, CMS, and operations tooling.",
+			"narrativeDescription": "At Protoezy, I built PCB/manufacturing workflow software across the website, order flows, CMS tooling, Gerber parsing, a Gerber viewer, image processing, and Excel management. The work helped users validate board files before placing orders and gave me early full-stack ownership across UI, backend, database, and workflow automation in a manufacturing-oriented domain.",
+			"achievementBullets": [
+				"Developed the Protoezy website using React, TypeScript, Tailwind CSS, Material UI, Node.js, and MongoDB.",
+				"Built Gerber parsing, a Gerber viewer, manufacturing-ready file validation, image processing, Excel management, CMS, and an order workflow system using Next.js, TypeScript, Prisma, SVGO, and Sharp."
+			],
+			"referenceLinks": [
+				{
+					"label": "Protoezy",
+					"url": "https://protoezy.com",
+					"source": "resume_latex"
+				}
+			],
+			"openQuestions": []
+		}
+	],
+	"experiencePresentation": {
+		"visualTreatment": "text-only",
+		"notes": "Keep employment history clean and avoid client/internal screenshots. Use visuals in showcase project cards instead."
+	},
+	"education": [
+		{
+			"school": "Mountain View Degree College",
+			"degree": "Bachelor of Computer Applications",
+			"field": "Computer Programming",
+			"location": "Chikmagaluru, Karnataka",
+			"startDate": "2017",
+			"endDate": "2020",
+			"grade": "Distinction",
+			"source": "LinkedIn and resume",
+			"showInMainUi": true,
+			"sourceConfidence": "high"
+		},
+		{
+			"school": "Charans PU College",
+			"degree": "PUC",
+			"field": "Physics, Mathematics, Chemistry and Electronics",
+			"location": null,
+			"startDate": "2015",
+			"endDate": "2017",
+			"grade": "First Class",
+			"source": "LinkedIn",
+			"showInMainUi": false,
+			"sourceConfidence": "high"
+		}
+	],
+	"projectsFromLinkedIn": [
+		{
+			"name": "Seer",
+			"alternateName": "Seer - சீர்",
+			"description": "Desktop application for media file management, metadata editing, codec detection, and re-encoding.",
+			"sourceConfidence": "medium"
+		}
+	],
+	"showcaseProjects": [
+		{
+			"id": "gosqlit",
+			"name": "GOSQLIT",
+			"displaySection": "open-source-projects",
+			"group": "developer-tools",
+			"status": "showcase",
+			"description": "Terminal SQL client for PostgreSQL with encrypted credentials, schema browsing, a multi-line query editor, query cancellation, and paginated results.",
+			"tech": ["Go", "Bubble Tea", "PostgreSQL", "pgx"],
+			"url": "https://github.com/imran-vz/gosqlit",
+			"source": "local_project_data"
+		},
+		{
+			"id": "seer",
+			"name": "Seer",
+			"alternateName": "Seer - சீர்",
+			"displaySection": "open-source-projects",
+			"group": "desktop-tools",
+			"status": "showcase",
+			"description": "Tauri desktop media toolkit for file browsing, codec and stream inspection, bitrate analysis, ffprobe metadata, and SQLite-backed caching.",
+			"tech": ["Tauri", "React", "TypeScript", "Rust", "FFmpeg"],
+			"url": "https://github.com/imran-vz/seer",
+			"source": "local_project_data_and_linkedin"
+		},
+		{
+			"id": "dbunk",
+			"name": "DBUNK",
+			"displaySection": "open-source-projects",
+			"group": "developer-tools",
+			"status": "showcase",
+			"description": "Open-source Tauri desktop database workspace for exploring schemas, running SQL, inspecting relationships, and editing table data.",
+			"tech": ["Tauri", "React", "TypeScript", "Rust", "SQLx"],
+			"url": "https://github.com/imran-vz/dbunk",
+			"source": "local_project_data"
+		},
+		{
+			"id": "thirai",
+			"name": "Thirai",
+			"displaySection": "open-source-projects",
+			"group": "desktop-tools",
+			"status": "pre-MVP, in design",
+			"statusDisplay": {
+				"show": true,
+				"style": "subtle-chip"
+			},
+			"description": "Mac screen recorder that follows the cursor, detects tasteful zoom moments from click/dwell/typing signals, and exports high-fidelity video for editors like DaVinci Resolve, Final Cut, or CapCut.",
+			"tech": ["Tauri", "React", "TypeScript", "Rust", "Swift", "ScreenCaptureKit", "Metal"],
+			"url": "https://github.com/imran-vz/thirai",
+			"source": "github_readme"
+		},
+		{
+			"id": "prompter",
+			"name": "Prompter",
+			"displaySection": "open-source-projects",
+			"group": "desktop-tools",
+			"status": "showcase",
+			"description": "Native SwiftUI macOS teleprompter with real-time speech-to-text auto-scrolling, transcript alignment, themes, and keyboard shortcuts.",
+			"tech": ["Swift", "SwiftUI", "Apple Speech", "WhisperKit"],
+			"url": "https://github.com/imran-vz/prompter",
+			"source": "local_project_data"
+		},
+		{
+			"id": "pi-observability",
+			"name": "pi-observability",
+			"displaySection": "open-source-projects",
+			"group": "developer-tools",
+			"status": "showcase",
+			"description": "Pi coding-agent extension with a live footer and /obs TUI dashboard for context usage, token counts, cost, TPS, runtime, and git stats.",
+			"tech": ["TypeScript", "Pi Extension", "TUI", "Agent Tooling"],
+			"url": "https://github.com/imran-vz/pi-observability",
+			"source": "local_project_data"
+		},
+		{
+			"id": "vegam",
+			"name": "Vegam",
+			"displaySection": "open-source-projects",
+			"group": "desktop-tools",
+			"tags": ["P2P file transfer"],
+			"status": "showcase",
+			"description": "Cross-platform Tauri app for direct macOS and Android file transfer using Iroh P2P networking, with a Rust backend and React frontend.",
+			"tech": ["Tauri", "Rust", "React", "TypeScript", "Iroh"],
+			"url": "https://github.com/imran-vz/vegam",
+			"source": "local_project_data"
+		}
+	],
+	"showcaseProjectGroups": [
+		{
+			"id": "developer-tools",
+			"label": "Developer Tools"
+		},
+		{
+			"id": "desktop-tools",
+			"label": "Desktop Tools"
+		}
+	],
+	"showcasePresentation": {
+		"visualTreatment": "project-visuals",
+		"notes": "Use screenshots, repo media, or generated visuals for showcase projects where available."
+	},
+	"languagesFromLinkedIn": [
+		{ "name": "Tamil", "proficiency": "Native or bilingual proficiency" },
+		{ "name": "Kannada", "proficiency": "Native or bilingual proficiency" },
+		{ "name": "Hindi", "proficiency": "Native or bilingual proficiency" },
+		{ "name": "English", "proficiency": "Professional working proficiency" },
+		{ "name": "Spanish", "proficiency": "Elementary proficiency" }
+	],
+	"positioningDrafts": {
+		"compact": "Senior full-stack developer in Bengaluru building data-intensive products, IoT platforms, AI automation systems, and internal tools across TypeScript, React, Go, Rust, Kafka, and PostgreSQL.",
+		"personal": "I like working where software touches real operations: devices, messages, data pipelines, workflows, and the tools teams rely on every day. My strongest work sits between product engineering and infrastructure, turning complex systems into interfaces and automations that people can trust.",
+		"achievementLed": "I have shipped systems serving 100,000+ users, processing 1M+ IoT messages per day, and supporting fleets of 300,000+ devices, with hands-on work across React, TypeScript, Go, Rust, Kafka, MQTT, PostgreSQL, and cloud/IoT infrastructure."
+	},
+	"researchGaps": [
+		"LinkedIn role descriptions appear empty; role titles, dates, employment types, location types, skills, education, languages, and project summary were available through Chrome."
+	]
+}

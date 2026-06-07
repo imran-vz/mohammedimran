@@ -1,12 +1,12 @@
 {
-  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
-  "skills": [
-    {
-      "name": "hire-imran",
-      "type": "skill-md",
-      "description": "Discover Imran's public portfolio, selected projects, technical strengths, and contact paths for freelance or contract work.",
-      "url": "https://imran.codes/.well-known/agent-skills/hire-imran/SKILL.md",
-      "digest": "sha256:9080e855c1286568d3b94888d34eca97081046bb0080e25b5a518a1f4f33ad96"
-    }
-  ]
+	"$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+	"skills": [
+		{
+			"name": "hire-imran",
+			"type": "skill-md",
+			"description": "Discover Imran's public portfolio, selected projects, technical strengths, and contact paths for freelance or contract work.",
+			"url": "https://imran.codes/.well-known/agent-skills/hire-imran/SKILL.md",
+			"digest": "sha256:9080e855c1286568d3b94888d34eca97081046bb0080e25b5a518a1f4f33ad96"
+		}
+	]
 }
