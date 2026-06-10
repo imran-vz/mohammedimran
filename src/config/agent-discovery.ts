@@ -95,7 +95,7 @@ export const corsHeaders = {
 	'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept, MCP-Protocol-Version',
 };
 
-export const jsonHeaders = {
+const jsonHeaders = {
 	...corsHeaders,
 	'Cache-Control': 'public, max-age=3600',
 	'Content-Type': 'application/json; charset=utf-8',

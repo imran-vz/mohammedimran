@@ -32,14 +32,13 @@
 		"@astrojs/vercel": "^10.0.8",
 		"@resvg/resvg-js": "^2.6.2",
 		"@vercel/analytics": "^2.0.1",
-		"astro": "^6.4.4",
+		"astro": "^6.4.5",
 		"sharp": "^0.34.5",
-		"svelte": "^5.56.2",
+		"svelte": "^5.56.3",
 		"turndown": "^7.2.4"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.16",
-		"@types/turndown": "^5.0.6",
-		"supports-color": "^10.2.2"
+		"@types/turndown": "^5.0.6"
 	}
 }

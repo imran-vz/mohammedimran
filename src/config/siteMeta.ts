@@ -31,8 +31,6 @@ export const siteMeta = {
 	employer: 'Thoughtseed',
 };
 
-export type SiteMeta = typeof siteMeta;
-
 /** Build a per-page dot-matrix OG image URL. */
 export function ogImageUrl(
 	opts: { title?: string; subtitle?: string; variant?: 'default' | 'square' | 'story' } = {},

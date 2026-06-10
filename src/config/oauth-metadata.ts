@@ -1,6 +1,6 @@
 import { absoluteUrl, discoveryApi, siteUrl } from './agent-discovery';
 
-export const scopesSupported = [discoveryApi.scope];
+const scopesSupported = [discoveryApi.scope];
 
 export const oauthAuthorizationServerMetadata = {
 	issuer: siteUrl,

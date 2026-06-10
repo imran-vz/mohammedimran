@@ -5,7 +5,7 @@ export const experience = experienceData as ExperienceData;
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-export function formatMonthYear(dateStr: string): string {
+function formatMonthYear(dateStr: string): string {
 	const [year, month] = dateStr.split('-');
 	if (!month) return year;
 	return `${MONTHS[Number.parseInt(month, 10) - 1]} ${year}`;
@@ -38,17 +38,6 @@ export function getShowcaseProjectsByGroup(groupId: string): ShowcaseProject[] {
 	return experience.showcaseProjects.filter((project) => project.group === groupId);
 }
 
-export function getAllResumeSkills(): string[] {
-	const { resumeSkills } = experience.profile;
-	return [
-		...resumeSkills.languages,
-		...resumeSkills.frontend,
-		...resumeSkills.backendAi,
-		...resumeSkills.infrastructureIot,
-		...resumeSkills.databasesTools,
-	];
-}
-
 export function getInitials(name: string): string {
 	const words = name
 		.replace(/[^a-zA-Z0-9\s-]/g, '')
@@ -58,12 +47,4 @@ export function getInitials(name: string): string {
 	if (words.length === 0) return '?';
 	if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
 	return (words[0][0] + words[1][0]).toUpperCase();
-}
-
-export function projectVisualHue(projectId: string): number {
-	let hash = 0;
-	for (const char of projectId) {
-		hash = char.charCodeAt(0) + ((hash << 5) - hash);
-	}
-	return Math.abs(hash) % 360;
 }
