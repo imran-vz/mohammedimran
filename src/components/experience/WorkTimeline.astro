@@ -5,6 +5,12 @@ import BrandLogo from './BrandLogo.astro';
 const timeline = getPrimaryTimeline();
 ---
 
+<script is:inline>
+	// runs during parse, before first paint: lets CSS hide the static fallback
+	// connector so the animated branch growth is the first line ever shown
+	document.documentElement.classList.add('wt-js');
+</script>
+
 <section class="exp-work section" aria-labelledby="work-heading">
 	<div class="section-header">
 		<h2 id="work-heading" class="section-title">Work Experience</h2>
@@ -140,6 +146,135 @@ const timeline = getPrimaryTimeline();
 	</ol>
 </section>
 
+<script>
+	const NS = 'http://www.w3.org/2000/svg';
+	const LEAF_GREENS = ['#6f8f5e', '#83a371', '#5d7a4e', '#94ad7f'];
+
+	const rand = (min: number, max: number) => min + Math.random() * (max - min);
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+	function makeLeaf(x: number, y: number, angle: number): SVGGElement {
+		const size = rand(5, 8.5);
+		const outer = document.createElementNS(NS, 'g');
+		outer.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${angle.toFixed(1)})`);
+
+		const sprout = document.createElementNS(NS, 'g');
+		sprout.setAttribute('class', 'branch-sprout');
+		sprout.style.animationDuration = `${rand(3.5, 6).toFixed(2)}s`;
+		sprout.style.animationDelay = `-${rand(0, 4).toFixed(2)}s`;
+
+		const leaf = document.createElementNS(NS, 'path');
+		const w = size * 0.38;
+		leaf.setAttribute(
+			'd',
+			`M0 0 C ${size * 0.35} ${-w} ${size * 0.75} ${-w * 0.8} ${size} 0 C ${size * 0.75} ${w * 0.8} ${size * 0.35} ${w} 0 0 Z`
+		);
+		leaf.setAttribute('class', 'branch-leaf');
+		leaf.setAttribute('fill', LEAF_GREENS[Math.floor(Math.random() * LEAF_GREENS.length)] ?? '#6f8f5e');
+
+		sprout.appendChild(leaf);
+		outer.appendChild(sprout);
+		return outer;
+	}
+
+	function growStroke(path: SVGPathElement, delay: number, duration: number) {
+		const length = path.getTotalLength();
+		path.setAttribute('stroke-dasharray', String(length));
+		path
+			.animate([{ strokeDashoffset: length }, { strokeDashoffset: 0 }], {
+				delay,
+				duration,
+				easing: 'ease-out',
+				fill: 'backwards',
+			})
+			.finished.then(() => path.removeAttribute('stroke-dasharray'))
+			.catch(() => {});
+	}
+
+	function drawBranch(svg: SVGSVGElement, animate: boolean, itemIndex: number) {
+		const h = svg.clientHeight;
+		if (h < 24) return;
+
+		svg.dataset.drawnHeight = String(h);
+		svg.setAttribute('viewBox', `0 0 22 ${h}`);
+		svg.removeAttribute('preserveAspectRatio');
+		svg.replaceChildren();
+
+		// wavy trunk from the node at (11, 0) down to the next node at (11, h)
+		const trunk = document.createElementNS(NS, 'path');
+		trunk.setAttribute(
+			'd',
+			`M11 0 C ${rand(2, 20).toFixed(1)} ${(h * rand(0.12, 0.24)).toFixed(1)}, ${rand(3, 19).toFixed(1)} ${(h * rand(0.3, 0.42)).toFixed(1)}, ${rand(6, 16).toFixed(1)} ${(h * 0.5).toFixed(1)} S ${rand(2, 20).toFixed(1)} ${(h * rand(0.76, 0.88)).toFixed(1)}, 11 ${h}`
+		);
+		trunk.setAttribute('class', 'branch-trunk');
+		svg.appendChild(trunk);
+
+		// each entry's branch starts growing as the previous one nears its node
+		const baseDelay = itemIndex * 520;
+		const trunkDuration = Math.max(500, Math.min(1100, h * 2.2));
+		if (animate) growStroke(trunk, baseDelay, trunkDuration);
+
+		// twigs sprout from random points along the trunk, each ending in a leaf
+		const trunkLength = trunk.getTotalLength();
+		const twigCount = 2 + Math.floor(Math.random() * 3);
+		for (let i = 0; i < twigCount; i++) {
+			const t = rand(0.12, 0.85);
+			const point = trunk.getPointAtLength(trunkLength * t);
+			const side = Math.random() < 0.5 ? -1 : 1;
+			const dx = side * rand(6, 12);
+			const dy = -rand(7, 16);
+
+			const twig = document.createElementNS(NS, 'path');
+			twig.setAttribute(
+				'd',
+				`M${point.x.toFixed(1)} ${point.y.toFixed(1)} q ${(dx * 0.35).toFixed(1)} ${(dy * 0.55).toFixed(1)} ${dx.toFixed(1)} ${dy.toFixed(1)}`
+			);
+			twig.setAttribute('class', 'branch-twig');
+			svg.appendChild(twig);
+
+			const angle = (Math.atan2(dy, dx) * 180) / Math.PI + rand(-12, 12);
+			const leaf = makeLeaf(point.x + dx, point.y + dy, angle);
+			svg.appendChild(leaf);
+
+			if (animate) {
+				// twig sprouts once the growing trunk tip passes its attachment point
+				const twigDelay = baseDelay + trunkDuration * t + rand(40, 140);
+				growStroke(twig, twigDelay, 320);
+
+				// the leaf then unfurls from the twig tip
+				const sprout = leaf.firstElementChild as SVGGElement;
+				sprout.animate([{ scale: '0' }, { scale: '1' }], {
+					delay: twigDelay + 240,
+					duration: 380,
+					easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+					fill: 'backwards',
+				});
+			}
+		}
+	}
+
+	function drawAll(animate: boolean, onlyIfResized = false) {
+		document.querySelectorAll<SVGSVGElement>('.timeline__connector').forEach((svg, index) => {
+			if (onlyIfResized && svg.dataset.drawnHeight === String(svg.clientHeight)) return;
+			drawBranch(svg, animate && !reducedMotion.matches, index);
+		});
+	}
+
+	drawAll(true);
+	// item heights settle once web fonts load; redraw (without replaying the
+	// growth) any branch whose segment height changed so twigs stay attached
+	document.fonts?.ready.then(() => drawAll(false, true));
+
+	let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+	let lastWidth = window.innerWidth;
+	window.addEventListener('resize', () => {
+		if (window.innerWidth === lastWidth) return;
+		lastWidth = window.innerWidth;
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(() => drawAll(false), 200);
+	});
+</script>
+
 <style>
 	.timeline {
 		list-style: none;
@@ -153,7 +288,7 @@ const timeline = getPrimaryTimeline();
 		position: relative;
 	}
 
-	/* continuous curvy spine: each item draws a smooth S-curve down to the next node */
+	/* organic spine: a randomized branch is drawn into each connector on load */
 	.timeline__connector {
 		height: 100%;
 		left: 0;
@@ -168,6 +303,50 @@ const timeline = getPrimaryTimeline();
 		stroke: var(--page-line);
 		stroke-linecap: round;
 		stroke-width: 2;
+	}
+
+	/* with JS available the branch is drawn dynamically; hide the static
+	   no-JS fallback from first paint so it never flashes before the growth.
+	   Scoped selector: only matches the server-rendered path, not the
+	   script-created branch elements. */
+	:global(html.wt-js) .timeline__connector path {
+		display: none;
+	}
+
+	.timeline__connector :global(.branch-trunk) {
+		fill: none;
+		stroke: var(--page-line);
+		stroke-linecap: round;
+		stroke-width: 2;
+	}
+
+	.timeline__connector :global(.branch-twig) {
+		fill: none;
+		stroke: var(--page-line);
+		stroke-linecap: round;
+		stroke-width: 1.4;
+	}
+
+	.timeline__connector :global(.branch-leaf) {
+		stroke: none;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.timeline__connector :global(.branch-sprout) {
+			animation: wt-leaf-sway 4.5s ease-in-out infinite alternate;
+			transform-box: fill-box;
+			transform-origin: left center;
+		}
+	}
+
+	@keyframes wt-leaf-sway {
+		from {
+			rotate: -3deg;
+		}
+
+		to {
+			rotate: 4deg;
+		}
 	}
 
 	/* node dot sits directly on the spine */

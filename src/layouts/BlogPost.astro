@@ -794,11 +794,13 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 			display: none;
 		}
 
+		/* 720px content column + 36px gutters, same as Layout.astro pages,
+		   so navigating to a post causes no layout shift */
 		.article-banner,
 		.article-wrapper,
 		.faq-section,
 		.author-section {
-			width: min(100%, 720px);
+			width: min(100%, 792px);
 			margin: 0 auto;
 		}
 
@@ -954,6 +956,73 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 
 			.footer-content {
 				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+
+	<style is:global>
+		/* shared page-transition + scrollbar treatment (mirrors Layout.astro) */
+		html {
+			scrollbar-width: thin;
+			scrollbar-color: #c8c8c4 transparent;
+		}
+
+		::-webkit-scrollbar {
+			width: 12px;
+			height: 12px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: transparent;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background: #d4d4d0;
+			border: 3px solid var(--page-bg);
+			border-radius: 8px;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: #b9b9b4;
+		}
+
+		@view-transition {
+			navigation: auto;
+		}
+
+		.header {
+			view-transition-name: site-header;
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			::view-transition-old(root) {
+				animation: vt-page-out 0.18s ease both;
+			}
+
+			::view-transition-new(root) {
+				animation: vt-page-in 0.3s ease both;
+			}
+		}
+
+		@keyframes vt-page-out {
+			to {
+				opacity: 0;
+			}
+		}
+
+		@keyframes vt-page-in {
+			from {
+				opacity: 0;
+				transform: translateY(10px);
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			::view-transition-group(*),
+			::view-transition-image-pair(*),
+			::view-transition-old(*),
+			::view-transition-new(*) {
+				animation: none !important;
 			}
 		}
 	</style>

@@ -21,8 +21,9 @@ const { profile } = experience;
 			<span class="exp-intro__hl exp-intro__hl--soft">5+ years</span> across backend platforms, IoT
 			systems, AI assistants, data pipelines, and customer engagement tools.
 		</p>
-		<span class="exp-intro__stamp" aria-hidden="true">Available for hire</span>
 	</div>
+
+	<span class="exp-intro__stamp" aria-hidden="true">Available for hire</span>
 
 	<svg class="exp-intro__seal" viewBox="0 0 160 160" width="160" height="160" aria-hidden="true">
 		<defs>
@@ -40,14 +41,21 @@ const { profile } = experience;
 
 <style>
 	.exp-intro {
-		display: flex;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		grid-template-areas:
+			'text seal'
+			'stamp seal';
+		column-gap: 24px;
 		align-items: center;
-		gap: 24px;
 		padding-bottom: 36px;
 		border-bottom: 1px solid var(--page-line);
 		margin-bottom: 8px;
 		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+	}
+
+	.exp-intro__text {
+		grid-area: text;
 	}
 
 	.exp-intro__eyebrow {
@@ -134,6 +142,8 @@ const { profile } = experience;
 
 	/* slanted rectangular ink stamp */
 	.exp-intro__stamp {
+		grid-area: stamp;
+		justify-self: start;
 		display: inline-block;
 		border: 2.5px solid #2456c4;
 		border-radius: 4px;
@@ -161,7 +171,7 @@ const { profile } = experience;
 
 	/* circular postmark */
 	.exp-intro__seal {
-		flex: 0 0 auto;
+		grid-area: seal;
 		width: clamp(120px, 18vw, 168px);
 		height: auto;
 		color: #c0392b;
@@ -183,29 +193,34 @@ const { profile } = experience;
 
 	@media (max-width: 700px) {
 		.exp-intro {
-			flex-direction: column;
-			align-items: flex-start;
+			position: relative;
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				'text'
+				'stamp';
 			padding-bottom: 28px;
 		}
 
 		.exp-intro__subheadline {
-			margin-bottom: 14px;
+			margin-bottom: 8px;
+		}
+
+		/* seal floats at the top right under the header, behind the text */
+		.exp-intro__seal {
+			position: absolute;
+			top: -14px;
+			right: -8px;
+			width: 129px;
+			z-index: -1;
 		}
 
 		.exp-intro__stamp {
-			font-size: 11px;
-			letter-spacing: 0.12em;
-			padding: 5px 10px;
-		}
-
-		/* tuck the seal up next to the stamp so they read as one row */
-		.exp-intro__seal {
-			align-self: flex-end;
-			margin-top: -52px;
-			margin-right: 6px;
-			width: 88px;
+			justify-self: center;
+			margin-top: 4px;
+			transform: rotate(-4deg) scale(0.9);
 		}
 	}
+
 
 	@media (prefers-reduced-motion: reduce) {
 		.exp-intro__underline path,

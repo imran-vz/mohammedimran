@@ -37,12 +37,9 @@ const experience = [
         <!-- Hero -->
         <section class="page-hero">
             <div class="page-hero-left">
-                <h1 class="page-hero-title">SKILLS</h1>
+                <h1 class="page-hero-title">Skills</h1>
             </div>
             <div class="page-hero-right">
-                <p class="page-hero-breadcrumb">
-                    <a href="/">Home</a> / Skills
-                </p>
                 <p class="page-hero-description">
                     5+ years building scalable, performant web applications. Specialized in React, TypeScript, and GoLang.
                 </p>
@@ -193,17 +190,6 @@ const experience = [
         flex-direction: column;
         justify-content: center;
         gap: 30px;
-    }
-
-    .page-hero-breadcrumb {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: var(--gray);
-    }
-
-    .page-hero-breadcrumb a:hover {
-        color: var(--black);
     }
 
     .page-hero-description {
@@ -523,16 +509,17 @@ const experience = [
         background: transparent;
     }
 
+    /* matches the home hero name (.exp-intro__name) for cross-page consistency */
     .page-hero-title {
-        font-family: Georgia, 'Times New Roman', serif;
-        font-size: clamp(3rem, 9vw, 5.5rem);
-        line-height: 1.06;
-        letter-spacing: -0.055em;
-        margin: 36px 0 20px;
+        font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: clamp(2rem, 5vw, 2.6rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        margin: 0 0 18px;
         text-transform: none;
     }
 
-    .page-hero-breadcrumb,
     .page-hero-description,
     .experience-label,
     .experience-description,
@@ -546,8 +533,8 @@ const experience = [
 
     .page-hero-description {
         max-width: 680px;
-        font-size: 1.1rem;
-        line-height: 1.72;
+        font-size: 15px;
+        line-height: 1.65;
     }
 
     .experience-grid,

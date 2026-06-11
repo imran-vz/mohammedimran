@@ -213,17 +213,6 @@ const blogListingSchema = {
             max-width: 500px;
         }
 
-        .hero-breadcrumb {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--gray);
-        }
-
-        .hero-breadcrumb a:hover {
-            color: var(--black);
-        }
-
         /* Section */
         .section {
             border-bottom: 4px solid var(--black);
@@ -557,9 +546,11 @@ const blogListingSchema = {
             display: none;
         }
 
+        /* 720px content column + 36px gutters, same as #main-content/.section
+           in Layout.astro, so navigating to /blog causes no layout shift */
         .hero,
         .section {
-            width: min(100%, 720px);
+            width: min(100%, 792px);
             margin: 0 auto;
         }
 
@@ -582,16 +573,17 @@ const blogListingSchema = {
             background: transparent;
         }
 
+        /* matches the home hero name (.exp-intro__name) for cross-page consistency */
         .hero-title {
-            font-family: Georgia, 'Times New Roman', serif;
-            font-size: clamp(3rem, 9vw, 5.5rem);
-            line-height: 1.06;
-            letter-spacing: -0.055em;
-            margin: 36px 0 20px;
+            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin: 0 0 18px;
             text-transform: none;
         }
 
-        .hero-breadcrumb,
         .hero-description,
         .post-description,
         .post-date,
@@ -604,8 +596,8 @@ const blogListingSchema = {
 
         .hero-description {
             max-width: 680px;
-            font-size: 1.1rem;
-            line-height: 1.72;
+            font-size: 15px;
+            line-height: 1.65;
         }
 
         .section-header {
@@ -713,7 +705,7 @@ const blogListingSchema = {
             color: var(--page-ink);
         }
 
-        @media (max-width: 760px) {
+        @media (max-width: 600px) {
             .hero {
                 padding: 44px 20px 28px;
             }
@@ -721,7 +713,9 @@ const blogListingSchema = {
             .section {
                 padding: 22px 20px 4px;
             }
+        }
 
+        @media (max-width: 760px) {
             .post-item {
                 grid-template-columns: 1fr;
                 grid-template-areas: none;
@@ -739,6 +733,73 @@ const blogListingSchema = {
 
             .footer-content {
                 grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <style is:global>
+        /* shared page-transition + scrollbar treatment (mirrors Layout.astro) */
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: #c8c8c4 transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d4d4d0;
+            border: 3px solid var(--page-bg);
+            border-radius: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b9b9b4;
+        }
+
+        @view-transition {
+            navigation: auto;
+        }
+
+        .header {
+            view-transition-name: site-header;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            ::view-transition-old(root) {
+                animation: vt-page-out 0.18s ease both;
+            }
+
+            ::view-transition-new(root) {
+                animation: vt-page-in 0.3s ease both;
+            }
+        }
+
+        @keyframes vt-page-out {
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes vt-page-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            ::view-transition-group(*),
+            ::view-transition-image-pair(*),
+            ::view-transition-old(*),
+            ::view-transition-new(*) {
+                animation: none !important;
             }
         }
     </style>
@@ -766,12 +827,9 @@ const blogListingSchema = {
     <!-- Hero -->
     <section class="hero">
         <div class="hero-left">
-            <h1 class="hero-title">BLOG</h1>
+            <h1 class="hero-title">Blog</h1>
         </div>
         <div class="hero-right">
-            <p class="hero-breadcrumb">
-                <a href="/">Home</a> / Blog
-            </p>
             <p class="hero-description">
                 Practical guides on building software with React, TypeScript, Go, and modern web technologies.
             </p>

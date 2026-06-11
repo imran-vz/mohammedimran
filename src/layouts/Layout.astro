@@ -173,6 +173,65 @@ const webMcpData = {
 
             html {
                 scroll-behavior: smooth;
+                scrollbar-width: thin;
+                scrollbar-color: #c8c8c4 transparent;
+            }
+
+            /* webkit fallback for browsers without scrollbar-color (Safari) */
+            ::-webkit-scrollbar {
+                width: 12px;
+                height: 12px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #d4d4d0;
+                border: 3px solid var(--page-bg);
+                border-radius: 8px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #b9b9b4;
+            }
+
+            /* native cross-document view transitions between pages */
+            @view-transition {
+                navigation: auto;
+            }
+
+            @media (prefers-reduced-motion: no-preference) {
+                ::view-transition-old(root) {
+                    animation: vt-page-out 0.18s ease both;
+                }
+
+                ::view-transition-new(root) {
+                    animation: vt-page-in 0.3s ease both;
+                }
+            }
+
+            @keyframes vt-page-out {
+                to {
+                    opacity: 0;
+                }
+            }
+
+            @keyframes vt-page-in {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                ::view-transition-group(*),
+                ::view-transition-image-pair(*),
+                ::view-transition-old(*),
+                ::view-transition-new(*) {
+                    animation: none !important;
+                }
             }
 
 			body {
@@ -211,6 +270,8 @@ const webMcpData = {
 				gap: 12px;
 				background: rgba(251, 251, 250, 0.86);
 				backdrop-filter: blur(16px);
+				/* header stays put during page transitions instead of fading with the root */
+				view-transition-name: site-header;
 			}
 
             .skip-link {
@@ -307,6 +368,7 @@ const webMcpData = {
 				background: var(--page-bg);
 				color: var(--page-muted);
 				padding: 36px 40px;
+				view-transition-name: site-footer;
 			}
 
 			.footer-content {

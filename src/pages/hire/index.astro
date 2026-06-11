@@ -24,14 +24,9 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 		<!-- Hero -->
 		<section class="page-hero">
 			<div class="page-hero-left">
-				<h1 class="page-hero-title">HIRE ME</h1>
+				<h1 class="page-hero-title">Hire Me</h1>
 			</div>
 			<div class="page-hero-right">
-				<nav class="breadcrumb" aria-label="Breadcrumb">
-					<a href="/">Home</a>
-					<span>/</span>
-					<span>Hire Me</span>
-				</nav>
 				<h2 class="page-hero-headline">Developer for hire in Bangalore</h2>
 				<p class="page-hero-description">
 					I am a senior full-stack developer based in Bengaluru/Bangalore, available for
@@ -53,8 +48,9 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 			<div class="hire-grid">
 				{hirePages.map((page) => (
 					<a href={`/hire/${page.slug}`} class="hire-card">
-						<h3 class="hire-card-title">{page.headline}</h3>
-						<p class="hire-card-description">{page.intro}</p>
+						{/* morphs into the matching headline/intro on the detail page */}
+						<h3 class="hire-card-title" style={`view-transition-name: hire-${page.slug}-title`}>{page.headline}</h3>
+						<p class="hire-card-description" style={`view-transition-name: hire-${page.slug}-desc`}>{page.intro}</p>
 						<div class="hire-card-skills">
 							{page.skills.slice(0, 4).map((skill) => (
 								<span class="hire-skill-tag">{skill}</span>
@@ -132,20 +128,6 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 		flex-direction: column;
 		justify-content: center;
 		gap: 24px;
-	}
-
-	.breadcrumb {
-		font-size: 12px;
-		text-transform: uppercase;
-		letter-spacing: 0.15em;
-		color: var(--gray);
-		display: flex;
-		align-items: center;
-		gap: 8px;
-	}
-
-	.breadcrumb a:hover {
-		color: var(--black);
 	}
 
 	.page-hero-headline {
@@ -338,16 +320,17 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 		background: transparent;
 	}
 
+	/* matches the home hero name (.exp-intro__name) for cross-page consistency */
 	.page-hero-title {
-		font-family: Georgia, 'Times New Roman', serif;
-		font-size: clamp(3rem, 9vw, 5.5rem);
-		line-height: 1.06;
-		letter-spacing: -0.055em;
-		margin: 36px 0 20px;
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: clamp(2rem, 5vw, 2.6rem);
+		font-weight: 700;
+		line-height: 1.1;
+		letter-spacing: -0.03em;
+		margin: 0 0 18px;
 		text-transform: none;
 	}
 
-	.page-hero-headline,
 	.hire-card-title,
 	.cta-title {
 		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -357,7 +340,16 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 		text-transform: none;
 	}
 
-	.breadcrumb,
+	/* matches the home hero headline (.exp-intro__headline) */
+	.page-hero-headline {
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-size: 1.2rem;
+		font-weight: 600;
+		letter-spacing: 0;
+		line-height: 1.5;
+		text-transform: none;
+	}
+
 	.page-hero-description,
 	.hire-card-description,
 	.cta-text {
@@ -369,8 +361,8 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 
 	.page-hero-description {
 		max-width: 680px;
-		font-size: 1.1rem;
-		line-height: 1.72;
+		font-size: 15px;
+		line-height: 1.65;
 	}
 
 	.action-link {
@@ -427,6 +419,7 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 		padding: 2px 6px;
 		background: var(--page-soft);
 		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 		font-size: 11px;
 		letter-spacing: 0;
 		text-transform: none;
@@ -435,6 +428,7 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 	.hire-card-link {
 		margin-top: 8px;
 		color: var(--page-muted);
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 		font-size: 13px;
 		font-weight: 500;
 		text-decoration: none;
