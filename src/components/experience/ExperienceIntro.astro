@@ -5,50 +5,222 @@ const { profile } = experience;
 ---
 
 <section class="exp-intro" aria-labelledby="profile-name">
-	<p class="exp-intro__eyebrow">{profile.location}</p>
-	<h1 id="profile-name" class="exp-intro__name">{profile.name}</h1>
-	<p class="exp-intro__headline">{profile.displayHeadline}</p>
-	<p class="exp-intro__subheadline">{profile.supportingHeadline}</p>
+	<div class="exp-intro__text">
+		<p class="exp-intro__eyebrow">{profile.location}</p>
+		<h1 id="profile-name" class="exp-intro__name">
+			{profile.preferredName ?? profile.name}
+			<svg class="exp-intro__underline" viewBox="0 0 200 12" width="200" height="12" preserveAspectRatio="none" aria-hidden="true">
+				<path d="M3 9 C 50 3, 90 11, 197 5" fill="none" stroke="#ffd60a" stroke-width="5" stroke-linecap="round" />
+			</svg>
+		</h1>
+		<p class="exp-intro__headline">
+			<span class="exp-intro__hl">{profile.displayHeadline}</span>
+			building things that ship.
+		</p>
+		<p class="exp-intro__subheadline">
+			<span class="exp-intro__hl exp-intro__hl--soft">5+ years</span> across backend platforms, IoT
+			systems, AI assistants, data pipelines, and customer engagement tools.
+		</p>
+		<span class="exp-intro__stamp" aria-hidden="true">Available for hire</span>
+	</div>
+
+	<svg class="exp-intro__seal" viewBox="0 0 160 160" width="160" height="160" aria-hidden="true">
+		<defs>
+			<path id="exp-seal-circle" d="M 80,80 m -58,0 a 58,58 0 1,1 116,0 a 58,58 0 1,1 -116,0" />
+		</defs>
+		<circle cx="80" cy="80" r="72" fill="none" stroke="currentColor" stroke-width="3" />
+		<circle cx="80" cy="80" r="44" fill="none" stroke="currentColor" stroke-width="1.5" />
+		<text font-family="'Space Mono', monospace" font-size="13.5" font-weight="700" letter-spacing="3.5" fill="currentColor">
+			<textPath href="#exp-seal-circle">BENGALURU · EST. 5+ YRS · FULL STACK ·</textPath>
+		</text>
+		<text x="80" y="76" text-anchor="middle" font-family="'Space Mono', monospace" font-size="12" font-weight="700" fill="currentColor">GO · TS</text>
+		<text x="80" y="93" text-anchor="middle" font-family="'Space Mono', monospace" font-size="12" font-weight="700" fill="currentColor">REACT · PY</text>
+	</svg>
 </section>
 
 <style>
 	.exp-intro {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 24px;
 		padding-bottom: 36px;
 		border-bottom: 1px solid var(--page-line);
 		margin-bottom: 8px;
+		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 	}
 
 	.exp-intro__eyebrow {
 		color: var(--page-muted);
-		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 		font-size: 13px;
 		line-height: 1.5;
 		margin-bottom: 10px;
 	}
 
 	.exp-intro__name {
-		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-		font-size: clamp(1.75rem, 4vw, 2.25rem);
+		position: relative;
+		display: inline-block;
+		font-size: clamp(2rem, 5vw, 2.6rem);
 		font-weight: 700;
 		letter-spacing: -0.03em;
-		line-height: 1.15;
-		margin-bottom: 10px;
+		line-height: 1.1;
+		margin-bottom: 14px;
+	}
+
+	.exp-intro__underline {
+		position: absolute;
+		left: 0;
+		bottom: -8px;
+		width: 100%;
+		height: 12px;
+		overflow: visible;
+	}
+
+	.exp-intro__underline path {
+		stroke-dasharray: 220;
+		stroke-dashoffset: 220;
+		animation: exp-draw 0.7s ease-out 0.15s forwards;
+	}
+
+	@keyframes exp-draw {
+		to {
+			stroke-dashoffset: 0;
+		}
 	}
 
 	.exp-intro__headline {
 		color: var(--page-ink);
-		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-		font-size: 1.125rem;
+		font-size: 1.2rem;
 		font-weight: 600;
-		line-height: 1.45;
+		line-height: 1.5;
 		margin-bottom: 8px;
 	}
 
 	.exp-intro__subheadline {
 		color: var(--page-muted);
-		font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 		font-size: 15px;
 		line-height: 1.65;
-		max-width: 640px;
+		max-width: 540px;
+		margin-bottom: 18px;
+	}
+
+	.exp-intro__hl {
+		position: relative;
+		white-space: nowrap;
+	}
+
+	.exp-intro__hl::before {
+		content: '';
+		position: absolute;
+		inset: -2px -4px;
+		background: #ffe94d;
+		z-index: -1;
+		transform: scaleX(0);
+		transform-origin: left center;
+		border-radius: 3px;
+		animation: exp-sweep 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+	}
+
+	.exp-intro__hl--soft::before {
+		background: #fff3a3;
+		animation-delay: 0.9s;
+	}
+
+	@keyframes exp-sweep {
+		to {
+			transform: scaleX(1);
+		}
+	}
+
+	/* slanted rectangular ink stamp */
+	.exp-intro__stamp {
+		display: inline-block;
+		border: 2.5px solid #2456c4;
+		border-radius: 4px;
+		color: #2456c4;
+		font-family: 'Space Mono', monospace;
+		font-size: 13px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		padding: 6px 14px;
+		transform: rotate(-4deg);
+		-webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMjAnIGhlaWdodD0nMTIwJz48ZmlsdGVyIGlkPSdnJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC41NScgbnVtT2N0YXZlcz0nMicvPjxmZUNvbG9yTWF0cml4IHZhbHVlcz0nMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMS42IC0wLjM1Jy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMjAnIGZpbGw9JyNmZmYnIGZpbHRlcj0ndXJsKCNnKScvPjwvc3ZnPg==);
+		mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMjAnIGhlaWdodD0nMTIwJz48ZmlsdGVyIGlkPSdnJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC41NScgbnVtT2N0YXZlcz0nMicvPjxmZUNvbG9yTWF0cml4IHZhbHVlcz0nMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMS42IC0wLjM1Jy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMjAnIGZpbGw9JyNmZmYnIGZpbHRlcj0ndXJsKCNnKScvPjwvc3ZnPg==);
+		-webkit-mask-size: 120px;
+		mask-size: 120px;
+		animation: exp-thump-stamp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 1.3s backwards;
+	}
+
+	@keyframes exp-thump-stamp {
+		from {
+			opacity: 0;
+			transform: rotate(-4deg) scale(1.7);
+		}
+	}
+
+	/* circular postmark */
+	.exp-intro__seal {
+		flex: 0 0 auto;
+		width: clamp(120px, 18vw, 168px);
+		height: auto;
+		color: #c0392b;
+		opacity: 0.85;
+		transform: rotate(11deg);
+		-webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSdnJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC40JyBudW1PY3RhdmVzPScyJy8+PGZlQ29sb3JNYXRyaXggdmFsdWVzPScwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAxLjcgLTAuNCcvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJyBmaWxsPScjZmZmJyBmaWx0ZXI9J3VybCgjZyknLz48L3N2Zz4=);
+		mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSdnJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC40JyBudW1PY3RhdmVzPScyJy8+PGZlQ29sb3JNYXRyaXggdmFsdWVzPScwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAxLjcgLTAuNCcvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJyBmaWxsPScjZmZmJyBmaWx0ZXI9J3VybCgjZyknLz48L3N2Zz4=);
+		-webkit-mask-size: 160px;
+		mask-size: 160px;
+		animation: exp-thump-seal 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s backwards;
+	}
+
+	@keyframes exp-thump-seal {
+		from {
+			opacity: 0;
+			transform: rotate(11deg) scale(1.7);
+		}
+	}
+
+	@media (max-width: 700px) {
+		.exp-intro {
+			flex-direction: column;
+			align-items: flex-start;
+			padding-bottom: 28px;
+		}
+
+		.exp-intro__subheadline {
+			margin-bottom: 14px;
+		}
+
+		.exp-intro__stamp {
+			font-size: 11px;
+			letter-spacing: 0.12em;
+			padding: 5px 10px;
+		}
+
+		/* tuck the seal up next to the stamp so they read as one row */
+		.exp-intro__seal {
+			align-self: flex-end;
+			margin-top: -52px;
+			margin-right: 6px;
+			width: 88px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.exp-intro__underline path,
+		.exp-intro__hl::before,
+		.exp-intro__stamp,
+		.exp-intro__seal {
+			animation: none;
+		}
+
+		.exp-intro__underline path {
+			stroke-dashoffset: 0;
+		}
+
+		.exp-intro__hl::before {
+			transform: scaleX(1);
+		}
 	}
 </style>
