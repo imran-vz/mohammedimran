@@ -27,8 +27,12 @@ const professionalServiceSchema = {
 	name: 'Imran - Full Stack Development',
 	description: 'Full Stack Development services in Bangalore/Bengaluru specializing in React, TypeScript, Go, and Rust',
 	url: siteMeta.siteUrl,
-	areaServed: 'Worldwide',
-	serviceType: ['Web Development', 'Full Stack Development', 'Software Engineering'],
+	areaServed: [
+		{ '@type': 'City', name: 'Bengaluru' },
+		{ '@type': 'City', name: 'Bangalore' },
+		{ '@type': 'Place', name: 'Worldwide (Remote)' },
+	],
+	serviceType: ['Web Development', 'Full Stack Development', 'Software Engineering', 'Technical Leadership'],
 };
 
 const agentDiscoveryLinks = [

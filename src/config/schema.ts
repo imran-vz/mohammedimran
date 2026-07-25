@@ -15,6 +15,13 @@ const personAlternateNames = [
 	'bengaluru developer Mohammed Imran',
 	'bengaluru developer Mohammed',
 	'bengaluru developer Imran',
+	'lead developer Bangalore',
+	'lead dev for hire',
+	'software developer Bangalore',
+	'software developer Bengaluru',
+	'remote full stack developer',
+	'remote lead developer India',
+	'hire lead developer',
 ];
 
 const personKnowsAbout = [
@@ -28,6 +35,7 @@ const personKnowsAbout = [
 	'Tauri',
 	'Full Stack Development',
 	'Web Development',
+	'Technical Leadership',
 ];
 
 function personDescription(overrides?: { description?: string }) {
@@ -44,7 +52,7 @@ export function buildPersonSchema(overrides?: { description?: string; imageUrl?:
 		'@type': 'Person',
 		name: siteMeta.brandShort,
 		alternateName: personAlternateNames,
-		jobTitle: 'Senior Full Stack Developer',
+		jobTitle: ['Lead Developer', 'Senior Full Stack Developer', 'Software Developer'],
 		description: personDescription(overrides),
 		url: siteMeta.siteUrl,
 		image: personImage(overrides),

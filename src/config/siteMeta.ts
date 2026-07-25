@@ -27,6 +27,10 @@ export const siteMeta = {
 		'Bangalore Full Stack Developer',
 		'Bengaluru Full Stack Developer',
 		'Developer for Hire in Bangalore',
+		'Lead Developer Bangalore',
+		'Software Developer Bangalore',
+		'Remote Full Stack Developer',
+		'Remote Lead Developer India',
 	],
 	employer: 'Thoughtseed',
 };
