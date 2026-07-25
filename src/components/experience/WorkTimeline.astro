@@ -148,33 +148,55 @@ const timeline = getPrimaryTimeline();
 
 <script>
 	const NS = 'http://www.w3.org/2000/svg';
-	const LEAF_GREENS = ['#6f8f5e', '#83a371', '#5d7a4e', '#94ad7f'];
+	const LEAF_GREENS = ['#6f8f5e', '#83a371', '#5d7a4e', '#94ad7f', '#a4b98a'];
 
 	const rand = (min: number, max: number) => min + Math.random() * (max - min);
 	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-	function makeLeaf(x: number, y: number, angle: number): SVGGElement {
-		const size = rand(5, 8.5);
+	function makeLeaf(x: number, y: number, angle: number, size: number): SVGGElement {
 		const outer = document.createElementNS(NS, 'g');
 		outer.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${angle.toFixed(1)})`);
 
 		const sprout = document.createElementNS(NS, 'g');
 		sprout.setAttribute('class', 'branch-sprout');
-		sprout.style.animationDuration = `${rand(3.5, 6).toFixed(2)}s`;
+		sprout.style.animationDuration = `${rand(3.2, 6).toFixed(2)}s`;
 		sprout.style.animationDelay = `-${rand(0, 4).toFixed(2)}s`;
 
+		const unfurl = document.createElementNS(NS, 'g');
+		unfurl.setAttribute('class', 'branch-unfurl');
+
+		// asymmetric lobes so no two leaves read as identical
+		const wTop = size * rand(0.34, 0.44);
+		const wBot = size * rand(0.28, 0.4);
 		const leaf = document.createElementNS(NS, 'path');
-		const w = size * 0.38;
 		leaf.setAttribute(
 			'd',
-			`M0 0 C ${size * 0.35} ${-w} ${size * 0.75} ${-w * 0.8} ${size} 0 C ${size * 0.75} ${w * 0.8} ${size * 0.35} ${w} 0 0 Z`
+			`M0 0 C ${size * 0.32} ${-wTop} ${size * 0.78} ${-wTop * 0.85} ${size} 0 C ${size * 0.72} ${wBot * 0.85} ${size * 0.32} ${wBot} 0 0 Z`
 		);
 		leaf.setAttribute('class', 'branch-leaf');
 		leaf.setAttribute('fill', LEAF_GREENS[Math.floor(Math.random() * LEAF_GREENS.length)] ?? '#6f8f5e');
 
-		sprout.appendChild(leaf);
+		const vein = document.createElementNS(NS, 'path');
+		vein.setAttribute(
+			'd',
+			`M${(size * 0.08).toFixed(1)} 0 Q ${(size * 0.55).toFixed(1)} ${(-wTop * 0.18).toFixed(1)} ${(size * 0.9).toFixed(1)} 0`
+		);
+		vein.setAttribute('class', 'branch-vein');
+
+		unfurl.append(leaf, vein);
+		sprout.appendChild(unfurl);
 		outer.appendChild(sprout);
 		return outer;
+	}
+
+	function unfurlLeaf(leaf: SVGGElement, delay: number) {
+		leaf.querySelector<SVGGElement>('.branch-unfurl')?.animate(
+			[
+				{ scale: '0', rotate: '-50deg' },
+				{ scale: '1', rotate: '0deg' },
+			],
+			{ delay, duration: 450, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)', fill: 'backwards' }
+		);
 	}
 
 	function growStroke(path: SVGPathElement, delay: number, duration: number) {
@@ -191,7 +213,7 @@ const timeline = getPrimaryTimeline();
 			.catch(() => {});
 	}
 
-	function drawBranch(svg: SVGSVGElement, animate: boolean, itemIndex: number) {
+	function drawBranch(svg: SVGSVGElement, animate: boolean, startDelay: number) {
 		const h = svg.clientHeight;
 		if (h < 24) return;
 
@@ -209,10 +231,8 @@ const timeline = getPrimaryTimeline();
 		trunk.setAttribute('class', 'branch-trunk');
 		svg.appendChild(trunk);
 
-		// each entry's branch starts growing as the previous one nears its node
-		const baseDelay = itemIndex * 520;
 		const trunkDuration = Math.max(500, Math.min(1100, h * 2.2));
-		if (animate) growStroke(trunk, baseDelay, trunkDuration);
+		if (animate) growStroke(trunk, startDelay, trunkDuration);
 
 		// twigs sprout from random points along the trunk, each ending in a leaf
 		const trunkLength = trunk.getTotalLength();
@@ -232,38 +252,77 @@ const timeline = getPrimaryTimeline();
 			twig.setAttribute('class', 'branch-twig');
 			svg.appendChild(twig);
 
-			const angle = (Math.atan2(dy, dx) * 180) / Math.PI + rand(-12, 12);
-			const leaf = makeLeaf(point.x + dx, point.y + dy, angle);
-			svg.appendChild(leaf);
+			const baseAngle = (Math.atan2(dy, dx) * 180) / Math.PI;
+			const tipLeaf = makeLeaf(point.x + dx, point.y + dy, baseAngle + rand(-12, 12), rand(5.5, 9));
+			svg.appendChild(tipLeaf);
+
+			// some twigs carry a second, smaller leaf partway along
+			let midLeaf: SVGGElement | undefined;
+			let mt = 0;
+			if (Math.random() < 0.45) {
+				mt = rand(0.4, 0.65);
+				const mx = 2 * mt * (1 - mt) * dx * 0.35 + mt * mt * dx;
+				const my = 2 * mt * (1 - mt) * dy * 0.55 + mt * mt * dy;
+				midLeaf = makeLeaf(
+					point.x + mx,
+					point.y + my,
+					baseAngle + (Math.random() < 0.5 ? -1 : 1) * rand(35, 60),
+					rand(3.5, 5.5)
+				);
+				svg.appendChild(midLeaf);
+			}
 
 			if (animate) {
 				// twig sprouts once the growing trunk tip passes its attachment point
-				const twigDelay = baseDelay + trunkDuration * t + rand(40, 140);
+				const twigDelay = startDelay + trunkDuration * t + rand(40, 140);
 				growStroke(twig, twigDelay, 320);
 
-				// the leaf then unfurls from the twig tip
-				const sprout = leaf.firstElementChild as SVGGElement;
-				sprout.animate([{ scale: '0' }, { scale: '1' }], {
-					delay: twigDelay + 240,
-					duration: 380,
-					easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-					fill: 'backwards',
-				});
+				// leaves unfurl from the twig as its tip grows past them
+				if (midLeaf) unfurlLeaf(midLeaf, twigDelay + 320 * mt);
+				unfurlLeaf(tipLeaf, twigDelay + 260);
 			}
 		}
 	}
 
-	function drawAll(animate: boolean, onlyIfResized = false) {
-		document.querySelectorAll<SVGSVGElement>('.timeline__connector').forEach((svg, index) => {
-			if (onlyIfResized && svg.dataset.drawnHeight === String(svg.clientHeight)) return;
-			drawBranch(svg, animate && !reducedMotion.matches, index);
-		});
+	const connectors = Array.from(document.querySelectorAll<SVGSVGElement>('.timeline__connector'));
+
+	// redraw already-grown branches (without replaying the growth) when their
+	// segment height changes, so twigs stay attached to the trunk
+	function redrawSettled(onlyIfResized: boolean) {
+		for (const svg of connectors) {
+			if (!svg.dataset.drawnHeight) continue;
+			if (onlyIfResized && svg.dataset.drawnHeight === String(svg.clientHeight)) continue;
+			drawBranch(svg, false, 0);
+		}
 	}
 
-	drawAll(true);
-	// item heights settle once web fonts load; redraw (without replaying the
-	// growth) any branch whose segment height changed so twigs stay attached
-	document.fonts?.ready.then(() => drawAll(false, true));
+	if (reducedMotion.matches || !('IntersectionObserver' in window)) {
+		connectors.forEach((svg) => drawBranch(svg, false, 0));
+	} else {
+		// each branch grows when it scrolls into view; branches that become
+		// visible together cascade with a short stagger
+		let batchTime = -Infinity;
+		let batchCount = 0;
+		const io = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue;
+					io.unobserve(entry.target);
+					const now = performance.now();
+					if (now - batchTime > 600) {
+						batchTime = now;
+						batchCount = 0;
+					}
+					drawBranch(entry.target as SVGSVGElement, true, batchCount++ * 420);
+				}
+			},
+			{ rootMargin: '0px 0px -40px 0px', threshold: 0.1 }
+		);
+		connectors.forEach((svg) => io.observe(svg));
+	}
+
+	// item heights settle once web fonts load
+	document.fonts?.ready.then(() => redrawSettled(true));
 
 	let resizeTimer: ReturnType<typeof setTimeout> | undefined;
 	let lastWidth = window.innerWidth;
@@ -271,7 +330,7 @@ const timeline = getPrimaryTimeline();
 		if (window.innerWidth === lastWidth) return;
 		lastWidth = window.innerWidth;
 		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(() => drawAll(false), 200);
+		resizeTimer = setTimeout(() => redrawSettled(false), 200);
 	});
 </script>
 
@@ -329,6 +388,19 @@ const timeline = getPrimaryTimeline();
 
 	.timeline__connector :global(.branch-leaf) {
 		stroke: none;
+	}
+
+	.timeline__connector :global(.branch-vein) {
+		fill: none;
+		stroke: rgba(38, 58, 30, 0.32);
+		stroke-linecap: round;
+		stroke-width: 0.7;
+	}
+
+	/* leaves unfurl (scale + rotate) around their attachment point */
+	.timeline__connector :global(.branch-unfurl) {
+		transform-box: fill-box;
+		transform-origin: left center;
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
