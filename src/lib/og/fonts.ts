@@ -8,11 +8,8 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-// @ts-expect-error - vite ?inline asset import returns a base64 data URI string
 import antonData from '../../assets/og-fonts/Anton-Regular.ttf?inline';
-// @ts-expect-error - vite ?inline asset import
 import monoBoldData from '../../assets/og-fonts/SpaceMono-Bold.ttf?inline';
-// @ts-expect-error - vite ?inline asset import
 import monoData from '../../assets/og-fonts/SpaceMono-Regular.ttf?inline';
 
 function toBuffer(dataUri: string): Buffer {

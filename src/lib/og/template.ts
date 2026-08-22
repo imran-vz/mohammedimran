@@ -31,11 +31,11 @@ interface Layout {
 	footSize: number;
 }
 
-const LAYOUTS: Record<OgVariant, Layout> = {
+const LAYOUTS = {
 	default: { w: 1200, h: 630, pad: 72, nameSize: 176, nameBaseline: 312, lineSize: 46, subSize: 26, footSize: 22 },
 	square: { w: 1080, h: 1080, pad: 90, nameSize: 188, nameBaseline: 520, lineSize: 50, subSize: 30, footSize: 26 },
 	story: { w: 1080, h: 1920, pad: 96, nameSize: 196, nameBaseline: 980, lineSize: 54, subSize: 32, footSize: 28 },
-};
+} satisfies Record<OgVariant, Layout>;
 
 function backdrop(grid: number[][], w: number, h: number): string {
 	const colW = w / OG_WEEKS;

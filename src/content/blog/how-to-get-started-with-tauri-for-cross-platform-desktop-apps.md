@@ -1,19 +1,19 @@
 ---
-title: "How to Get Started with Tauri for Cross-Platform Desktop Apps"
-description: "A practical guide to building cross-platform desktop applications with Tauri, React, and Rust. Learn the architecture, set up your first project, and ship native apps from a single codebase."
+title: 'How to Get Started with Tauri for Cross-Platform Desktop Apps'
+description: 'A practical guide to building cross-platform desktop applications with Tauri, React, and Rust. Learn the architecture, set up your first project, and ship native apps from a single codebase.'
 pubDate: 2026-04-08
-tags: ["tauri", "rust", "react", "desktop-app", "tutorial"]
+tags: ['tauri', 'rust', 'react', 'desktop-app', 'tutorial']
 faq:
-  - question: "What is Tauri and how is it different from Electron?"
+  - question: 'What is Tauri and how is it different from Electron?'
     answer: "Tauri is a framework for building cross-platform desktop applications using web technologies for the frontend and Rust for the backend. Unlike Electron, which bundles Chromium and Node.js (resulting in 150MB+ binaries), Tauri uses the operating system's native webview — WebView2 on Windows, WebKit on macOS and Linux. This produces binaries under 10MB, with significantly lower memory usage and faster startup times."
-  - question: "Do I need to know Rust to use Tauri?"
+  - question: 'Do I need to know Rust to use Tauri?'
     answer: "Not for basic applications. Tauri's scaffolding generates a working Rust backend out of the box, and many apps only need to write frontend code. However, learning Rust basics becomes valuable when you need custom backend commands — like calling FFmpeg, accessing the filesystem, or running CPU-intensive tasks. Tauri's command system makes the Rust side approachable even for Rust beginners."
-  - question: "What frontend frameworks work with Tauri?"
-    answer: "Tauri is frontend-agnostic. It works with React, Vue, Svelte, SolidJS, Angular, or plain HTML/CSS/JavaScript. Any framework that produces static files or runs a dev server works. The official create-tauri-app scaffolding tool offers templates for all major frameworks."
-  - question: "Can Tauri apps access native system features?"
-    answer: "Yes. Tauri provides a plugin system for native capabilities including filesystem access, system dialogs, notifications, clipboard, global shortcuts, HTTP requests, and more. The Rust backend can also call any system library or CLI tool directly. For example, in my app Seer, the Rust backend calls FFmpeg and FFprobe for media analysis — something that would be difficult to do securely in a browser-only environment."
-  - question: "Is Tauri ready for production applications?"
-    answer: "Yes. Tauri 2.0 is stable and supports macOS, Windows, Linux, iOS, and Android. It includes built-in auto-updaters, code signing, native installers (DMG, MSI, AppImage, DEB), and a security-focused architecture with fine-grained permissions. The framework is actively maintained and backed by the CrabNebula company."
+  - question: 'What frontend frameworks work with Tauri?'
+    answer: 'Tauri is frontend-agnostic. It works with React, Vue, Svelte, SolidJS, Angular, or plain HTML/CSS/JavaScript. Any framework that produces static files or runs a dev server works. The official create-tauri-app scaffolding tool offers templates for all major frameworks.'
+  - question: 'Can Tauri apps access native system features?'
+    answer: 'Yes. Tauri provides a plugin system for native capabilities including filesystem access, system dialogs, notifications, clipboard, global shortcuts, HTTP requests, and more. The Rust backend can also call any system library or CLI tool directly. For example, in my app Seer, the Rust backend calls FFmpeg and FFprobe for media analysis — something that would be difficult to do securely in a browser-only environment.'
+  - question: 'Is Tauri ready for production applications?'
+    answer: 'Yes. Tauri 2.0 is stable and supports macOS, Windows, Linux, iOS, and Android. It includes built-in auto-updaters, code signing, native installers (DMG, MSI, AppImage, DEB), and a security-focused architecture with fine-grained permissions. The framework is actively maintained and backed by the CrabNebula company.'
 ---
 
 Tauri is a framework for building lightweight, cross-platform desktop applications using web technologies for the UI and Rust for the backend. It produces small, fast, native binaries by using the operating system's built-in webview instead of bundling a full browser engine.
@@ -113,9 +113,9 @@ pub fn run() {
 Call it from the frontend:
 
 ```typescript
-import { invoke } from "@tauri-apps/api/core";
+import { invoke } from '@tauri-apps/api/core';
 
-const message = await invoke<string>("greet", { name: "Imran" });
+const message = await invoke<string>('greet', { name: 'Imran' });
 console.log(message); // "Hello, Imran! This ran in Rust."
 ```
 
@@ -154,13 +154,13 @@ fn get_file_info(path: String) -> Result<FileInfo, String> {
 
 ```typescript
 interface FileInfo {
-  name: string;
-  size: number;
-  path: string;
+	name: string;
+	size: number;
+	path: string;
 }
 
-const info = await invoke<FileInfo>("get_file_info", {
-  path: "/Users/imran/video.mp4",
+const info = await invoke<FileInfo>('get_file_info', {
+	path: '/Users/imran/video.mp4',
 });
 ```
 
@@ -180,10 +180,10 @@ fn read_config(path: String) -> Result<String, String> {
 
 ```typescript
 try {
-  const config = await invoke<string>("read_config", { path: configPath });
+	const config = await invoke<string>('read_config', { path: configPath });
 } catch (error) {
-  // error is the string from Err()
-  console.error(error);
+	// error is the string from Err()
+	console.error(error);
 }
 ```
 
@@ -214,23 +214,19 @@ pub fn run() {
 Use it from the frontend:
 
 ```typescript
-import Database from "@tauri-apps/plugin-sql";
+import Database from '@tauri-apps/plugin-sql';
 
-const db = await Database.load("sqlite:app.db");
+const db = await Database.load('sqlite:app.db');
 
-await db.execute(
-  "CREATE TABLE IF NOT EXISTS cache (key TEXT PRIMARY KEY, value TEXT, created_at INTEGER)"
-);
+await db.execute('CREATE TABLE IF NOT EXISTS cache (key TEXT PRIMARY KEY, value TEXT, created_at INTEGER)');
 
-await db.execute("INSERT INTO cache (key, value, created_at) VALUES ($1, $2, $3)", [
-  "analysis:video.mp4",
-  JSON.stringify(analysisResult),
-  Date.now(),
+await db.execute('INSERT INTO cache (key, value, created_at) VALUES ($1, $2, $3)', [
+	'analysis:video.mp4',
+	JSON.stringify(analysisResult),
+	Date.now(),
 ]);
 
-const results = await db.select<CacheEntry[]>("SELECT * FROM cache WHERE key = $1", [
-  "analysis:video.mp4",
-]);
+const results = await db.select<CacheEntry[]>('SELECT * FROM cache WHERE key = $1', ['analysis:video.mp4']);
 ```
 
 Other commonly used plugins include:
@@ -248,16 +244,11 @@ Tauri takes a different approach to security than Electron. Instead of giving th
 ```json
 // src-tauri/capabilities/default.json
 {
-  "$schema": "../gen/schemas/desktop-schema.json",
-  "identifier": "default",
-  "description": "Default capabilities for the main window",
-  "windows": ["main"],
-  "permissions": [
-    "core:default",
-    "sql:default",
-    "dialog:default",
-    "shell:allow-spawn"
-  ]
+	"$schema": "../gen/schemas/desktop-schema.json",
+	"identifier": "default",
+	"description": "Default capabilities for the main window",
+	"windows": ["main"],
+	"permissions": ["core:default", "sql:default", "dialog:default", "shell:allow-spawn"]
 }
 ```
 
@@ -337,26 +328,26 @@ The `tauri.conf.json` file controls your app's identity and build settings:
 
 ```json
 {
-  "productName": "My App",
-  "version": "0.1.0",
-  "identifier": "com.myapp.dev",
-  "build": {
-    "frontendDist": "../dist",
-    "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "bun run build",
-    "beforeDevCommand": "bun run dev"
-  },
-  "app": {
-    "windows": [
-      {
-        "title": "My App",
-        "width": 1200,
-        "height": 800,
-        "minWidth": 800,
-        "minHeight": 600
-      }
-    ]
-  }
+	"productName": "My App",
+	"version": "0.1.0",
+	"identifier": "com.myapp.dev",
+	"build": {
+		"frontendDist": "../dist",
+		"devUrl": "http://localhost:1420",
+		"beforeBuildCommand": "bun run build",
+		"beforeDevCommand": "bun run dev"
+	},
+	"app": {
+		"windows": [
+			{
+				"title": "My App",
+				"width": 1200,
+				"height": 800,
+				"minWidth": 800,
+				"minHeight": 600
+			}
+		]
+	}
 }
 ```
 

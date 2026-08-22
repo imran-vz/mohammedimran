@@ -1,7 +1,11 @@
 import experienceData from '../data/experience.json';
 import type { ExperienceData, ShowcaseProject, WorkExperience } from '../types/experience';
 
-export const experience = experienceData as ExperienceData;
+// SAFETY: experience.json is authored in-repo alongside this type; its literal values
+// (e.g. legalNameDisplay: 'tooltip') match ExperienceData's unions, which JSON inference widens.
+const typedExperienceData = experienceData as ExperienceData;
+
+export const experience = typedExperienceData;
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 

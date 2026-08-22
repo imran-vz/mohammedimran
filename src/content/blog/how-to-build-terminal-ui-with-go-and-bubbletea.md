@@ -1,19 +1,19 @@
 ---
-title: "How to Build a Terminal UI Application with Go and Bubble Tea"
-description: "A practical guide to building interactive terminal UI applications in Go using the Bubble Tea framework. Learn the Elm architecture pattern, handle keyboard input, and create real TUI apps."
+title: 'How to Build a Terminal UI Application with Go and Bubble Tea'
+description: 'A practical guide to building interactive terminal UI applications in Go using the Bubble Tea framework. Learn the Elm architecture pattern, handle keyboard input, and create real TUI apps.'
 pubDate: 2026-04-06
-tags: ["go", "bubble-tea", "terminal-ui", "cli", "tutorial"]
+tags: ['go', 'bubble-tea', 'terminal-ui', 'cli', 'tutorial']
 faq:
-  - question: "What is Bubble Tea in Go?"
-    answer: "Bubble Tea is a Go framework for building interactive terminal UI (TUI) applications. It uses the Elm architecture pattern with three core concepts: a Model that holds application state, an Update function that handles messages and user input, and a View function that renders the UI as a string. It is maintained by Charm and is one of the most popular TUI frameworks in the Go ecosystem."
-  - question: "Is Bubble Tea good for production applications?"
-    answer: "Yes. Bubble Tea is used in production by companies and open-source projects. It handles terminal resizing, mouse events, alternate screen buffers, and concurrent operations via commands. The framework is well-tested and actively maintained with over 28,000 GitHub stars."
-  - question: "How does Bubble Tea compare to other Go TUI frameworks?"
-    answer: "Bubble Tea uses a functional, Elm-inspired architecture which makes state management predictable. Alternatives like tview use a widget-based approach similar to traditional GUI frameworks. Bubble Tea is generally preferred for custom, highly interactive UIs, while tview works well for standard dashboard layouts with tables and forms."
-  - question: "Can I use Bubble Tea for database clients or SQL tools?"
-    answer: "Yes. Bubble Tea is well-suited for building database clients and SQL tools. You can create interactive query editors, result tables, and connection managers. I built GOSQLIT — an open-source terminal SQL client with Bubble Tea that supports PostgreSQL, MySQL, and SQLite with encrypted credential storage."
-  - question: "What is the Elm architecture in Bubble Tea?"
-    answer: "The Elm architecture in Bubble Tea is a pattern where your application has three parts: a Model struct that holds all state, an Update method that receives messages (like key presses) and returns a new model, and a View method that takes the current model and returns a string to render. This unidirectional data flow makes TUI applications easier to reason about and debug."
+  - question: 'What is Bubble Tea in Go?'
+    answer: 'Bubble Tea is a Go framework for building interactive terminal UI (TUI) applications. It uses the Elm architecture pattern with three core concepts: a Model that holds application state, an Update function that handles messages and user input, and a View function that renders the UI as a string. It is maintained by Charm and is one of the most popular TUI frameworks in the Go ecosystem.'
+  - question: 'Is Bubble Tea good for production applications?'
+    answer: 'Yes. Bubble Tea is used in production by companies and open-source projects. It handles terminal resizing, mouse events, alternate screen buffers, and concurrent operations via commands. The framework is well-tested and actively maintained with over 28,000 GitHub stars.'
+  - question: 'How does Bubble Tea compare to other Go TUI frameworks?'
+    answer: 'Bubble Tea uses a functional, Elm-inspired architecture which makes state management predictable. Alternatives like tview use a widget-based approach similar to traditional GUI frameworks. Bubble Tea is generally preferred for custom, highly interactive UIs, while tview works well for standard dashboard layouts with tables and forms.'
+  - question: 'Can I use Bubble Tea for database clients or SQL tools?'
+    answer: 'Yes. Bubble Tea is well-suited for building database clients and SQL tools. You can create interactive query editors, result tables, and connection managers. I built GOSQLIT — an open-source terminal SQL client with Bubble Tea that supports PostgreSQL, MySQL, and SQLite with encrypted credential storage.'
+  - question: 'What is the Elm architecture in Bubble Tea?'
+    answer: 'The Elm architecture in Bubble Tea is a pattern where your application has three parts: a Model struct that holds all state, an Update method that receives messages (like key presses) and returns a new model, and a View method that takes the current model and returns a string to render. This unidirectional data flow makes TUI applications easier to reason about and debug.'
 ---
 
 Bubble Tea is a Go framework for building interactive terminal user interface (TUI) applications using the Elm architecture pattern. It lets you create rich, keyboard-driven terminal apps — from simple selection menus to full database clients — with a clean, functional programming model that keeps your code maintainable as complexity grows.

@@ -313,6 +313,7 @@ const timeline = getPrimaryTimeline();
 						batchTime = now;
 						batchCount = 0;
 					}
+					// SAFETY: this observer only observes `connectors`, which are SVGSVGElement instances.
 					drawBranch(entry.target as SVGSVGElement, true, batchCount++ * 420);
 				}
 			},

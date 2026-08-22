@@ -50,7 +50,7 @@ function fallback(): OgContributions {
 		for (let d = 0; d < 7; d++) {
 			// deterministic noise so previews look plausible offline
 			const n = Math.sin(w * 12.9898 + d * 78.233) * 43758.5453;
-			const level = Math.floor((n - Math.floor(n)) * 5) as number;
+			const level = Math.floor((n - Math.floor(n)) * 5);
 			col.push(level);
 			total += level;
 		}

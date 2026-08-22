@@ -1,30 +1,29 @@
 {
 	"name": "mohammedimran",
-	"type": "module",
 	"version": "0.0.1",
+	"private": true,
+	"homepage": "https://imran.codes",
 	"author": {
 		"name": "Imran",
 		"email": "mohammedimran86992@gmail.com",
 		"url": "https://github.com/imran-vz"
 	},
-	"engines": {
-		"node": "24.x"
-	},
 	"repository": {
 		"url": "https://github.com/imran-vz/mohammedimran"
 	},
-	"packageManager": "pnpm@11.5.2",
-	"private": true,
-	"homepage": "https://imran.codes",
+	"type": "module",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"format": "biome format --write ./src",
-		"lint": "biome lint --write ./src",
-		"lint:fix": "biome check --write ."
+		"format": "vp fmt",
+		"format:check": "vp fmt --check",
+		"lint": "vp lint",
+		"lint:fix": "vp lint --fix",
+		"typecheck": "astro check",
+		"prepare": "vp config"
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.7.3",
@@ -38,7 +37,15 @@
 		"turndown": "^7.2.4"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.5.5",
-		"@types/turndown": "^5.0.6"
-	}
+		"@astrojs/check": "0.9.10",
+		"@oxlint/plugins": "1.79.0",
+		"@types/turndown": "^5.0.6",
+		"typescript": "6.0.3",
+		"vite": "catalog:",
+		"vite-plus": "catalog:"
+	},
+	"engines": {
+		"node": "24.x"
+	},
+	"packageManager": "pnpm@11.5.2"
 }

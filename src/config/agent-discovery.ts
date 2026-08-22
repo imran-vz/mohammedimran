@@ -1,6 +1,9 @@
 import { allProjects } from '../data/projects';
 import { siteMeta } from './siteMeta';
 
+/** Any value that can be serialized to JSON. The contract for response bodies at our I/O boundary. */
+export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+
 export const siteUrl = siteMeta.siteUrl.replace(/\/$/, '');
 
 export const absoluteUrl = (path: string) => new URL(path, `${siteUrl}/`).toString();
@@ -101,7 +104,7 @@ const jsonHeaders = {
 	'Content-Type': 'application/json; charset=utf-8',
 };
 
-export const jsonResponse = (data: unknown, init: ResponseInit = {}) =>
+export const jsonResponse = (data: JsonValue, init: ResponseInit = {}) =>
 	new Response(JSON.stringify(data, null, 2), {
 		...init,
 		headers: {

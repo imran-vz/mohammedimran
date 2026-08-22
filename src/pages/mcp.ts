@@ -8,12 +8,18 @@ import {
 	publicProjects,
 	siteSummary,
 } from '../config/agent-discovery';
+import type { JsonValue } from '../config/agent-discovery';
+
+type ToolCallParams = {
+	/** Unparsed tool name from the client; compared against known tool ids before use. */
+	name?: unknown;
+};
 
 type JsonRpcRequest = {
 	jsonrpc?: string;
 	id?: string | number | null;
 	method?: string;
-	params?: Record<string, unknown>;
+	params?: ToolCallParams;
 };
 
 const protocolVersion = mcpServer.protocolVersions[0];
@@ -26,7 +32,7 @@ const mcpTools = agentToolDefinitions.map((tool) => ({
 	annotations: tool.annotations,
 }));
 
-const toolResult = (data: unknown) => ({
+const toolResult = (data: JsonValue) => ({
 	content: [
 		{
 			type: 'text',
@@ -35,7 +41,7 @@ const toolResult = (data: unknown) => ({
 	],
 });
 
-const success = (id: JsonRpcRequest['id'], result: unknown) => ({ jsonrpc: '2.0', id: id ?? null, result });
+const success = (id: JsonRpcRequest['id'], result: JsonValue) => ({ jsonrpc: '2.0', id: id ?? null, result });
 const failure = (id: JsonRpcRequest['id'], code: number, message: string) => ({
 	jsonrpc: '2.0',
 	id: id ?? null,
@@ -104,7 +110,10 @@ export const POST: APIRoute = async ({ request }) => {
 	let payload: JsonRpcRequest | JsonRpcRequest[];
 
 	try {
-		payload = (await request.json()) as JsonRpcRequest | JsonRpcRequest[];
+		// SAFETY: every JsonRpcRequest field is optional and read defensively in handleRequest,
+		// so any JSON body shape is answered; null/undefined fall back to {} because property
+		// access would throw on them.
+		payload = ((await request.json()) ?? {}) as JsonRpcRequest | JsonRpcRequest[];
 	} catch {
 		return jsonResponse(failure(null, -32700, 'Parse error'), { status: 400 });
 	}

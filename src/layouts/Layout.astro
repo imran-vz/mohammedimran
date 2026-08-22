@@ -125,7 +125,7 @@ const webMcpData = {
                     execute: async () => executeTool(tool.name),
                 }));
 
-                if (typeof modelContext.registerTool === 'function') {
+                if (modelContext.registerTool) {
                     for (const tool of tools) {
                         try {
                             modelContext.registerTool(tool, { signal: controller.signal });
@@ -135,7 +135,7 @@ const webMcpData = {
                     }
                 }
 
-                if (typeof modelContext.provideContext === 'function') {
+                if (modelContext.provideContext) {
                     try {
                         modelContext.provideContext({ tools }, { signal: controller.signal });
                     } catch (error) {

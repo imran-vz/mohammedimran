@@ -9,7 +9,10 @@ const turndownService = new TurndownService({
 	headingStyle: 'atx',
 });
 
-turndownService.remove(['script', 'style', 'noscript', 'svg', 'template']);
+// SAFETY: turndown matches tag names against any element at runtime, but its
+// TagName type only covers HTMLElementTagNameMap and omits SVG names like 'svg'.
+const REMOVED_TAGS = ['script', 'style', 'noscript', 'svg', 'template'] as TurndownService.TagName[];
+turndownService.remove(REMOVED_TAGS);
 
 turndownService.addRule('skipHiddenContent', {
 	filter: (node) => {
@@ -17,6 +20,7 @@ turndownService.addRule('skipHiddenContent', {
 			return false;
 		}
 
+		// SAFETY: nodeType 1 is Node.ELEMENT_NODE, so node is an Element.
 		const element = node as Element;
 		return element.hasAttribute('hidden') || element.getAttribute('aria-hidden') === 'true';
 	},
