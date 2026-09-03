@@ -32,7 +32,6 @@ export const siteMeta = {
 		'Remote Full Stack Developer',
 		'Remote Lead Developer India',
 	],
-	employer: 'Thoughtseed',
 };
 
 /** Build a per-page dot-matrix OG image URL. */

@@ -73,7 +73,6 @@ export const siteSummary = {
 	url: siteUrl,
 	description: siteMeta.defaultDescription,
 	location: siteMeta.location,
-	employer: siteMeta.employer,
 	availability: 'Available for freelance and contract engagements',
 	specialties: ['React', 'TypeScript', 'Go', 'Rust', 'Full Stack Development'],
 };

@@ -7,7 +7,7 @@ const timeline = getPrimaryTimeline();
 
 <script is:inline>
 	// runs during parse, before first paint: lets CSS hide the static fallback
-	// connector so the animated branch growth is the first line ever shown
+	// spine so the growing branch is the first line ever shown
 	document.documentElement.classList.add('wt-js');
 </script>
 
@@ -17,150 +17,188 @@ const timeline = getPrimaryTimeline();
 		<span class="section-count">{String(timeline.length).padStart(2, '0')}</span>
 	</div>
 
-	<ol class="timeline">
-		{timeline.map((entry, index) => {
-			const companyName = getDisplayCompanyName(entry);
-			const legalTooltip = getLegalNameTooltip(entry);
-			const isFirst = index === 0;
-			const isLast = index === timeline.length - 1;
-			const metaParts = [
-				entry.employmentType,
-				entry.locationType,
-				entry.parentCompany,
-			].filter(Boolean);
+	<div class="timeline">
+		<svg class="timeline__spine" aria-hidden="true"></svg>
 
-			return (
-				<li class="timeline__item">
-					{!isLast && (
-						<svg class="timeline__connector" viewBox="0 0 22 100" preserveAspectRatio="none" aria-hidden="true">
-							<path d="M11 0 C 2 34 20 66 11 100" vector-effect="non-scaling-stroke" />
-						</svg>
-					)}
-					<span class:list={['timeline__dot', { 'is-current': isFirst }]} aria-hidden="true" />
-					<div class="timeline__content">
-						<div class="timeline__header">
-							<time class="timeline__dates" datetime={`${entry.startDate}/${entry.endDate ?? ''}`}>
-								{formatDateRange(entry)}
-							</time>
-							{entry.current && <span class="timeline__current">Current</span>}
-						</div>
+		<ol class="timeline__list">
+			{timeline.map((entry) => {
+				const companyName = getDisplayCompanyName(entry);
+				const legalTooltip = getLegalNameTooltip(entry);
+				const metaParts = [entry.employmentType, entry.locationType, entry.parentCompany].filter(Boolean);
 
-						<div class="timeline__identity">
-							<span class="timeline__logo-wrap" title={legalTooltip}>
-								<BrandLogo src={entry.logo} name={companyName} variant="company" />
-								{entry.parentCompanyLogo && entry.acquisition && (
-									<img
-										class="timeline__parent-badge"
-										src={entry.parentCompanyLogo}
-										alt={`Acquired by ${entry.acquisition.acquirer}`}
-										title={`Acquired by ${entry.acquisition.acquirer}`}
-										loading="lazy"
-										decoding="async"
-										onerror="this.style.display='none'"
-									/>
-								)}
-							</span>
+				return (
+					<li class="timeline__item">
+						<span class:list={['timeline__dot', { 'is-current': entry.current }]} aria-hidden="true" />
+						<div class="timeline__content">
+							<div class="timeline__header">
+								<time class="timeline__dates" datetime={`${entry.startDate}/${entry.endDate ?? ''}`}>
+									{formatDateRange(entry)}
+								</time>
+								{entry.current && <span class="timeline__current">Current</span>}
+							</div>
 
-							<div class="timeline__identity-text">
-								<div class="timeline__title-row">
-									{legalTooltip ? (
-										<h3 class="timeline__company">
-											<span class="tooltip-wrap" tabindex="0" title={legalTooltip}>
-												{companyName}
-												<span class="tooltip" aria-hidden="true">{legalTooltip}</span>
-											</span>
-										</h3>
-									) : (
-										<h3 class="timeline__company">{companyName}</h3>
+							<div class="timeline__identity">
+								<span class="timeline__logo-wrap" title={legalTooltip}>
+									<BrandLogo src={entry.logo} name={companyName} variant="company" />
+									{entry.parentCompanyLogo && entry.acquisition && (
+										<img
+											class="timeline__parent-badge"
+											src={entry.parentCompanyLogo}
+											alt={`Acquired by ${entry.acquisition.acquirer}`}
+											title={`Acquired by ${entry.acquisition.acquirer}`}
+											loading="lazy"
+											decoding="async"
+											onerror="this.style.display='none'"
+										/>
 									)}
-									<span class="timeline__role">{entry.role}</span>
-								</div>
+								</span>
 
-								{metaParts.length > 0 && (
-									<p class="timeline__meta">{metaParts.join(' · ')}</p>
-								)}
-							</div>
-						</div>
-
-						{entry.shortDescription && (
-							<p class="timeline__summary">{entry.shortDescription}</p>
-						)}
-
-						{entry.achievementBullets && entry.achievementBullets.length > 0 && (
-							<ul class="timeline__bullets">
-								{entry.achievementBullets.map((bullet) => (
-									<li>{bullet}</li>
-								))}
-							</ul>
-						)}
-
-						{entry.technologies && entry.technologies.length > 0 && (
-							<div class="timeline__tech">
-								{entry.technologies.map((tech) => (
-									<span class="tech-tag">{tech}</span>
-								))}
-							</div>
-						)}
-
-						{entry.companyUrl && (
-							<a
-								href={entry.companyUrl}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="timeline__link"
-							>
-								{companyName} ↗
-							</a>
-						)}
-
-						{entry.referenceLinks && entry.referenceLinks.length > 0 && (
-							<div class="timeline__refs">
-								<span class="timeline__refs-label">Reference</span>
-								{entry.referenceLinks.map((ref) => (
-									<a
-										href={ref.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										class="timeline__ref"
-									>
-										{ref.logo && (
-											<img
-												class="timeline__ref-logo"
-												src={ref.logo}
-												alt={`${ref.label} logo`}
-												loading="lazy"
-												decoding="async"
-												onerror="this.style.display='none'"
-											/>
+								<div class="timeline__identity-text">
+									<div class="timeline__title-row">
+										{legalTooltip ? (
+											<h3 class="timeline__company">
+												<span class="tooltip-wrap" tabindex="0" title={legalTooltip}>
+													{companyName}
+													<span class="tooltip" aria-hidden="true">{legalTooltip}</span>
+												</span>
+											</h3>
+										) : (
+											<h3 class="timeline__company">{companyName}</h3>
 										)}
-										<span>{ref.label}</span>
-										<span class="timeline__ref-arrow" aria-hidden="true">↗</span>
-									</a>
-								))}
+										<span class="timeline__role">{entry.role}</span>
+									</div>
+
+									{metaParts.length > 0 && <p class="timeline__meta">{metaParts.join(' · ')}</p>}
+								</div>
 							</div>
-						)}
-					</div>
-				</li>
-			);
-		})}
-	</ol>
+
+							{entry.shortDescription && <p class="timeline__summary">{entry.shortDescription}</p>}
+
+							{entry.achievementBullets && entry.achievementBullets.length > 0 && (
+								<ul class="timeline__bullets">
+									{entry.achievementBullets.map((bullet) => (
+										<li>{bullet}</li>
+									))}
+								</ul>
+							)}
+
+							{entry.technologies && entry.technologies.length > 0 && (
+								<div class="timeline__tech">
+									{entry.technologies.map((tech) => (
+										<span class="tech-tag">{tech}</span>
+									))}
+								</div>
+							)}
+
+							{entry.companyUrl && (
+								<a href={entry.companyUrl} target="_blank" rel="noopener noreferrer" class="timeline__link">
+									{companyName} ↗
+								</a>
+							)}
+
+							{entry.referenceLinks && entry.referenceLinks.length > 0 && (
+								<div class="timeline__refs">
+									<span class="timeline__refs-label">Reference</span>
+									{entry.referenceLinks.map((ref) => (
+										<a href={ref.url} target="_blank" rel="noopener noreferrer" class="timeline__ref">
+											{ref.logo && (
+												<img
+													class="timeline__ref-logo"
+													src={ref.logo}
+													alt={`${ref.label} logo`}
+													loading="lazy"
+													decoding="async"
+													onerror="this.style.display='none'"
+												/>
+											)}
+											<span>{ref.label}</span>
+											<span class="timeline__ref-arrow" aria-hidden="true">
+												↗
+											</span>
+										</a>
+									))}
+								</div>
+							)}
+						</div>
+					</li>
+				);
+			})}
+		</ol>
+	</div>
 </section>
 
 <script>
+	/**
+	 * One continuous branch grows down the whole timeline as the reader scrolls.
+	 * The trunk passes through every node; twigs and leaves sprout the moment the
+	 * growing tip passes their attachment point, and each node dot buds open when
+	 * the tip reaches it. Growth only ever moves forward, like a real plant.
+	 */
 	const NS = 'http://www.w3.org/2000/svg';
 	const LEAF_GREENS = ['#6f8f5e', '#83a371', '#5d7a4e', '#94ad7f', '#a4b98a'];
+	const SPINE_X = 11;
+	const DOT_CENTRE = 23; // px from the top of a list item to the centre of its dot
+	const TWIG_GROW_MS = 320;
+	const LEAF_OPEN_MS = 450;
 
-	const rand = (min: number, max: number) => min + Math.random() * (max - min);
-	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+	type Rand = (min: number, max: number) => number;
 
-	function makeLeaf(x: number, y: number, angle: number, size: number): SVGGElement {
+	interface Sprout {
+		attachLength: number;
+		twig: SVGPathElement;
+		leaves: { group: SVGGElement; delay: number }[];
+		grown: boolean;
+	}
+
+	interface TrunkNode {
+		length: number;
+		dot: HTMLElement | null;
+		grown: boolean;
+	}
+
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+	// deterministic randomness so the branch keeps its shape when it is rebuilt after a resize
+	function makeRandom(seed: number): Rand {
+		let state = seed >>> 0;
+		return (min, max) => {
+			state = (state + 0x6d2b79f5) >>> 0;
+			let t = state;
+			t = Math.imul(t ^ (t >>> 15), t | 1);
+			t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+			const unit = ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+			return min + unit * (max - min);
+		};
+	}
+
+	function svgPath(className: string, d: string): SVGPathElement {
+		const el = document.createElementNS(NS, 'path');
+		el.setAttribute('class', className);
+		el.setAttribute('d', d);
+		return el;
+	}
+
+	// binary search for the trunk length at a given y; the trunk only ever heads downward
+	function lengthAtY(trunk: SVGPathElement, total: number, y: number): number {
+		let lo = 0;
+		let hi = total;
+		for (let i = 0; i < 24; i++) {
+			const mid = (lo + hi) / 2;
+			if (trunk.getPointAtLength(mid).y < y) lo = mid;
+			else hi = mid;
+		}
+		return (lo + hi) / 2;
+	}
+
+	function makeLeaf(rand: Rand, x: number, y: number, angle: number, size: number): SVGGElement {
 		const outer = document.createElementNS(NS, 'g');
 		outer.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${angle.toFixed(1)})`);
 
-		const sprout = document.createElementNS(NS, 'g');
-		sprout.setAttribute('class', 'branch-sprout');
-		sprout.style.animationDuration = `${rand(3.2, 6).toFixed(2)}s`;
-		sprout.style.animationDelay = `-${rand(0, 4).toFixed(2)}s`;
+		const sway = document.createElementNS(NS, 'g');
+		sway.setAttribute('class', 'branch-sway');
+		sway.style.animationDuration = `${rand(3.2, 6).toFixed(2)}s`;
+		sway.style.animationDelay = `-${rand(0, 4).toFixed(2)}s`;
 
 		const unfurl = document.createElementNS(NS, 'g');
 		unfurl.setAttribute('class', 'branch-unfurl');
@@ -171,176 +209,248 @@ const timeline = getPrimaryTimeline();
 		const leaf = document.createElementNS(NS, 'path');
 		leaf.setAttribute(
 			'd',
-			`M0 0 C ${size * 0.32} ${-wTop} ${size * 0.78} ${-wTop * 0.85} ${size} 0 C ${size * 0.72} ${wBot * 0.85} ${size * 0.32} ${wBot} 0 0 Z`
+			`M0 0 C ${size * 0.32} ${-wTop} ${size * 0.78} ${-wTop * 0.85} ${size} 0 C ${size * 0.72} ${wBot * 0.85} ${size * 0.32} ${wBot} 0 0 Z`,
 		);
 		leaf.setAttribute('class', 'branch-leaf');
-		leaf.setAttribute('fill', LEAF_GREENS[Math.floor(Math.random() * LEAF_GREENS.length)] ?? '#6f8f5e');
+		leaf.setAttribute('fill', LEAF_GREENS[Math.floor(rand(0, LEAF_GREENS.length))] ?? '#6f8f5e');
 
 		const vein = document.createElementNS(NS, 'path');
 		vein.setAttribute(
 			'd',
-			`M${(size * 0.08).toFixed(1)} 0 Q ${(size * 0.55).toFixed(1)} ${(-wTop * 0.18).toFixed(1)} ${(size * 0.9).toFixed(1)} 0`
+			`M${(size * 0.08).toFixed(1)} 0 Q ${(size * 0.55).toFixed(1)} ${(-wTop * 0.18).toFixed(1)} ${(size * 0.9).toFixed(1)} 0`,
 		);
 		vein.setAttribute('class', 'branch-vein');
 
 		unfurl.append(leaf, vein);
-		sprout.appendChild(unfurl);
-		outer.appendChild(sprout);
+		sway.appendChild(unfurl);
+		outer.appendChild(sway);
 		return outer;
 	}
 
-	function unfurlLeaf(leaf: SVGGElement, delay: number) {
-		leaf.querySelector<SVGGElement>('.branch-unfurl')?.animate(
-			[
-				{ scale: '0', rotate: '-50deg' },
-				{ scale: '1', rotate: '0deg' },
-			],
-			{ delay, duration: 450, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)', fill: 'backwards' }
-		);
-	}
+	function init() {
+		const wrap = document.querySelector<HTMLElement>('.timeline');
+		const spineEl = wrap?.querySelector<SVGSVGElement>('.timeline__spine');
+		if (!wrap || !spineEl) return;
+		// narrowed copy so the nested functions below see a non-null spine
+		const spine = spineEl;
 
-	function growStroke(path: SVGPathElement, delay: number, duration: number) {
-		const length = path.getTotalLength();
-		path.setAttribute('stroke-dasharray', String(length));
-		path
-			.animate([{ strokeDashoffset: length }, { strokeDashoffset: 0 }], {
-				delay,
-				duration,
-				easing: 'ease-out',
-				fill: 'backwards',
-			})
-			.finished.then(() => path.removeAttribute('stroke-dasharray'))
-			.catch(() => {});
-	}
+		const items = Array.from(wrap.querySelectorAll<HTMLLIElement>('.timeline__item'));
+		const dots = items.map((item) => item.querySelector<HTMLElement>('.timeline__dot'));
+		const first = items[0];
+		const last = items[items.length - 1];
+		if (!first || !last || items.length < 2) {
+			for (const dot of dots) dot?.classList.add('is-grown');
+			return;
+		}
 
-	function drawBranch(svg: SVGSVGElement, animate: boolean, startDelay: number) {
-		const h = svg.clientHeight;
-		if (h < 24) return;
+		const seed = Math.floor(Math.random() * 2147483647);
+		let trunk: SVGPathElement | undefined;
+		let tip: SVGCircleElement | undefined;
+		let sprouts: Sprout[] = [];
+		let nodes: TrunkNode[] = [];
+		let total = 0;
+		let grown = 0;
+		let target = 0;
+		let frame = 0;
+		let builtSpan = 0;
 
-		svg.dataset.drawnHeight = String(h);
-		svg.setAttribute('viewBox', `0 0 22 ${h}`);
-		svg.removeAttribute('preserveAspectRatio');
-		svg.replaceChildren();
+		function build() {
+			const top = first.offsetTop + DOT_CENTRE;
+			builtSpan = last.offsetTop - first.offsetTop;
+			spine.style.top = `${top}px`;
+			spine.style.height = `${builtSpan}px`;
+			spine.setAttribute('viewBox', `0 0 22 ${builtSpan}`);
+			spine.replaceChildren();
 
-		// wavy trunk from the node at (11, 0) down to the next node at (11, h)
-		const trunk = document.createElementNS(NS, 'path');
-		trunk.setAttribute(
-			'd',
-			`M11 0 C ${rand(2, 20).toFixed(1)} ${(h * rand(0.12, 0.24)).toFixed(1)}, ${rand(3, 19).toFixed(1)} ${(h * rand(0.3, 0.42)).toFixed(1)}, ${rand(6, 16).toFixed(1)} ${(h * 0.5).toFixed(1)} S ${rand(2, 20).toFixed(1)} ${(h * rand(0.76, 0.88)).toFixed(1)}, 11 ${h}`
-		);
-		trunk.setAttribute('class', 'branch-trunk');
-		svg.appendChild(trunk);
+			const rand = makeRandom(seed);
+			const nodeYs = items.map((item) => item.offsetTop - first.offsetTop);
 
-		const trunkDuration = Math.max(500, Math.min(1100, h * 2.2));
-		if (animate) growStroke(trunk, startDelay, trunkDuration);
-
-		// twigs sprout from random points along the trunk, each ending in a leaf
-		const trunkLength = trunk.getTotalLength();
-		const twigCount = 2 + Math.floor(Math.random() * 3);
-		for (let i = 0; i < twigCount; i++) {
-			const t = rand(0.12, 0.85);
-			const point = trunk.getPointAtLength(trunkLength * t);
-			const side = Math.random() < 0.5 ? -1 : 1;
-			const dx = side * rand(6, 12);
-			const dy = -rand(7, 16);
-
-			const twig = document.createElementNS(NS, 'path');
-			twig.setAttribute(
-				'd',
-				`M${point.x.toFixed(1)} ${point.y.toFixed(1)} q ${(dx * 0.35).toFixed(1)} ${(dy * 0.55).toFixed(1)} ${dx.toFixed(1)} ${dy.toFixed(1)}`
-			);
-			twig.setAttribute('class', 'branch-twig');
-			svg.appendChild(twig);
-
-			const baseAngle = (Math.atan2(dy, dx) * 180) / Math.PI;
-			const tipLeaf = makeLeaf(point.x + dx, point.y + dy, baseAngle + rand(-12, 12), rand(5.5, 9));
-			svg.appendChild(tipLeaf);
-
-			// some twigs carry a second, smaller leaf partway along
-			let midLeaf: SVGGElement | undefined;
-			let mt = 0;
-			if (Math.random() < 0.45) {
-				mt = rand(0.4, 0.65);
-				const mx = 2 * mt * (1 - mt) * dx * 0.35 + mt * mt * dx;
-				const my = 2 * mt * (1 - mt) * dy * 0.55 + mt * mt * dy;
-				midLeaf = makeLeaf(
-					point.x + mx,
-					point.y + my,
-					baseAngle + (Math.random() < 0.5 ? -1 : 1) * rand(35, 60),
-					rand(3.5, 5.5)
-				);
-				svg.appendChild(midLeaf);
+			// one wavy trunk through every node; the first control point of each
+			// segment mirrors the last of the previous so the curve stays smooth
+			let d = `M${SPINE_X} 0`;
+			let prevC2x = SPINE_X;
+			for (let i = 1; i < nodeYs.length; i++) {
+				const y0 = nodeYs[i - 1] ?? 0;
+				const y1 = nodeYs[i] ?? 0;
+				const span = y1 - y0;
+				const c1x = i === 1 ? rand(2, 20) : 2 * SPINE_X - prevC2x;
+				const c2x = rand(2, 20);
+				const c1y = y0 + span * rand(0.22, 0.4);
+				const c2y = y0 + span * rand(0.6, 0.8);
+				d += ` C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${SPINE_X} ${y1.toFixed(1)}`;
+				prevC2x = c2x;
 			}
 
-			if (animate) {
-				// twig sprouts once the growing trunk tip passes its attachment point
-				const twigDelay = startDelay + trunkDuration * t + rand(40, 140);
-				growStroke(twig, twigDelay, 320);
+			const trunkEl = svgPath('branch-trunk', d);
+			spine.appendChild(trunkEl);
+			total = trunkEl.getTotalLength();
+			trunkEl.style.strokeDasharray = String(total);
+			trunkEl.style.strokeDashoffset = String(total);
+			trunk = trunkEl;
 
-				// leaves unfurl from the twig as its tip grows past them
-				if (midLeaf) unfurlLeaf(midLeaf, twigDelay + 320 * mt);
-				unfurlLeaf(tipLeaf, twigDelay + 260);
-			}
-		}
-	}
+			nodes = nodeYs.map((y, i) => ({
+				length: lengthAtY(trunkEl, total, y),
+				dot: dots[i] ?? null,
+				grown: false,
+			}));
 
-	const connectors = Array.from(document.querySelectorAll<SVGSVGElement>('.timeline__connector'));
+			// twigs sprout from points along each segment, alternating sides, each ending in a leaf
+			sprouts = [];
+			let side = rand(0, 1) < 0.5 ? -1 : 1;
+			for (let i = 1; i < nodes.length; i++) {
+				const from = nodes[i - 1]?.length ?? 0;
+				const to = nodes[i]?.length ?? 0;
+				const count = 2 + Math.floor(rand(0, 3));
+				for (let k = 0; k < count; k++) {
+					const attachLength = from + ((k + rand(0.25, 0.75)) / count) * (to - from);
+					const point = trunkEl.getPointAtLength(attachLength);
+					side = -side;
+					const dx = side * rand(7, 13);
+					const dy = -rand(8, 18);
 
-	// redraw already-grown branches (without replaying the growth) when their
-	// segment height changes, so twigs stay attached to the trunk
-	function redrawSettled(onlyIfResized: boolean) {
-		for (const svg of connectors) {
-			if (!svg.dataset.drawnHeight) continue;
-			if (onlyIfResized && svg.dataset.drawnHeight === String(svg.clientHeight)) continue;
-			drawBranch(svg, false, 0);
-		}
-	}
+					const twig = svgPath(
+						'branch-twig',
+						`M${point.x.toFixed(1)} ${point.y.toFixed(1)} q ${(dx * 0.35).toFixed(1)} ${(dy * 0.55).toFixed(1)} ${dx.toFixed(1)} ${dy.toFixed(1)}`,
+					);
+					spine.appendChild(twig);
+					const twigLength = twig.getTotalLength();
+					twig.style.strokeDasharray = String(twigLength);
+					twig.style.strokeDashoffset = String(twigLength);
 
-	if (reducedMotion.matches || !('IntersectionObserver' in window)) {
-		connectors.forEach((svg) => drawBranch(svg, false, 0));
-	} else {
-		// each branch grows when it scrolls into view; branches that become
-		// visible together cascade with a short stagger
-		let batchTime = -Infinity;
-		let batchCount = 0;
-		const io = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (!entry.isIntersecting) continue;
-					io.unobserve(entry.target);
-					const now = performance.now();
-					if (now - batchTime > 600) {
-						batchTime = now;
-						batchCount = 0;
+					const baseAngle = (Math.atan2(dy, dx) * 180) / Math.PI;
+					const leaves: Sprout['leaves'] = [];
+
+					// some twigs carry a second, smaller leaf partway along
+					if (rand(0, 1) < 0.45) {
+						const mt = rand(0.4, 0.65);
+						const mx = 2 * mt * (1 - mt) * dx * 0.35 + mt * mt * dx;
+						const my = 2 * mt * (1 - mt) * dy * 0.55 + mt * mt * dy;
+						const lean = rand(0, 1) < 0.5 ? -1 : 1;
+						const mid = makeLeaf(rand, point.x + mx, point.y + my, baseAngle + lean * rand(35, 60), rand(3.5, 5.5));
+						spine.appendChild(mid);
+						leaves.push({ group: mid, delay: TWIG_GROW_MS * mt });
 					}
-					// SAFETY: this observer only observes `connectors`, which are SVGSVGElement instances.
-					drawBranch(entry.target as SVGSVGElement, true, batchCount++ * 420);
+
+					const tipLeaf = makeLeaf(rand, point.x + dx, point.y + dy, baseAngle + rand(-12, 12), rand(6, 9.5));
+					spine.appendChild(tipLeaf);
+					leaves.push({ group: tipLeaf, delay: TWIG_GROW_MS * 0.8 });
+
+					sprouts.push({ attachLength, twig, leaves, grown: false });
 				}
-			},
-			{ rootMargin: '0px 0px -40px 0px', threshold: 0.1 }
-		);
-		connectors.forEach((svg) => io.observe(svg));
+			}
+
+			// a small bud rides the growing tip and fades once the trunk is complete
+			const tipEl = document.createElementNS(NS, 'circle');
+			tipEl.setAttribute('class', 'branch-tip');
+			tipEl.setAttribute('r', '2.4');
+			spine.appendChild(tipEl);
+			tip = tipEl;
+		}
+
+		function sprout(entry: Sprout, instant: boolean) {
+			entry.grown = true;
+			entry.twig.style.transition = instant ? 'none' : `stroke-dashoffset ${TWIG_GROW_MS}ms ease-out`;
+			entry.twig.style.strokeDashoffset = '0';
+			for (const leaf of entry.leaves) {
+				const unfurl = leaf.group.querySelector<SVGGElement>('.branch-unfurl');
+				if (!unfurl) continue;
+				unfurl.style.transition = instant
+					? 'none'
+					: `transform ${LEAF_OPEN_MS}ms cubic-bezier(0.34, 1.56, 0.64, 1) ${leaf.delay.toFixed(0)}ms`;
+				unfurl.classList.add('is-open');
+			}
+		}
+
+		function render(instant: boolean) {
+			if (!trunk || !tip) return;
+			trunk.style.strokeDashoffset = String(Math.max(0, total - grown));
+
+			const point = trunk.getPointAtLength(grown);
+			tip.setAttribute('cx', point.x.toFixed(1));
+			tip.setAttribute('cy', point.y.toFixed(1));
+			tip.style.opacity = grown >= total - 0.5 ? '0' : '1';
+
+			for (const entry of sprouts) {
+				if (!entry.grown && entry.attachLength <= grown) sprout(entry, instant);
+			}
+			for (const node of nodes) {
+				if (node.grown || node.length > grown + 0.5) continue;
+				node.grown = true;
+				node.dot?.classList.add('is-grown');
+			}
+		}
+
+		// how far down the spine the reader has scrolled, as a trunk length
+		function reachFromScroll(): number {
+			const rect = spine.getBoundingClientRect();
+			if (rect.height <= 0) return 0;
+			const reach = window.innerHeight * 0.7 - rect.top;
+			return clamp(reach / rect.height, 0, 1) * total;
+		}
+
+		function tick() {
+			const remaining = target - grown;
+			if (remaining <= 0.5) {
+				grown = target;
+				render(false);
+				frame = 0;
+				return;
+			}
+			// ease toward the target with a floor so it never stalls and a cap so it never teleports
+			grown += clamp(remaining * 0.08, 1.5, 14);
+			render(false);
+			frame = requestAnimationFrame(tick);
+		}
+
+		function follow() {
+			target = Math.max(target, reachFromScroll());
+			if (frame === 0 && target > grown) frame = requestAnimationFrame(tick);
+		}
+
+		function rebuild() {
+			const grownRatio = total > 0 ? grown / total : 0;
+			const targetRatio = total > 0 ? target / total : 0;
+			build();
+			grown = grownRatio * total;
+			target = targetRatio * total;
+			render(true);
+			if (!reducedMotion) follow();
+		}
+
+		build();
+		if (reducedMotion) {
+			grown = total;
+			target = total;
+			render(true);
+		} else {
+			render(true);
+			follow();
+			window.addEventListener('scroll', follow, { passive: true });
+		}
+
+		// item heights settle once web fonts load, and change again on resize
+		let settleTimer: ReturnType<typeof setTimeout> | undefined;
+		const observer = new ResizeObserver(() => {
+			clearTimeout(settleTimer);
+			settleTimer = setTimeout(() => {
+				if (last.offsetTop - first.offsetTop !== builtSpan) rebuild();
+			}, 150);
+		});
+		observer.observe(wrap);
 	}
 
-	// item heights settle once web fonts load
-	document.fonts?.ready.then(() => redrawSettled(true));
-
-	let resizeTimer: ReturnType<typeof setTimeout> | undefined;
-	let lastWidth = window.innerWidth;
-	window.addEventListener('resize', () => {
-		if (window.innerWidth === lastWidth) return;
-		lastWidth = window.innerWidth;
-		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(() => redrawSettled(false), 200);
-	});
+	init();
 </script>
 
 <style>
 	.timeline {
+		position: relative;
+	}
+
+	.timeline__list {
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		position: relative;
 	}
 
 	.timeline__item {
@@ -348,50 +458,56 @@ const timeline = getPrimaryTimeline();
 		position: relative;
 	}
 
-	/* organic spine: a randomized branch is drawn into each connector on load */
-	.timeline__connector {
-		height: 100%;
-		left: 0;
-		overflow: visible;
+	/* static no-JS fallback: a straight line from each dot to the next */
+	.timeline__item:not(:last-child)::before {
+		background: var(--page-line);
+		bottom: -23px;
+		content: '';
+		left: 10px;
 		position: absolute;
 		top: 23px;
-		width: 22px;
+		width: 2px;
 	}
 
-	.timeline__connector path {
-		fill: none;
-		stroke: var(--page-line);
-		stroke-linecap: round;
-		stroke-width: 2;
-	}
-
-	/* with JS available the branch is drawn dynamically; hide the static
-	   no-JS fallback from first paint so it never flashes before the growth.
-	   Scoped selector: only matches the server-rendered path, not the
-	   script-created branch elements. */
-	:global(html.wt-js) .timeline__connector path {
+	:global(html.wt-js) .timeline__item::before {
 		display: none;
 	}
 
-	.timeline__connector :global(.branch-trunk) {
-		fill: none;
-		stroke: var(--page-line);
-		stroke-linecap: round;
-		stroke-width: 2;
+	/* one branch is drawn into this SVG on load and grown as the page scrolls */
+	.timeline__spine {
+		height: 0;
+		left: 0;
+		overflow: visible;
+		pointer-events: none;
+		position: absolute;
+		top: 0;
+		width: 22px;
 	}
 
-	.timeline__connector :global(.branch-twig) {
+	.timeline__spine :global(.branch-trunk) {
 		fill: none;
-		stroke: var(--page-line);
+		stroke: #c9c7bf;
+		stroke-linecap: round;
+		stroke-width: 2.2;
+	}
+
+	.timeline__spine :global(.branch-twig) {
+		fill: none;
+		stroke: #cfcdc5;
 		stroke-linecap: round;
 		stroke-width: 1.4;
 	}
 
-	.timeline__connector :global(.branch-leaf) {
+	.timeline__spine :global(.branch-tip) {
+		fill: #83a371;
+		transition: opacity 0.4s ease;
+	}
+
+	.timeline__spine :global(.branch-leaf) {
 		stroke: none;
 	}
 
-	.timeline__connector :global(.branch-vein) {
+	.timeline__spine :global(.branch-vein) {
 		fill: none;
 		stroke: rgba(38, 58, 30, 0.32);
 		stroke-linecap: round;
@@ -399,13 +515,18 @@ const timeline = getPrimaryTimeline();
 	}
 
 	/* leaves unfurl (scale + rotate) around their attachment point */
-	.timeline__connector :global(.branch-unfurl) {
+	.timeline__spine :global(.branch-unfurl) {
+		transform: scale(0) rotate(-50deg);
 		transform-box: fill-box;
 		transform-origin: left center;
 	}
 
+	.timeline__spine :global(.branch-unfurl.is-open) {
+		transform: scale(1) rotate(0deg);
+	}
+
 	@media (prefers-reduced-motion: no-preference) {
-		.timeline__connector :global(.branch-sprout) {
+		.timeline__spine :global(.branch-sway) {
 			animation: wt-leaf-sway 4.5s ease-in-out infinite alternate;
 			transform-box: fill-box;
 			transform-origin: left center;
@@ -422,7 +543,7 @@ const timeline = getPrimaryTimeline();
 		}
 	}
 
-	/* node dot sits directly on the spine */
+	/* node dot sits directly on the spine and buds open when the tip reaches it */
 	.timeline__dot {
 		background: var(--page-muted);
 		border: 2px solid var(--page-bg);
@@ -441,7 +562,19 @@ const timeline = getPrimaryTimeline();
 		box-shadow: 0 0 0 1px var(--page-ink);
 	}
 
+	:global(html.wt-js) .timeline__dot {
+		transform: scale(0);
+	}
+
+	:global(html.wt-js) .timeline__dot.is-grown {
+		transform: scale(1);
+	}
+
 	@media (prefers-reduced-motion: no-preference) {
+		.timeline__dot {
+			transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+		}
+
 		.timeline__item {
 			animation: timeline-in 0.5s ease both;
 		}
@@ -702,10 +835,6 @@ const timeline = getPrimaryTimeline();
 	}
 
 	@media (max-width: 760px) {
-		.timeline__item {
-			padding: 16px 0 16px 40px;
-		}
-
 		.timeline__title-row {
 			flex-direction: column;
 			gap: 2px;

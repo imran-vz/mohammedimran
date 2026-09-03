@@ -59,11 +59,6 @@ export function buildPersonSchema(overrides?: { description?: string; imageUrl?:
 		email: 'mohammedimran86992@gmail.com',
 		sameAs: [siteMeta.social.github, siteMeta.social.linkedin],
 		knowsAbout: personKnowsAbout,
-		worksFor: {
-			'@type': 'Organization',
-			name: siteMeta.employer,
-			url: 'https://www.thoughtseed.space/',
-		},
 		address: {
 			'@type': 'PostalAddress',
 			addressLocality: siteMeta.location.locality,

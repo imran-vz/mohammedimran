@@ -2,8 +2,8 @@
 	"profile": {
 		"name": "Mohammed Imran",
 		"preferredName": "Imran",
-		"headline": "Lead Software Developer at ThoughtSeed. Working with Go, TypeScript, React and Python.",
-		"displayHeadline": "Lead Software Developer",
+		"headline": "Senior Full-Stack Developer. Working with Go, TypeScript, React and Python.",
+		"displayHeadline": "Senior Full-Stack Developer",
 		"supportingHeadline": "5+ years building backend platforms, IoT systems, AI assistants, data pipelines, and customer engagement tools.",
 		"location": "Bengaluru, Karnataka, India",
 		"summary": "Full-stack developer with 5+ years of experience building backend platforms, IoT systems, AI assistants, data pipelines, and customer engagement tools. Strong with TypeScript, Python, Go, React, Kafka, PostgreSQL, and event-driven systems; shipped systems for 100,000+ users and 300,000+ devices.",
@@ -38,8 +38,8 @@
 			"locationType": "Remote",
 			"location": "Bengaluru, Karnataka, India",
 			"startDate": "2025-05",
-			"endDate": null,
-			"current": true,
+			"endDate": "2026-07",
+			"current": false,
 			"companyUrl": "https://www.thoughtseed.space/",
 			"linkedinUrl": "https://www.linkedin.com/company/thought-seed-labs/",
 			"logo": "/assets/brand/companies/thoughtseed.jpg",
@@ -79,8 +79,8 @@
 				"Amazon Web Services (AWS)",
 				"TypeScript"
 			],
-			"shortDescription": "Building digital product experiences and production IoT systems processing 1M+ messages per day across 300,000+ devices, then layering AI automation for reliable real-world device control.",
-			"narrativeDescription": "At ThoughtSeed, a product studio focused on digital experience engineering, I work on IoT systems processing 1M+ messages per day across 300,000+ devices. On top of that scale, my current work centers on AI-driven smart home automation: Tuya-based device flows, hybrid intent parsing with LLM orchestration, and human-in-the-loop dry-run validation before automations affect real devices.",
+			"shortDescription": "Built digital product experiences and production IoT systems processing 1M+ messages per day across 300,000+ devices, then layered AI automation for reliable real-world device control.",
+			"narrativeDescription": "At ThoughtSeed, a product studio focused on digital experience engineering, I worked on IoT systems processing 1M+ messages per day across 300,000+ devices. On top of that scale, my later work centred on AI-driven smart home automation: Tuya-based device flows, hybrid intent parsing with LLM orchestration, and human-in-the-loop dry-run validation before automations affected real devices.",
 			"ownershipSummary": "Owned architecture and implementation across IoT flows, automation logic, validation, and integrations.",
 			"achievementBullets": [
 				"Built IoT systems on the Tuya IoT Platform processing 1M+ messages per day across 300,000+ devices.",

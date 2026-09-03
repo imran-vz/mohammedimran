@@ -147,7 +147,7 @@ const webMcpData = {
             })();
         </script>
 
-        <meta name="theme-color" content="#ffff00" />
+        <meta name="theme-color" content="#fbfbfa" />
 
         <style is:global>
             * {
@@ -253,10 +253,6 @@ const webMcpData = {
                 text-decoration: none;
             }
 
-            .border-brutal {
-                border: 4px solid var(--black);
-            }
-
 			.header {
 				position: sticky;
 				top: 0;
@@ -315,10 +311,6 @@ const webMcpData = {
 			.nav-link:hover {
 				background: var(--page-soft);
 				color: var(--page-ink);
-			}
-
-			.nav-link::after {
-				display: none;
 			}
 
 			#main-content {
@@ -380,26 +372,11 @@ const webMcpData = {
 				gap: 28px;
 			}
 
-			.footer-content > div:first-child {
-				display: none;
-			}
-
             @media (max-width: 900px) {
                 .footer-content {
                     grid-template-columns: 1fr;
                     gap: 40px;
                 }
-            }
-
-            .footer-title {
-                font-family: 'Anton', sans-serif;
-                font-size: 4rem;
-                text-transform: uppercase;
-                line-height: 1;
-            }
-
-            .footer-title span {
-                color: var(--yellow);
             }
 
 			.footer-section-title {
@@ -427,10 +404,6 @@ const webMcpData = {
 				color: var(--page-ink);
 			}
 
-			.noise {
-				display: none;
-			}
-
 			@media (max-width: 600px) {
 				.header { padding: 10px 12px; }
 				.nav-links { gap: 2px; }
@@ -442,7 +415,6 @@ const webMcpData = {
     </head>
 
     <body>
-        <div class="noise"></div>
         <Navbar />
         <slot />
         <Footer />
