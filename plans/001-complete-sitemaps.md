@@ -1,6 +1,14 @@
 # Plan 001: Include every article in the sitemap and exclude the preview page
 
-Status: TODO. Priority P1. Effort S (hours). Risk LOW. Category bug. Dependencies: none.
+Status: DONE. Priority P1. Effort S (hours). Risk LOW. Category bug. Dependencies: none.
+
+Implemented on 2026-09-06 in `seo/sitemaps`.
+
+- Added a prerendered XML endpoint using collection IDs and XML-escaped absolute article URLs, without modification dates.
+- Registered the blog sitemap alongside the existing child sitemap and excluded the exact preview pathname, preserving hire URLs.
+- Baseline and final `vp check`, `vp run typecheck`, and `vp run build` passed. Astro check retained 27 existing hints. `vp test` exited 1 because no test files exist, both before and after implementation.
+- The XML build assertion passed with 10 unique content URLs. The static sitemap was copied to `.vercel/output/static`; blog detail routes still target `_render` and have no static output.
+- The build reports a nonfatal warning because existing middleware reads request headers during sitemap prerendering. The XML endpoint does not read request headers; middleware remains unchanged as required by scope.
 
 Planned at `6b2f134`, 2026-09-06, in `/Users/imran/projects/Code/mohammedimran`.
 

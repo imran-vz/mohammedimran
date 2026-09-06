@@ -1,6 +1,6 @@
 # Plan 002: Allow crawlers to fetch Astro public assets
 
-Status: TODO. Priority P1. Effort S (under an hour). Risk LOW. Category bug. Dependencies: none.
+Status: DONE. Priority P1. Effort S (under an hour). Risk LOW. Category bug. Dependencies: none.
 
 Planned at `6b2f134`, 2026-09-06, in `/Users/imran/projects/Code/mohammedimran`.
 
@@ -77,3 +77,15 @@ All assertions pass, built robots.txt matches source, no source outside scope ch
 Stop and report source drift, out-of-scope requirements or verification failures persisting after two focused attempts. Do not edit production, daily preview settings, visible copy or UI. Do not deploy, push or open a PR. If commits are requested, use the repo's simple imperative title convention.
 
 Reference: [Google JavaScript SEO guidance](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics).
+
+## Implementation verification (2026-09-06)
+
+Implemented in the isolated `seo/crawler-assets` worktree. The drift check found no changes to `public/robots.txt` since `6b2f134`. Removed exactly the three active `/_astro/` restrictions and changed the heading to “Disallow API routes”; other directives and comments are preserved.
+
+- `vp install` passed with the lockfile unchanged.
+- Baseline and post-edit `vp check`, `vp run typecheck`, and `vp run build` passed. Astro reported the same 27 pre-existing hints, with zero errors and warnings.
+- Baseline and post-edit `vp test` exited 1 with “No test files found”; no project test suite exists.
+- The parser check printed PASS for public assets, API restrictions, sitemap, and AI preference declarations. This does not verify crawler enforcement of Content-Signal.
+- `rg -n '^Disallow: /_astro/' public/robots.txt` returned no matches (exit 1).
+- `cmp public/robots.txt dist/client/robots.txt` and `git diff --check` passed.
+- Only `public/robots.txt` and this plan changed in this worktree. The coordinating agent owns the index status update during integration.

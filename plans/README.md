@@ -1,18 +1,26 @@
 # SEO implementation plans
 
-Prepared 2026-09-06 against commit `6b2f134`. These are implementation handoffs, not completed fixes. Source code and production are unchanged.
+Prepared 2026-09-06 against commit `6b2f134`. Implemented locally using separate worktrees and subagents. Production is unchanged.
 
-[Visual overview](seo-plan.html)
+[Original planning overview](seo-plan.html). This archived overview preserves the pre-implementation handoffs; current status and verification are recorded here and in each plan.
 
 | Plan                                                   | Priority | Effort | Risk   | Depends on | Status |
 | ------------------------------------------------------ | -------- | ------ | ------ | ---------- | ------ |
-| [001: Complete sitemaps](001-complete-sitemaps.md)     | P1       | S      | Low    | None       | TODO   |
-| [002: Allow public assets](002-allow-public-assets.md) | P1       | S      | Low    | None       | TODO   |
-| [003: Canonical URLs](003-canonical-urls.md)           | P1       | S      | Medium | 001        | TODO   |
+| [001: Complete sitemaps](001-complete-sitemaps.md)     | P1       | S      | Low    | None       | DONE   |
+| [002: Allow public assets](002-allow-public-assets.md) | P1       | S      | Low    | None       | DONE   |
+| [003: Canonical URLs](003-canonical-urls.md)           | P1       | S      | Medium | 001        | DONE   |
 
-Execute serially. Plans 001 and 003 share astro.config.ts; do not assign simultaneous ownership. Plan 002 is independent but small enough for the same pass.
+Plans 001 and 002 ran in parallel with separate file ownership. Plan 003 started after both were merged into the integration branch, preserving serial ownership of `astro.config.ts`.
 
-Each plan includes scope, evidence, verification and stop conditions. The advisor inspected command definitions and installed framework code; installation, fresh builds and baseline tests were not run. Executors must record existing failures separately.
+Each plan records implementation evidence and baseline limitations. The original baseline built and typechecked successfully, with 27 Astro hints; no test files existed. Formatting issues in the supplied plans were corrected before implementation.
+
+## Integration verification (2026-09-06)
+
+- Final integration build and Astro typecheck pass; all 41 redirect boundary tests pass.
+- Combined output assertions confirm 10 unique canonical content URLs, crawlable public assets, unchanged API restrictions and AI preferences, static blog sitemap output, and public pages routed through SSR.
+- Isolated HTTP verification confirms bodyless GET/HEAD redirects, query preservation, canonical metadata, Markdown responses and missing-article 404s. The temporary server was stopped.
+- The 27 existing Astro hints remain. The new static sitemap also exposes a nonfatal warning from existing middleware reading request headers during prerendering; generated XML is verified.
+- All implementation branches are integrated locally. No push or deployment occurred; hosted routing validation remains pending deployment.
 
 ## Deferred findings
 

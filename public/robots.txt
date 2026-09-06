@@ -6,8 +6,7 @@ User-agent: *
 Allow: /
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 
-# Disallow internal/build directories
-Disallow: /_astro/
+# Disallow API routes
 Disallow: /api/
 
 # Crawl-delay for politeness (optional, most major crawlers ignore this)
@@ -20,14 +19,12 @@ Sitemap: https://imran.codes/sitemap-index.xml
 User-agent: Googlebot
 Allow: /
 Content-Signal: ai-train=no, search=yes, ai-input=yes
-Disallow: /_astro/
 Disallow: /api/
 
 # Bing-specific directives
 User-agent: Bingbot
 Allow: /
 Content-Signal: ai-train=no, search=yes, ai-input=yes
-Disallow: /_astro/
 Disallow: /api/
 
 # Block AI training crawlers (optional - uncomment if desired)
