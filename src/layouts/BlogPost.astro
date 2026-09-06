@@ -20,7 +20,8 @@ export interface Props {
 
 const { title, description, pubDate, updatedDate, tags = [], faq = [], image = siteMeta.ogImage } = Astro.props;
 
-const canonicalUrl = `${siteMeta.siteUrl}${Astro.url.pathname}`;
+const canonicalPathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const canonicalUrl = `${siteMeta.siteUrl}${canonicalPathname}`;
 const formattedPubDate = pubDate.toISOString();
 const formattedUpdateDate = updatedDate?.toISOString();
 

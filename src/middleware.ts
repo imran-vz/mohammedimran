@@ -1,5 +1,6 @@
 import { defineMiddleware } from 'astro:middleware';
 import TurndownService from 'turndown';
+import { getCanonicalRedirect } from './lib/canonical';
 
 const MARKDOWN_CONTENT_TYPE = 'text/markdown; charset=utf-8';
 
@@ -70,6 +71,11 @@ const extractContentHtml = (html: string) =>
 const estimateTokenCount = (markdown: string) => markdown.match(/\S+/g)?.length ?? 0;
 
 export const onRequest = defineMiddleware(async ({ request }, next) => {
+	const redirectUrl = getCanonicalRedirect(new URL(request.url), request.method);
+	if (redirectUrl) {
+		return new Response(null, { status: 308, headers: { Location: redirectUrl.href } });
+	}
+
 	if (!acceptsMarkdown(request.headers.get('Accept'))) {
 		return next();
 	}
