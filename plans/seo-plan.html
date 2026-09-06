@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta name="robots" content="noindex" />
+		<title>imran.codes | SEO implementation plan</title>
+		<style>
+			:root {
+				color-scheme: dark;
+				--bg: #000;
+				--ink: #fff;
+				--secondary: #bbb;
+				--line: #3c3c3c;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				margin: 0;
+				background: var(--bg);
+				color: var(--ink);
+				font:
+					16px/1.55 system-ui,
+					sans-serif;
+			}
+			main {
+				max-width: 1060px;
+				margin: auto;
+				padding: 44px 32px 72px;
+			}
+			header {
+				border-bottom: 1px solid var(--line);
+				padding-bottom: 28px;
+			}
+			nav {
+				display: flex;
+				gap: 24px;
+				flex-wrap: wrap;
+				font:
+					13px ui-monospace,
+					monospace;
+			}
+			a {
+				color: inherit;
+				text-underline-offset: 5px;
+			}
+			h1 {
+				font-size: clamp(30px, 5vw, 52px);
+				line-height: 1.1;
+				letter-spacing: -0.045em;
+				margin: 32px 0 18px;
+			}
+			h2 {
+				font-size: 24px;
+				line-height: 1.2;
+				margin: 0;
+			}
+			h3 {
+				font:
+					12px ui-monospace,
+					monospace;
+				text-transform: uppercase;
+				margin: 0 0 10px;
+				color: var(--ink);
+			}
+			p {
+				margin: 12px 0;
+				max-width: 77ch;
+			}
+			.intro {
+				font-size: 19px;
+			}
+			.meta,
+			.risk,
+			.scope {
+				font:
+					13px/1.6 ui-monospace,
+					monospace;
+				color: var(--secondary);
+			}
+			section {
+				display: grid;
+				grid-template-columns: 64px minmax(0, 1fr);
+				gap: 20px;
+				padding: 32px 0;
+				border-bottom: 1px solid var(--line);
+			}
+			.number {
+				font:
+					24px ui-monospace,
+					monospace;
+			}
+			.comparison {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 28px;
+				margin: 25px 0;
+			}
+			.comparison p {
+				margin: 0;
+				font-size: 18px;
+			}
+			.scope {
+				overflow-wrap: anywhere;
+			}
+			summary {
+				cursor: pointer;
+				padding: 12px 0;
+				text-decoration: underline;
+				text-underline-offset: 4px;
+				font-size: 14px;
+			}
+			pre {
+				white-space: pre-wrap;
+				overflow-wrap: anywhere;
+				font:
+					13px/1.7 ui-monospace,
+					monospace;
+				border-left: 1px solid var(--line);
+				padding-left: 18px;
+			}
+			details {
+				margin-top: 18px;
+			}
+			a:focus-visible,
+			summary:focus-visible {
+				outline: 2px solid #fff;
+				outline-offset: 5px;
+			}
+			footer {
+				padding-top: 30px;
+			}
+			footer h2 {
+				font-size: 19px;
+			}
+			footer p {
+				font-size: 14px;
+			}
+			@media (max-width: 600px) {
+				main {
+					padding: 26px 20px 48px;
+				}
+				section {
+					grid-template-columns: 1fr;
+					gap: 12px;
+				}
+				.comparison {
+					grid-template-columns: 1fr;
+					gap: 20px;
+				}
+				nav {
+					gap: 14px;
+				}
+				h2 {
+					font-size: 22px;
+				}
+			}
+			@media print {
+				details {
+					display: block;
+				}
+				body {
+					color: #000;
+					background: #fff;
+				}
+				main {
+					padding: 0;
+				}
+				.risk,
+				.scope,
+				.meta {
+					color: #333;
+				}
+				a {
+					color: #000;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<header>
+				<nav><a href="#p001">01 Sitemap</a><a href="#p002">02 Crawlers</a><a href="#p003">03 Canonicals</a></nav>
+				<h1>imran.codes<br />SEO implementation plan</h1>
+				<p class="intro">
+					Make every article discoverable, keep public assets crawlable, and give each page one preferred URL.
+				</p>
+				<p class="meta">
+					Three handoffs · planned at 6b2f134 · 06 September 2026<br />Status: ready for implementation. Source and
+					production unchanged.
+				</p>
+			</header>
+			<section id="p001">
+				<div class="number">001</div>
+				<div>
+					<h2>Complete sitemap discovery</h2>
+					<p class="risk">Low risk · hours</p>
+					<div class="comparison">
+						<div>
+							<h3>Observed</h3>
+							<p>9 entries, including a 404; both articles missing</p>
+						</div>
+						<div>
+							<h3>Done when</h3>
+							<p>10 content URLs across two child sitemaps</p>
+						</div>
+					</div>
+					<p>Add a collection-driven blog XML sitemap. Exclude the preview route.</p>
+					<p class="scope">astro.config.ts · new sitemap-blog.xml.ts</p>
+					<details>
+						<summary>Read the complete implementation handoff</summary>
+						<pre>
+# Plan 001: Include every article in the sitemap and exclude the preview page
+
+Status: TODO. Priority P1. Effort S (hours). Risk LOW. Category bug. Dependencies: none.
+
+Planned at `6b2f134`, 2026-09-06, in `/Users/imran/projects/Code/mohammedimran`.
+
+## Drift check
+
+Run `git status --short` and `git diff 6b2f134..HEAD -- astro.config.ts src/content.config.ts src/pages/blog src/pages/og-preview.astro src/middleware.ts`. Inspect uncommitted changes too. Reconcile drift before editing; do not overwrite user work.
+
+## Why and current state
+
+The live sitemap has nine entries: eight content pages and `/og-preview/`, which returns 404. Both published articles are missing. Blog links still make articles discoverable; this fix completes sitemap discovery.
+
+`astro.config.ts:15` currently contains:
+
+```ts
+sitemap({
+    changefreq: &#x27;always&#x27;,
+    customPages: hirePages.map((page) =&gt; `https://imran.codes/hire/${page.slug}`),
+    lastmod: new Date(),
+}),
+```
+
+`src/content.config.ts` loads `**/*.md` under `src/content/blog`. The blog index uses `getCollection(&#x27;blog&#x27;)` and `post.id` for links. Use those authoritative collection IDs, not an independent filename parser. Blog detail pages use `getEntry` at request time, and middleware negotiates `text/markdown`; keep those pages server-rendered.
+
+`src/pages/og-preview.astro:7` returns 404 when `import.meta.env.PROD` is true. The sitemap integration cannot infer that behavior. Installed `@astrojs/sitemap/dist/index.js` supports both `filter` and `customSitemaps`.
+
+## Scope and conventions
+
+Modify `astro.config.ts`; create `src/pages/sitemap-blog.xml.ts`. Documentation updates are limited to this plan and its index status. Do not edit content, layouts, blog routes, middleware, robots, dates, dependencies or hosting settings.
+
+Astro 7.2.4, Vercel adapter 11.0.7, TypeScript, Node 24, Vite+ and pnpm 11.5.2. Match tabs, single quotes and inferred types; no `any`. Use the blog index&#x27;s `getCollection(&#x27;blog&#x27;)` pattern and `siteMeta.siteUrl` from `src/config/siteMeta.ts`.
+
+## Steps
+
+1. Create a prerendered XML endpoint at `src/pages/sitemap-blog.xml.ts`. Export `prerender = true` and a typed Astro GET handler. Read the collection and return a standard sitemap `urlset`, with one absolute `/blog/${post.id}` URL per post and `Content-Type: application/xml; charset=utf-8`. XML-escape URL text, including ampersands. Do not invent modification dates. An empty collection must yield a valid empty urlset.
+   Verify: `vp run typecheck` succeeds; `vp run build` emits `dist/client/sitemap-blog.xml`.
+2. Add `customSitemaps: [&#x27;https://imran.codes/sitemap-blog.xml&#x27;]` to the existing sitemap integration. Filter out the exact preview pathname after stripping trailing slashes. Preserve all custom hire URLs. Do not put the XML endpoint in the page URL list.
+   Verify: rebuild, then run the XML assertion below. The index references both child files, with 10 unique content URLs total and no preview page.
+3. Run the baseline gates below again, `git diff --check`, and inspect source scope. Confirm the new XML endpoint is static in Vercel output and blog detail routes remain server-rendered.
+
+## Verification commands
+
+Work on a local branch or disposable worktree. Run `vp install` before implementation as AGENTS.md requests. Record baseline results before changing source.
+
+| Command | Expected |
+| --- | --- |
+| `vp check` | Format, lint and type checks pass; do not broadly fix unrelated files |
+| `vp run typecheck` | Astro check exits 0 |
+| `vp test` | Tests pass; this checkout has no project suite, so “no test files found” is a baseline limitation, not a passing test |
+| `vp run build` | Astro build exits 0 and writes ignored dist/ and .vercel/output/ |
+
+These commands were identified from package.json and vp help; the advisor did not execute baseline builds. If environment setup fails, run `vp env doctor` and report the output.
+
+After the build:
+
+```sh
+python3 - &lt;&lt;&#x27;PY&#x27;
+from pathlib import Path
+from urllib.parse import urlparse
+import xml.etree.ElementTree as ET
+root = Path(&#x27;dist/client&#x27;)
+ns = {&#x27;s&#x27;: &#x27;http://www.sitemaps.org/schemas/sitemap/0.9&#x27;}
+index = ET.parse(root / &#x27;sitemap-index.xml&#x27;)
+files = [urlparse(x.text).path.lstrip(&#x27;/&#x27;) for x in index.findall(&#x27;.//s:loc&#x27;, ns)]
+assert &#x27;sitemap-blog.xml&#x27; in files, files
+urls = [x.text for f in files for x in ET.parse(root / f).findall(&#x27;.//s:loc&#x27;, ns)]
+paths = [urlparse(u).path.rstrip(&#x27;/&#x27;) or &#x27;/&#x27; for u in urls]
+expected = {&#x27;/&#x27;, &#x27;/blog&#x27;, &#x27;/hire&#x27;, &#x27;/skills&#x27;,
+ &#x27;/hire/developer-for-hire-bangalore&#x27;, &#x27;/hire/react-developer-bengaluru&#x27;,
+ &#x27;/hire/golang-developer&#x27;, &#x27;/hire/typescript-developer&#x27;,
+ &#x27;/blog/how-to-build-terminal-ui-with-go-and-bubbletea&#x27;,
+ &#x27;/blog/how-to-get-started-with-tauri-for-cross-platform-desktop-apps&#x27;}
+assert set(paths) == expected, paths
+assert len(paths) == len(set(paths)) == 10, paths
+assert all(urlparse(u).scheme == &#x27;https&#x27; and urlparse(u).netloc == &#x27;imran.codes&#x27; for u in urls)
+print(&#x27;PASS: 10 unique content URLs across the sitemap index&#x27;)
+PY
+```
+
+Use this one-time build-output check instead of adding a test framework. Reconcile expected article names if the collection changed after planning.
+
+## Done and maintenance
+
+- XML assertions pass; every article appears once; no preview URL.
+- Blog runtime and Markdown negotiation are unchanged.
+- Required checks pass or pre-existing limitations are explicitly reported.
+- Only scoped source files changed; update this plan&#x27;s status in plans/README.md.
+
+Future articles enter the sitemap on build automatically. Revisit static sitemap generation if a runtime CMS is introduced. Plan 003 normalizes the original sitemap&#x27;s trailing slashes. Build-based lastmod is a separate deferred finding.
+
+## Stop conditions and Git workflow
+
+Stop and report if source drift invalidates assumptions, an out-of-scope file or dependency is needed, or verification fails twice after a focused correction. Never deploy or edit live settings to obtain validation. No UI edits, push or PR. Use a local branch such as `seo/sitemaps`; if commits are requested, match the repo&#x27;s simple imperative titles.
+
+References: [Astro sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/), [Google sitemap guidance](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap).
+</pre>
+					</details>
+				</div>
+			</section>
+			<section id="p002">
+				<div class="number">002</div>
+				<div>
+					<h2>Let crawlers load public assets</h2>
+					<p class="risk">Low risk · under an hour</p>
+					<div class="comparison">
+						<div>
+							<h3>Observed</h3>
+							<p>/_astro/ blocked for three crawler groups</p>
+						</div>
+						<div>
+							<h3>Done when</h3>
+							<p>Scripts, styles and images crawlable</p>
+						</div>
+					</div>
+					<p>Remove three restrictions. Preserve API and AI preferences.</p>
+					<p class="scope">public/robots.txt</p>
+					<details>
+						<summary>Read the complete implementation handoff</summary>
+						<pre>
+# Plan 002: Allow crawlers to fetch Astro public assets
+
+Status: TODO. Priority P1. Effort S (under an hour). Risk LOW. Category bug. Dependencies: none.
+
+Planned at `6b2f134`, 2026-09-06, in `/Users/imran/projects/Code/mohammedimran`.
+
+## Drift check
+
+Run `git status --short` and `git diff 6b2f134..HEAD -- public/robots.txt`. Inspect uncommitted changes before editing and preserve user work.
+
+## Why and current state
+
+The homepage loads its timeline script from `/_astro/`. The robots file blocks that directory for general crawlers, Googlebot and Bingbot. Text is server-rendered, but crawlers should also access the assets used to render the page.
+
+`public/robots.txt` has three active user-agent groups, each including:
+
+```text
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Disallow: /_astro/
+Disallow: /api/
+```
+
+It declares `Sitemap: https://imran.codes/sitemap-index.xml`. The general group includes `Crawl-delay: 1`. The optional training-bot blocks at the bottom are comments. The heading “Disallow internal/build directories” incorrectly describes public assets as internal.
+
+## Scope
+
+Only `public/robots.txt`, this plan&#x27;s verification notes and its index status. Preserve crawler groups, AI preferences, API restrictions, sitemap declaration and other comments. No dependencies, application code or hosting changes.
+
+## Steps
+
+1. Remove all three active `Disallow: /_astro/` lines. Correct the heading to describe the remaining API restriction.
+   Verify: `git diff -- public/robots.txt` shows just the three removals and heading correction. `rg -n &#x27;^Disallow: /_astro/&#x27; public/robots.txt` returns exit 1 with no matches.
+2. Run the parser check below, then `vp run build`.
+   Verify: parser prints PASS; `cmp public/robots.txt dist/client/robots.txt` exits 0.
+3. Run required baseline gates, `git diff --check` and inspect modified files. No new test suite is needed for this static edit.
+
+## Verification
+
+Astro 7.2.4 on Vercel; Node 24, pnpm 11.5.2, Vite+. Work locally on a branch such as `seo/crawler-assets` or a disposable worktree. Run `vp install` as AGENTS.md requests before implementation. Record baseline failures separately, then repeat these commands after the edit:
+
+| Command | Expected |
+| --- | --- |
+| `vp check` | Formatting, lint and types pass without unrelated changes |
+| `vp run typecheck` | Astro check exits 0 |
+| `vp test` | Tests pass; no project suite currently exists, so report “no test files found” as a baseline limitation |
+| `vp run build` | Build exits 0 into ignored output directories |
+
+The advisor checked command definitions, not baseline build success. Run `vp env doctor` and report output if setup fails.
+
+```sh
+python3 - &lt;&lt;&#x27;PY&#x27;
+from pathlib import Path
+from urllib.robotparser import RobotFileParser
+text = Path(&#x27;public/robots.txt&#x27;).read_text()
+r = RobotFileParser()
+# Adapt redundant universal Allow and blank lines to this parser&#x27;s semantics.
+r.parse([line for line in text.replace(&#x27;Allow: /\n&#x27;, &#x27;&#x27;).splitlines() if line.strip()])
+for agent in (&#x27;Googlebot&#x27;, &#x27;Bingbot&#x27;, &#x27;ExampleCrawler&#x27;):
+    for path in (&#x27;/&#x27;, &#x27;/blog&#x27;, &#x27;/_astro/test.js&#x27;, &#x27;/_astro/test.css&#x27;, &#x27;/_astro/test.webp&#x27;):
+        assert r.can_fetch(agent, &#x27;https://imran.codes&#x27; + path), (agent, path)
+    assert not r.can_fetch(agent, &#x27;https://imran.codes/api/example&#x27;), agent
+assert &#x27;Sitemap: https://imran.codes/sitemap-index.xml&#x27; in text
+assert text.count(&#x27;Content-Signal: ai-train=no, search=yes, ai-input=yes&#x27;) == 3
+print(&#x27;PASS: public assets allowed; API restrictions and stated AI preferences preserved&#x27;)
+PY
+```
+
+This checks conventional allow/disallow behavior, not enforcement of Content-Signal by particular crawlers.
+
+## Done and maintenance
+
+All assertions pass, built robots.txt matches source, no source outside scope changed, baseline limitations are recorded, and the index status is updated. Keep future public build assets crawlable. Robots.txt is not access control.
+
+## Stop conditions and boundaries
+
+Stop and report source drift, out-of-scope requirements or verification failures persisting after two focused attempts. Do not edit production, daily preview settings, visible copy or UI. Do not deploy, push or open a PR. If commits are requested, use the repo&#x27;s simple imperative title convention.
+
+Reference: [Google JavaScript SEO guidance](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics).
+</pre>
+					</details>
+				</div>
+			</section>
+			<section id="p003">
+				<div class="number">003</div>
+				<div>
+					<h2>One URL for each page</h2>
+					<p class="risk">Medium risk · hours · after 001</p>
+					<div class="comparison">
+						<div>
+							<h3>Observed</h3>
+							<p>Slash variants each claim to be canonical</p>
+						</div>
+						<div>
+							<h3>Done when</h3>
+							<p>HTTPS imran.codes + slash-free page paths</p>
+						</div>
+					</div>
+					<p>Normalize public GET/HEAD aliases, metadata and sitemap URLs. Preserve queries through redirects.</p>
+					<p class="scope">middleware · blog layout · sitemap config · focused helper/tests</p>
+					<details>
+						<summary>Read the complete implementation handoff</summary>
+						<pre>
+# Plan 003: Give each public content page one canonical URL
+
+Status: TODO. Priority P1. Effort S (hours). Risk MEDIUM (routing). Category bug. Dependency: Plan 001 for the final sitemap structure.
+
+Planned at `6b2f134`, 2026-09-06, in `/Users/imran/projects/Code/mohammedimran`.
+
+## Drift check
+
+Run `git status --short` and `git diff 6b2f134..HEAD -- astro.config.ts src/layouts/BlogPost.astro src/middleware.ts`. Preserve Plan 001&#x27;s expected config additions. Reconcile other drift before editing, including uncommitted work.
+
+## Why and current state
+
+Blog URLs with and without a trailing slash return 200 and claim themselves canonical. The sitemap lists `/blog/`, `/hire/`, `/skills/`, while those pages canonicalize without slashes. www also serves duplicate content, although its canonical metadata already points to the main hostname.
+
+Target: HTTPS imran.codes; `/` for home; no trailing slash on other public pages; preserve queries through redirects but omit them from canonical metadata.
+
+`src/layouts/BlogPost.astro:23`:
+
+```ts
+const canonicalUrl = `${siteMeta.siteUrl}${Astro.url.pathname}`;
+```
+
+`src/middleware.ts:72`:
+
+```ts
+export const onRequest = defineMiddleware(async ({ request }, next) =&gt; {
+    if (!acceptsMarkdown(request.headers.get(&#x27;Accept&#x27;))) {
+        return next();
+    }
+```
+
+The remaining middleware negotiates Markdown and must retain its behavior. Navigation already uses slash-free paths. astro.config.ts has no global trailingSlash policy. The installed Astro trailing-slash handler also redirects non-GET requests; avoid changing OAuth, MCP and agent route behavior with a global setting.
+
+## Scope and conventions
+
+Modify `astro.config.ts`, `src/layouts/BlogPost.astro`, `src/middleware.ts`. Create `src/lib/canonical.ts` and `src/lib/canonical.test.ts` for a small pure redirect-decision helper and meaningful route-boundary tests. Documentation changes: this plan and index status.
+
+Do not modify vercel.json, live domain configuration, authentication endpoints, page content, sitemap dates or other schemas. Astro 7.2.4, Vercel adapter 11.0.7, Node 24, pnpm 11.5.2, TypeScript and Vite+. Match tabs, single quotes and inferred types. No `any`, module mocks or new dependencies. Use the typed URL/request APIs already used in middleware.
+
+## Steps
+
+1. Add a pure helper taking a URL and method and returning a redirect URL or null. Only process GET/HEAD for `/`, `/blog`, `/blog/&lt;one slug&gt;`, `/hire`, `/hire/&lt;one slug&gt;` and `/skills`, allowing trailing slashes on input. Match the parsed pathname, not substrings. Strip trailing slashes except for root. For the literal hostname `www.imran.codes`, switch to HTTPS imran.codes with no port. Preserve all other origins, including localhost and private previews. Preserve the query. Return null for canonical inputs, excluded routes and non-read methods. Do not mutate the input URL.
+   Call this helper at the start of onRequest, before Markdown negotiation. Return a bodyless 308 with Location when a redirect is needed; leave the remainder untouched.
+   Verify: focused tests below pass; `vp run typecheck` succeeds; the middleware diff has only an import and early redirect branch.
+2. Normalize `Astro.url.pathname` before composing canonicalUrl in BlogPost: strip trailing slashes, retaining `/` for root. Keep `siteMeta.siteUrl` as the trusted origin. Existing canonical, Open Graph, article and breadcrumb consumers must all keep using this same value.
+   Verify: local requests to both article variants resolve to the same slash-free path and emit the same production canonical without query parameters.
+3. Add a sitemap serialize callback in astro.config.ts, returning each item with its URL pathname normalized while preserving root and all other properties. Preserve Plan 001&#x27;s filter and customSitemaps; its blog sitemap already emits slash-free URLs. Do not change global Astro/Vercel trailingSlash settings.
+   Verify: `vp run build`, then Plan 001&#x27;s XML assertions and the supplementary slash assertion below.
+4. Run baseline gates, inspect `git diff --check` and `.vercel/output/config.json`. Confirm affected public SSR routes still pass through middleware. If an affected page bypasses middleware, stop and report instead of changing live domains. Local tests do not establish hosted routing; report deployment validation as pending separate authorization.
+
+## Focused tests and commands
+
+Use the Vitest API exported by the installed Vite+ package; confirm the exact import export locally before writing the test. No existing project suite provides a pattern. Table-driven tests of the pure helper must cover:
+
+- Slash normalization for each listed page family and both article/service slug paths.
+- Canonical paths and non-www root return null.
+- www plus trailing slash and `?ref=portfolio` becomes HTTPS non-www with query intact in one hop.
+- Localhost and private preview hosts remain unchanged when paths normalize.
+- POST, PUT, DELETE and OPTIONS return null.
+- `/oauth/token/`, `/oauth/authorize/`, `/mcp/`, `/agent/register/`, `/_astro/a.js`, `/.well-known/openapi.json`, `/robots.txt`, `/sitemap-blog.xml` are excluded.
+- Running the helper again on its result returns null, preventing loops; input URL stays unchanged.
+
+`vp test src/lib/canonical.test.ts` must pass. These tests protect consequential redirect boundaries, not implementation snapshots.
+
+Work on a local branch such as `seo/canonical-urls` or a disposable worktree. Before editing, run `vp install`, `vp check`, `vp run typecheck`, `vp test`, `vp run build` and record baseline failures. Repeat after edits: all must succeed, with pre-existing limitations reported separately. The original checkout has no project tests; this plan introduces focused tests. The advisor identified commands but did not run baseline builds. Use `vp env doctor` for setup failures. Build output must stay in ignored directories.
+
+After the build:
+
+```sh
+python3 - &lt;&lt;&#x27;PY&#x27;
+from pathlib import Path
+from urllib.parse import urlparse
+import xml.etree.ElementTree as ET
+root = Path(&#x27;dist/client&#x27;)
+ns = {&#x27;s&#x27;: &#x27;http://www.sitemaps.org/schemas/sitemap/0.9&#x27;}
+files = [urlparse(x.text).path.lstrip(&#x27;/&#x27;) for x in ET.parse(root / &#x27;sitemap-index.xml&#x27;).findall(&#x27;.//s:loc&#x27;, ns)]
+urls = [x.text for f in files for x in ET.parse(root / f).findall(&#x27;.//s:loc&#x27;, ns)]
+assert len(urls) == len(set(urls)) == 10, urls
+assert all(urlparse(u).path == &#x27;/&#x27; or not urlparse(u).path.endswith(&#x27;/&#x27;) for u in urls)
+print(&#x27;PASS: sitemap URLs follow the canonical slash policy&#x27;)
+PY
+```
+
+Check port 4381 is free, then start `vp run dev --host 127.0.0.1 --port 4381` in the isolated checkout. Do not reuse a daily preview server. Run:
+
+```sh
+curl -sS -D - -o /dev/null &#x27;http://127.0.0.1:4381/blog/?ref=portfolio&#x27;
+curl -sS -I &#x27;http://127.0.0.1:4381/hire/golang-developer/&#x27;
+curl -sS -L &#x27;http://127.0.0.1:4381/blog/how-to-build-terminal-ui-with-go-and-bubbletea/?ref=portfolio&#x27;
+curl -sS -L -H &#x27;Accept: text/markdown&#x27; &#x27;http://127.0.0.1:4381/blog/how-to-build-terminal-ui-with-go-and-bubbletea/&#x27;
+```
+
+First two: 308 to the same local origin without trailing slashes, preserving ref in the first. Third: slash-free production canonical without ref. Fourth: Markdown article response. A missing blog slug must still end in 404, never a successful homepage. Do not invoke mutating API endpoints to test exclusions; pure tests cover their redirect decisions. Stop only the local server you started.
+
+## Done and maintenance
+
+Route-boundary tests pass; public aliases normalize once; sitemap and metadata agree; Markdown still works; no new redirect behavior for excluded routes; generated routing reviewed; no deployment performed. Update the index status and record verification limitations.
+
+New public page families require deliberate inclusion in the helper and tests. Moving pages from SSR to prerendering requires revisiting redirect ownership. Use one shared decision helper rather than duplicating host/path logic.
+
+## Stop conditions and Git workflow
+
+Stop on unexpected source drift, out-of-scope requirements, or verification that fails twice after focused correction. No UI/copy changes, production mutations, push or PR. If commits are requested, use simple imperative titles consistent with the repo; rebase onto main before a requested PR.
+
+References: [Google canonical guidance](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls), installed Astro `dist/core/routing/trailing-slash-handler.js`, installed sitemap `dist/index.js`.
+</pre>
+					</details>
+				</div>
+			</section>
+			<footer>
+				<h2>Execution and verification</h2>
+				<p>
+					Complete 001 → 002 → 003. The first and third plans share the sitemap configuration. Each handoff includes
+					scope, checks and stop conditions.
+				</p>
+				<p>
+					Verify generated XML, crawler rules, redirects and Markdown responses locally. Protect OAuth, MCP and agent
+					endpoints from SEO redirects. Production deployment requires a separate instruction.
+				</p>
+				<p class="meta">
+					Deferred: sitemap dates, contribution API caching, icons, schema cleanup and content positioning. Search
+					Console and Core Web Vitals were not measured.
+				</p>
+			</footer>
+		</main>
+	</body>
+</html>
