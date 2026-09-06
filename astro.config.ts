@@ -18,6 +18,11 @@ export default defineConfig({
 			customSitemaps: ['https://imran.codes/sitemap-blog.xml'],
 			filter: (page) => new URL(page).pathname.replace(/\/+$/, '') !== '/og-preview',
 			lastmod: new Date(),
+			serialize: (item) => {
+				const url = new URL(item.url);
+				url.pathname = url.pathname.replace(/\/+$/, '') || '/';
+				return { ...item, url: url.href };
+			},
 		}),
 		svelte(),
 	],

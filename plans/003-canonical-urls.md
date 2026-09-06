@@ -1,6 +1,16 @@
 # Plan 003: Give each public content page one canonical URL
 
-Status: TODO. Priority P1. Effort S (hours). Risk MEDIUM (routing). Category bug. Dependency: Plan 001 for the final sitemap structure.
+Status: DONE. Priority P1. Effort S (hours). Risk MEDIUM (routing). Category bug. Dependency: Plan 001 for the final sitemap structure.
+
+Implemented on 2026-09-06 in `seo/canonical-urls`, after Plans 001 and 002.
+
+- Added a pure public-content redirect helper and an early bodyless 308 response, preserving the remaining Markdown middleware exactly. Only GET/HEAD public page families normalize slashes and the exact www hostname; other origins and query parameters are preserved.
+- Normalized the shared blog canonical URL and sitemap item paths. Plan 001's filter and blog sitemap registration remain intact; no global trailing-slash configuration changed.
+- `vp install`, baseline/final `vp check`, `vp run typecheck`, and `vp run build` passed. Astro check retained 27 existing hints and the build retained the known sitemap prerender middleware warning. Baseline `vp test` had no test files; final full and focused test runs passed all 41 boundary cases using the verified `vite-plus/test` export. `git diff --check` passed.
+- Build XML assertions passed: exactly 10 expected, unique HTTPS content URLs, with no non-root trailing slashes. Generated Vercel routes send every affected page and slash alias to `_render`; no static page output bypasses middleware, and the server entry imports the generated middleware containing the redirect branch.
+- Isolated HTTP checks on port 4381 passed: GET and HEAD return bodyless 308 redirects; local origin and query survive; both article variants emit the same production canonical without the query; Markdown returns 200 with article content, `Vary: Accept`, and token count; a missing article alias ends in 404.
+- The browser verified the article redirect, canonical metadata, visible article/home content, and no console errors. The `agent-browser` CLI was unavailable, so browser verification used CUA. The verification tab was closed and the worktree's dev server was stopped; port 4381 is free.
+- No deployment or live setting changes performed. Hosted redirect behavior still requires separately authorized deployment validation.
 
 Planned at `6b2f134`, 2026-09-06, in `/Users/imran/projects/Code/mohammedimran`.
 
