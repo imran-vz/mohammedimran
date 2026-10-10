@@ -353,104 +353,54 @@
 	],
 	"showcaseProjects": [
 		{
-			"id": "gosqlit",
-			"name": "GOSQLIT",
+			"id": "cocoacomaa",
+			"name": "Cocoa Comaa",
 			"displaySection": "open-source-projects",
-			"group": "developer-tools",
-			"status": "showcase",
-			"icon": "/assets/brand/projects/gosqlit.svg",
-			"description": "Terminal SQL client for PostgreSQL with encrypted credentials, schema browsing, a multi-line query editor, query cancellation, and paginated results.",
-			"tech": ["Go", "Bubble Tea", "PostgreSQL", "pgx"],
-			"url": "https://github.com/imran-vz/gosqlit",
-			"source": "local_project_data"
-		},
-		{
-			"id": "seer",
-			"name": "Seer",
-			"alternateName": "Seer - சீர்",
-			"displaySection": "open-source-projects",
-			"group": "desktop-tools",
-			"status": "showcase",
-			"icon": "/assets/brand/projects/seer.svg",
-			"description": "Tauri desktop media toolkit for file browsing, codec and stream inspection, bitrate analysis, ffprobe metadata, and SQLite-backed caching.",
-			"tech": ["Tauri", "React", "TypeScript", "Rust", "FFmpeg"],
-			"url": "https://github.com/imran-vz/seer",
-			"source": "local_project_data_and_linkedin"
+			"group": "client-work",
+			"status": "live",
+			"icon": "/assets/brand/projects/cocoacomaa.png",
+			"description": "Live ordering site for a Bengaluru dessert brand: custom cakes, postal brownies shipped across India, paid baking workshops, and online courses, with admin and manager panels behind it.",
+			"tech": ["Next.js", "React", "TypeScript", "PostgreSQL", "Drizzle ORM", "Razorpay", "Better Auth"],
+			"url": "https://cocoacomaa.com",
+			"source": "github_readme_and_live_site"
 		},
 		{
 			"id": "dbunk",
 			"name": "DBUNK",
 			"displaySection": "open-source-projects",
-			"group": "developer-tools",
-			"status": "showcase",
-			"icon": "/assets/brand/projects/dbunk.png",
-			"description": "Open-source Tauri desktop database workspace for exploring schemas, running SQL, inspecting relationships, and editing table data.",
-			"tech": ["Tauri", "React", "TypeScript", "Rust", "SQLx"],
-			"url": "https://github.com/imran-vz/dbunk",
-			"source": "local_project_data"
-		},
-		{
-			"id": "thirai",
-			"name": "Thirai",
-			"displaySection": "open-source-projects",
-			"group": "desktop-tools",
-			"status": "pre-MVP, in design",
+			"group": "apps",
+			"status": "pre-alpha",
 			"statusDisplay": {
 				"show": true,
 				"style": "subtle-chip"
 			},
-			"icon": "/assets/brand/projects/thirai.svg",
-			"description": "Mac screen recorder that follows the cursor, detects tasteful zoom moments from click/dwell/typing signals, and exports high-fidelity video for editors like DaVinci Resolve, Final Cut, or CapCut.",
-			"tech": ["Tauri", "React", "TypeScript", "Rust", "Swift", "ScreenCaptureKit", "Metal"],
-			"url": "https://github.com/imran-vz/thirai",
+			"icon": "/assets/brand/projects/dbunk.png",
+			"description": "Native macOS database workspace built with Rust and GPUI (Zed's UI framework): browse data, run SQL, and inspect and change schemas from one keyboard-friendly window.",
+			"tech": ["Rust", "GPUI", "PostgreSQL", "MySQL", "SQLite"],
+			"url": "https://dbunk.imran.codes",
 			"source": "github_readme"
-		},
-		{
-			"id": "prompter",
-			"name": "Prompter",
-			"displaySection": "open-source-projects",
-			"group": "desktop-tools",
-			"status": "showcase",
-			"icon": "/assets/brand/projects/prompter.svg",
-			"description": "Native SwiftUI macOS teleprompter with real-time speech-to-text auto-scrolling, transcript alignment, themes, and keyboard shortcuts.",
-			"tech": ["Swift", "SwiftUI", "Apple Speech", "WhisperKit"],
-			"url": "https://github.com/imran-vz/prompter",
-			"source": "local_project_data"
 		},
 		{
 			"id": "pi-observability",
 			"name": "pi-observability",
 			"displaySection": "open-source-projects",
-			"group": "developer-tools",
+			"group": "apps",
 			"status": "showcase",
 			"icon": "/assets/brand/projects/pi-observability.svg",
-			"description": "Pi coding-agent extension with a live footer and /obs TUI dashboard for context usage, token counts, cost, TPS, runtime, and git stats.",
+			"description": "Pi coding-agent extension with a configurable live footer, /obs TUI dashboard, and end-of-run TPS summary covering context usage, tokens, cost, and git stats.",
 			"tech": ["TypeScript", "Pi Extension", "TUI", "Agent Tooling"],
 			"url": "https://github.com/imran-vz/pi-observability",
-			"source": "local_project_data"
-		},
-		{
-			"id": "vegam",
-			"name": "Vegam",
-			"displaySection": "open-source-projects",
-			"group": "desktop-tools",
-			"tags": ["P2P file transfer"],
-			"status": "showcase",
-			"icon": "/assets/brand/projects/vegam.png",
-			"description": "Cross-platform Tauri app for direct macOS and Android file transfer using Iroh P2P networking, with a Rust backend and React frontend.",
-			"tech": ["Tauri", "Rust", "React", "TypeScript", "Iroh"],
-			"url": "https://github.com/imran-vz/vegam",
-			"source": "local_project_data"
+			"source": "github_readme"
 		}
 	],
 	"showcaseProjectGroups": [
 		{
-			"id": "developer-tools",
-			"label": "Developer Tools"
+			"id": "client-work",
+			"label": "Client Work"
 		},
 		{
-			"id": "desktop-tools",
-			"label": "Desktop Tools"
+			"id": "apps",
+			"label": "Apps & Tools"
 		}
 	],
 	"showcasePresentation": {

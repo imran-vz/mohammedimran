@@ -9,8 +9,8 @@ export const allProjects: Project[] = [
 	{
 		name: 'DBUNK',
 		description:
-			'Open-source Tauri desktop database workspace for exploring schemas, running SQL, inspecting relationships, and editing table data.',
-		tech: ['Tauri', 'React', 'TypeScript', 'Rust', 'SQLx'],
+			"Open-source native macOS database workspace built with Rust and GPUI (Zed's UI framework) for browsing data, running SQL, and inspecting and changing schemas.",
+		tech: ['Rust', 'GPUI', 'PostgreSQL', 'MySQL', 'SQLite'],
 		url: 'https://github.com/imran-vz/dbunk',
 	},
 	{
@@ -26,6 +26,13 @@ export const allProjects: Project[] = [
 			'Terminal SQL client for PostgreSQL with encrypted credentials, schema browsing, a multi-line query editor, query cancellation, and paginated results.',
 		tech: ['Go', 'Bubble Tea', 'PostgreSQL', 'pgx'],
 		url: 'https://github.com/imran-vz/gosqlit',
+	},
+	{
+		name: 'Cocoa Comaa',
+		description:
+			'Live ordering site for a Bengaluru dessert brand with custom cakes, postal brownies, paid baking workshops, online courses, and admin and manager panels.',
+		tech: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Razorpay'],
+		url: 'https://cocoacomaa.com',
 	},
 	{
 		name: 'Cocoa Comaa Store',
@@ -44,7 +51,7 @@ export const allProjects: Project[] = [
 	{
 		name: 'Vegam',
 		description:
-			'Cross-platform Tauri app for direct macOS and Android file transfer using Iroh P2P networking, with a Rust backend and React frontend.',
+			'Tauri desktop app for direct file transfer between macOS, Windows, and Linux computers using Iroh P2P networking with relay fallback and no cloud storage.',
 		tech: ['Tauri', 'Rust', 'React', 'TypeScript', 'Iroh'],
 		url: 'https://github.com/imran-vz/vegam',
 	},
