@@ -381,6 +381,18 @@
 			"source": "github_readme"
 		},
 		{
+			"id": "guidy",
+			"name": "Guidy",
+			"displaySection": "open-source-projects",
+			"group": "apps",
+			"status": "showcase",
+			"icon": "/assets/brand/projects/guidy.png",
+			"description": "Offline desktop speech-to-text built with Rust and GPUI: press a shortcut, speak, and the transcript is pasted into the focused app. Transcription runs locally.",
+			"tech": ["Rust", "GPUI", "gpui-kit", "sherpa-onnx"],
+			"url": "https://github.com/imran-vz/Guidy",
+			"source": "github_readme"
+		},
+		{
 			"id": "netwatch",
 			"name": "Netwatch",
 			"displaySection": "open-source-projects",

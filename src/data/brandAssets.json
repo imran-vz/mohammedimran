@@ -47,6 +47,11 @@
 			"asset": "/assets/brand/projects/dbunk.png",
 			"source": "github_repo"
 		},
+		"guidy": {
+			"name": "Guidy",
+			"asset": "/assets/brand/projects/guidy.png",
+			"source": "github_repo"
+		},
 		"netwatch": {
 			"name": "Netwatch",
 			"asset": "/assets/brand/projects/netwatch.png",

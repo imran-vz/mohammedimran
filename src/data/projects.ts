@@ -14,6 +14,13 @@ export const allProjects: Project[] = [
 		url: 'https://github.com/imran-vz/dbunk',
 	},
 	{
+		name: 'Guidy',
+		description:
+			'Open-source offline speech-to-text for the desktop, built with Rust and GPUI. Press a shortcut, speak, and the transcript is pasted into the focused app, with transcription running locally.',
+		tech: ['Rust', 'GPUI', 'gpui-kit', 'sherpa-onnx'],
+		url: 'https://github.com/imran-vz/Guidy',
+	},
+	{
 		name: 'Netwatch',
 		description:
 			'Open-source macOS menu-bar monitor built with Rust and GPUI, showing live download and upload rates, a scrolling traffic graph, and disk usage, with a one-click dashboard.',
