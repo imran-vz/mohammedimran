@@ -381,6 +381,18 @@
 			"source": "github_readme"
 		},
 		{
+			"id": "netwatch",
+			"name": "Netwatch",
+			"displaySection": "open-source-projects",
+			"group": "apps",
+			"status": "showcase",
+			"icon": "/assets/brand/projects/netwatch.png",
+			"description": "macOS menu-bar monitor built with Rust and GPUI: live download and upload rates, a scrolling traffic graph, and a storage bar in the status item, with a dashboard one click away.",
+			"tech": ["Rust", "GPUI", "macOS", "resvg"],
+			"url": "https://netwatch.imran.codes",
+			"source": "github_readme"
+		},
+		{
 			"id": "pi-observability",
 			"name": "pi-observability",
 			"displaySection": "open-source-projects",

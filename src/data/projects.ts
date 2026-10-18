@@ -14,6 +14,13 @@ export const allProjects: Project[] = [
 		url: 'https://github.com/imran-vz/dbunk',
 	},
 	{
+		name: 'Netwatch',
+		description:
+			'Open-source macOS menu-bar monitor built with Rust and GPUI, showing live download and upload rates, a scrolling traffic graph, and disk usage, with a one-click dashboard.',
+		tech: ['Rust', 'GPUI', 'macOS', 'resvg'],
+		url: 'https://netwatch.imran.codes',
+	},
+	{
 		name: 'SEER',
 		description:
 			'Tauri desktop media toolkit for file browsing, codec and stream inspection, bitrate analysis, ffprobe metadata, and SQLite-backed caching.',

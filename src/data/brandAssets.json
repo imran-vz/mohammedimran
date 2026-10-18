@@ -47,6 +47,11 @@
 			"asset": "/assets/brand/projects/dbunk.png",
 			"source": "github_repo"
 		},
+		"netwatch": {
+			"name": "Netwatch",
+			"asset": "/assets/brand/projects/netwatch.png",
+			"source": "github_repo"
+		},
 		"thirai": {
 			"name": "Thirai",
 			"asset": "/assets/brand/projects/thirai.svg",
