@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    # Enable SAND_RUNNERS_ENABLED only after the SSD-backed slot is online.
+    # Trusted jobs use ephemeral Linux ARM64 Tart VMs on /Volumes/SN770.
+    # Fork and Dependabot PRs retain GitHub-hosted runners.
+    runs-on: ${{ vars.SAND_RUNNERS_ENABLED == 'true' && (github.event_name != 'pull_request' || (github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.user.login != 'dependabot[bot]')) && github.actor != 'dependabot[bot]' && fromJSON('["self-hosted","Linux","ARM64","homeserver","docker","sand"]') || 'ubuntu-latest' }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      # Fresh guests need Node before pnpm's installer runs.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.5.2
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run format:check
+      # astro check generates the content types consumed by the typed linter.
+      - run: pnpm run typecheck
+      - run: pnpm run lint
+      - run: pnpm run build
