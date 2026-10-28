@@ -52,9 +52,9 @@
 			"asset": "/assets/brand/projects/guidy.png",
 			"source": "github_repo"
 		},
-		"netwatch": {
-			"name": "Netwatch",
-			"asset": "/assets/brand/projects/netwatch.png",
+		"utilify": {
+			"name": "Utilify",
+			"asset": "/assets/brand/projects/utilify.png",
 			"source": "github_repo"
 		},
 		"thirai": {

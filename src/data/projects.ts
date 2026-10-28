@@ -21,11 +21,11 @@ export const allProjects: Project[] = [
 		url: 'https://github.com/imran-vz/Guidy',
 	},
 	{
-		name: 'Netwatch',
+		name: 'Utilify',
 		description:
-			'Open-source macOS menu-bar monitor built with Rust and GPUI, showing live download and upload rates, a scrolling traffic graph, and disk usage, with a one-click dashboard.',
-		tech: ['Rust', 'GPUI', 'macOS', 'resvg'],
-		url: 'https://netwatch.imran.codes',
+			'Open-source macOS menu-bar utilities built with Rust and GPUI: live network rates and storage, a speed test, keep awake, fan control with sensor curves, and a CyberChef-style data workbench.',
+		tech: ['Rust', 'GPUI', 'macOS', 'IOKit'],
+		url: 'https://utilify.imran.codes',
 	},
 	{
 		name: 'SEER',

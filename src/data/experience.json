@@ -393,15 +393,15 @@
 			"source": "github_readme"
 		},
 		{
-			"id": "netwatch",
-			"name": "Netwatch",
+			"id": "utilify",
+			"name": "Utilify",
 			"displaySection": "open-source-projects",
 			"group": "apps",
 			"status": "showcase",
-			"icon": "/assets/brand/projects/netwatch.png",
-			"description": "macOS menu-bar monitor built with Rust and GPUI: live download and upload rates, a scrolling traffic graph, and a storage bar in the status item, with a dashboard one click away.",
-			"tech": ["Rust", "GPUI", "macOS", "resvg"],
-			"url": "https://netwatch.imran.codes",
+			"icon": "/assets/brand/projects/utilify.png",
+			"description": "macOS menu-bar utilities built with Rust and GPUI: live network rates and storage, a speed test, keep awake, fan control with sensor curves, and a CyberChef-style data workbench.",
+			"tech": ["Rust", "GPUI", "macOS", "IOKit"],
+			"url": "https://utilify.imran.codes",
 			"source": "github_readme"
 		},
 		{
