@@ -33,7 +33,7 @@
 		"@vercel/analytics": "^2.0.1",
 		"astro": "^7.3.2",
 		"sharp": "^0.35.4",
-		"svelte": "^5.57.0",
+		"svelte": "^5.57.1",
 		"turndown": "^7.2.4"
 	},
 	"devDependencies": {
