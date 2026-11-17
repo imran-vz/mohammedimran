@@ -16,9 +16,9 @@ export const allProjects: Project[] = [
 	{
 		name: 'Guidy',
 		description:
-			'Open-source offline speech-to-text for the desktop, built with Rust and GPUI. Press a shortcut, speak, and the transcript is pasted into the focused app, with transcription running locally.',
-		tech: ['Rust', 'GPUI', 'gpui-kit', 'sherpa-onnx'],
-		url: 'https://github.com/imran-vz/Guidy',
+			'Open-source offline speech-to-text for the desktop, built with Rust and GPUI. Press a shortcut, speak, and the transcript is pasted into the focused app. Transcription runs on local models, and meeting notes add named speakers, summaries and Linear tickets.',
+		tech: ['Rust', 'GPUI', 'gpui-kit', 'transcribe.cpp', 'llama.cpp'],
+		url: 'https://guidy.imran.codes',
 	},
 	{
 		name: 'Utilify',

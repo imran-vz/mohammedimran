@@ -26,19 +26,18 @@
 		"prepare": "vp config"
 	},
 	"dependencies": {
-		"@astrojs/sitemap": "^3.7.4",
-		"@astrojs/svelte": "^9.0.1",
-		"@astrojs/vercel": "^11.0.10",
+		"@astrojs/sitemap": "^3.7.5",
+		"@astrojs/svelte": "^9.1.6",
+		"@astrojs/vercel": "^11.0.22",
 		"@resvg/resvg-js": "^2.6.2",
 		"@vercel/analytics": "^2.0.1",
-		"astro": "^7.3.2",
-		"sharp": "^0.35.4",
-		"svelte": "^5.57.0",
-		"turndown": "^7.2.4"
+		"astro": "^7.4.12",
+		"sharp": "^0.35.5",
+		"svelte": "^5.57.3",
+		"turndown": "^7.2.5"
 	},
 	"devDependencies": {
-		"@astrojs/check": "0.9.10",
-		"@oxlint/plugins": "1.79.0",
+		"@astrojs/check": "0.9.12",
 		"@types/turndown": "^5.0.6",
 		"typescript": "6.0.3",
 		"vite": "catalog:",

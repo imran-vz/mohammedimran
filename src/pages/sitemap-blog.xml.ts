@@ -5,7 +5,7 @@ import { siteMeta } from '../config/siteMeta';
 export const prerender = true;
 
 export const GET: APIRoute = async () => {
-	const posts = await getCollection('blog');
+	const posts: { id: string }[] = await getCollection('blog');
 	const urls = posts.map((post) => {
 		const url = new URL(`/blog/${post.id}`, siteMeta.siteUrl).href
 			.replaceAll('&', '&amp;')
