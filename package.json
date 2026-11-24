@@ -31,7 +31,7 @@
 		"@astrojs/vercel": "^11.0.22",
 		"@resvg/resvg-js": "^2.6.2",
 		"@vercel/analytics": "^2.0.1",
-		"astro": "^7.4.12",
+		"astro": "^7.4.13",
 		"sharp": "^0.35.5",
 		"svelte": "^5.57.3",
 		"turndown": "^7.2.5"
