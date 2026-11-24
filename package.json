@@ -26,7 +26,7 @@
 		"prepare": "vp config"
 	},
 	"dependencies": {
-		"@astrojs/sitemap": "^3.7.5",
+		"@astrojs/sitemap": "^3.7.6",
 		"@astrojs/svelte": "^9.1.6",
 		"@astrojs/vercel": "^11.0.22",
 		"@resvg/resvg-js": "^2.6.2",
